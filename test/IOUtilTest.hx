@@ -2,11 +2,11 @@ import utest.Assert;
 import bitmap.RGBABitmap;
 import bitmap.IOUtil;
 
-class IOUtilTest {
+class IOUtilTest implements utest.ITest{
 	public function new() {}
 
-	public function testIOUtilfromFile() {
-		var input = IOUtil.fromFile("test/assets/n.png");
+	public function testreadFile() {
+		var input = IOUtil.readFile("test/assets/n.png");
 		Assert.stringContains("Input", Type.getClassName(Type.getClass(input)));
     input.close();
 	}

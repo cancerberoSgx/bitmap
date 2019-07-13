@@ -1,0 +1,12 @@
+-lib utest
+-lib format
+-lib sure
+
+-cp test
+-cp src
+
+-debug
+-main TestMain
+
+-python bin/test/Main.py
+-cmd python3 bin/test/Main.py
