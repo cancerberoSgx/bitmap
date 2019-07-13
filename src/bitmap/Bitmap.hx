@@ -1,7 +1,12 @@
 package bitmap;
 
-import haxe.io.Input;
-import haxe.io.Output;
+import haxe.io.*;
+
+
+// enum PixelFormat {
+//   RGBA;
+//   ARGB;
+// }
 
 interface RectangleArea {
   @:readOnly public var width:Int;
@@ -14,21 +19,18 @@ interface OffsetRectangleArea extends RectangleArea {
 }
 
 interface Bitmap extends OffsetRectangleArea{
+  @:readOnly public var data:Bytes;
   public function load(nput:Input, ?format:PixelFormat):Void;
-  public function save(format:PixelFormat):Output;
+  public function save(output:Output):Void;
+  // public function getData():haxe.io.Bytes;
   public function get(x:Int, y:Int):Color;
   public function set(x:Int, y:Int, c:Color):Void;
-  // public function visit(visitor: ((i:Int,s:Int)->Bool)):Void;
+  public function equals(b:Bitmap):Bool;
 }
 
-typedef Color = {
-  public var r:Int;
-  public var g:Int;
-  public var b:Int;
-  public var a:Int;
-};
-
-enum PixelFormat {
-  RGBA;
-  ARGB;
-}
+// typedef Color = {
+//   public var r:Int;
+//   public var g:Int;
+//   public var b:Int;
+//   public var a:Int;
+// };

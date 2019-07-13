@@ -40,3 +40,14 @@ docker run --rm -it --workdir /code -v "$PWD":/code bitmap-test sh test/docker/t
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
 - [ ] bitmap.write(bitmap, x, y)
 - [ ] convolutions API
+
+## Notes
+
+Convert from rgba to png:
+
+convert -size 109x145 -depth 8 test/assets/tmptestdrawRectangle.rgba tmp2.png
+
+Convert png to rgba
+
+convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
+

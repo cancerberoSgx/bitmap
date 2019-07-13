@@ -1,38 +1,12 @@
 package bitmap;
 
-// import haxe.io.Input;
+import haxe.io.Output;
 import bitmap.*;
 import bitmap.Bitmap;
-import format.png.Tools;
+import format.png.*;
+
 // import bitmap.AbstractBitmap;
-
 class PNGBitmap extends AbstractBitmap {
-
-	override public function get(x:Int, y:Int):Color {
-		var i = (y * width + x) * 4;
-		Sure.sure(i >= 0 && i < data.length - 4);
-		if (format == PixelFormat.RGBA) {
-			return {
-				r: data.get(i++),
-				g: data.get(i++),
-				b: data.get(i++),
-				a: data.get(i++)
-			};
-		} else if (format == PixelFormat.ARGB) {
-			return {
-				a: data.get(i++),
-				r: data.get(i++),
-				g: data.get(i++),
-				b: data.get(i++)
-			};
-		} else {
-			throw "Image format not supported";
-		}
-	}
-
-	override public function set(x:Int, y:Int, c:Color):Void {
-    
-  }
 
 	override public function load(input:haxe.io.Input, ?f:PixelFormat) {
 		if (f == null) {
@@ -49,18 +23,26 @@ class PNGBitmap extends AbstractBitmap {
 		data = Tools.extract32(d);
 		Tools.reverseBytes(data);
 		if (format == PixelFormat.RGBA) {
-			data = PixelFormatUtil.argbToRgba(data);
+			PixelFormatUtil.argbToRgba(data);
 		}
 	}
 
-	override public function save(format:PixelFormat): haxe.io.Output {
-		throw "not impl";
-	}
+  override public function save(output:Output):Void{
+    var copy = data.sub(0, data.length);
+		if (format==null||format == PixelFormat.RGBA) {
+			copy = PixelFormatUtil.rgbaToArgb(copy);
+		}
+    // Tools.reverseBytes(copy);
+    var data = Tools.build32ARGB(width, height, copy);
+    // Writer.
+    new  Writer(output).write(data);
 
-	public static function crete(input:haxe.io.Input, ?format:PixelFormat)	{
-    var bitmap = new PNGBitmap();
+    // output.writeBytes(data, 0, data.length);
+  }
+
+	public static function create(input:haxe.io.Input, ?format:PixelFormat) {
+		var bitmap = new PNGBitmap();
 		bitmap.load(input, format);
 		return bitmap;
 	}
-
 }
