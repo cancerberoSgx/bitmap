@@ -1,3 +1,4 @@
 bin
 bkps
 .DS_Store
+test/assets/tmp*
