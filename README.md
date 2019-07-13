@@ -29,7 +29,7 @@
 ## Install
 
 ```sh
-haxelib instal bitmap
+haxelib install bitmap
 ```
 
 
