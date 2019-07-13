@@ -28,4 +28,14 @@ import haxe.io.Bytes;
   public function save(format:PixelFormat):Output{
     throw "Abstract method call";
   }
+//  public function visitData(visitor:(i:Int,y:Int)->Bool):Void{
+
+//  }
+  //  public function visit(visitor:(x:Int,y:Int)->Bool):Void{
+  //    if(this.format==PixelFormat.RGBA||this.format==PixelFormat.ARGB) {
+
+  //    }else {
+  //      throw "Pixel format not implemented for visit";
+  //    }
+  //  }
 }

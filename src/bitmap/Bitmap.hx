@@ -18,6 +18,7 @@ interface Bitmap extends OffsetRectangleArea{
   public function save(format:PixelFormat):Output;
   public function get(x:Int, y:Int):Color;
   public function set(x:Int, y:Int, c:Color):Void;
+  // public function visit(visitor: ((i:Int,s:Int)->Bool)):Void;
 }
 
 typedef Color = {

@@ -1,0 +1,4 @@
+test-each.hxml
+
+-php bin/test/php
+-cmd php bin/test/php

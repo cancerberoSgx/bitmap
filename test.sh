@@ -4,6 +4,7 @@ haxe test-neko.hxml && \
 haxe test-interp.hxml && \
 haxe test-java.hxml && \
 haxe test-phantomjs.hxml && \
+haxe test-php.hxml && \
 haxe test-cpp.hxml
 CODE="$?"
 echo "
