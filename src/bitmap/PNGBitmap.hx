@@ -2,12 +2,9 @@ package bitmap;
 
 import haxe.io.Output;
 import bitmap.*;
-import bitmap.Bitmap;
 import format.png.*;
 
-// import bitmap.AbstractBitmap;
 class PNGBitmap extends AbstractBitmap {
-
 	override public function load(input:haxe.io.Input, ?f:PixelFormat) {
 		if (f == null) {
 			f = PixelFormat.RGBA;
@@ -27,22 +24,35 @@ class PNGBitmap extends AbstractBitmap {
 		}
 	}
 
-  override public function save(output:Output):Void{
-    var copy = data.sub(0, data.length);
-		if (format==null||format == PixelFormat.RGBA) {
+	override public function save(output:Output):Void {
+		haxeZipCompressJsSupport();
+		var copy = data.sub(0, data.length);
+		if (format == null || format == PixelFormat.RGBA) {
 			copy = PixelFormatUtil.rgbaToArgb(copy);
 		}
-    // Tools.reverseBytes(copy);
-    var data = Tools.build32ARGB(width, height, copy);
-    // Writer.
-    new  Writer(output).write(data);
-
-    // output.writeBytes(data, 0, data.length);
-  }
+		var data = Tools.build32ARGB(width, height, copy);
+		new Writer(output).write(data);
+	}
 
 	public static function create(input:haxe.io.Input, ?format:PixelFormat) {
 		var bitmap = new PNGBitmap();
 		bitmap.load(input, format);
 		return bitmap;
+	}
+
+	private static var haxeZipCompressJsSupportOnce = false;
+
+	private static function haxeZipCompressJsSupport() {
+		if (haxeZipCompressJsSupportOnce) {
+			return;
+		}
+		haxeZipCompressJsSupportOnce = true;
+		#if js
+		untyped haxe.zip.Compress.run = function(bytes, level = 9) {
+			var data = bytes.getData();
+			var data = untyped pako.deflate(data, {level: level});
+			return haxe.io.Bytes.ofData(data);
+		};
+		#end
 	}
 }

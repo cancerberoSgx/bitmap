@@ -1,0 +1,18 @@
+{
+	expr: EUntyped({
+		expr: ECall({
+			expr: EConst(CIdent(__js__))
+			pos: null <- expected value
+		}, [{
+			expr: EConst(CString(null <- expected String))
+			pos: null <- expected value
+		}])
+		pos: null <- expected value
+	})
+	pos: null <- expected value
+}
+line 5: expected value
+line 7: expected String
+line 8: expected value
+line 10: expected value
+line 12: expected value
