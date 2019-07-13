@@ -16,14 +16,14 @@ import haxe.io.Bytes;
 	public var draw:Draw;
 	public var transform:Transform;
 
-	public function new(?w:Int, ?h:Int, ?f:PixelFormat) {
+	public function new(w:Int=0, h:Int=0, f:PixelFormat=PixelFormat.RGBA) {
 		draw = new Draw(this);
 		transform = new Transform(this);
 		if (w > 0 && h > 0) {
 			width = w;
 			height = h;
 			data = Bytes.alloc(w * h * 4);
-			format = f == null ? PixelFormat.RGBA : f;
+			format = f ;
 			draw.rectangle({
 				width: w - 1,
 				height: h - 1,

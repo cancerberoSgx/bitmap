@@ -1,0 +1,4 @@
+-cp test
+-main probes.PythonIssue2
+-python bin/test/probes/PythonIssue.py
+-cmd python3 bin/test/probes/PythonIssue.py

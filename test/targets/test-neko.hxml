@@ -1,4 +1,4 @@
-test-each.hxml
+test/targets/test-each.hxml
 
 -neko bin/test/Main.n
 -cmd neko bin/test/Main.n

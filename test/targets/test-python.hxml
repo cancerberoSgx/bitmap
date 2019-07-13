@@ -1,4 +1,4 @@
-test-each.hxml
+test/targets/test-each.hxml
 
 -python bin/test/Main.py
 -cmd python3 bin/test/Main.py

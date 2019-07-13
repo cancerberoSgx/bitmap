@@ -70,9 +70,12 @@ sh test-docker.sh
 
 ## TODO
 
-- [ ] bitmap.read(bounds):Bitmap
+- [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
+- [ ] export the library to other target's library by @:exposing public API
+- [ ] bitmap.copy(bounds?:Rectangle):Bitmap
+- [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
-- [ ] bitmap.write(bitmap, x, y)
+- [ ] bitmap.write(bitmap2, x, y)
 - [ ] convolutions API
 
 ### OT

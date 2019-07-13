@@ -1,4 +1,4 @@
-test-each.hxml
+test/targets/test-each.hxml
 
 -cpp bin/test/Main.cpp
 -cmd bin/test/Main.cpp/testMain-debug

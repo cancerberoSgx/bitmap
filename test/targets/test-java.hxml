@@ -1,4 +1,4 @@
-test-each.hxml
+test/targets/test-each.hxml
 
 -java bin/test/java
 -cmd java -jar bin/test/java/TestMain-Debug.jar

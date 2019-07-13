@@ -1,0 +1,4 @@
+-cp test
+-main probes.PythonIssue2
+-js bin/test/probes/PythonIssue.js
+-cmd node bin/test/probes/PythonIssue.js
