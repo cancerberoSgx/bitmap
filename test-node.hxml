@@ -1,0 +1,12 @@
+-lib utest
+-lib format
+-lib sure
+
+-cp test
+-cp src
+
+-debug
+-main TestMain
+
+-js bin/test/Main.js
+-cmd node bin/test/Main.js

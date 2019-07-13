@@ -1,0 +1,11 @@
+-lib sure
+-lib utest
+-lib format
+
+-cp test
+-cp src
+
+-main TestMain
+
+-neko bin/test/Main.n
+-cmd neko bin/test/Main.n
