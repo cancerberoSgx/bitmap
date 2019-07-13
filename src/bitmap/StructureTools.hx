@@ -13,7 +13,7 @@ class StructureTools {
 		var pos = Context.currentPos();
 		var block = [];
 		var cnt = 1;
-		var all = new Map<String, {field:String, expr:Expr, quotes: QuoteStatus }>();
+		var all = new Map<String, ObjectField>();
 		for (rx in rest) {
 			var trest = Context.typeof(rx);
 			switch (trest.follow()) {
@@ -24,7 +24,7 @@ class StructureTools {
 					block.push(macro var $tmp = $rx);
 					for (field in tr.fields) {
 						var fname = field.name;
-						all.set(fname, {field: fname, expr: macro $extVar.$fname, quotes: QuoteStatus.Unquoted});
+						all.set(fname, {field: fname, expr: macro $extVar.$fname});
 					}
 				default:
 					return Context.error("Object type expected instead of " + trest.toString(), rx.pos);

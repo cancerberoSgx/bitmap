@@ -66,7 +66,6 @@ sh scripts/test.sh
 sh test-docker.sh
 ```
 
-
 ## Status
 
  * `Bitmap` types to create from haxe.io.Input and get/set pixel colors
@@ -74,16 +73,35 @@ sh test-docker.sh
  * `PNGBitmap`: Supports read/write PNG images pixel formats: ARGB, RGBA
  * tests running in all targets.
 
+## Tests
+
+### Run locally
+
+You will need java, php, g++, node.js to run all targets:
+
+```sh
+sh scripts/test.sh
+```
+
+### Run with docker
+
+```sh
+sh test-docker.sh
+```
+
 ## TODO
 
-- [ ] node & browser "pako is not defined" when used from other project
+- [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
-- [ ] export the library to other target's library by @:exposing public API
+- [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
+- [ ] dox
+- [ ] code formatter
 - [ ] bitmap.copy(bounds?:Rectangle):Bitmap
 - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
 - [ ] bitmap.write(bitmap2, x, y)
 - [ ] convolutions API
+- [x] node & browser "pako is not defined" when used from other project
 
 ### OT
 

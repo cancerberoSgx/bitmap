@@ -1,4 +1,4 @@
 test/targets/test-each.hxml
 
 -js bin/test/MainPhantom.js
--cmd cp bin/test/MainPhantom.js bin/test/MainPhantom.jsbkp && cat src/assets/pako.min.js >bin/test/MainPhantom.js && cat bin/test/MainPhantom.jsbkp >> bin/test/MainPhantom.js && haxe test/phantomjs/run.hxml bin/test/MainPhantom.js
+-cmd haxe test/phantomjs/run.hxml bin/test/MainPhantom.js

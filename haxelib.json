@@ -12,7 +12,7 @@
   ],
   "description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
   "version": "0.0.6",
-  "releasenote": "Initial contribution",
+  "releasenote": "fix js target",
   "contributors": [
     "cancerberosgx"
   ],

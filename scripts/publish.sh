@@ -1,3 +1,4 @@
+sh scripts/test.js
 npx markdown-toc README.md -i
 sh scripts/pack.sh
 node scripts/patch.js

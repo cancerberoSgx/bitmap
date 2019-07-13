@@ -1,0 +1,1 @@
+require('fs').writeFileSync('tmp.txt', JSON.stringify(require('fs').readFileSync('src/assets/pako.min.js').toString()))
