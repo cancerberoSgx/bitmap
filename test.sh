@@ -1,3 +1,4 @@
+sh clean.sh
 haxe test-node.hxml && \
 haxe test-neko.hxml && \
 # haxe test-python.hxml && \

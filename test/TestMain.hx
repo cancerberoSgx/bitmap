@@ -5,6 +5,7 @@ import utest.ui.Report;
 import PNGBitmapTest;
 import IOUtilTest;
 import BitmapUtilTest;
+import MiscTest;
 
 class TestMain {
 	static function main() {		
@@ -12,6 +13,7 @@ class TestMain {
 		runner.addCase(new PNGBitmapTest());
 		runner.addCase(new IOUtilTest());
 		runner.addCase(new BitmapUtilTest());
+		runner.addCase(new MiscTest());
 		Report.create(runner);
 		runner.run();
 	}

@@ -36,7 +36,7 @@ class PNGBitmap extends AbstractBitmap {
 	}
 
 	public static function create(input:haxe.io.Input, ?format:PixelFormat) {
-		var bitmap = new PNGBitmap(1,1);
+		var bitmap = new PNGBitmap();
 		bitmap.load(input, format);
 		return bitmap;
 	}

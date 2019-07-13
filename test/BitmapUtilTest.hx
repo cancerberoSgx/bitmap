@@ -68,10 +68,5 @@ class BitmapUtilTest implements utest.ITest {
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestdrawLine.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 	}
-	// public function testdrawRectangle2() {
-	//   var a =RawRgbaBitmap.create(IOUtil.readFile("test/assets/n.rgba"), 109, 145);
-	//   BitmapUtil.drawRectangle(a, {x: 60,y:20,width:20,height:40},Color.create(255,44,122,255));
-	//  IOUtil.writeBitmap('test/assets/tmptestdrawRectangle2.rgba', a);
-	// 	Assert.isTrue(true);
-	// }
+
 }

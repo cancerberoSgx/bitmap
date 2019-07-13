@@ -8,9 +8,9 @@ class BitmapUtil {
 	}
 
 	public static function bitmapEquals(a:Bitmap, b:Bitmap, ?debug:Bool) {
-    if(debug==true){
-          trace("a.width", a.width, "b.width", b.width, "a.height", a.height, "b.height", b.height);
-        }
+    // if(debug==true){
+    //       trace("a.width", a.width, "b.width", b.width, "a.height", a.height, "b.height", b.height);
+    //     }
     if(a.width!=b.width||a.height!=b.height){
       return false;
     }
@@ -18,9 +18,9 @@ class BitmapUtil {
 			for (x in 0...a.width) {
 				var c1 = a.get(x, y);
 				var c2 = b.get(x, y);
-        if(debug==true){
-          trace(colorEquals(c1,c2), c1, c2);
-        }
+        // if(debug==true){
+        //   trace(colorEquals(c1,c2), c1, c2);
+        // }
 				if (!colorEquals(c1,c2)) {
 					return false;
 				}
@@ -30,7 +30,7 @@ class BitmapUtil {
 	}
 
 	public static function drawRectangle(b:Bitmap, x:Int,y:Int,width:Int,height:Int, c:bitmap.Color, ?fill:Bool, ?blend:Blend) {
-		b.draw.rectangle({x:x,y:y,width:width,height:height, c:c,fill:fill, blend:blend});
+		b.draw.rectangle({x:x,y:y,width:width,height:height, c:c, fill:fill, blend:blend});
 	}
 
 	/**

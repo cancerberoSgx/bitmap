@@ -14,13 +14,15 @@ import haxe.io.Bytes;
   
   public var draw:Draw;
 
-	public function new(w:Int,h:Int,?f:PixelFormat) {
+	public function new(?w:Int,?h:Int,?f:PixelFormat) {
+    draw = new Draw(this);
+    if(w>0&&h>0)   {
     width = w;
     height = h;
     data = Bytes.alloc(w*h*4);
     format = f==null ? PixelFormat.RGBA : f;
-    draw = new Draw(this);
     draw.rectangle({width: w-1, height:h-1,x:0,y:0,fill: true, blend: Blend.none, c:Color.create(0,0,0,0)});
+    }
   }
 
 	 public function get(x:Int, y:Int):Color {
