@@ -5,12 +5,12 @@ import haxe.io.Output;
 import haxe.io.Bytes;
 
 @:abstract class AbstractBitmap implements Bitmap {
-	@:readOnly public var data:Bytes;
-	@:readOnly public var width:Int;
-	@:readOnly public var height:Int;
-  @:readOnly public var originalWidth:Int;
-	@:readOnly public var originalHeight:Int;
-	@:readOnly public var format:PixelFormat;
+	public var data:Bytes;
+	public var width:Int;
+	public var height:Int;
+  public var originalWidth:Int;
+	public var originalHeight:Int;
+	public var format:PixelFormat;
   
 	private function new() {}
 

@@ -1,0 +1,3 @@
+-cp test/phantomjs
+-cp .
+--run Run

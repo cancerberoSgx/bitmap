@@ -1,12 +1,4 @@
--lib utest
--lib format
--lib sure
-
--cp test
--cp src
-
--debug
--main TestMain
+test-each.hxml
 
 -cpp bin/test/Main.cpp
 -cmd bin/test/Main.cpp/testMain-debug

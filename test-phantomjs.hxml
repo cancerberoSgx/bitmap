@@ -1,0 +1,4 @@
+test-each.hxml
+
+-js bin/test/Main.js
+-cmd haxe test/phantomjs/run.hxml bin/test/Main.js
