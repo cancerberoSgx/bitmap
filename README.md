@@ -49,17 +49,23 @@ class Test {
 }
 ```
 
-## Run tests
+## Tests
+
+### Run locally
+
+You will need java, php, g++, node.js to run all targets:
 
 ```sh
-sh test.sh
+sh scripts/test.sh
 ```
 
-### Run tests with docker
+### Run with docker
 
 ```sh
 sh test-docker.sh
 ```
+
+
 
 ## Status
 
