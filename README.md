@@ -66,7 +66,6 @@ sh test-docker.sh
 ```
 
 
-
 ## Status
 
  * `Bitmap` types to create from haxe.io.Input and get/set pixel colors
