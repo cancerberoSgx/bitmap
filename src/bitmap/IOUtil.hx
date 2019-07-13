@@ -1,7 +1,7 @@
 package bitmap;
 
-class FileUtil {
-  public static function readBinary(path:String):haxe.io.Input  {
+class IOUtil {
+  public static function fromFile(path:String):haxe.io.Input  {
     #if js
     untyped var s = require("fs").readFileSync(path).toString('binary');
     return new haxe.io.StringInput(s);

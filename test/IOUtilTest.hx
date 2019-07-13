@@ -1,12 +1,12 @@
 import utest.Assert;
 import bitmap.RGBABitmap;
-import bitmap.FileUtil;
+import bitmap.IOUtil;
 
-class FileUtilTest {
+class IOUtilTest {
 	public function new() {}
 
-	public function testFileUtilReadBinaryReturnsInput() {
-		var input = FileUtil.readBinary("test/assets/n.png");
+	public function testIOUtilfromFile() {
+		var input = IOUtil.fromFile("test/assets/n.png");
 		Assert.stringContains("Input", Type.getClassName(Type.getClass(input)));
     input.close();
 	}
