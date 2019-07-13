@@ -10,6 +10,7 @@ class PNGBitmapTest  implements utest.ITest{
 		Assert.same([bitmap.width, bitmap.height],[109,145]);
     input.close();
 	}
+  
   public function testGet() {
 		var input = IOUtil.readFile("test/assets/n.png");
     var bitmap =PNGBitmap.create(input);

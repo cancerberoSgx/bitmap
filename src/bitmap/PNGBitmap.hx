@@ -5,6 +5,7 @@ import bitmap.*;
 import format.png.*;
 
 class PNGBitmap extends AbstractBitmap {
+  
 	override public function load(input:haxe.io.Input, ?f:PixelFormat) {
 		if (f == null) {
 			f = PixelFormat.RGBA;

@@ -153,10 +153,13 @@ class Util {
 	 * @param	value The value to abs.
 	 * @return	The absolute value of the given value.
 	 */
-	public static inline function abs(value:Int):Int {
+	public static inline function abs(value:Int) {
 		if (value < 0) {
 			return -value;
 		}
 		return value;
+	}
+  public static inline function sgn(value:Int) {
+			return value < 0 ? -1 : value>0 ? 1 : 0;
 	}
 }

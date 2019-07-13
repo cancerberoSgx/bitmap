@@ -54,17 +54,11 @@ import haxe.io.Bytes;
 		}
 	}
 
-
-  // public function getData(): Bytes{
-  //   var d = Bytes.alloc(data.length);
-  //   return data.blit(0, data.length);
-  // }
 	public function load(input:Input, ?f:PixelFormat):Void{
     throw "Abstract method call";
   }
 
   public function save(output:Output):Void{
-    // output.writeBytes(data, 0, data.length);
     throw "Abstract method call";
 
   }
@@ -73,17 +67,4 @@ import haxe.io.Bytes;
     // we could use compare here
     return BitmapUtil.bitmapEquals(this, b);
   }
-//  public function visitData(visitor: ((i:Int,s:Int)->Bool)):Void {
-//    for(i in [0...data.length-1]){
-
-//    }
-//  }
- 
-  //  public function visit(visitor:(x:Int,y:Int)->Bool):Void{
-    //  if(this.format==PixelFormat.RGBA||this.format==PixelFormat.ARGB) {
-
-    //  }else {
-    //    throw "Pixel format not implemented for visit";
-    //  }
-  //  }
 }

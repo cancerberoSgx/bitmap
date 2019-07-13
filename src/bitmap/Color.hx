@@ -42,14 +42,14 @@ abstract Color(Int) from Int to Int {
 		return (Util.clamp(red, 0, 255) << 24) + (Util.clamp(green, 0, 255) << 16) + (Util.clamp(blue, 0, 255) << 8) + (Util.clamp(alpha, 0, 255));
 	}
 	
-	// /**
-	//  * Converts an integer to a RGBA8888 color.
-	//  * @param	rgba The integer to convert to the color.
-	//  * @return	The RGBA color.
-	//  */
-	// @:from public static inline function fromInt(rgba:Int):Color {
-	// 	return rgba;
-	// }
+	/**
+	 * Converts an integer to a RGBA8888 color.
+	 * @param	rgba The integer to convert to the color.
+	 * @return	The RGBA color.
+	 */
+	@:from public static inline function fromInt(rgba:Int):Color {
+		return rgba;
+	}
 	
 	private inline function get_r():Int {
 		return (this >> 24) & 0xFF;

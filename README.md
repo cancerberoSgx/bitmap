@@ -41,6 +41,10 @@ docker run --rm -it --workdir /code -v "$PWD":/code bitmap-test sh test/docker/t
 - [ ] bitmap.write(bitmap, x, y)
 - [ ] convolutions API
 
+### OT
+
+ * geomtrize-haxe : may be checking with Sure is expensive so: implement macro or conditionals to not compile those statement if an option or compile arg is given.
+
 ## Notes
 
 Convert from rgba to png:
