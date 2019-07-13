@@ -1,2 +1,2 @@
 sh scripts/clean.sh
-zip -x "test/assets/*" "bin/*" "tmp*" "*.zip" ".*" -r bitmap *
+zip -x "test/*" "bin/*" "tmp*" "*.zip" ".*" "sample-project/*" -r bitmap *

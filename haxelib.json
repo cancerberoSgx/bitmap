@@ -11,14 +11,14 @@
     "png"
   ],
   "description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "releasenote": "Initial contribution",
   "contributors": [
-    "Sebastián Gurin"
+    "cancerberosgx"
   ],
-  "classPath":"src",
+  "classPath": "src",
   "dependencies": {
-    "sure": "",
-    "format": ""
+    "sure": "0.1.1",
+    "format": "3.4.2"
   }
 }
