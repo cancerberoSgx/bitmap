@@ -2,3 +2,4 @@ bin
 bkps
 .DS_Store
 tmp*
+dump

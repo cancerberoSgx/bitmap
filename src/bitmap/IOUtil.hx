@@ -8,7 +8,7 @@ class IOUtil {
 		var bytes = haxe.io.Bytes.ofData(s);
 		return new haxe.io.BytesInput(bytes);
 		#else
-		return sys.io.File.read("test/assets/n.png", true);
+		return sys.io.File.read(path, true);
 		#end
 		throw "Unexpected end of method";
 	}

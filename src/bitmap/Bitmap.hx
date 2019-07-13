@@ -1,6 +1,7 @@
 package bitmap;
 
 import haxe.io.*;
+import bitmap.*;
 
 interface RectangleArea {
   @:readOnly public var width:Int;
@@ -14,6 +15,7 @@ interface OffsetRectangleArea extends RectangleArea {
 
 interface Bitmap extends OffsetRectangleArea{
   @:readOnly public var data:Bytes;
+   @:readOnly public var draw:Draw;
   public function load(nput:Input, ?format:PixelFormat):Void;
   public function save(output:Output):Void;
   public function get(x:Int, y:Int):Color;

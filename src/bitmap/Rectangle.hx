@@ -1,8 +1,7 @@
 package bitmap;
-
+import bitmap.*;
 typedef Rectangle = {
-  x:Int,
-	y:Int,
+  >Point,
 	width:Int,
 	height:Int
 };

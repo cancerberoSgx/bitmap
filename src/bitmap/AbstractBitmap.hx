@@ -12,7 +12,16 @@ import haxe.io.Bytes;
 	public var originalHeight:Int;
 	public var format:PixelFormat;
   
-	private function new() {}
+  public var draw:Draw;
+
+	public function new(w:Int,h:Int,?f:PixelFormat) {
+    width = w;
+    height = h;
+    data = Bytes.alloc(w*h*4);
+    format = f==null ? PixelFormat.RGBA : f;
+    draw = new Draw(this);
+    draw.rectangle({width: w-1, height:h-1,x:0,y:0,fill: true, blend: Blend.none, c:Color.create(0,0,0,0)});
+  }
 
 	 public function get(x:Int, y:Int):Color {
 		var i = (y * width + x) * 4;
@@ -67,4 +76,6 @@ import haxe.io.Bytes;
     // we could use compare here
     return BitmapUtil.bitmapEquals(this, b);
   }
+
+
 }
