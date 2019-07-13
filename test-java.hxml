@@ -1,4 +1,4 @@
 test-each.hxml
 
--java bin/MainTest/java
--cmd java -jar bin/MainTest/java/TestMain-Debug.jar
+-java bin/test/java
+-cmd java -jar bin/test/java/TestMain-Debug.jar

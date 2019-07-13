@@ -25,7 +25,7 @@ class PNGBitmap extends AbstractBitmap {
 	}
 
 	override public function save(output:Output):Void {
-		haxeZipCompressJsSupport();
+		ZipSupport.haxeZipCompressJsSupport();
 		var copy = data.sub(0, data.length);
 		if (format == null || format == PixelFormat.RGBA) {
 			copy = PixelFormatUtil.rgbaToArgb(copy);
@@ -40,19 +40,5 @@ class PNGBitmap extends AbstractBitmap {
 		return bitmap;
 	}
 
-	private static var haxeZipCompressJsSupportOnce = false;
-
-	private static function haxeZipCompressJsSupport() {
-		if (haxeZipCompressJsSupportOnce) {
-			return;
-		}
-		haxeZipCompressJsSupportOnce = true;
-		#if js
-		untyped haxe.zip.Compress.run = function(bytes, level = 9) {
-			var data = bytes.getData();
-			var data = untyped pako.deflate(data, {level: level});
-			return haxe.io.Bytes.ofData(data);
-		};
-		#end
-	}
+	
 }
