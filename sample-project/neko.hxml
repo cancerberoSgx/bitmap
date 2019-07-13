@@ -1,0 +1,5 @@
+common.hxml
+
+
+-neko bin/test/Main.n
+-cmd neko bin/test/Main.n

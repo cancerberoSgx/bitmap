@@ -1,0 +1,4 @@
+common.hxml
+
+-cpp bin/test/Main.cpp
+-cmd bin/test/Main.cpp/Test-debug

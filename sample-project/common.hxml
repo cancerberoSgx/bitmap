@@ -1,0 +1,4 @@
+-cp .
+-lib bitmap
+-main Test
+-debug

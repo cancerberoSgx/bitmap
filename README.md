@@ -76,6 +76,7 @@ sh test-docker.sh
 
 ## TODO
 
+- [ ] node & browser "pako is not defined" when used from other project
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API
 - [ ] bitmap.copy(bounds?:Rectangle):Bitmap

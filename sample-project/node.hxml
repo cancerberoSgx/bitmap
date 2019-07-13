@@ -1,0 +1,4 @@
+common.hxml
+
+-js bin/test/Main.js
+-cmd node bin/test/Main.js
