@@ -1,30 +1,66 @@
 # Bitmap
 
-A library with high level API to access images and basic processing tools.
+## Contents
 
-Supports all haxe targets.
+<!-- toc -->
+
+- [Summary](#summary)
+- [Install](#install)
+- [Usage](#usage)
+- [Run tests](#run-tests)
+  * [Run tests with docker](#run-tests-with-docker)
+- [Status](#status)
+- [TODO](#todo)
+  * [OT](#ot)
+- [Notes](#notes)
+
+<!-- tocstop -->
+
+## Summary 
+
+ * Easy to use API.
+ * Supports all targets.
+ * Supports common formats (right now only PNG).
+ * Pixel access, RGBA color, blending
+ * Shape drawing.
+ * Composition, convolution, color blending and more.
+ * Stay tunned!
 
 ## Install
 
-```
+```sh
 haxelib instal bitmap
 ```
 
+
 ## Usage
 
-```
-haxe
+Use `-lib bitmap` in your projects.
+
+The following example works on all targets but the browser since we are reading/writing files:
+
+```haxe
+import bitmap.*;
+class Test {
+  public static function test1() {
+		var bitmap = PNGBitmap.create(IOUtil.readFile("imgs/input.png"));	
+    bitmap.set(30, 20, Color.create(23, 233, 111, 128)); 	
+    bitmap.draw.rectangle({x: 10, y: 20, width: 40, height: 22, c: Color.create(12, 144, 0, 131), fill: false});
+    IOUtil.writeBitmap('imgs/output.png', bitmap);
+  }
+}
 ```
 
 ## Run tests
 
+```sh
+sh test.sh
+```
+
 ### Run tests with docker
 
-```
-# build docker image - only need to run once:
-docker build -t bitmap-test test/docker/alpine-linux
-# run tests in the container:
-docker run --rm -it --workdir /code -v "$PWD":/code bitmap-test sh test/docker/test.sh 
+```sh
+sh test-docker.sh
 ```
 
 ## Status

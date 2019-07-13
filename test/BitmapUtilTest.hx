@@ -1,4 +1,3 @@
-import haxe.io.BytesOutput;
 import utest.Assert;
 import bitmap.*;
 
@@ -54,7 +53,7 @@ class BitmapUtilTest implements utest.ITest {
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestdrawRectangle.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 
-		BitmapUtil.drawRectangle(a, 10, 20, 40, 22, Color.create(12, 144, 0, 131), false);
+    a.draw.rectangle({x: 10, y: 20, width: 40, height: 22, c: Color.create(12, 144, 0, 131), fill: false});
 		Assert.isFalse(BitmapUtil.bitmapEquals(a, b));
 	}
 

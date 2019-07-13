@@ -3,7 +3,7 @@
 	"url": "https://github.com/cancerberoSgx/bitmap",
 	"license": "MIT",
 	"tags": ["cross", "haxe", "bitmap", "format", "image", "png"],
-	"description": "Library for image manipulation with no big dependencies supporting all targets.",
+	"description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
 	"version": "0.0.1",
 	"releasenote": "Initial contribution",
 	"contributors": ["cancerberosgx"],
