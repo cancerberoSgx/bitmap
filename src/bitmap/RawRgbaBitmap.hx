@@ -21,4 +21,8 @@ class RawRgbaBitmap extends AbstractBitmap {
     bitmap.data = bytes;
 		return bitmap;
 	}
+
+	override public function clone():Bitmap{
+    throw "TODO: not implemented";
+  }
 }

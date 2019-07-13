@@ -31,8 +31,6 @@
 ```sh
 haxelib instal bitmap
 ```
-
-
 ## Usage
 
 Use `-lib bitmap` in your projects.

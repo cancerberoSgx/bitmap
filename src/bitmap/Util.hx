@@ -2,55 +2,12 @@ package bitmap;
 
 import bitmap.*;
 
-// /**
-//  * Represents a point or vector in 2D space. 
-//  * @author Sam Twidale (http://samcodes.co.uk/)
-//  */
-// typedef Point = {
-// 	var x:Int;
-// 	var y:Int;
-// }
-
-// /**
-//  * Represents a rectangle in 2D space.
-//  * @author Sam Twidale (http://samcodes.co.uk/)
-//  */
-// typedef Rect = {
-// 	> Point,
-// 	width:Int,
-// 	height:Int
-// }
 
 /**
  * Utility functions.
- * @author Sam Twidale (http://samcodes.co.uk/)
+ * Adapted from https://github.com/Tw1ddle/geometrize-haxe/
  */
 class Util {
-	/**
-	 * Computes the average RGB color of the pixels in the image.
-	 * @param	image	The image whose average color will be calculated.
-	 * @param	alpha	The opacity of the image (0-255), defaults to opaque (255).
-	 * @return	The average RGB color of the image, RGBA8888 format. Alpha defaults to opaque (255).
-	 */
-	public static function getAverageImageColor(image:Bitmap, alpha:Int = 255):Color {
-		Sure.sure(image != null);
-
-		var totalRed:Int = 0;
-		var totalGreen:Int = 0;
-		var totalBlue:Int = 0;
-
-		for (x in 0...image.width) {
-			for (y in 0...image.height) {
-				var pixel = image.get(x, y);
-				totalRed += pixel.r;
-				totalGreen += pixel.g;
-				totalBlue += pixel.b;
-			}
-		}
-
-		var size:Int = image.width * image.height;
-		return Color.create(Std.int(totalRed / size), Std.int(totalGreen / size), Std.int(totalBlue / size), alpha);
-	}
 
 	/**
 	 * Clamps a value within a range.
@@ -85,22 +42,34 @@ class Util {
 	}
 
 	/**
-	 * Converts a value measured in degrees to radians.
-	 * @param	degrees	Degrees value to convert to radians.
-	 * @return	The value converted to radians.
+	 * Returns the absolute value of the given value.
+	 * @param	value The value to abs.
+	 * @return	The absolute value of the given value.
 	 */
-	public static inline function toRadians(degrees:Float):Float {
-		return degrees * Math.PI / 180;
+	public static inline function abs(value:Int) {
+			return value < 0 ? -value : value;
 	}
 
-	/**
-	 * Converts a value measured in radians to degrees.
-	 * @param	radians	Radians value to convert to degrees.
-	 * @return	The value converted to degrees.
-	 */
-	public static inline function toDegrees(radians:Float):Float {
-		return radians * 180 / Math.PI;
+  public static inline function sgn(value:Int) {
+			return value < 0 ? -1 : value>0 ? 1 : 0;
 	}
+	// /**
+	//  * Converts a value measured in degrees to radians.
+	//  * @param	degrees	Degrees value to convert to radians.
+	//  * @return	The value converted to radians.
+	//  */
+	// public static inline function toRadians(degrees:Float):Float {
+	// 	return degrees * Math.PI / 180;
+	// }
+
+	// /**
+	//  * Converts a value measured in radians to degrees.
+	//  * @param	radians	Radians value to convert to degrees.
+	//  * @return	The value converted to degrees.
+	//  */
+	// public static inline function toDegrees(radians:Float):Float {
+	// 	return radians * 180 / Math.PI;
+	// }
 
 	/**
 	 * Returns a random integer in the range (inclusive).
@@ -113,15 +82,15 @@ class Util {
 		return lower + Math.floor((upper - lower + 1) * Math.random());
 	}
 
-	/**
-	 * Returns a random item from an array.
-	 * @param	a	The array to pick a random item from.
-	 * @return	A random item from the array.
-	 */
-	public static inline function randomArrayItem<T>(a:Array<T>):T {
-		Sure.sure(a != null && a.length > 0);
-		return a[random(0, a.length - 1)];
-	}
+	// /**
+	//  * Returns a random item from an array.
+	//  * @param	a	The array to pick a random item from.
+	//  * @return	A random item from the array.
+	//  */
+	// public static inline function randomArrayItem<T>(a:Array<T>):T {
+	// 	Sure.sure(a != null && a.length > 0);
+	// 	return a[random(0, a.length - 1)];
+	// }
 
 	// /**
 	//  * Returns the smallest and largest items from an array of ints.
@@ -148,18 +117,4 @@ class Util {
 	// 	return {x: min, y: max};
 	// }
 
-	/**
-	 * Returns the absolute value of the given value.
-	 * @param	value The value to abs.
-	 * @return	The absolute value of the given value.
-	 */
-	public static inline function abs(value:Int) {
-		if (value < 0) {
-			return -value;
-		}
-		return value;
-	}
-  public static inline function sgn(value:Int) {
-			return value < 0 ? -1 : value>0 ? 1 : 0;
-	}
 }

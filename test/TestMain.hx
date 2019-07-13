@@ -6,6 +6,7 @@ import PNGBitmapTest;
 import IOUtilTest;
 import BitmapUtilTest;
 import MiscTest;
+import TransformTest;
 
 class TestMain {
 	static function main() {		
@@ -14,6 +15,8 @@ class TestMain {
 		runner.addCase(new IOUtilTest());
 		runner.addCase(new BitmapUtilTest());
 		runner.addCase(new MiscTest());
+		runner.addCase(new TransformTest());
+    
 		Report.create(runner);
 		runner.run();
 	}
