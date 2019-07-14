@@ -14,11 +14,17 @@ public function pixelize(t:Pixelize.PixelizeOptions) {
   t.bitmap = bitmap;
   return new Pixelize().transform(t);
 }
+public function convolve(t:Convolution.ConvolveOptions) {
+  t.bitmap = bitmap;
+  return Convolution.convolve(t);
+}
 }
 
 typedef TransformationOptions = {
-  @:optional var modify:Bool;
-  @:optional var bitmap:Bitmap;
+  @:optional public var modify:Bool;
+  @:optional public var bitmap:Bitmap;
+  @:optional public var output: Bitmap;
+
 }
 
 // typedef TransformationResult = {
