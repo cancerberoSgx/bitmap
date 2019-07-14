@@ -154,15 +154,18 @@ sh test-docker.sh
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
 - [ ] code formatter
-- [ ] affine transformations :rotate, translate, skew
+- [ ] easy API for common affine transforms like rotate, translate, skew
+- [ ] easy API for common convolutions like blur, sharpen, edges, etc
+- [ ] transformations modify not respected
 - [ ] bitmap.copy(bounds?:Rectangle):Bitmap
 - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
-- [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
-- [ ] transformations modify not respected
-- [ ] bitmap.write(bitmap2, x, y)
+- [ ] bitmap.write(bitmap2, x, y, blend)
 - [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
-- [x] convolutions API
+- [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
+- [x] affine transformations
+- [x] convolutions
+- [x] pixelize
 - [x] node & browser "pako is not defined" when used from other project
 
 ### Notes

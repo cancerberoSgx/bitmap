@@ -16,14 +16,14 @@ import haxe.io.Bytes;
 	public var draw:Draw;
 	public var transform:Transform;
 
-	public function new(w:Int=0, h:Int=0, f:Types.PixelFormat=Types.PixelFormat.RGBA) {
+	public function new(w:Int = 0, h:Int = 0, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
 		transform = new Transform(this);
 		if (w > 0 && h > 0) {
 			width = w;
 			height = h;
 			data = Bytes.alloc(w * h * 4);
-			format = f ;
+			format = f;
 			draw.rectangle({
 				width: w - 1,
 				height: h - 1,
@@ -50,10 +50,14 @@ import haxe.io.Bytes;
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = (y * width + x) * 4;
-    var outOfBounds = i >= 0 && i < data.length - 3;
-    if(noError!=true){
-		  Sure.sure(outOfBounds);
-    }
+		var outOfBounds = i >= data.length - 5;
+		if (outOfBounds) {
+			if (noError != true) {
+				Sure.sure(outOfBounds);
+			} else {
+				return true;
+			}
+		}
 		if (format == null || format == Types.PixelFormat.RGBA) {
 			data.set(i, c.r);
 			data.set(i + 1, c.g);
@@ -67,7 +71,7 @@ import haxe.io.Bytes;
 		} else {
 			throw "Image format not supported";
 		}
-    return outOfBounds;
+		return outOfBounds;
 	}
 
 	public function load(input:Input, ?f:Types.PixelFormat):Void {
