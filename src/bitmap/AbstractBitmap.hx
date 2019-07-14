@@ -35,18 +35,41 @@ import haxe.io.Bytes;
 			});
 		}
 	}
+inline function getInt32(i:Int){
+  var c = data.getInt32(i);
 
+		return ((c >> 24) & 0xFF) + (((c >> 16) & 0xFF)<< 8) + (((c >> 8) & 0xFF)<<16) + ((c&0xff)<<24);
+}
+inline function getInt8(i:Int){
+		return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
+}
+private var int32Mode=false;
 	public function get(x:Int, y:Int):Color {
 		var i = (y * width + x) * 4;
 		Sure.sure(i >= 0 && i < data.length - 3);
-		if (format == null || format == Types.PixelFormat.RGBA) {
-			return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
-		} else if (format == Types.PixelFormat.ARGB) {
-			return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
-		} else {
-			throw "Image format not supported";
-		}
+    // return getInt8(i);
+    return int32Mode ? getInt32(i): getInt8(i);
 	}
+
+
+  /** 
+   * This invert the four bytes order in the Int32. For some reason this is needed in order to write a whole Int32 ,instead separated bytes, which is faster. 
+
+   I suspect this class (taken from geometrize-haxe project) is currently storing the bytes not rgba but abgr (reversed) and since colors are in general accessed byte by byte is not noticed. 
+
+   TODO: Si the previous is correct, this method should not be needed. Change the order in create() and r, b, g, a props.
+   **/
+inline function setInt32(i:Int, c:Color){
+  // data.setInt32(i, c);
+			data.setInt32(i, ((c >> 24) & 0xFF) + (((c >> 16) & 0xFF)<< 8) + (((c >> 8) & 0xFF)<<16) + ((c&0xff)<<24));
+}
+
+inline function setInt8(i:Int, c:Color){
+   data.set(i , c.r);
+   data.set(i + 1, c.g);
+			data.set(i + 2, c.b);
+			data.set(i + 3, c.a);
+}
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = (y * width + x)* 4 ;
@@ -57,21 +80,12 @@ import haxe.io.Bytes;
 				return true;
 			}
 		}
-		if (format == null || format == Types.PixelFormat.RGBA) {
-			data.setInt32(i, c.asInt32());
-			// data.set(i + 1, c.g);
-			// data.set(i + 2, c.b);
-			// data.set(i + 3, c.a);
-		} 
-    // else if (format == Types.PixelFormat.ARGB) {
-		// 	data.set(i, c.a);
-		// 	data.set(i + 1, c.r);
-		// 	data.set(i + 2, c.g);
-		// 	data.set(i + 3, c.b);
-		// } 
+    if(int32Mode){
+      setInt32(i, c);
+    }
     else {
-			throw "Image format not supported";
-		}
+        setInt8(i,c);
+    } 
     return false;
 	}
 

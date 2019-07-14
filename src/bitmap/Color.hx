@@ -52,10 +52,11 @@ abstract Color(Int) from Int to Int {
 
    TODO: Si the previous is correct, this method should not be needed. Change the order in create() and r, b, g, a props.
    **/
-public inline function asInt32(){
-var red = (this >> 24) & 0xFF, green = (this >> 16) & 0xFF, blue=(this >> 8) & 0xFF, alpha=(this ) & 0xFF;
-return (Util.clamp(red, 0, 255)) + (Util.clamp(green, 0, 255) << 8) + (Util.clamp(blue, 0, 255) << 16) + (Util.clamp(alpha, 0, 255)<<24);
-}
+   
+// public inline function asInt32(){
+// var red = (this >> 24) & 0xFF, green = (this >> 16) & 0xFF, blue=(this >> 8) & 0xFF, alpha=(this ) & 0xFF;
+// return (Util.clamp(red, 0, 255)) + (Util.clamp(green, 0, 255) << 8) + (Util.clamp(blue, 0, 255) << 16) + (Util.clamp(alpha, 0, 255)<<24);
+// }
 	/**
 	 * Converts an integer to a RGBA8888 color.
 	 * @param	rgba The integer to convert to the color.
