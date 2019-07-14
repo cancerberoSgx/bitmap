@@ -42,9 +42,20 @@ abstract Color(Int) from Int to Int {
 	 * @return	The new color value in RGBA8888 format.
 	 */
 	public static inline function create(red:Int, green:Int, blue:Int, alpha:Int):Color {
-		return (Util.clamp(red, 0, 255) << 24) + (Util.clamp(green, 0, 255) << 16) + (Util.clamp(blue, 0, 255) << 8) + (Util.clamp(alpha, 0, 255));
+		return (Util.clamp(red, 0, 255) << 24) + (Util.clamp(green, 0, 255) << 16) + (Util.clamp(blue, 0, 255) << 8) + Util.clamp(alpha, 0, 255);
 	}
 
+  /** 
+   * This invert the four bytes order in the Int32. For some reason this is needed in order to write a whole Int32 ,instead separated bytes, which is faster. 
+
+   I suspect this class (taken from geometrize-haxe project) is currently storing the bytes not rgba but abgr (reversed) and since colors are in general accessed byte by byte is not noticed. 
+
+   TODO: Si the previous is correct, this method should not be needed. Change the order in create() and r, b, g, a props.
+   **/
+public inline function asInt32(){
+var red = (this >> 24) & 0xFF, green = (this >> 16) & 0xFF, blue=(this >> 8) & 0xFF, alpha=(this ) & 0xFF;
+return (Util.clamp(red, 0, 255)) + (Util.clamp(green, 0, 255) << 8) + (Util.clamp(blue, 0, 255) << 16) + (Util.clamp(alpha, 0, 255)<<24);
+}
 	/**
 	 * Converts an integer to a RGBA8888 color.
 	 * @param	rgba The integer to convert to the color.

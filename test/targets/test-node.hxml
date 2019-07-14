@@ -1,5 +1,4 @@
 test/targets/test-each.hxml
 
 -js bin/test/Main.js
-# -cmd cp bin/test/Main.js bin/test/Main.jsbkp && cat src/assets/pako.min.js >bin/test/Main.js && cat bin/test/Main.jsbkp >> bin/test/Main.js &&   node bin/test/Main.js
 -cmd node bin/test/Main.js

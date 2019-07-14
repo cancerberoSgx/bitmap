@@ -49,29 +49,30 @@ import haxe.io.Bytes;
 	}
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
-		var i = (y * width + x) * 4;
-		var outOfBounds = i >= data.length - 5;
-		if (outOfBounds) {
+		var i = (y * width + x)* 4 ;
+		if (i >= data.length - 5) {
 			if (noError != true) {
-				Sure.sure(outOfBounds);
+				Sure.sure('outOfBounds'==null);
 			} else {
 				return true;
 			}
 		}
 		if (format == null || format == Types.PixelFormat.RGBA) {
-			data.set(i, c.r);
-			data.set(i + 1, c.g);
-			data.set(i + 2, c.b);
-			data.set(i + 3, c.a);
-		} else if (format == Types.PixelFormat.ARGB) {
-			data.set(i, c.a);
-			data.set(i + 1, c.r);
-			data.set(i + 2, c.g);
-			data.set(i + 3, c.b);
-		} else {
+			data.setInt32(i, c.asInt32());
+			// data.set(i + 1, c.g);
+			// data.set(i + 2, c.b);
+			// data.set(i + 3, c.a);
+		} 
+    // else if (format == Types.PixelFormat.ARGB) {
+		// 	data.set(i, c.a);
+		// 	data.set(i + 1, c.r);
+		// 	data.set(i + 2, c.g);
+		// 	data.set(i + 3, c.b);
+		// } 
+    else {
 			throw "Image format not supported";
 		}
-		return outOfBounds;
+    return false;
 	}
 
 	public function load(input:Input, ?f:Types.PixelFormat):Void {

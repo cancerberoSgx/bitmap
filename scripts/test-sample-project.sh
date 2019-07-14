@@ -1,4 +1,3 @@
-sh scripts/pack.sh
 cd sample-project 
 haxelib install ../bitmap.zip
 
