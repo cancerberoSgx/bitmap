@@ -148,6 +148,7 @@ sh test-docker.sh
 
 ## TODO
 
+- [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
 - [ ] browser example. load png from url, draw/transform and render it back again as img.
 - [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
