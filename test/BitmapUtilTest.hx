@@ -46,14 +46,21 @@ class BitmapUtilTest implements utest.ITest {
 
 	public function testdrawRectangle() {
 		var a = PNGBitmap.create(IOUtil.readFile("test/assets/n.png"));
-		BitmapUtil.drawRectangle(a, 60, 20, 20, 40, Color.create(255, 44, 122, 132), true, Blend.mean);
+		BitmapUtil.drawRectangle(a, 60, 20, 20, 40, Color.create(255, 44, 122, 132), true, bitmap.Types.Blend.mean);
 		BitmapUtil.drawRectangle(a, 10, 20, 40, 22, Color.create(12, 144, 0, 132), false);
 		IOUtil.writeBitmap('test/assets/tmptestdrawRectangle.png', a);
 		var b = PNGBitmap.create(IOUtil.readFile("test/assets/drawRectangle.png"));
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestdrawRectangle.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 
-    a.draw.rectangle({x: 10, y: 20, width: 40, height: 22, c: Color.create(12, 144, 0, 131), fill: false});
+		a.draw.rectangle({
+			x: 10,
+			y: 20,
+			width: 40,
+			height: 22,
+			c: Color.create(12, 144, 0, 131),
+			fill: false
+		});
 		Assert.isFalse(BitmapUtil.bitmapEquals(a, b));
 	}
 
@@ -67,5 +74,4 @@ class BitmapUtilTest implements utest.ITest {
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestdrawLine.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 	}
-
 }

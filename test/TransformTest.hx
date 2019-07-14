@@ -30,7 +30,6 @@ class TransformTest implements utest.ITest {
 
 	public function testConvolve() {
 		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
-		// var output = bitmap.clone();
 		var kernel = [[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]];
 		var result = bitmap.transform.convolve({
 			kernel: kernel,

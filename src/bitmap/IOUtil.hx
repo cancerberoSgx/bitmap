@@ -1,7 +1,6 @@
 package bitmap;
 
 class IOUtil {
-  
 	public static function readFile(path:String):haxe.io.Input {
 		#if js
 		untyped var s = require("fs").readFileSync(path);
@@ -25,12 +24,12 @@ class IOUtil {
 		throw "Unexpected end of method";
 	}
 
-   public static function writeBitmap(file:String, bitmap:Bitmap) {
-    //  var copy = bitmap.data.sub(0, bitmap.data.length);
-    var output=  new haxe.io.BytesOutput();
-    bitmap.save(output);
-    var bytes = output.getBytes();
-    // output.writeBytes(bitmap.data, 0, bitmap.data.length);
+	public static function writeBitmap(file:String, bitmap:Bitmap) {
+		//  var copy = bitmap.data.sub(0, bitmap.data.length);
+		var output = new haxe.io.BytesOutput();
+		bitmap.save(output);
+		var bytes = output.getBytes();
+		// output.writeBytes(bitmap.data, 0, bitmap.data.length);
 		// var bytes = bitmap.data;
 		#if js
 		untyped require("fs").writeFileSync(file, Buffer.from(bytes.b));
@@ -41,5 +40,4 @@ class IOUtil {
 		#end
 		throw "Unexpected end of method";
 	}
-
 }

@@ -18,7 +18,7 @@ interface Bitmap extends OffsetRectangleArea {
 	@:readOnly public var data:Bytes;
 	@:readOnly public var draw:Draw;
 	@:readOnly public var transform:Transform;
-	public function load(nput:Input, ?format:PixelFormat):Void;
+	public function load(nput:Input, ?format:Types.PixelFormat):Void;
 	public function save(output:Output):Void;
 	public function get(x:Int, y:Int):Color;
 	public function set(x:Int, y:Int, c:Color):Void;

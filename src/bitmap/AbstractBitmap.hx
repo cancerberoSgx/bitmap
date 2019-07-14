@@ -12,11 +12,11 @@ import haxe.io.Bytes;
 	public var height:Int;
 	public var originalWidth:Int;
 	public var originalHeight:Int;
-	public var format:PixelFormat;
+	public var format:Types.PixelFormat;
 	public var draw:Draw;
 	public var transform:Transform;
 
-	public function new(w:Int=0, h:Int=0, f:PixelFormat=PixelFormat.RGBA) {
+	public function new(w:Int=0, h:Int=0, f:Types.PixelFormat=Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
 		transform = new Transform(this);
 		if (w > 0 && h > 0) {
@@ -30,7 +30,7 @@ import haxe.io.Bytes;
 				x: 0,
 				y: 0,
 				fill: true,
-				blend: Blend.none,
+				blend: Types.Blend.none,
 				c: Color.create(0, 0, 0, 0)
 			});
 		}
@@ -39,9 +39,9 @@ import haxe.io.Bytes;
 	public function get(x:Int, y:Int):Color {
 		var i = (y * width + x) * 4;
 		Sure.sure(i >= 0 && i < data.length - 3);
-		if (format == null || format == PixelFormat.RGBA) {
+		if (format == null || format == Types.PixelFormat.RGBA) {
 			return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
-		} else if (format == PixelFormat.ARGB) {
+		} else if (format == Types.PixelFormat.ARGB) {
 			return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 		} else {
 			throw "Image format not supported";
@@ -51,12 +51,12 @@ import haxe.io.Bytes;
 	public function set(x:Int, y:Int, c:Color):Void {
 		var i = (y * width + x) * 4;
 		Sure.sure(i >= 0 && i < data.length - 3);
-		if (format == null || format == PixelFormat.RGBA) {
+		if (format == null || format == Types.PixelFormat.RGBA) {
 			data.set(i, c.r);
 			data.set(i + 1, c.g);
 			data.set(i + 2, c.b);
 			data.set(i + 3, c.a);
-		} else if (format == PixelFormat.ARGB) {
+		} else if (format == Types.PixelFormat.ARGB) {
 			data.set(i, c.a);
 			data.set(i + 1, c.r);
 			data.set(i + 2, c.g);
@@ -66,7 +66,7 @@ import haxe.io.Bytes;
 		}
 	}
 
-	public function load(input:Input, ?f:PixelFormat):Void {
+	public function load(input:Input, ?f:Types.PixelFormat):Void {
 		throw "Abstract method call";
 	}
 

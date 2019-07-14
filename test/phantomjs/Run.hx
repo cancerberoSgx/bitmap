@@ -3,25 +3,27 @@ import sys.FileSystem.*;
 import sys.io.File.*;
 import haxe.*;
 import haxe.io.*;
+
 using StringTools;
 
 /**
-    Test a JS file in PhantomJS.
-*/
+	Test a JS file in PhantomJS.
+ */
 class Run {
-    static var phantomjsRunner(default, never) = "test/phantomjs/phantomjs.js";
-    static var phantomjsHtml(default, never) = "test/phantomjs/phantomjs.html";
-    static function main() {
-        var args = args();
-        var jsFile = fullPath(args[0]);
+	static var phantomjsRunner(default, never) = "test/phantomjs/phantomjs.js";
+	static var phantomjsHtml(default, never) = "test/phantomjs/phantomjs.html";
 
-        var tmpl = new Template(getContent(phantomjsHtml));
-        var html = tmpl.execute({
-        	jsFile: Path.withoutDirectory(jsFile)
-        });
-        saveContent(Path.join([Path.directory(jsFile), "phantomjs.html"]), html);
+	static function main() {
+		var args = args();
+		var jsFile = fullPath(args[0]);
 
-        var exitCode = command("phantomjs", [phantomjsRunner]);
-        exit(exitCode);
-    }
+		var tmpl = new Template(getContent(phantomjsHtml));
+		var html = tmpl.execute({
+			jsFile: Path.withoutDirectory(jsFile)
+		});
+		saveContent(Path.join([Path.directory(jsFile), "phantomjs.html"]), html);
+
+		var exitCode = command("phantomjs", [phantomjsRunner]);
+		exit(exitCode);
+	}
 }

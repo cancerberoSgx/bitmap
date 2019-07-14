@@ -9,7 +9,10 @@ class Draw {
 		bitmap = b;
 	}
 
-	public function line(x1:Int, y1:Int, x2:Int, y2:Int, c:Color, blend:Blend) {
+	/**
+	 * adapted from http://www.brackeen.com/vga/source/djgpp20/lines.c.html
+	**/
+	public function line(x1:Int, y1:Int, x2:Int, y2:Int, c:Color, blend:Types.Blend) {
 		var dx:Int, dy:Int, sdx:Int, sdy:Int, dxabs:Int, dyabs:Int, x:Int, y:Int, px:Int, py:Int;
 		dx = x2 - x1; /* the horizontal distance of the line */
 		dy = y2 - y1; /* the vertical distance of the line */
@@ -45,7 +48,7 @@ class Draw {
 	}
 
 	public function rectangle(r:RectangleShape) {
-		if (r.fill+''=='true') { // haxe issue: r.fill==true is always false
+		if (r.fill) { // haxe issue: r.fill==true is always false
 			for (y2 in 0...r.height) {
 				for (x2 in 0...r.width) {
 					set(x2 + r.x, y2 + r.y, r.c, r.blend);
@@ -59,15 +62,15 @@ class Draw {
 		}
 	}
 
-	private inline function set(x:Int, y:Int, c:Color, ?blend:Blend) {
-		bitmap.set(x, y, (blend == null || blend == Blend.none) ? c : BitmapUtil.blendColors(bitmap.get(x, y), c, blend));
+	private inline function set(x:Int, y:Int, c:Color, ?blend:Types.Blend) {
+		bitmap.set(x, y, (blend == null || blend == Types.Blend.none) ? c : BitmapUtil.blendColors(bitmap.get(x, y), c, blend));
 	}
 }
 
 typedef DrawShape = {
 	@:optional var fill:Bool;
 	var c:bitmap.Color;
-	@:optional var blend:Blend;
+	@:optional var blend:Types.Blend;
 	var x:Int;
 	var y:Int;
 };

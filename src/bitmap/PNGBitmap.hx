@@ -2,10 +2,11 @@ package bitmap;
 
 import haxe.io.Output;
 import bitmap.*;
+import bitmap.support.ZipSupport;
+import bitmap.Types.PixelFormat;
 import format.png.*;
 
 class PNGBitmap extends AbstractBitmap {
-  
 	override public function load(input:haxe.io.Input, ?f:PixelFormat) {
 		if (f == null) {
 			f = PixelFormat.RGBA;
@@ -35,19 +36,18 @@ class PNGBitmap extends AbstractBitmap {
 		new Writer(output).write(data);
 	}
 
-	override public function clone():Bitmap{
-    var bitmap = new PNGBitmap();
-    bitmap.width = width;
+	override public function clone():Bitmap {
+		var bitmap = new PNGBitmap();
+		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
 		bitmap.data = data.sub(0, data.length);
 		return bitmap;
-  }
-  
+	}
+
 	public static function create(input:haxe.io.Input, ?format:PixelFormat) {
 		var bitmap = new PNGBitmap();
 		bitmap.load(input, format);
 		return bitmap;
 	}
-
 }

@@ -1,15 +1,17 @@
-package bitmap;
+package bitmap.support;
+
 #if macro
 import haxe.macro.Expr;
 import haxe.macro.Context;
 import haxe.macro.Expr;
+
 using haxe.macro.Tools;
 using Lambda;
 #end
 
 class StructureTools {
 	public static macro function combine(rest:Array<Expr>):Expr {
-    var quotes = QuoteStatus.Unquoted;
+		var quotes = QuoteStatus.Unquoted;
 		var pos = Context.currentPos();
 		var block = [];
 		var cnt = 1;
@@ -36,32 +38,32 @@ class StructureTools {
 	}
 
 	public static macro function props(self:ExprOf<Dynamic>):Expr {
-    var propsNames = [];
-    var selfType = Context.typeof(self);
-    switch (selfType.follow()) {
-      case TAnonymous(_.get() => tr):
-        for (field in tr.fields) {
-          propsNames.push(field.name);
-        }	
-      default:
-        return Context.error("Object type expected instead of " + selfType.toString(), self.pos);
-    }
+		var propsNames = [];
+		var selfType = Context.typeof(self);
+		switch (selfType.follow()) {
+			case TAnonymous(_.get() => tr):
+				for (field in tr.fields) {
+					propsNames.push(field.name);
+				}
+			default:
+				return Context.error("Object type expected instead of " + selfType.toString(), self.pos);
+		}
 		var propsStringLiterals = propsNames.map(function(name) {
-      return {
-        expr: EConst(CString(name)), 
-        pos: Context.currentPos()
-      }
-    });
+			return {
+				expr: EConst(CString(name)),
+				pos: Context.currentPos()
+			}
+		});
 		var arrDecl:Expr = {
-      expr: EArrayDecl(propsStringLiterals), 
-      pos: Context.currentPos()
-    };
+			expr: EArrayDecl(propsStringLiterals),
+			pos: Context.currentPos()
+		};
 		return macro $b{[macro $arrDecl]};
 	}
 
 	public static macro function set(self:ExprOf<Dynamic>, name:String, value:Expr) {
 		return {
-			expr: EBinop(OpAssign, {  
+			expr: EBinop(OpAssign, {
 				expr: EField(macro ${self}, name),
 				pos: Context.currentPos()
 			}, macro ${value}),
@@ -71,14 +73,12 @@ class StructureTools {
 
 	public static macro function get(self:ExprOf<Dynamic>, name:String) {
 		return {
-      expr: EField(macro ${self}, name),
-      pos: Context.currentPos()
-    };
+			expr: EField(macro ${self}, name),
+			pos: Context.currentPos()
+		};
 	}
 
-
-// tests 
-
+	// tests
 	// static function StructureTools() {
 	// 	var a = {
 	// 		foo: 1,
@@ -87,14 +87,13 @@ class StructureTools {
 	// 	var b = {
 	// 		bar: "he"
 	// 	};
-  //   trace(a.props(), b.props());
+	//   trace(a.props(), b.props());
 	// 	var c = a.combine(b);
 	// 	trace(c.get('foo'), c.get('bar'));
 	// 	c.set('foo', 2);
 	// 	c.set('bar', 'sdf');
 	// 	trace(c.get('foo'), c.get('bar'));
 	// }
-
 	static public function assign(o1:Dynamic, o2:Dynamic, o3:Dynamic) {
 		var fields = Reflect.fields(o1).concat(Reflect.fields(o2)).concat(Reflect.fields(o3)); // TODO: dedup
 		for (f in fields) {
@@ -103,7 +102,4 @@ class StructureTools {
 		}
 		return o1;
 	}
-
-
-
 }

@@ -1,14 +1,15 @@
 package bitmap;
+
 import bitmap.*;
+
 class ColorUtil {
-  
 	/**
 	 * Computes the average RGB color of the pixels in the image.
 	 * @param	image	The image whose average color will be calculated.
 	 * @param	alpha	The opacity of the image (0-255), defaults to opaque (255).
 	 * @return	The average RGB color of the image, RGBA8888 format. Alpha defaults to opaque (255).
 	 */
-	public static function average(image:Bitmap, ?region:Rectangle, ?alpha:Int):Color {
+	public static function average(image:Bitmap, ?region:Types.Rectangle, ?alpha:Int):Color {
 		Sure.sure(image != null);
 		// TODO: verify valid region
 
@@ -18,11 +19,14 @@ class ColorUtil {
 		var totalAlpha:Int = 0;
 		if (region == null) {
 			region = {
-				x:0, y:0, width:image.width, height: image.height
+				x: 0,
+				y: 0,
+				width: image.width,
+				height: image.height
 			};
 		}
-		for (x in region.x...region.x+region.width) {
-			for (y in region.y...region.y+region.height) {
+		for (x in region.x...region.x + region.width) {
+			for (y in region.y...region.y + region.height) {
 				var pixel = image.get(x, y);
 				totalRed += pixel.r;
 				totalGreen += pixel.g;
@@ -30,22 +34,12 @@ class ColorUtil {
 				totalAlpha += pixel.a;
 			}
 		}
-    // trace(total)
 		var size:Int = region.width * region.height;
-				// var r:UInt = Std.int(totalRed / size) >> 8;
-				// var g:UInt = Std.int(totalGreen / size) >> 8;
-				// var b:UInt = Std.int(totalBlue / size) >> 8;
-				// var a:UInt = Std.int(totalAlpha / size) >> 8;
-  //       return Color.create(r,g,b,a);
-
-		// return Color.create(r,g,b,a      );
-    return Color.create(Std.int(Math.round(totalRed / size)) , Std.int(Math.round(totalGreen / size)),Std.int(Math.round(totalBlue / size)),
-    alpha==null?Std.int(Math.round(totalAlpha / size) ): alpha  
-    // 188
-       );
+		return Color.create(Std.int(Math.round(totalRed / size)), Std.int(Math.round(totalGreen / size)), Std.int(Math.round(totalBlue / size)),
+			alpha == null ? Std.int(Math.round(totalAlpha / size)) : alpha);
 	}
 
-  public static function random(){
-    return Color.create(Util.random(0,255),Util.random(0,255),Util.random(0,255),Util.random(0,255));
-  }
+	public static function random() {
+		return Color.create(Util.random(0, 255), Util.random(0, 255), Util.random(0, 255), Util.random(0, 255));
+	}
 }

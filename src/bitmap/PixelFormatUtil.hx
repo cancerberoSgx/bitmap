@@ -15,7 +15,7 @@ class PixelFormatUtil {
 	public static inline function argbToRgba(bytes:Bytes):Bytes {
 		Sure.sure(bytes != null);
 		Sure.sure(bytes.length % 4 == 0);
-		
+
 		var length:Int = bytes.length;
 		var i:Int = 0;
 		while (i < length) {
@@ -31,7 +31,7 @@ class PixelFormatUtil {
 		}
 		return bytes;
 	}
-	
+
 	/**
 	 * Converts a buffer of image data in RGBA format to ARGB in-place.
 	 * @param	bytes	The byte buffer to convert.
@@ -40,7 +40,7 @@ class PixelFormatUtil {
 	public static inline function rgbaToArgb(bytes:Bytes):Bytes {
 		Sure.sure(bytes != null);
 		Sure.sure(bytes.length % 4 == 0);
-		
+
 		var length:Int = bytes.length;
 		var i:Int = 0;
 		while (i < length) {
@@ -56,7 +56,7 @@ class PixelFormatUtil {
 		}
 		return bytes;
 	}
-	
+
 	/**
 	 * Converts a buffer of image data in BRGA format to RGBA in-place.
 	 * @param	bytes	The byte buffer to convert.
@@ -65,7 +65,7 @@ class PixelFormatUtil {
 	public static inline function brgaToRgba(bytes:Bytes):Bytes {
 		Sure.sure(bytes != null);
 		Sure.sure(bytes.length % 4 == 0);
-		
+
 		var length:Int = bytes.length;
 		var i:Int = 0;
 		while (i < length) {
@@ -81,7 +81,7 @@ class PixelFormatUtil {
 		}
 		return bytes;
 	}
-	
+
 	/**
 	 * Converts a buffer of image data in RGBA format to BGRA in-place.
 	 * @param	bytes	The byte buffer to convert.
@@ -90,7 +90,7 @@ class PixelFormatUtil {
 	public static inline function rgbaToBgra(bytes:Bytes):Bytes {
 		Sure.sure(bytes != null);
 		Sure.sure(bytes.length % 4 == 0);
-		
+
 		var length:Int = bytes.length;
 		var i:Int = 0;
 		while (i < length) {

@@ -20,6 +20,4 @@ class TestMain {
 		Report.create(runner);
 		runner.run();
 	}
-
-  	static function fff(a:Int,b:Int):Int{return 1;} 
 }

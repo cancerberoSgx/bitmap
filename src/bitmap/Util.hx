@@ -2,13 +2,11 @@ package bitmap;
 
 import bitmap.*;
 
-
 /**
  * Utility functions.
  * Adapted from https://github.com/Tw1ddle/geometrize-haxe/
  */
 class Util {
-
 	/**
 	 * Clamps a value within a range.
 	 * @param	value	The value to clamp.
@@ -47,12 +45,13 @@ class Util {
 	 * @return	The absolute value of the given value.
 	 */
 	public static inline function abs(value:Int) {
-			return value < 0 ? -value : value;
+		return value < 0 ? -value : value;
 	}
 
-  public static inline function sgn(value:Int) {
-			return value < 0 ? -1 : value>0 ? 1 : 0;
+	public static inline function sgn(value:Int) {
+		return value < 0 ? -1 : value > 0 ? 1 : 0;
 	}
+
 	// /**
 	//  * Converts a value measured in degrees to radians.
 	//  * @param	degrees	Degrees value to convert to radians.
@@ -61,7 +60,6 @@ class Util {
 	// public static inline function toRadians(degrees:Float):Float {
 	// 	return degrees * Math.PI / 180;
 	// }
-
 	// /**
 	//  * Converts a value measured in radians to degrees.
 	//  * @param	radians	Radians value to convert to degrees.
@@ -81,7 +79,6 @@ class Util {
 		Sure.sure(lower <= upper);
 		return lower + Math.floor((upper - lower + 1) * Math.random());
 	}
-
 	// /**
 	//  * Returns a random item from an array.
 	//  * @param	a	The array to pick a random item from.
@@ -91,7 +88,6 @@ class Util {
 	// 	Sure.sure(a != null && a.length > 0);
 	// 	return a[random(0, a.length - 1)];
 	// }
-
 	// /**
 	//  * Returns the smallest and largest items from an array of ints.
 	//  * @param	a	The array of ints.
@@ -101,10 +97,8 @@ class Util {
 	// 	if (a == null || a.length == 0) {
 	// 		return {x: 0, y: 0};
 	// 	}
-
 	// 	var min:Int = a[0];
 	// 	var max:Int = a[0];
-
 	// 	for (value in a) {
 	// 		if (min > value) {
 	// 			min = value;
@@ -113,8 +107,6 @@ class Util {
 	// 			max = value;
 	// 		}
 	// 	}
-
 	// 	return {x: min, y: max};
 	// }
-
 }
