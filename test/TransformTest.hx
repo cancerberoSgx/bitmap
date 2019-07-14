@@ -30,7 +30,11 @@ class TransformTest implements utest.ITest {
 
 	public function testConvolve() {
 		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
-		var kernel = [[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]];
+		var kernel = [
+      [0.0, -1.0, 0.0], 
+      [-1.0, 4.0, -1.0], 
+      [0.0, -1.0, 0.0]
+    ];
 		var result = bitmap.transform.convolve({
 			kernel: kernel,
 			bias: 0.2,
@@ -40,4 +44,22 @@ class TransformTest implements utest.ITest {
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/convolve.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
 	}
+
+	public function testAffine() {
+		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
+		var result = bitmap.transform.affine({
+			matrix:{
+			a: 0.4,
+			b: 0.5,
+			c: 0.2,
+			d: 1.5,
+			e: 2.0,
+			f: 3.0
+		}
+		});
+		IOUtil.writeBitmap('test/assets/tmpAffine1.png', result.bitmap);
+		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/affine.png"));
+		Assert.isTrue(BitmapUtil.bitmapEquals(result.bitmap, b2));
+	}
+
 }

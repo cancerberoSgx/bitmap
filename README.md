@@ -26,7 +26,7 @@
 
  * Easy to use API.
  * Supports all targets.
- * Supports common formats (right now only PNG).
+ * Although currently only PNG, the objective is to common formats (GIF, JPG).
  * Pixel access, RGBA color, blending
  * Shape drawing.
  * Composition, convolution, color blending and more.
@@ -154,20 +154,18 @@ sh test-docker.sh
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
 - [ ] code formatter
+- [ ] affine transformations :rotate, translate, skew
 - [ ] bitmap.copy(bounds?:Rectangle):Bitmap
 - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
+- [ ] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
+- [ ] transformations modify not respected
 - [ ] bitmap.write(bitmap2, x, y)
 - [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
 - [x] convolutions API
 - [x] node & browser "pako is not defined" when used from other project
-### OT
 
- * [ ] some math libraries: https://github.com/markknol/hx-vector2d/blob/master/src/geom/Vector2d.hx, https://github.com/tbrosman/hxmath/blob/master/test/Test2D.hx, https://github.com/ramchale/quick-haxe/blob/master/quick_haxe/path/Path.hx
- * geomtrize-haxe : may be checking with Sure is expensive so: implement macro or conditionals to not compile those statement if an option or compile arg is given.
- * haxe library to call ImageMagick commands in ALL targets (and browser). In non js targets user needs to have installed ImageMatick and we spawn. In the browser , with the same API, use https://www.npmjs.com/package/magica emscripten port of IM. 
-
-## Notes
+### Notes
 
 Convert from rgba to png:
 
@@ -177,3 +175,9 @@ Convert png to rgba
 
 convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
 
+ * [ ] some math libraries: https://github.com/markknol/hx-vector2d/blob/master/src/geom/Vector2d.hx, https://github.com/tbrosman/hxmath/blob/master/test/Test2D.hx, https://github.com/ramchale/quick-haxe/blob/master/quick_haxe/path/Path.hx
+
+### OT
+
+ * geomtrize-haxe : may be checking with Sure is expensive so: implement macro or conditionals to not compile those statement if an option or compile arg is given.
+ * haxe library to call ImageMagick commands in ALL targets (and browser). In non js targets user needs to have installed ImageMatick and we spawn. In the browser , with the same API, use https://www.npmjs.com/package/magica emscripten port of IM. 

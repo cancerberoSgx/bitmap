@@ -3,6 +3,12 @@ package bitmap.transformation;
 import bitmap.*;
 import bitmap.transformation.*;
 
+typedef TransformationOptions = {
+	@:optional public var modify:Bool;
+	@:optional public var bitmap:Bitmap;
+	@:optional public var output:Bitmap;
+}
+
 class Transform {
 	private var bitmap:Bitmap;
 
@@ -19,13 +25,11 @@ class Transform {
 		t.bitmap = bitmap;
 		return Convolution.convolve(t);
 	}
-}
 
-typedef TransformationOptions = {
-	@:optional public var modify:Bool;
-	@:optional public var bitmap:Bitmap;
-	@:optional public var output:Bitmap;
+	public function affine(t: Affine.AffineOptions) {
+		t.bitmap = bitmap;
+    var affine = new Affine();
+		return affine.transform(t);
+	}
+
 }
-// typedef TransformationResult = {
-//   var bitmap:Bitmap;
-// }

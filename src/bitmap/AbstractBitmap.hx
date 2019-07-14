@@ -48,9 +48,12 @@ import haxe.io.Bytes;
 		}
 	}
 
-	public function set(x:Int, y:Int, c:Color):Void {
+	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = (y * width + x) * 4;
-		Sure.sure(i >= 0 && i < data.length - 3);
+    var outOfBounds = i >= 0 && i < data.length - 3;
+    if(noError!=true){
+		  Sure.sure(outOfBounds);
+    }
 		if (format == null || format == Types.PixelFormat.RGBA) {
 			data.set(i, c.r);
 			data.set(i + 1, c.g);
@@ -64,6 +67,7 @@ import haxe.io.Bytes;
 		} else {
 			throw "Image format not supported";
 		}
+    return outOfBounds;
 	}
 
 	public function load(input:Input, ?f:Types.PixelFormat):Void {
@@ -74,8 +78,13 @@ import haxe.io.Bytes;
 		throw "Abstract method call";
 	}
 
-	public function clone():Bitmap {
-		throw "Abstract method call";
+	public function clone() {
+		var bitmap = new PNGBitmap();
+		bitmap.width = width;
+		bitmap.height = height;
+		bitmap.format = format;
+		bitmap.data = data.sub(0, data.length);
+		return bitmap;
 	}
 
 	public function equals(b:Bitmap):Bool {

@@ -20,8 +20,8 @@ class Convolution {
 			for (x in 0...width) {
 				var px = (y * width + x) * 4;
 				var r = 0.0, g = 0.0, b = 0.0;
-				for (cy in 0...w) {
-					for (cx in 0...h) {
+				for (cy in 0...h) {
+					for (cx in 0...w) {
 						// HEADS UP: we need to be very strict on types for static targets.
 						// Not only cpx index but also Null<Int> (nullability).
 						// See https://haxe.org/manual/types-nullability.html
