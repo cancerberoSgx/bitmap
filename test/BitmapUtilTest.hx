@@ -46,21 +46,46 @@ class BitmapUtilTest implements utest.ITest {
 	}
 
   public function testCompare(){
-    var a = new PNGBitmap(3, 3);
-    var b = new PNGBitmap(4, 4);
+    var a = new PNGBitmap(4, 4);
+    var b = new PNGBitmap(5, 5);
     a.fill(Color.create(0,0,0,0));
     b.fill(Color.create(0,0,0,0));
     Assert.same(0, BitmapUtil.compare(a,b,{x:0,y:0,width:2,height:2}));
-    b.set(0,0,Color.create(1,2,3,4));
-    Assert.same(0.0012254901960784314, BitmapUtil.compare(a,b,{x:0,y:0,width:2,height:2}));
-    a.fill(Color.create(220,220,220,220));
-    Assert.same(-0.8615196078431373, BitmapUtil.compare(a,b,{x:0,y:0,width:2,height:2}));
+    b.set(0,0,Color.create(5,5,5,5));
+    var d1 = BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3});
+Assert.isTrue(Math.abs(d1)>Math.abs(0));
+    // Assert.same(0.0012254901960784314, BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3}));
+    b.set(0,1,Color.create(12,12,12,12));
+
+    // Assert.same(0.0012254901960784314, BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3}));
+    var d2 = BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3});
+// Assert.isTrue(Math.abs(d2)>Math.abs(0));
+Assert.isTrue(Math.abs(d2)>Math.abs(d1));
+    a.fill(Color.create(33,33,33,33));
+    var d3 = BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3});
+Assert.isTrue(Math.abs(d3)>Math.abs(d2));
+
+    a.fill(Color.create(233,233,233,233));
+    var d4 = BitmapUtil.compare(a,b,{x:0,y:0,width:3,height:3});
+Assert.isTrue(Math.abs(d4)>Math.abs(d3));
+    
+    // Assert.same(-0.8615196078431373, BitmapUtil.compare(a,b,{x:0,y:0,width:2,height:2}));
   }
 
 	public function testMultiply() {
 		var a = [[8.0, 3.0], [2.0, 4.0], [3.0, 6.0]],
     b = [[1.0, 2.0, 3.0], [4.0, 6.0, 8.0]];
     Assert.same(Util.multiply(a, b), [[20,34,48],[18,28,38],[27,42,57]]);
+	}
+public function testRandom() {
+   var a= [for(i in 0...30)Util.random(0,0)];
+   Assert.isTrue(a.filter(function(f)return f==0).length>0);
+   Assert.isTrue(a.filter(function(f)return f==1).length==0);
+    a= [for(i in 0...50)Util.random(0,3)];
+   Assert.isTrue(a.filter(function(f)return f==0).length>0);
+   Assert.isTrue(a.filter(function(f)return f==1).length>0);
+   Assert.isTrue(a.filter(function(f)return f==2).length>0);
+   Assert.isTrue(a.filter(function(f)return f==3).length>0);
 	}
 
 }

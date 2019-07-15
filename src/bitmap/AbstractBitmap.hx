@@ -23,7 +23,7 @@ import haxe.io.Bytes;
 	public var transform:Transform;
 	public var bg = Color.create(255, 255, 255, 255);
 
-	public function new(w:Int = 0, h:Int = 0, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
+	public function new(w:Int = 1, h:Int = 1, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
 		transform = new Transform(this);
 		if (w > 0 && h > 0) {
@@ -36,7 +36,7 @@ import haxe.io.Bytes;
 	}
 
 	public function fill(?bg_:Color) {
-    bg_=bg_==null?bg:bg_;
+		bg_ = bg_ == null ? bg : bg_;
 		for (x in 0...width) {
 			for (y in 0...height) {
 				set(x, y, bg_);
@@ -59,13 +59,10 @@ import haxe.io.Bytes;
 	public inline function byteIndex(x:Int, y:Int) {
 		return (y * width + x) * 4;
 	}
-// public static inline function getByteIndex(x:Int, y:Int,width:Int){
-//   return (y * width + x) * 4;
-// }
 
-public function copy(?r:Types.Rectangle):Bitmap{
+	public function copy(?r:Types.Rectangle):Bitmap {
 		throw "Abstract method call";
-}
+	}
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = byteIndex(x, y);
@@ -97,6 +94,8 @@ public function copy(?r:Types.Rectangle):Bitmap{
 		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
+    bitmap.noRangeCheck=noRangeCheck;
+
 		if (!fill_) {
 			bitmap.data = data.sub(0, data.length);
 		} else {
@@ -110,26 +109,48 @@ public function copy(?r:Types.Rectangle):Bitmap{
 		return BitmapUtil.bitmapEquals(this, b, region);
 	}
 
-	public function copyFrom(b:Bitmap, ?region:Types.Rectangle) {
-		if (region == null) {
-			region = {
-				x: 0,
-				y: 0,
-				width: Util.min(width, b.width),
-				height: Util.min(height, b.height)
-			};
-		}
-		// region.width = Util.min(Util.min(region.width, b.width), width);
-		// region.height = Util.min(Util.min(region.height, b.height), height);
-		var i0 = byteIndex(region.x, region.y);
-		var i1 = byteIndex(region.x + region.width - 1, region.y + region.height - 1);
-		data.blit(i0, b.data, i0, i1 - i0);
+	public function copyFrom(b:Bitmap, ?regionB:Types.Rectangle, ?regionThis:Types.Rectangle) {
+		regionB = regionB==null?regionThis==null?b.bounds():regionThis:regionB;
+		regionThis = regionThis==null?regionB==null?this.bounds():regionB:regionThis;
+
+	regionB.width = regionB.width+regionB.x> b.width ? b.width - regionB.x -1 : regionB.width;
+		regionB.height =regionB.height+regionB.y> b.height ? b.height - regionB.y -1 : regionB.height;
+
+	regionB.width = regionB.width+regionB.x> b.width ? b.width - regionB.x -1 : regionB.width;
+		regionB.height =regionB.height+regionB.y> b.height ? b.height - regionB.y -1 : regionB.height;
+
+if(regionThis.width!=regionB.width||regionThis.height!=regionB.height){
+      throw "Regions given or inferred have different sizes";
+    }
+
+    // trace(r, width, height, b.width, b.height);
+
+		Sure.sure(b.width >= regionB.x + regionB.width && b.height >= regionB.y + regionB.height);
+		Sure.sure(width >= regionThis.x + regionThis.width && height >= regionThis.y + regionThis.height);
+
+		var startB = (cast b).byteIndex(regionB.x, regionB.y);
+		var endB = (cast b).byteIndex(regionB.x + regionB.width - 1, regionB.y + regionB.height - 1);
+
+		var startThis = (cast b).byteIndex(regionThis.x, regionThis.y);
+		var endThis = (cast b).byteIndex(regionThis.x + regionThis.width - 1, regionThis.y + regionThis.height - 1);
+
+    // trace(width, regionB.x + regionB.width, height,regionB.y+ regionB.height, data.length, b.data.length,endB-startB, startB, endB);
+
+		data.blit(startThis, b.data, startB, Util.min(endThis-startThis, endB - startB));
 		// for (x in region.x...region.width) {
 		// 	for (y in region.y...region.height) {
 		// 		set(x, y, b.get(x, y));
 		// 	}
 		// }
 	}
+
+	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {
+		return BitmapUtil.compare(this, b, regionB, thisRegion);
+	}
+
+  public function bounds():Types.Rectangle{
+    return {x:0,y:0,width:width,height:height};
+  }
 
 	/** 
 		* This invert the four bytes order in the Int32. For some reason this is needed in order to write a whole Int32 ,instead separated bytes, which is faster.
@@ -159,9 +180,5 @@ public function copy(?r:Types.Rectangle):Bitmap{
 			Bytes.fastGet(data.getData(), i + 3));
 		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
-
-  public function compare(b:Bitmap,?r:Types.Rectangle):Float{
-    return BitmapUtil.compare(this, b, r);
-  }
 
 }

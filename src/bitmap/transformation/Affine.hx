@@ -81,7 +81,7 @@ class Affine {
 		e = matrix.e;
 		f = matrix.f;
 		var output = o.output!=null&&o.output!=o.bitmap? o.output : o.bitmap.clone(o.bg == Types.Background.none ? null : true);
-    var region = o.region==null?{x:0,y:0,width:output.width,height:output.height}:o.region;
+    var region = o.region==null?output.bounds():o.region;
 		for (y in region.y...region.height) {
 			for (x in region.x...region.width) {
 				var p = applyToPoint(x, y);

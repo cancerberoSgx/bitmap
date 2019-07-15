@@ -17,13 +17,7 @@ class Convolution {
 		var data = o.bitmap, width = o.bitmap.width, height = o.bitmap.height, matrix = o.kernel;
 		var w = matrix[0].length, h = matrix.length, half = Math.floor(h / 2);
 		var factor = o.factor == null ? 1.0 : o.factor, bias = o.bias == null ? 0.0 : o.bias;
-		var region = o.region == null ? {
-			x: 0,
-			y: 0,
-			width: output.width,
-			height: output.height
-		}
-			: o.region;
+		var region = o.region == null ? output.bounds()			: o.region;
 		for (y in region.y...region.height) {
 			for (x in region.x...region.width) {
 				var px = (y * width + x) * 4;

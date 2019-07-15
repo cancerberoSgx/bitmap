@@ -43,11 +43,14 @@ class ColorUtil {
 			alpha == null ? Std.int(Math.round(totalAlpha / size)) : alpha);
 	}
 
-	public static function random(?alpha:Int) {
+	public inline static function random(?alpha:Int) {
 		return Color.create(Util.random(0, 255), Util.random(0, 255), Util.random(0, 255), alpha==null?Util.random(0, 255):alpha);
 	}
-
-	public static function blendColors(c1:Color, c2:Color, ?mode:Types.Blend) {
+	public inline static function randomGray(?alpha:Int) {
+    var g=Util.random(0, 255);
+		return Color.create(g, g, g, alpha==null?Util.random(0, 255):alpha);
+	}
+	public inline static function blendColors(c1:Color, c2:Color, ?mode:Types.Blend) {
 		if (mode == Types.Blend.alpha) {
 			return c2;
 		} else if (mode == Types.Blend.mean) {

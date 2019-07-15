@@ -75,9 +75,9 @@ class Util {
 	 * @param	upper	The upper bound.
 	 * @return	A random integer in the range [lower:upper] inclusive.
 	 */
-	public static inline function random(lower:Float, upper:Float):Int {
+	public inline static function random(lower:Float, upper:Float):Int {
 		// Sure.sure(lower <= upper);
-		return Math.floor(lower + upper - lower + 1 * Math.random());
+		return Math.round((upper - lower)* Math.random()+lower);
 	}
 	/**
 	 * Returns a random array of integers in the range (inclusive).
@@ -85,15 +85,17 @@ class Util {
 	 * @param	upper	The upper bound.
 	 * @return	An array of random integers in the range [lower:upper] inclusive.
 	 */
-	public static inline function randomIntArray(length:Int, lower:Int, upper:Int) {
-		var a: Array<Int>=[];
+	public inline static function randomIntArray(length:Int, lower:Int, upper:Int, noRepeat=false) {
+    Sure.sure(length<upper-lower+1);
+		var a: Array<Int>=[], r=random(lower, upper);
     for(i in 0...length){
-      a.push(random(lower, upper));
+      while(a.filter(function(n)return n==r).length!=0){r=random(lower, upper);}
+      a.push(r);
     }
     return a;
 	}
 
-  public static inline function  randomRectangle(r:Types.Rectangle) {
+  public inline static function  randomRectangle(r:Types.Rectangle) {
     var w = r.width/2, h = r.height/2;
     return {x: random(0, w), y: random(0, h), width:random(0, w), height: random(0, h) };
   }
@@ -112,7 +114,7 @@ class Util {
   return m;
 }
 
-public static inline function dist(x:Int,y:Int) {
+public static function dist(x:Int,y:Int) {
 		return x<y ? y-x : x-y;
 	}
 
@@ -122,7 +124,7 @@ public static inline function dist(x:Int,y:Int) {
 	 * @param	a	The array to pick a random item from.
 	 * @return	A random item from the array.
 	 */
-	public static inline function randomArrayItem<T>(a:Array<T>):T {
+	public static  function randomArrayItem<T>(a:Array<T>):T {
 		Sure.sure(a != null && a.length > 0);
 		return a[random(0, a.length - 1)];
 	}

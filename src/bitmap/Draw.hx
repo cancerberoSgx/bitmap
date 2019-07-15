@@ -109,7 +109,11 @@ line(e.min,  y, e.max,  y,c,blend );
         // line(found[1].x, found[1].y, found[2].x, found[2].y,c,blend );
         // line(found[0].x, found[0].y, found[2].x, found[2].y,c,blend );
         // }
-      }else {
+      }
+      else if (found.length==1) {
+        set(found[0].x, found[0].y, c, blend);
+      }
+      else {
         trace(found.length);
       }
     }

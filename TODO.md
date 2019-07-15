@@ -9,18 +9,19 @@
 - [ ] bitmap.util.scale() - both a bitmap resize and affine resize
 - [ ] color transformations: bright, contrast, replace-color
 - [ ] bitmap.util.write(bitmap2, x, y, blend)
-- [ ] bitmap.util.compare():number - move equals to bitmap.util
 - [ ] code formatter
 - [ ] easy API for common affine transforms like rotate, translate, skew
 - [ ] easy API for common convolutions like blur, sharpen, edges, etc
 - [ ] remove the borders of convolution result by copying neighbor
-- [ ] transformations modify not respected
-- [ ] bitmap.copy(bounds?:Rectangle):Bitmap
-- [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
-- [ ] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
-- [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
+  - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
+- [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
+- [ ] test bitmap  compare, copyFrom with different bounds and regions.
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
+- [x] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
+- [x] bitmap.copy(bounds?:Rectangle):Bitmap
+- [x] transformations modify not respected
+- [x] bitmap.util.compare():number - move equals to bitmap.util
 - [x] in32 and in8 configurable modes for get/set
 - [x] affine issues : lots doesn't work like rotate, flipY. The ones using negative values...
 - [x] ensure that Bitmaps never throw error when drawing outside their canvas if noRangeCheck=true

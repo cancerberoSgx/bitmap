@@ -12,13 +12,7 @@ class Pixelize {
 		var b = t.output != null ? t.output : t.bitmap.clone();
 		var a = t.bitmap;
 
-		var region2 = t.region == null ? {
-			x: 0,
-			y: 0,
-			width: a.width,
-			height: a.height
-		}
-			: t.region;
+		var region2 = t.region == null ? a.bounds()			: t.region;
 		// for (y in region2.y...region2.height) {
 		// 	for (x in region2.x...region2.width) {
 				var xStep = Std.int(Math.round(region2.width / t.width));

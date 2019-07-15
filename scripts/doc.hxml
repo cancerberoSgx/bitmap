@@ -3,6 +3,6 @@
 -cp src
 
 -xml types.xml
-src.bitmap.Doc
+bitmap.support.Doc
 --no-output
 
