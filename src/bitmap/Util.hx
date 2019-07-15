@@ -79,6 +79,19 @@ class Util {
 		// Sure.sure(lower <= upper);
 		return Math.floor(lower + upper - lower + 1 * Math.random());
 	}
+	/**
+	 * Returns a random array of integers in the range (inclusive).
+	 * @param	lower	The lower bound.
+	 * @param	upper	The upper bound.
+	 * @return	An array of random integers in the range [lower:upper] inclusive.
+	 */
+	public static inline function randomIntArray(length:Int, lower:Int, upper:Int) {
+		var a: Array<Int>=[];
+    for(i in 0...length){
+      a.push(random(lower, upper));
+    }
+    return a;
+	}
 
   public static inline function  randomRectangle(r:Types.Rectangle) {
     var w = r.width/2, h = r.height/2;
@@ -104,15 +117,15 @@ public static inline function dist(x:Int,y:Int) {
 	}
 
 
-	// /**
-	//  * Returns a random item from an array.
-	//  * @param	a	The array to pick a random item from.
-	//  * @return	A random item from the array.
-	//  */
-	// public static inline function randomArrayItem<T>(a:Array<T>):T {
-	// 	Sure.sure(a != null && a.length > 0);
-	// 	return a[random(0, a.length - 1)];
-	// }
+	/**
+	 * Returns a random item from an array.
+	 * @param	a	The array to pick a random item from.
+	 * @return	A random item from the array.
+	 */
+	public static inline function randomArrayItem<T>(a:Array<T>):T {
+		Sure.sure(a != null && a.length > 0);
+		return a[random(0, a.length - 1)];
+	}
 	/**
 	 * Returns the smallest and largest items from an array of ints.
 	 * @param	a	The array of ints.

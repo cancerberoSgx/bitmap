@@ -8,16 +8,17 @@ class BitmapUtil {
 		if (a.width != b.width || a.height != b.height) {
 			return false;
 		}
-		for (y in 0...a.height) {
-			for (x in 0...a.width) {
-				var c1 = a.get(x, y);
-				var c2 = b.get(x, y);
-				if (!ColorUtil.colorEquals(c1, c2)) {
-					return false;
-				}
-			}
-		}
-		return true;
+    return a.data.compare(b.data)==0;
+		// for (y in 0...a.height) {
+		// 	for (x in 0...a.width) {
+		// 		var c1 = a.get(x, y);
+		// 		var c2 = b.get(x, y);
+		// 		if (!ColorUtil.colorEquals(c1, c2)) {
+		// 			return false;
+		// 		}
+		// 	}
+		// }
+		// return true;
 	}
 
 	public static function blendBitmaps(b1:Bitmap, b2:Bitmap, b3:Bitmap, ?mode:Types.Blend) {

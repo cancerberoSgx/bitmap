@@ -44,7 +44,7 @@ import haxe.io.Bytes;
 	}
 
 	public function get(x:Int, y:Int, ?noError:Bool):Color {
-		var i = (y * width + x) * 4;
+		var i =  byteIndex(x,y);
 		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck && !noError) {
 				Sure.sure('get outOfBounds' == null);
@@ -55,8 +55,12 @@ import haxe.io.Bytes;
 		return int32Mode ? getInt32(i) : getInt8(i);
 	}
 
+inline function byteIndex(x:Int, y:Int){
+  return (y * width + x) * 4;
+}
+
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
-		var i = (y * width + x) * 4;
+		var i = byteIndex(x,y);
 		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck && noError != true) {
 				Sure.sure('set outOfBounds' == null);
@@ -94,7 +98,7 @@ import haxe.io.Bytes;
 		return bitmap;
 	}
 
-	public function equals(b:Bitmap):Bool {
+	public inline function equals(b:Bitmap):Bool {
 		return BitmapUtil.bitmapEquals(this, b);
 	}
 
@@ -102,16 +106,22 @@ import haxe.io.Bytes;
 		if (region == null) {
 			region = {
 				x: 0,
-				y: 0,
-				width: Util.min(width, b.width),
-				height: Util.min(height, b.height)
+				y: 0	,
+        width: Util.min(width, b.width), 
+        height:Util.min(height,b.height)			
 			};
 		}
-		for (x in region.x...region.width) {
-			for (y in region.y...region.height) {
-				set(x, y, b.get(x, y));
-			}
-		}
+    // region.width = Util.min(Util.min(region.width, b.width), width);
+		// region.height = Util.min(Util.min(region.height, b.height), height);
+    var i0 =  byteIndex(region.x,region.y);
+    var i1 =  byteIndex(region.x+region.width-1,region.y+region.height-1);
+    data.blit(i0, b.data, i0, i1-i0);
+		// for (x in region.x...region.width) {
+		// 	for (y in region.y...region.height) {
+		// 		set(x, y, b.get(x, y));
+		// 	}
+		// }
+
 	}
 
 	/** 

@@ -43,8 +43,8 @@ class ColorUtil {
 			alpha == null ? Std.int(Math.round(totalAlpha / size)) : alpha);
 	}
 
-	public static function random() {
-		return Color.create(Util.random(0, 255), Util.random(0, 255), Util.random(0, 255), Util.random(0, 255));
+	public static function random(?alpha:Int) {
+		return Color.create(Util.random(0, 255), Util.random(0, 255), Util.random(0, 255), alpha==null?Util.random(0, 255):alpha);
 	}
 
 	public static function blendColors(c1:Color, c2:Color, ?mode:Types.Blend) {

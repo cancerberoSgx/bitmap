@@ -81,9 +81,9 @@ class TransformTest implements utest.ITest {
 		bitmap.noRangeCheck = true;
 		var result = bitmap.transform.affine({
 			affine: new Affine().scale(0.5, 0.3).translate(222, 211).rotateDeg(35.6),
-			output: bitmap
+			output: bitmap,
 		});
-		IOUtil.writeBitmap('test/assets/tmpAffine2.png', result.bitmap);
+		IOUtil.writeBitmap('test/assets/tmpAffine2.png',  bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine2.png"))));
 	}
 
