@@ -71,54 +71,53 @@ class TransformTest implements utest.ITest {
 		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
 		bitmap.noRangeCheck = true;
 		var result = bitmap.transform.affine({
-			affine: new Affine().scale(0.5, 0.3).translate(222,211).rotateDeg(35.6) ,
+			affine: new Affine().scale(0.5, 0.3).translate(222, 211).rotateDeg(35.6),
 			modify: true
 		});
 		IOUtil.writeBitmap('test/assets/tmpAffine2.png', result.bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine2.png"))));
-
-    
 	}
 
-  public function testBroken(){
+	public function testAffinePrecision() {
+		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
+		bitmap.noRangeCheck = true;
+		bitmap.transform.affine({
+			affine: new Affine().rotateDeg(24),
+			modify: true,
+			precision: true
+		});
+		IOUtil.writeBitmap('test/assets/tmpAffine3.png', bitmap);
+		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affing3.png"))));
 
 		// b2.noRangeCheck = true;
 		// b2.transform.affine({
 		// 	affine: new Affine().flipX().flipY(),
 		// 	modify: true
-		// });    
-    // Assert.isTrue(BitmapUtil.bitmapEquals(b2, PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"))));
+		// });
+		// Assert.isTrue(BitmapUtil.bitmapEquals(b2, PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"))));
 
-    // var bitmap = new PNGBitmap(16, 16);
+		// var bitmap = new PNGBitmap(16, 16);
 		// bitmap.noRangeCheck = true;
 		// // bitmap.draw.line( 2,3,13, 7, Color.create(222, 222, 9, 132));
-    // bitmap.set(10,6, Color.create(222, 222, 9, 132) );
-    // bitmap.set(9,6, Color.create(2, 222, 9, 132) );
-    // IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
+		// bitmap.set(10,6, Color.create(222, 222, 9, 132) );
+		// bitmap.set(9,6, Color.create(2, 222, 9, 132) );
+		// IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
 
-    // // bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/a4.png"));
-    // 	// bitmap.noRangeCheck = true;
+		// var bitmap = new PNGBitmap(16, 16);
+		// bitmap.noRangeCheck = true;
+		// // bitmap.draw.line( 2,3,13, 7, Color.create(222, 222, 9, 132));
+		// bitmap.set(10,6, Color.create(222, 222, 9, 132) );
+		// bitmap.set(9,6, Color.create(2, 222, 9, 132) );
+		// IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
+
+		// bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
+		// 	bitmap.noRangeCheck = true;
 		// bitmap.transform.affine({
 		// 	affine: new Affine().rotateDeg(24),
 		// 	modify: true
-		// });    
-    // IOUtil.writeBitmap('test/assets/tmpAffine3.png', bitmap);
-
-    // var bitmap = new PNGBitmap(16, 16);
-		// bitmap.noRangeCheck = true;
-		// // bitmap.draw.line( 2,3,13, 7, Color.create(222, 222, 9, 132));
-    // bitmap.set(10,6, Color.create(222, 222, 9, 132) );
-    // bitmap.set(9,6, Color.create(2, 222, 9, 132) );
-    // IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
-
-    // bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
-    // 	bitmap.noRangeCheck = true;
-		// bitmap.transform.affine({
-		// 	affine: new Affine().rotateDeg(24),
-		// 	modify: true
-		// });    
-    // IOUtil.writeBitmap('test/assets/tmpAffine5.png', bitmap);
+		// });
+		// IOUtil.writeBitmap('test/assets/tmpAffine5.png', bitmap);
 
 		Assert.isTrue(true);
-  }
+	}
 }
