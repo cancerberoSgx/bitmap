@@ -1,12 +1,12 @@
 ## TODO
 
-- [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
 - [ ] browser example. load png from url, draw/transform and render it back again as img.
 - [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
-- [ ] ensure that Bitmaps never throw error when drawing outside their canvas if noRangeCheck=true
+- [ ] bitmap.util.write(bitmap2, x, y, blend)
+- [ ] bitmap.util.compare():number - move equals to bitmap.util
 - [ ] code formatter
 - [ ] easy API for common affine transforms like rotate, translate, skew
 - [ ] easy API for common convolutions like blur, sharpen, edges, etc
@@ -15,9 +15,11 @@
 - [ ] bitmap.copy(bounds?:Rectangle):Bitmap
 - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
-- [ ] bitmap.write(bitmap2, x, y, blend)
 - [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
+- [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
+- [ ] in32 and in8 configurable modes for get/set
+- [x] ensure that Bitmaps never throw error when drawing outside their canvas if noRangeCheck=true
 - [x] affine transformations
 - [x] convolutions
 - [x] pixelize

@@ -16,6 +16,7 @@ import haxe.io.Bytes;
 	 * Switch between byte-by-byte and int32 modalities for reading and writing pixels with get/set.
 	**/
 	public var int32Mode = true;
+  
 	public var data:Bytes;
 	public var width:Int;
 	public var height:Int;
@@ -40,7 +41,7 @@ import haxe.io.Bytes;
 				y: 0,
 				fill: true,
 				blend: Types.Blend.none,
-				c: Color.create(0, 0, 0, 0)
+				c: Color.create(255, 255, 255, 255)
 			});
 		}
 	}

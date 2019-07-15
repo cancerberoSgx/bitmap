@@ -1,12 +1,8 @@
--lib utest
 -lib format
 -lib sure
-
 -cp src
--D doc-gen
---macro include('pack')
---no-output
---each
 
--debug
--main TestMain
+-xml types.xml
+src.bitmap.Doc
+--no-output
+

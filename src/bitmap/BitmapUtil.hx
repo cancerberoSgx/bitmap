@@ -3,9 +3,6 @@ package bitmap;
 import bitmap.*;
 
 class BitmapUtil {
-	public static inline function colorEquals(a:bitmap.Color, b:bitmap.Color) {
-		return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
-	}
 
 	public static function bitmapEquals(a:Bitmap, b:Bitmap, ?debug:Bool) {
 		if (a.width != b.width || a.height != b.height) {
@@ -15,7 +12,7 @@ class BitmapUtil {
 			for (x in 0...a.width) {
 				var c1 = a.get(x, y);
 				var c2 = b.get(x, y);
-				if (!colorEquals(c1, c2)) {
+				if (!ColorUtil.colorEquals(c1, c2)) {
 					return false;
 				}
 			}

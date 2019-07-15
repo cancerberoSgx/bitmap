@@ -21,18 +21,17 @@ class PNGBitmap extends AbstractBitmap {
 		format = f;
 		data = Tools.extract32(d);
 		Tools.reverseBytes(data);
-		// if (format == PixelFormat.RGBA) {
+		if (format == PixelFormat.RGBA) {
 			PixelFormatUtil.argbToRgba(data);
-		// }
+		}
 	}
 
 	override public function save(output:Output):Void {
 		ZipSupport.haxeZipCompressJsSupport();
 		var copy = data.sub(0, data.length);
-		// if (format == null || format == PixelFormat.RGBA) {
-		  // Tools.reverseBytes(data);
+		if (format == null || format == PixelFormat.RGBA) {
 			copy = PixelFormatUtil.rgbaToArgb(copy);
-		// }
+		}
 		var data = Tools.build32ARGB(width, height, copy);
 		new Writer(output).write(data);
 	}

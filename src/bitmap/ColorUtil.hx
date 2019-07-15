@@ -3,6 +3,11 @@ package bitmap;
 import bitmap.*;
 
 class ColorUtil {
+
+	public static inline function colorEquals(a:bitmap.Color, b:bitmap.Color) {
+		return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
+	}
+  
 	/**
 	 * Computes the average RGB color of the pixels in the image.
 	 * @param	image	The image whose average color will be calculated.
