@@ -47,7 +47,7 @@ interface Bitmap extends OffsetRectangleArea {
 	 * By default if coords are out of bounds it will throw error. This can be prevented
 	 * passing noError==true. In that case, if the error happens it will return true, otherwise false.
 	**/
-	public function get(x:Int, y:Int):Color;
+	public function get(x:Int, y:Int,?noError:Bool):Color;
 
 	/**
 	 * By default if coords are out of bounds it will throw error. This can be prevented

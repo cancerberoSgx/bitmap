@@ -88,10 +88,10 @@ class Affine {
 				if (p.x >= 0 && p.x < output.width && p.y >= 0 && p.y < output.height) {
 					var x2 = Math.floor(p.x), y2 = Math.floor(p.y);
 					if (o.precision && o.bg != Types.Background.none) {
-						if (output.get(x2, y2) != o.bitmap.bg) {
+						if (output.get(x2, y2, true) != o.bitmap.bg) {
 							x2 = Math.round(p.x);
 						}
-						if (output.get(x2, y2) != o.bitmap.bg) {
+						if (output.get(x2, y2, true) != o.bitmap.bg) {
 							y2 = Math.round(p.y);
 						}
 					}
@@ -105,57 +105,11 @@ class Affine {
 		}
 	}
 
-	// public function transform(o:AffineOptions) {
-	// 	var matrix = o.matrix != null ? o.matrix : o.affine.getMatrix();
-	// 	a = matrix.a;
-	// 	b = matrix.b;
-	// 	c = matrix.c;
-	// 	d = matrix.d;
-	// 	e = matrix.e;
-	// 	f = matrix.f;
-	// 	var output = o.bitmap.clone(o.bg==Types.Background.none?null:true); // we need to work on a copy always
-	// 	for (y in 0...o.bitmap.height) {
-	// 		for (x in 0...o.bitmap.width) {
-	// 			var p = applyToPoint(x, y);
-	// 			if (p.x >= 0 && p.x < output.width && p.y >= 0 && p.y < output.height) {
-	// 				output.set(Math.floor(p.x), Math.floor(p.y), o.bitmap.get(x, y), true);
-	// 			}
-	// 		}
-	// 	}
-	// 	return {
-	// 		bitmap: output,
-	// 		affine: this
-	// 	}
-	// }
-	// /**
-	//  * Multiplies current matrix with new matrix values.
-	//  */
-	// public function transformMatrix(m:AffineMatrix) {
-	// 	var a1 = a, b1 = b, c1 = c, d1 = d, e1 = e, f1 = f;
-	// 	/* matrix order (canvas compatible):
-	// 	 * ace
-	// 	 * bdf
-	// 	 * 001
-	// 	 */
-	// 	a = a1 * m.a + c1 * m.b;
-	// 	b = b1 * m.a + d1 * m.b;
-	// 	c = a1 * m.c + c1 * m.d;
-	// 	d = b1 * m.c + d1 * m.d;
-	// 	e = a1 * m.e + c1 * m.f + e1;
-	// 	f = b1 * m.e + d1 * m.f + f1;
-	// 	return this;
-	// }
-
 	/**
 	 * Multiplies current matrix with new matrix values.
 	 */
 	public function transformMatrix(a2:Float, b2:Float, c2:Float, d2:Float, e2:Float, f2:Float) {
 		var a1 = a, b1 = b, c1 = c, d1 = d, e1 = e, f1 = f;
-		/* matrix order (canvas compatible):
-		 * ace
-		 * bdf
-		 * 001
-		 */
 		a = a1 * a2 + c1 * b2;
 		b = b1 * a2 + d1 * b2;
 		c = a1 * c2 + c1 * d2;
@@ -163,15 +117,6 @@ class Affine {
 		e = a1 * e2 + c1 * f2 + e1;
 		f = b1 * e2 + d1 * f2 + f1;
 		return this;
-
-		// return transformMatrix({
-		// 	a: a,
-		// 	b: b,
-		// 	c: c,
-		// 	d: d,
-		// 	e: e,
-		// 	f: f
-		// });
 	}
 
 	/**
@@ -197,53 +142,6 @@ class Affine {
 			f: f
 		};
 	}
-
-	// /**
-	//  * Apply current matrix to array with point objects or point pairs.
-	//  * Returns a new array with points in the same format as the input array.
-	//  *
-	//  * A point object is an object literal:
-	//  *
-	//  * {x: x, y: y}
-	//  *
-	//  * so an array would contain either:
-	//  *
-	//  * [{x: x1, y: y1} {x: x2, y: y2} ... {x: xn, y: yn}]
-	//  *
-	//  * or
-	//  * [x1, y1, x2, y2, ... xn, yn]
-	//  *
-	//  * @param points - array with point objects or pairs
-	//  * @returns  A new array with transformed points
-	//  */
-	// public function applyToPoints(points:Array<Types.Point>) {
-	// 	var i = 0, p:Types.Point, l:Int, mxPoints:Array<Types.Point> = [];
-	// 	l = points.length;
-	// 	while (i < l) {
-	// 		var p2 = points[i++];
-	// 		p = this.applyToPoint(p2.x, p2.y);
-	// 		mxPoints.push(p);
-	// 	}
-	// 	return mxPoints;
-	// }
-	// /**
-	//  * Apply current matrix to a typed array with point pairs. Although
-	//  * the input array may be an ordinary array, this method is intended
-	//  * for more performant use where typed arrays are used. The returned
-	//  * array is regardless always returned as a UInt16Array.
-	//  *
-	//  * @param   points   array with point pairs
-	//  * @returns A new array with transformed points
-	//  */
-	// public function applyToArray(points:haxe.io.Int32Array):haxe.io.Int32Array {
-	// 	var i = 0, p:Types.Point, l = points.length, mxPoints = new haxe.io.Int32Array(l);
-	// 	while (i < l) {
-	// 		p = this.applyToPoint(points[i], points[i + 1]);
-	// 		mxPoints[i++] = p.x;
-	// 		mxPoints[i++] = p.y;
-	// 	}
-	// 	return mxPoints;
-	// }
 
 	/**
 	 * Returns true if matrix is an identity matrix (no transforms applied).
@@ -389,6 +287,56 @@ class Affine {
 	public function skewY(sy:Float) {
 		return transformMatrix(1, sy, 0, 1, 0, 0);
 	}
+
+
+
+	/**
+	 * Apply current matrix to array with point objects or point pairs.
+	 * Returns a new array with points in the same format as the input array.
+	 *
+	 * A point object is an object literal:
+	 *
+	 * {x: x, y: y}
+	 *
+	 * so an array would contain either:
+	 *
+	 * [{x: x1, y: y1} {x: x2, y: y2} ... {x: xn, y: yn}]
+	 *
+	 * or
+	 * [x1, y1, x2, y2, ... xn, yn]
+	 *
+	 * @param points - array with point objects or pairs
+	 * @returns  A new array with transformed points
+	 */
+	public function applyToPoints(points:Array<Types.Point>) {
+		var i = 0, p:Types.Point, l:Int, mxPoints:Array<Types.Point> = [];
+		l = points.length;
+		while (i < l) {
+			var p2 = points[i++];
+			p = this.applyToPoint(p2.x, p2.y);
+			mxPoints.push(p);
+		}
+		return mxPoints;
+	}
+	/**
+	 * Apply current matrix to a typed array with point pairs. Although
+	 * the input array may be an ordinary array, this method is intended
+	 * for more performant use where typed arrays are used. The returned
+	 * array is regardless always returned as a UInt16Array.
+	 *
+	 * @param   points   array with point pairs
+	 * @returns A new array with transformed points
+	 */
+	public function applyToArray(points:haxe.io.Int32Array):haxe.io.Int32Array {
+		var i = 0, p:Types.Point, l = points.length, mxPoints = new haxe.io.Int32Array(l);
+		while (i < l) {
+			p = this.applyToPoint(points[i], points[i + 1]);
+			mxPoints[i++] = p.x;
+			mxPoints[i++] = p.y;
+		}
+		return mxPoints;
+	}
+
 }
 
 /**

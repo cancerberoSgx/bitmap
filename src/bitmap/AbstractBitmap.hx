@@ -45,10 +45,10 @@ public var bg=Color.create(255, 255, 255, 255);
       }  
   }
 
-	public function get(x:Int, y:Int):Color {
+	public function get(x:Int, y:Int,?noError:Bool):Color {
 		var i = (y * width + x) * 4;
 		if (i < 0 || i > data.length - 4) {
-			if (!noRangeCheck) {
+			if (!noRangeCheck&&!noError) {
 				Sure.sure('get outOfBounds' == null);
 			} else {
 				return bg;

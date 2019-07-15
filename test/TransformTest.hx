@@ -87,7 +87,7 @@ class TransformTest implements utest.ITest {
 			precision: true
 		});
 		IOUtil.writeBitmap('test/assets/tmpAffine3.png', bitmap);
-		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affing3.png"))));
+		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine3.png"))));
 
 		// b2.noRangeCheck = true;
 		// b2.transform.affine({

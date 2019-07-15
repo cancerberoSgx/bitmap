@@ -87,6 +87,9 @@ install:
     fi
   - haxelib install hxjava
   - haxelib install hxcs
+  - haxelib install sure
+  - haxelib install utest
+  - haxelib install format
   - haxelib list
 
 script:
