@@ -52,22 +52,22 @@ class Util {
 		return value < 0 ? -1 : value > 0 ? 1 : 0;
 	}
 
-	// /**
-	//  * Converts a value measured in degrees to radians.
-	//  * @param	degrees	Degrees value to convert to radians.
-	//  * @return	The value converted to radians.
-	//  */
-	// public static inline function toRadians(degrees:Float):Float {
-	// 	return degrees * Math.PI / 180;
-	// }
-	// /**
-	//  * Converts a value measured in radians to degrees.
-	//  * @param	radians	Radians value to convert to degrees.
-	//  * @return	The value converted to degrees.
-	//  */
-	// public static inline function toDegrees(radians:Float):Float {
-	// 	return radians * 180 / Math.PI;
-	// }
+	/**
+	 * Converts a value measured in degrees to radians.
+	 * @param	degrees	Degrees value to convert to radians.
+	 * @return	The value converted to radians.
+	 */
+	public static inline function toRadians(degrees:Float):Float {
+		return degrees * Math.PI / 180;
+	}
+	/**
+	 * Converts a value measured in radians to degrees.
+	 * @param	radians	Radians value to convert to degrees.
+	 * @return	The value converted to degrees.
+	 */
+	public static inline function toDegrees(radians:Float):Float {
+		return radians * 180 / Math.PI;
+	}
 
 	/**
 	 * Returns a random integer in the range (inclusive).

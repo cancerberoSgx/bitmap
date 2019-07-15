@@ -10,13 +10,12 @@ import haxe.io.Bytes;
 	/**
 	 * If true operationsn won't throw exceptions in case given coordinates for get/set are outside de bitmap.
 	**/
-	public var noRangeCheck = true;
+	public var noRangeCheck = false;
 
 	/**
 	 * Switch between byte-by-byte and int32 modalities for reading and writing pixels with get/set.
 	**/
-	public var int32Mode = true;
-  
+	public var int32Mode = false;
 	public var data:Bytes;
 	public var width:Int;
 	public var height:Int;
@@ -48,15 +47,19 @@ import haxe.io.Bytes;
 
 	public function get(x:Int, y:Int):Color {
 		var i = (y * width + x) * 4;
-		if (!noRangeCheck) {
-			Sure.sure(i >= 0 && i < data.length - 3);
+		if (i < 0 || i > data.length - 4) {
+			if (!noRangeCheck) {
+				Sure.sure('outOfBounds' == null);
+			} else {
+				return 0;
+			}
 		}
 		return int32Mode ? getInt32(i) : getInt8(i);
 	}
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = (y * width + x) * 4;
-		if (i >= data.length - 5) {
+		if (i < 0 || i >= data.length - 5) {
 			if (!noRangeCheck && noError != true) {
 				Sure.sure('outOfBounds' == null);
 			} else {
@@ -90,6 +93,22 @@ import haxe.io.Bytes;
 
 	public function equals(b:Bitmap):Bool {
 		return BitmapUtil.bitmapEquals(this, b);
+	}
+
+	public function copyFrom(b:Bitmap, ?region:Types.Rectangle) {
+		if (region == null) {
+			region = {
+				x: 0,
+				y: 0,
+				width: Util.min(width, b.width),
+				height: Util.min(height, b.height)
+			};
+		}
+		for (x in region.x...region.width) {
+			for (y in region.y...region.height) {
+				set(x, y, b.get(x, y));
+			}
+		}
 	}
 
 	/** 

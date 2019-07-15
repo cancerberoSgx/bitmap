@@ -55,4 +55,8 @@ interface Bitmap extends OffsetRectangleArea {
    * Returns a new bitmap that is a copy of this one with exactly the same pixels.
    **/
 	public function clone():Bitmap;
+  /**
+   * Writes in this bitmap given region of given bitmap, or if no region is given, the bitmap entirely.
+   **/
+  public function copyFrom(b:Bitmap, ?region:Types.Rectangle):Void;
 }

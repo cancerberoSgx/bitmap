@@ -3,11 +3,10 @@ package bitmap;
 import bitmap.*;
 
 class ColorUtil {
-
 	public static inline function colorEquals(a:bitmap.Color, b:bitmap.Color) {
 		return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 	}
-  
+
 	/**
 	 * Computes the average RGB color of the pixels in the image.
 	 * @param	image	The image whose average color will be calculated.
@@ -46,5 +45,15 @@ class ColorUtil {
 
 	public static function random() {
 		return Color.create(Util.random(0, 255), Util.random(0, 255), Util.random(0, 255), Util.random(0, 255));
+	}
+
+	public static function blendColors(c1:Color, c2:Color, ?mode:Types.Blend) {
+		if (mode == Types.Blend.alpha) {
+			return c2;
+		} else if (mode == Types.Blend.mean) {
+			return Color.create(Std.int((c1.r + c2.r) / 2), Std.int((c1.g + c2.g) / 2), Std.int((c1.b + c2.b) / 2), Std.int((c1.a + c2.a) / 2));
+		} else {
+			return c2;
+		}
 	}
 }

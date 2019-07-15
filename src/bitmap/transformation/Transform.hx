@@ -18,12 +18,20 @@ class Transform {
 
 	public function pixelize(t:Pixelize.PixelizeOptions) {
 		t.bitmap = bitmap;
-		return new Pixelize().transform(t);
+		var b = new Pixelize().transform(t);
+    if(t.modify){
+      bitmap.copyFrom(b);
+    }
+    return b;
 	}
 
 	public function convolve(t:Convolution.ConvolveOptions) {
 		t.bitmap = bitmap;
-		return Convolution.convolve(t);
+		var b =  Convolution.convolve(t);
+    if(t.modify){
+      bitmap.copyFrom(b);
+    }
+    return b;
 	}
 
 	public function affine(t: Affine.AffineOptions) {
@@ -36,7 +44,11 @@ class Transform {
     }else {
       affine = t.affine;
     }
-		return affine.transform(t);
+		var result = affine.transform(t);
+    if(t.modify){
+      bitmap.copyFrom(result.bitmap);
+    }
+    return result;
 	}
 
 }

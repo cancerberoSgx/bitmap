@@ -73,7 +73,15 @@ class Affine {
 		d = b1 * m.c + d1 * m.d;
 		e = a1 * m.e + c1 * m.f + e1;
 		f = b1 * m.e + d1 * m.f + f1;
+
 		return this;
+	}
+
+	/**
+	 * Multiplies current matrix with new matrix values.
+	 */
+	public function transformMatrix2(a:Float,b:Float,c:Float,d:Float,e:Float,f:Float) {
+		return transformMatrix({a:a,b:b,c:c,d:d,e:e,f:f});
 	}
 
 	/**
@@ -95,15 +103,36 @@ class Affine {
 	 */
 	public function rotate(angle:Float) {
 		var cos = Math.cos(angle), sin = Math.sin(angle);
-		transformMatrix({
+		return transformMatrix({
 			a: cos,
 			b: sin,
-			c: -sin,
+			c: -1.0*sin,
 			d: cos,
-			e: 0,
-			f: 0
+			e: 0.0,
+			f: 0.0
 		});
-		return this;
+	}
+
+  /**
+	 * Helper method to make a rotation based on an angle in degrees.
+	 * @param  angle - angle in degrees
+	 */
+	public function rotateDeg(angle:Float) {
+		return rotate(angle * 0.017453292519943295);
+	}
+
+  /**
+	 * Flips the vertical values.
+	 */
+	public function flipY() {
+		return this.transformMatrix2(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+	}
+
+  /**
+	 * Flips the horizontal values.
+	 */
+	public function flipX() {
+		return this.transformMatrix2(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 	}
 
 	/**
@@ -114,23 +143,30 @@ class Affine {
 	 * @param  y - value for y
 	 * @returns  A new transformed point object
 	 */
-	public inline function applyToPoint(x:Int, y:Int):Types.Point {
+	public inline function applyToPoint(x:Float, y:Float):Types.Point {
 		return {
 			x: Math.round(x * a + y * c + e),
 			y: Math.round(x * b + y * d + f)
 		};
 	}
 
+  public function getMatrix(){
+    return {
+      a:a,b:b,c:c,d:d,e:e,f:f
+    };
+  }
+
 	public function transform(o:AffineOptions) {
 		// var output = o.output ==null ? o.bitmap.clone() : o.output;
 		// Sure.sure(o.bitmap.width==output.width&&o.input.height==output.height);
 		// matrix=o.matrix;
-		a = o.matrix.a;
-		b = o.matrix.b;
-		c = o.matrix.c;
-		d = o.matrix.d;
-		e = o.matrix.e;
-		f = o.matrix.f;
+    var matrix = o.matrix!=null?o.matrix : o.affine.getMatrix();
+		a = matrix.a;
+		b = matrix.b;
+		c = matrix.c;
+		d = matrix.d;
+		e = matrix.e;
+		f = matrix.f;
 		var output = o.bitmap.clone(); // we need to work on a copy always
 		for (y in 0...o.bitmap.height) {
 			for (x in 0...o.bitmap.width) {
@@ -214,12 +250,12 @@ class Affine {
 	 */
 	public function interpolate(m2:AffineMatrix, t:Float) {
 		var m:AffineMatrix = {
-			a: 0,
-			b: 0,
-			c: 0,
-			d: 0,
-			e: 0,
-			f: 0
+			a: 0.0,
+			b: 0.0,
+			c: 0.0,
+			d: 0.0,
+			e: 0.0,
+			f: 0.0
 		};
 		m.a = a + (m2.a - a) * t;
 		m.b = b + (m2.b - b) * t;
