@@ -21,6 +21,11 @@ interface Bitmap extends OffsetRectangleArea {
 	@:readOnly public var data:Bytes;
 
 	/**
+	 * If true operationsn won't throw exceptions in case given coordinates for get/set are outside bitmap.
+	**/
+	public var noRangeCheck:Bool;
+
+	/**
 	 * Drawing utilities.
 	**/
 	@:readOnly public var draw:Draw;

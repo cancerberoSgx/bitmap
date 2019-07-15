@@ -1,5 +1,22 @@
-{
-  "transformation": "pixelize",
-  "width": 10, 
-  "height": 10
-}
+[
+  {
+    "transformation": "scale",
+    "x": 0.5,
+    "y": 0.5
+  },
+  {
+    "transformation": "translate",
+    "x": 122,
+    "y": 33
+  },
+  {
+    "transformation": "rotate",
+    "degrees": 33,
+    "precision": true
+  },
+  {
+    "transformation": "pixelize",
+    "width": 64,
+    "height": 64
+  }
+]

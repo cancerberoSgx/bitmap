@@ -7,9 +7,6 @@ import haxe.io.Output;
 import haxe.io.Bytes;
 
 @:abstract class AbstractBitmap implements Bitmap {
-	/**
-	 * If true operationsn won't throw exceptions in case given coordinates for get/set are outside de bitmap.
-	**/
 	public var noRangeCheck = false;
 
 	/**
@@ -24,7 +21,7 @@ import haxe.io.Bytes;
 	public var format:Types.PixelFormat;
 	public var draw:Draw;
 	public var transform:Transform;
-public var bg=Color.create(255, 255, 255, 255);
+	public var bg = Color.create(255, 255, 255, 255);
 
 	public function new(w:Int = 0, h:Int = 0, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
@@ -34,21 +31,22 @@ public var bg=Color.create(255, 255, 255, 255);
 			height = h;
 			data = Bytes.alloc(w * h * 4);
 			format = f;
-      fillBg();    
+			fillBg();
 		}
 	}
-  private function fillBg(){
-    for(x in 0...width) {
-        for(y in 0...height){
-          set(x,y,bg);
-        }
-      }  
-  }
 
-	public function get(x:Int, y:Int,?noError:Bool):Color {
+	private function fillBg() {
+		for (x in 0...width) {
+			for (y in 0...height) {
+				set(x, y, bg);
+			}
+		}
+	}
+
+	public function get(x:Int, y:Int, ?noError:Bool):Color {
 		var i = (y * width + x) * 4;
 		if (i < 0 || i > data.length - 4) {
-			if (!noRangeCheck&&!noError) {
+			if (!noRangeCheck && !noError) {
 				Sure.sure('get outOfBounds' == null);
 			} else {
 				return bg;
@@ -82,17 +80,17 @@ public var bg=Color.create(255, 255, 255, 255);
 		throw "Abstract method call";
 	}
 
-	public function clone(?fillBg_=false) {
+	public function clone(?fillBg_ = false) {
 		var bitmap = new PNGBitmap();
 		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
-    if(!fillBg_){
-		bitmap.data = data.sub(0, data.length);
-    }else {
-      bitmap.data = Bytes.alloc(data.length);
-      bitmap.fillBg();
-    }
+		if (!fillBg_) {
+			bitmap.data = data.sub(0, data.length);
+		} else {
+			bitmap.data = Bytes.alloc(data.length);
+			bitmap.fillBg();
+		}
 		return bitmap;
 	}
 
@@ -140,7 +138,8 @@ public var bg=Color.create(255, 255, 255, 255);
 	}
 
 	private inline function getInt8(i:Int) {
-		return Color.create(Bytes.fastGet(data.getData(), i), Bytes.fastGet(data.getData(), i+1), Bytes.fastGet(data.getData(), i+2), Bytes.fastGet(data.getData(), i+3));
+		return Color.create(Bytes.fastGet(data.getData(), i), Bytes.fastGet(data.getData(), i + 1), Bytes.fastGet(data.getData(), i + 2),
+			Bytes.fastGet(data.getData(), i + 3));
 		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
 }

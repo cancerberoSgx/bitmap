@@ -5,8 +5,9 @@
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
+- [ ] bitmap.util.resize() - it will resize the bitmap itself - not like affine
+- [ ] bitmap.util.scale() - both a bitmap resize and affine resize
 - [ ] color transformations: bright, contrast, replace-color
-- [ ] affine issues : lots doesn't work like rotate, flipY. The ones using negative values...
 - [ ] bitmap.util.write(bitmap2, x, y, blend)
 - [ ] bitmap.util.compare():number - move equals to bitmap.util
 - [ ] code formatter
@@ -20,7 +21,8 @@
 - [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
-- [ ] in32 and in8 configurable modes for get/set
+- [x] in32 and in8 configurable modes for get/set
+- [x] affine issues : lots doesn't work like rotate, flipY. The ones using negative values...
 - [x] ensure that Bitmaps never throw error when drawing outside their canvas if noRangeCheck=true
 - [x] affine transformations
 - [x] convolutions
