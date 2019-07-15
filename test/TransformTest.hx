@@ -23,7 +23,7 @@ class TransformTest implements utest.ITest {
 		var result = bitmap.transform.pixelize({
 			width: 50,
 			height: 50,
-			modify: true,
+      output:bitmap,
 			alpha: 255
 		});
 		IOUtil.writeBitmap('test/assets/tmpPixelize.png', result);
@@ -35,17 +35,26 @@ class TransformTest implements utest.ITest {
 		Assert.isTrue(true);
 	}
 
-	public function testConvolve() {
+	public function testConvolve1() {
 		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
 		bitmap.noRangeCheck = true;
 		var kernel = [[0.0, -1.0, 0.0], [-1.0, 4.0, -1.0], [0.0, -1.0, 0.0]];
 		var result = bitmap.transform.convolve({
 			kernel: kernel,
 			bias: 0.2,
-			factor: 1.1
+			factor: 1.1,
 		});
 		IOUtil.writeBitmap('test/assets/tmpConvolve1.png', result);
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/convolve.png"));
+		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
+	}
+
+	public function testConvolve2() {
+		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/n.png"));
+		bitmap.noRangeCheck = true;
+		var result = bitmap.transform.convolve(Convolution.blur(7, 0.7));
+		IOUtil.writeBitmap('test/assets/tmpConvolve2.png', result);
+		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/convolve2.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
 	}
 
@@ -72,7 +81,7 @@ class TransformTest implements utest.ITest {
 		bitmap.noRangeCheck = true;
 		var result = bitmap.transform.affine({
 			affine: new Affine().scale(0.5, 0.3).translate(222, 211).rotateDeg(35.6),
-			modify: true
+      output: bitmap
 		});
 		IOUtil.writeBitmap('test/assets/tmpAffine2.png', result.bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine2.png"))));
@@ -83,8 +92,8 @@ class TransformTest implements utest.ITest {
 		bitmap.noRangeCheck = true;
 		bitmap.transform.affine({
 			affine: new Affine().rotateDeg(24),
-			modify: true,
-			precision: true
+			precision: true,
+      output: bitmap
 		});
 		IOUtil.writeBitmap('test/assets/tmpAffine3.png', bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine3.png"))));

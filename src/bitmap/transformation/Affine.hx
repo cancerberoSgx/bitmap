@@ -81,7 +81,7 @@ class Affine {
 		d = matrix.d;
 		e = matrix.e;
 		f = matrix.f;
-		var output = o.bitmap.clone(o.bg == Types.Background.none ? null : true);
+		var output = o.output!=null&&o.output!=o.bitmap? o.output : o.bitmap.clone(o.bg == Types.Background.none ? null : true);
 		for (y in 0...o.bitmap.height) {
 			for (x in 0...o.bitmap.width) {
 				var p = applyToPoint(x, y);
@@ -99,6 +99,9 @@ class Affine {
 				}
 			}
 		}
+    if(o.output==o.bitmap) {
+      o.output.copyFrom(output);
+    }
 		return {
 			bitmap: output,
 			affine: this
@@ -308,12 +311,12 @@ class Affine {
 	 * @param points - array with point objects or pairs
 	 * @returns  A new array with transformed points
 	 */
-	public function applyToPoints(points:Array<Types.Point>) {
-		var i = 0, p:Types.Point, l:Int, mxPoints:Array<Types.Point> = [];
+	public function applyToPoints(points:Array<Types.FloatPoint>) {
+		var i = 0, p:Types.FloatPoint, l:Int, mxPoints:Array<Types.FloatPoint> = [];
 		l = points.length;
 		while (i < l) {
 			var p2 = points[i++];
-			p = this.applyToPoint(p2.x, p2.y);
+			p = this.applyToPoint(p2.x*1.0, p2.y*1.0);
 			mxPoints.push(p);
 		}
 		return mxPoints;
@@ -328,11 +331,11 @@ class Affine {
 	 * @returns A new array with transformed points
 	 */
 	public function applyToArray(points:haxe.io.Int32Array):haxe.io.Int32Array {
-		var i = 0, p:Types.Point, l = points.length, mxPoints = new haxe.io.Int32Array(l);
+		var i = 0, p:Types.FloatPoint, l = points.length, mxPoints = new haxe.io.Int32Array(l);
 		while (i < l) {
 			p = this.applyToPoint(points[i], points[i + 1]);
-			mxPoints[i++] = p.x;
-			mxPoints[i++] = p.y;
+			mxPoints[i++] = Math.round(p.x);
+			mxPoints[i++] = Math.round(p.y);
 		}
 		return mxPoints;
 	}

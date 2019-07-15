@@ -9,7 +9,7 @@ class Pixelize {
 	public function new() {}
 
 	public function transform(t:PixelizeOptions) {
-		var b = t.modify ? t.bitmap : t.bitmap.clone();
+		var b = t.output!=null ? t.output : t.bitmap.clone();
 		var a = t.bitmap;
 		var xStep = Std.int(Math.round(a.width / t.width));
 		var yStep = Std.int(Math.round(a.height / t.height));

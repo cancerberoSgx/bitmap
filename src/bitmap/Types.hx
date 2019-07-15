@@ -13,6 +13,11 @@ typedef Point = {
 	y:Int
 };
 
+typedef FloatPoint = {
+	x:Float,
+	y:Float
+};
+
 typedef Rectangle = {
 	> Point,
 	width:Int,
