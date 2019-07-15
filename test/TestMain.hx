@@ -10,8 +10,10 @@ import TransformTest;
 import PerformanceGetSetTest;
 import GeometrizeTest;
 import DrawTest;
+import ColorsTest;
+
 class TestMain {
-	static function main() {		
+	static function main() {
 		var runner = new Runner();
 		runner.addCase(new PNGBitmapTest());
 		runner.addCase(new IOUtilTest());
@@ -20,8 +22,9 @@ class TestMain {
 		runner.addCase(new TransformTest());
 		runner.addCase(new GeometrizeTest());
 		runner.addCase(new DrawTest());
+		runner.addCase(new ColorsTest());
 		// runner.addCase(new PerformanceGetSetTest());
-    
+
 		Report.create(runner);
 		runner.run();
 	}

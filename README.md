@@ -6,6 +6,7 @@
 
 - [Summary](#summary)
 - [Install](#install)
+- [API Reference](#api-reference)
 - [Usage](#usage)
   * [Transformations](#transformations)
 - [Scripts](#scripts)
@@ -16,9 +17,7 @@
 - [Tests](#tests)
   * [Run locally](#run-locally)
   * [Run with docker](#run-with-docker)
-- [TODO](#todo)
-  * [OT](#ot)
-- [Notes](#notes)
+- [TODO / Road map / Changelog](#todo--road-map--changelog)
 
 <!-- tocstop -->
 
@@ -39,6 +38,10 @@ haxelib install bitmap
 ```
 
 And don't forget to use `-lib bitmap` in your projects.
+
+## API Reference
+
+[API Reference](https://cancerberosgx.github.io/bitmap/index.html)
 
 ## Usage
 

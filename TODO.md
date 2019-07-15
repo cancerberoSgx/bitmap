@@ -1,25 +1,28 @@
 ## TODO
 
+- [W] color transformations: bright, contrast, replace-color
+- [W] easy API for common affine transforms like rotate, translate, skew
+- [W] easy API for common convolutions like blur, sharpen, edges, etc
 - [ ] browser example. load png from url, draw/transform and render it back again as img.
-- [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
-- [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
-- [ ] dox
-- [ ] bitmap.util.resize() - it will resize the bitmap itself - not like affine
-- [ ] bitmap.util.scale() - both a bitmap resize and affine resize
-- [ ] color transformations: bright, contrast, replace-color
-- [ ] bitmap.util.write(bitmap2, x, y, blend)
+- [ ] bitmap.util.clip() - creates a new bitmap from a region.
+- [ ] bitmap.util.scale(region, x, y) - both a bitmap resize and affine resize creating a larget bitmap if neccesary.
+- [ ] performance tests and track performance.
+- [ ] bitmap.util.write(src:Bitmap, region:Rectangle, blend:Blend, factor:float) 
+  - [ ] bitmap.compose(otherBitmap, region, blend, factor): creates a new bitmap 
 - [ ] code formatter
-- [ ] easy API for common affine transforms like rotate, translate, skew
-- [ ] easy API for common convolutions like blur, sharpen, edges, etc
+- [ ] write tutorial page showing the effect of API, get, draw, transformations, etc
+- [ ] document CLI
 - [ ] remove the borders of convolution result by copying neighbor
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
   - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
-- [ ] browser test n(sh test.sh should verify that at least the browser example renders whet it should,)
+- [ ] browser test (sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] test bitmap  compare, copyFrom with different bounds and regions.
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
+- [x] dox
 - [x] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
 - [x] bitmap.copy(bounds?:Rectangle):Bitmap
+- [x] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [x] transformations modify not respected
 - [x] bitmap.util.compare():number - move equals to bitmap.util
 - [x] in32 and in8 configurable modes for get/set
@@ -44,6 +47,7 @@ convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
 
 ### OT
 
+- [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
  * geomtrize-haxe : may be checking with Sure is expensive so: implement macro or conditionals to not compile those statement if an option or compile arg is given.
  * haxe library to call ImageMagick commands in ALL targets (and browser). In non js targets user needs to have installed ImageMatick and we spawn. In the browser , with the same API, use https://www.npmjs.com/package/magica emscripten port of IM. 
 

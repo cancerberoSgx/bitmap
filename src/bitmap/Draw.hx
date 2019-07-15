@@ -12,7 +12,7 @@ class Draw {
 	/**
 	 * adapted from http://www.brackeen.com/vga/source/djgpp20/lines.c.html
 	**/
-	public function line(x1:Int, y1:Int, x2:Int, y2:Int, c:Color, ?blend:Types.Blend, ?returnPoints=false) {
+	public function line(x1:Int, y1:Int, x2:Int, y2:Int, c:Color, ?blend:Types.ColorBlend, ?returnPoints=false) {
 		var dx:Int, dy:Int, sdx:Int, sdy:Int, dxabs:Int, dyabs:Int, x:Int, y:Int, px:Int, py:Int;
 		dx = x2 - x1; /* the horizontal distance of the line */
 		dy = y2 - y1; /* the vertical distance of the line */
@@ -66,7 +66,7 @@ class Draw {
 		}
 	}
 
-	public function rectangle2(x:Int, y:Int, width:Int, height:Int, c:Color, ?fill:Bool, ?blend:Types.Blend) {
+	public function rectangle2(x:Int, y:Int, width:Int, height:Int, c:Color, ?fill:Bool, ?blend:Types.ColorBlend) {
 		rectangle({
 			x: x,
 			y: y,
@@ -78,7 +78,7 @@ class Draw {
 		});
 	}
 
-  public function triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int, c:Color, ?fill=false, ?blend:Types.Blend) {   
+  public function triangle(x1:Int, y1:Int, x2:Int, y2:Int, x3:Int, y3:Int, c:Color, ?fill=false, ?blend:Types.ColorBlend) {   
     var points = line(x1,y1,x2,y2,c,blend,fill);
     points = points.concat(line(x2,y2,x3,y3,c,blend, fill));
     points = points.concat(line(x3,y3,x1,y1,c,blend, fill));
@@ -119,15 +119,15 @@ line(e.min,  y, e.max,  y,c,blend );
     }
   }
 
-	private inline function set(x:Int, y:Int, c:Color, ?blend:Types.Blend) {
-		bitmap.set(x, y, (blend == null || blend == Types.Blend.none) ? c : ColorUtil.blendColors(bitmap.get(x, y), c, blend));
+	private inline function set(x:Int, y:Int, c:Color,?blend:Types.ColorBlend) {
+		bitmap.set(x, y, (blend == null ||  blend.type == Types.Blend.none) ? c : ColorUtil.blendColors(bitmap.get(x, y), c, blend));
 	}
 }
 
 typedef DrawShape = {
 	@:optional var fill:Bool;
 	var c:bitmap.Color;
-	@:optional var blend:Types.Blend;
+	@:optional var blend:Types.ColorBlend;
 	var x:Int;
 	var y:Int;
 };

@@ -20,12 +20,14 @@ import haxe.io.Bytes;
 	public var originalHeight:Int;
 	public var format:Types.PixelFormat;
 	public var draw:Draw;
+	public var color:Colors;
 	public var transform:Transform;
 	public var bg = Color.create(255, 255, 255, 255);
 
 	public function new(w:Int = 1, h:Int = 1, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
 		transform = new Transform(this);
+		color = new Colors(this);
 		if (w > 0 && h > 0) {
 			width = w;
 			height = h;

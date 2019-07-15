@@ -1,10 +1,11 @@
 sh scripts/test.sh && \
 sh scripts/doc.sh && \
 npx markdown-toc README.md -i && \
-sh scripts/pack.sh && \
 node scripts/patch.js && \
+sh scripts/clean.sh && \
+sh scripts/pack.sh && \
 haxelib submit bitmap.zip && \
-rm bitmap.zip 
+sh scripts/clean.sh 
 
 CODE="$?"
 echo "

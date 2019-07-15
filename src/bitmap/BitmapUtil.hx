@@ -1,6 +1,7 @@
 package bitmap;
 
 import bitmap.*;
+
 class BitmapUtil {
 	public static function bitmapEquals(a:Bitmap, b:Bitmap, ?region:Types.Rectangle) {
 		if (a.width != b.width || a.height != b.height) {
@@ -28,45 +29,43 @@ class BitmapUtil {
 	}
 
 	/**
-	 * Compares given region of given Bitmaps. Returns a number between -1 and 1, the biger its absolute value the bigger the difference. If negative it means the sum of a's bytes is bigger than b's, possitive otherwise.
+		* Compares given region of given Bitmaps. Returns a number between -1 and 1, the biger its absolute value the bigger the difference. If negative it means the sum of a's bytes is bigger than b's, possitive otherwise.
 
-   TODO : fix this is not working fine
+		   TODO : fix this is not working fine
 	**/
 	public static function compare(a:Bitmap, b:Bitmap, ?regionA:Types.Rectangle, ?regionB:Types.Rectangle) {
-    if(regionA==null&&regionB==null&&(a.width!=b.width||b.height!=a.height)){
-      throw "No regions given and bitmaps with different sizes";
-    }
-    regionA = regionA==null?(regionB==null ? a.bounds():regionB): regionA;
-    regionB=regionB==null ? (regionA==null ? b.bounds():regionA):regionB;
-    if(regionA.width!=regionB.width||regionA.height!=regionB.height){
-      throw "Regions given or inferred have different sizes";
-    }
+		if (regionA == null && regionB == null && (a.width != b.width || b.height != a.height)) {
+			throw "No regions given and bitmaps with different sizes";
+		}
+		regionA = regionA == null ? (regionB == null ? a.bounds() : regionB) : regionA;
+		regionB = regionB == null ? (regionA == null ? b.bounds() : regionA) : regionB;
+		if (regionA.width != regionB.width || regionA.height != regionB.height) {
+			throw "Regions given or inferred have different sizes";
+		}
 		var va = 0, vb = 0;
 		var startA = (cast a).byteIndex(regionA.x, regionA.y);
 		var endA = (cast a).byteIndex(regionA.x + regionA.width, regionA.y + regionA.height);
 		var startB = (cast a).byteIndex(regionB.x, regionB.y);
 		var endB = (cast a).byteIndex(regionB.x + regionB.width, regionB.y + regionB.height);
-    Sure.sure(endA-startA==endB-startB);
-    Sure.sure(endA>startA&&endB>startB);
-    Sure.sure(startA>=0&&startB>=0);Std.int(1);
-    // trace(startA, endA, )
-		for (i in 0...endA-startA) {
-      var v=a.data.get(startA+i);
-			va +=  Math.isNaN(v)?0:v;
-       v=b.data.get(startB+i);
-			vb +=  Math.isNaN(v)?0:v;
+		Sure.sure(endA - startA == endB - startB);
+		Sure.sure(endA > startA && endB > startB);
+		Sure.sure(startA >= 0 && startB >= 0);
+		Std.int(1);
+		for (i in 0...endA - startA) {
+			var v = a.data.get(startA + i);
+			va += Math.isNaN(v) ? 0 : v;
+			v = b.data.get(startB + i);
+			vb += Math.isNaN(v) ? 0 : v;
 		}
-    // trace(va, vb, Util.dist(va, vb), Util.dist(va, vb) / ((endA - startA)*255) * (va > vb ? -1 : 1));
-		return Util.dist(va, vb) / ((endA - startA)*255) * (va > vb ? -1 : 1);
+		return Util.dist(va, vb) / ((endA - startA) * 255) * (va > vb ? -1 : 1);
 	}
 
-	public static function blendBitmaps(b1:Bitmap, b2:Bitmap, b3:Bitmap, ?mode:Types.Blend) {
+	public static function blend(b1:Bitmap, b2:Bitmap, b3:Bitmap, ?blend:Types.ColorBlend) {
 		var w = Util.min(b1.width, b2.width);
 		var h = Util.min(b1.height, b2.height);
 		for (y in 0...h) {
 			for (x in 0...w) {
-				var c = ColorUtil.blendColors(b1.get(x, y), b2.get(x, y), mode);
-				b3.set(x, y, c);
+				b3.set(x, y, ColorUtil.blendColors(b1.get(x, y), b2.get(x, y), blend));
 			}
 		}
 		return b3;

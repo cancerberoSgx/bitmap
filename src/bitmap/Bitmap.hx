@@ -31,9 +31,18 @@ interface Bitmap extends OffsetRectangleArea {
 	@:readOnly public var draw:Draw;
 
 	/**
+	 * Color related utilities like channel filters, blend, etc.
+	**/
+	@:readOnly public var color:Colors;
+
+	/**
 	 * Transform utilities like convolve, affine, etc.
 	**/
 	@:readOnly public var transform:Transform;
+
+	/**
+	 * Default color for this bitmap background. It's used in some operations like copy/clone as default background color in some cases.
+	**/
 	public var bg:Color;
 
 	/**
@@ -52,7 +61,7 @@ interface Bitmap extends OffsetRectangleArea {
 	 * By default if coords are out of bounds it will throw error. This can be prevented
 	 * passing noError==true. In that case, if the error happens it will return true, otherwise false.
 	**/
-	public function get(x:Int, y:Int,?noError:Bool):Color;
+	public function get(x:Int, y:Int, ?noError:Bool):Color;
 
 	/**
 	 * By default if coords are out of bounds it will throw error. This can be prevented
@@ -74,11 +83,8 @@ interface Bitmap extends OffsetRectangleArea {
 	 * Writes in this bitmap given region of given bitmap, or if no region is given, the bitmap entirely.
 	**/
 	public function copyFrom(b:Bitmap, ?region:Types.Rectangle, ?thisRegion:Types.Rectangle):Void;
-
-  public function fill(?bg:Color):Void;
-
-  public function copy(?r:Types.Rectangle):Bitmap;
-  public function compare(b:Bitmap, ?regionA:Types.Rectangle, ?thisRegion:Types.Rectangle):Float;
-  public function bounds():Types.Rectangle;
-  
+	public function fill(?bg:Color):Void;
+	public function copy(?r:Types.Rectangle):Bitmap;
+	public function compare(b:Bitmap, ?regionA:Types.Rectangle, ?thisRegion:Types.Rectangle):Float;
+	public function bounds():Types.Rectangle;
 }

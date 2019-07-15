@@ -8,6 +8,11 @@ enum Blend {
 	none;
 }
 
+typedef ColorBlend = {
+  var type: Blend;
+  @:optional var factor:Float;
+};
+
 typedef Point = {
 	x:Int,
 	y:Int
