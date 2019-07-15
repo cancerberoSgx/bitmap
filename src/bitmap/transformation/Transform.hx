@@ -27,8 +27,15 @@ class Transform {
 	}
 
 	public function affine(t: Affine.AffineOptions) {
+    Sure.sure(t.matrix!=null||t.affine!=null);
 		t.bitmap = bitmap;
-    var affine = new Affine();
+    var affine:Affine;
+    if(t.affine==null){
+      affine = new Affine();
+      affine.assign(t.matrix);
+    }else {
+      affine = t.affine;
+    }
 		return affine.transform(t);
 	}
 
