@@ -94,7 +94,7 @@ import haxe.io.Bytes;
 		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
-    bitmap.noRangeCheck=noRangeCheck;
+		bitmap.noRangeCheck = noRangeCheck;
 
 		if (!fill_) {
 			bitmap.data = data.sub(0, data.length);
@@ -110,20 +110,18 @@ import haxe.io.Bytes;
 	}
 
 	public function copyFrom(b:Bitmap, ?regionB:Types.Rectangle, ?regionThis:Types.Rectangle) {
-		regionB = regionB==null?regionThis==null?b.bounds():regionThis:regionB;
-		regionThis = regionThis==null?regionB==null?this.bounds():regionB:regionThis;
+		regionB = regionB == null ? regionThis == null ? b.bounds() : regionThis : regionB;
+		regionThis = regionThis == null ? regionB == null ? this.bounds() : regionB : regionThis;
 
-	regionB.width = regionB.width+regionB.x> b.width ? b.width - regionB.x -1 : regionB.width;
-		regionB.height =regionB.height+regionB.y> b.height ? b.height - regionB.y -1 : regionB.height;
+		regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
+		regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
 
-	regionB.width = regionB.width+regionB.x> b.width ? b.width - regionB.x -1 : regionB.width;
-		regionB.height =regionB.height+regionB.y> b.height ? b.height - regionB.y -1 : regionB.height;
+		regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
+		regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
 
-if(regionThis.width!=regionB.width||regionThis.height!=regionB.height){
-      throw "Regions given or inferred have different sizes";
-    }
-
-    // trace(r, width, height, b.width, b.height);
+		if (regionThis.width != regionB.width || regionThis.height != regionB.height) {
+			throw "Regions given or inferred have different sizes";
+		}
 
 		Sure.sure(b.width >= regionB.x + regionB.width && b.height >= regionB.y + regionB.height);
 		Sure.sure(width >= regionThis.x + regionThis.width && height >= regionThis.y + regionThis.height);
@@ -134,23 +132,21 @@ if(regionThis.width!=regionB.width||regionThis.height!=regionB.height){
 		var startThis = (cast b).byteIndex(regionThis.x, regionThis.y);
 		var endThis = (cast b).byteIndex(regionThis.x + regionThis.width - 1, regionThis.y + regionThis.height - 1);
 
-    // trace(width, regionB.x + regionB.width, height,regionB.y+ regionB.height, data.length, b.data.length,endB-startB, startB, endB);
-
-		data.blit(startThis, b.data, startB, Util.min(endThis-startThis, endB - startB));
-		// for (x in region.x...region.width) {
-		// 	for (y in region.y...region.height) {
-		// 		set(x, y, b.get(x, y));
-		// 	}
-		// }
+		data.blit(startThis, b.data, startB, Util.min(endThis - startThis, endB - startB));
 	}
 
 	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {
 		return BitmapUtil.compare(this, b, regionB, thisRegion);
 	}
 
-  public function bounds():Types.Rectangle{
-    return {x:0,y:0,width:width,height:height};
-  }
+	public function bounds():Types.Rectangle {
+		return {
+			x: 0,
+			y: 0,
+			width: width,
+			height: height
+		};
+	}
 
 	/** 
 		* This invert the four bytes order in the Int32. For some reason this is needed in order to write a whole Int32 ,instead separated bytes, which is faster.
@@ -180,5 +176,4 @@ if(regionThis.width!=regionB.width||regionThis.height!=regionB.height){
 			Bytes.fastGet(data.getData(), i + 3));
 		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
-
 }
