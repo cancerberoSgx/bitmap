@@ -35,7 +35,7 @@
 ## Install
 
 ```sh
-haxelib instal bitmap
+haxelib install bitmap
 ```
 
 And don't forget to use `-lib bitmap` in your projects.
