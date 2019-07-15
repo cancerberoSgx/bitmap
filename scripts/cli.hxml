@@ -1,0 +1,10 @@
+-lib utest 
+-lib format 
+-lib sure 
+-lib tink_cli 
+-cp src 
+-main bitmap.cli.CliMain
+-js bin/cli/main.js
+# -java bin/cli/main.java
+# -neko bin/cli/main.n
+# -python bin/cli/main.py

@@ -10,7 +10,7 @@ dist: xenial
 
 # Test with Haxe 3.4.7 and Haxe development.
 haxe:
-  - "3.4.7"
+  - "4.0.0-rc.3"
   - development
 
 neko: "2.2.0"
@@ -43,9 +43,9 @@ addons:
       # - libfreetype6
       # Lua
       - cmake
-      - lua5.1
-      - luarocks
-      - libpcre3-dev
+      # - lua5.1
+      # - luarocks
+      # - libpcre3-dev
       - libssl-dev
 
 install:
@@ -60,21 +60,21 @@ install:
       brew install mono;
       brew upgrade python;
     fi
-  # Haxe Lua dependencies
-  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
-      sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu;
-      sudo luarocks install lrexlib-pcre PCRE_LIBDIR=/usr/lib/x86_64-linux-gnu;
-      sudo luarocks install luabitop;
-    elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-      brew install lua luarocks pcre python;
-      sudo luarocks install lrexlib-pcre;
-      sudo luarocks install luasocket;
-    fi
-  - sudo luarocks install luv
-  - sudo luarocks install environ
-  - sudo luarocks install luautf8
-  # Download and setup a standalone flash player debugger
-  # - haxe flash/install.hxml
+  # # Haxe Lua dependencies
+  # - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+  #     sudo luarocks install luasec OPENSSL_LIBDIR=/usr/lib/x86_64-linux-gnu;
+  #     sudo luarocks install lrexlib-pcre PCRE_LIBDIR=/usr/lib/x86_64-linux-gnu;
+  #     sudo luarocks install luabitop;
+  #   elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+  #     brew install lua luarocks pcre python;
+  #     luarocks --lua-dir=/usr/local/opt/lua@5.1 install lrexlib-pcre;
+  #     luarocks --lua-dir=/usr/local/opt/lua@5.1 install luasocket;
+  #   fi
+  # - luarocks --lua-dir=/usr/local/opt/lua@5.1 install luv
+  # - luarocks --lua-dir=/usr/local/opt/lua@5.1 install environ
+  # - luarocks --lua-dir=/usr/local/opt/lua@5.1 install luautf8
+  # # Download and setup a standalone flash player debugger
+  # # - haxe flash/install.hxml
   # Install haxelibs
   - if [ "${TRAVIS_HAXE_VERSION}" = "development" ]; then
       haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp.git;

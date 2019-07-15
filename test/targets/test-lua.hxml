@@ -1,0 +1,4 @@
+test/targets/test-each.hxml
+
+-lua bin/test/Main.lua
+-cmd lua bin/test/Main.lua

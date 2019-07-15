@@ -12,6 +12,32 @@ class IOUtil {
 		throw "Unexpected end of method";
 	}
 
+	public static function args() {
+		#if js
+		untyped return process.argv;
+		#else
+		return Sys.args();
+		#end
+		return [];
+	}
+
+	public static function exit(code:Int) {
+		#if js
+		untyped return process.exit(code);
+		#else
+		return Sys.exit(code);
+		#end
+	}
+
+	public static function readTextFile(path:String):String {
+		#if js
+		untyped return require("fs").readFileSync(path).toString();
+		#else
+		return sys.io.File.getContent(path);
+		#end
+		return '';
+	}
+
 	public static function writeFile(file:String, input:haxe.io.Input) {
 		var bytes = input.readAll();
 		#if js

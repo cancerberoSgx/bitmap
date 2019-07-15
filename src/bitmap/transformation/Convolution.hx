@@ -46,38 +46,57 @@ class Convolution {
 		return output;
 	}
 
-
-	public static function blur (size:Int, bias:Float, modify=false, ?output:Bitmap) {
-		var k = [for(i in 0...size)[for(i in 0...size) 0.0]];
-		for(i in 0...size)
-			for(j in 0...size) 
-				k[i][j]=1.0;
+	public static function blur(size:Int = 3, bias:Float = 0.0, modify = false, ?output:Bitmap) {
+		var k = [for (i in 0...size) [for (i in 0...size) 0.0]];
+		for (i in 0...size)
+			for (j in 0...size)
+				k[i][j] = 1.0;
 		return {
 			kernel: k,
 			bias: bias,
-			factor: 1/(size*size),
-      bitmap:null,
-      modify:modify,
-      output:output
+			factor: 1 / (size * size),
+			bitmap: null,
+			output: output
 		};
 	}
 
-/**
- 1, 1, 1, 1, 1,
-	1, 0, 0, 0, 1,
-	1, 0, 0, 0, 1,
-	1, 0, 0, 0, 1,
-	1, 1, 1, 1, 1,
-  **/
-	public static function fBlur(size:Int, factor:Float) {
-    var k:Array<Array<Float>> = [for(i in 0...size)[for(i in 0...size) 0.0]];
-		for(i in 0...size)
-			for(j in 0...size) 
-				if(i==0 || j==0 || i==size-1 || j==size-1)
-					k[i][j]=factor;
-				else k[i][j]=0; 
-		return k;
+	/**
+		1, 1, 1, 1, 1,
+			1, 0, 0, 0, 1,
+			1, 0, 0, 0, 1,
+			1, 0, 0, 0, 1,
+			1, 1, 1, 1, 1,
+	**/
+	public static function fBlur(size:Int = 4, bias:Float = 0.0, modify = false, ?output:Bitmap) {
+		var k = [for (i in 0...size) [for (i in 0...size) 0.0]];
+		for (i in 0...size)
+			for (j in 0...size)
+				if (i == 0 || j == 0 || i == size - 1 || j == size - 1)
+					k[i][j] = 1.0;
+				else
+					k[i][j] = 0;
+		return {
+			kernel: k,
+			bias: bias,
+			factor: 1 / (size + 1),
+			bitmap: null,
+			output: output
+		};
 	}
 
-
+	public static function sharp(factor = 1.0, bias:Float = 0.0, modify = false, ?output:Bitmap) {
+		var k = [
+			[-1 / 9.0, -1 / 9.0, -1 / 9.0, -1 / 9.0],
+			[-1 / 9.0, factor, factor, -1 / 9.0],
+			[-1 / 9.0, factor, factor, -1 / 9.0],
+			[-1 / 9.0, -1 / 9.0, -1 / 9.0, -1 / 9.0]
+		];
+		return {
+			kernel: k,
+			bias: bias,
+			factor: 1.0,
+			bitmap: null,
+			output: output
+		};
+	}
 }
