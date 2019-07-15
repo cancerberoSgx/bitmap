@@ -90,4 +90,4 @@ install:
   - haxelib list
 
 script:
-  - sh test.sh
+  - sh scripts/test.sh
