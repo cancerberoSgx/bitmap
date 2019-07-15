@@ -84,6 +84,21 @@ class Util {
     var w = r.width/2, h = r.height/2;
     return {x: random(0, w), y: random(0, h), width:random(0, w), height: random(0, h) };
   }
+
+  public static function multiply(a:Array<Array<Float>>, b:Array<Array<Float>>) {
+  var aNumRows = a.length, aNumCols = a[0].length, bNumRows = b.length, bNumCols = b[0].length, m =[for (i in 0...aNumRows) [i*1.0]] ;  // initialize array of rows
+  for (r in 0...aNumRows) {
+    m[r] = [for (i in 0...bNumRows) i*1.0]; // initialize the current row
+    for (c in 0...bNumCols) {
+      m[r][c] = 0.0;             // initialize the current cell
+      for (i in 0...aNumCols) {
+        m[r][c] = m[r][c] + a[r][i] * b[i][c];
+      }
+    }
+  }
+  return m;
+}
+
 	// /**
 	//  * Returns a random item from an array.
 	//  * @param	a	The array to pick a random item from.

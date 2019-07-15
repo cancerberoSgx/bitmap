@@ -1,12 +1,12 @@
 package bitmap.transformation;
 
 import bitmap.*;
-import haxe.io.UInt16Array;
 
 typedef AffineOptions = {
 	> Transform.TransformationOptions,
 	@:optional var matrix:AffineMatrix;
 	@:optional var affine:Affine;
+	@:optional var bg: Types.Background;
 	@:optional var region:Types.Rectangle;
 }
 
@@ -58,30 +58,89 @@ class Affine {
 	}
 
 	/**
+	 * Apply current matrix to x and y point.
+	 * Returns a point object.
+	 *
+	 * @param  x - value for x
+	 * @param  y - value for y
+	 * @returns  A new transformed point object
+	 */
+	public inline function applyToPoint(x:Float, y:Float):Types.Point {
+		return {
+			x: Math.round(x * a + y * c + e),
+			y: Math.round(x * b + y * d + f)
+		};
+	}
+
+	public function transform(o:AffineOptions) {
+		var matrix = o.matrix != null ? o.matrix : o.affine.getMatrix();
+		a = matrix.a;
+		b = matrix.b;
+		c = matrix.c;
+		d = matrix.d;
+		e = matrix.e;
+		f = matrix.f;
+		var output = o.bitmap.clone(o.bg==Types.Background.none?null:true); // we need to work on a copy always
+		for (y in 0...o.bitmap.height) {
+			for (x in 0...o.bitmap.width) {
+				var p = applyToPoint(x, y);
+				if (p.x >= 0 && p.x < output.width && p.y >= 0 && p.y < output.height) {
+					output.set(p.x, p.y, o.bitmap.get(x, y), true);
+				}
+			}
+		}
+		return {
+			bitmap: output,
+			affine: this
+		}
+	}
+
+	// /**
+	//  * Multiplies current matrix with new matrix values.
+	//  */
+	// public function transformMatrix(m:AffineMatrix) {
+	// 	var a1 = a, b1 = b, c1 = c, d1 = d, e1 = e, f1 = f;
+	// 	/* matrix order (canvas compatible):
+	// 	 * ace
+	// 	 * bdf
+	// 	 * 001
+	// 	 */
+	// 	a = a1 * m.a + c1 * m.b;
+	// 	b = b1 * m.a + d1 * m.b;
+	// 	c = a1 * m.c + c1 * m.d;
+	// 	d = b1 * m.c + d1 * m.d;
+	// 	e = a1 * m.e + c1 * m.f + e1;
+	// 	f = b1 * m.e + d1 * m.f + f1;
+
+	// 	return this;
+	// }
+
+	/**
 	 * Multiplies current matrix with new matrix values.
 	 */
-	public function transformMatrix(m:AffineMatrix) {
-		var a1 = a, b1 = b, c1 = c, d1 = d, e1 = e, f1 = f;
+	public function transformMatrix(a2:Float, b2:Float, c2:Float, d2:Float, e2:Float, f2:Float) {
+    		var a1 = a, b1 = b, c1 = c, d1 = d, e1 = e, f1 = f;
 		/* matrix order (canvas compatible):
 		 * ace
 		 * bdf
 		 * 001
 		 */
-		a = a1 * m.a + c1 * m.b;
-		b = b1 * m.a + d1 * m.b;
-		c = a1 * m.c + c1 * m.d;
-		d = b1 * m.c + d1 * m.d;
-		e = a1 * m.e + c1 * m.f + e1;
-		f = b1 * m.e + d1 * m.f + f1;
-
+		a = a1 * a2 + c1 * b2;
+		b = b1 * a2 + d1 * b2;
+		c = a1 * c2 + c1 * d2;
+		d = b1 * c2 + d1 * d2;
+		e = a1 * e2 + c1 * f2 + e1;
+		f = b1 * e2 + d1 * f2 + f1;
 		return this;
-	}
 
-	/**
-	 * Multiplies current matrix with new matrix values.
-	 */
-	public function transformMatrix2(a:Float,b:Float,c:Float,d:Float,e:Float,f:Float) {
-		return transformMatrix({a:a,b:b,c:c,d:d,e:e,f:f});
+		// return transformMatrix({
+		// 	a: a,
+		// 	b: b,
+		// 	c: c,
+		// 	d: d,
+		// 	e: e,
+		// 	f: f
+		// });
 	}
 
 	/**
@@ -97,88 +156,15 @@ class Affine {
 		return this;
 	}
 
-	/**
-	 * Rotates current matrix accumulative by angle.
-	 * @param angle - angle in radians
-	 */
-	public function rotate(angle:Float) {
-		var cos = Math.cos(angle), sin = Math.sin(angle);
-		return transformMatrix({
-			a: cos,
-			b: sin,
-			c: -1.0*sin,
-			d: cos,
-			e: 0.0,
-			f: 0.0
-		});
-	}
-
-  /**
-	 * Helper method to make a rotation based on an angle in degrees.
-	 * @param  angle - angle in degrees
-	 */
-	public function rotateDeg(angle:Float) {
-		return rotate(angle * 0.017453292519943295);
-	}
-
-  /**
-	 * Flips the vertical values.
-	 */
-	public function flipY() {
-		return this.transformMatrix2(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
-	}
-
-  /**
-	 * Flips the horizontal values.
-	 */
-	public function flipX() {
-		return this.transformMatrix2(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
-	}
-
-	/**
-	 * Apply current matrix to x and y point.
-	 * Returns a point object.
-	 *
-	 * @param  x - value for x
-	 * @param  y - value for y
-	 * @returns  A new transformed point object
-	 */
-	public inline function applyToPoint(x:Float, y:Float):Types.Point {
+	public function getMatrix() {
 		return {
-			x: Math.round(x * a + y * c + e),
-			y: Math.round(x * b + y * d + f)
+			a: a,
+			b: b,
+			c: c,
+			d: d,
+			e: e,
+			f: f
 		};
-	}
-
-  public function getMatrix(){
-    return {
-      a:a,b:b,c:c,d:d,e:e,f:f
-    };
-  }
-
-	public function transform(o:AffineOptions) {
-		// var output = o.output ==null ? o.bitmap.clone() : o.output;
-		// Sure.sure(o.bitmap.width==output.width&&o.input.height==output.height);
-		// matrix=o.matrix;
-    var matrix = o.matrix!=null?o.matrix : o.affine.getMatrix();
-		a = matrix.a;
-		b = matrix.b;
-		c = matrix.c;
-		d = matrix.d;
-		e = matrix.e;
-		f = matrix.f;
-		var output = o.bitmap.clone(); // we need to work on a copy always
-		for (y in 0...o.bitmap.height) {
-			for (x in 0...o.bitmap.width) {
-				var p = applyToPoint(x, y);
-				output.set(p.x, p.y, o.bitmap.get(x, y), true);
-			}
-		}
-		// TODO: o.modify
-		return {
-			bitmap: output,
-			affine: this
-		}
 	}
 
 	/**
@@ -191,7 +177,7 @@ class Affine {
 	 *
 	 * so an array would contain either:
 	 *
-	 * [{x: x1, y: y1}, {x: x2, y: y2}, ... {x: xn, y: yn}]
+	 * [{x: x1, y: y1} {x: x2, y: y2} ... {x: xn, y: yn}]
 	 *
 	 * or
 	 * [x1, y1, x2, y2, ... xn, yn]
@@ -265,6 +251,115 @@ class Affine {
 		m.f = f + (m2.f - f) * t;
 		return m;
 	}
+
+
+	/**
+	 * Rotates current matrix accumulative by angle.
+	 * @param angle - angle in radians
+	 */
+	public function rotate(angle:Float) {
+		var cos = Math.cos(angle), sin = Math.sin(angle);
+		return transformMatrix(cos, sin, -sin, cos, 0, 0);
+	}
+
+	/**
+	 * Helper method to make a rotation based on an angle in degrees.
+	 * @param  angle - angle in degrees
+	 */
+	public function rotateDeg(angle:Float) {
+		return rotate(angle * 0.017453292519943295);
+	}
+
+	/**
+	 * Translate current matrix accumulative.
+	 * @param tx - translation for x
+	 * @param ty - translation for y
+	 */
+	public function translate(tx:Float, ty:Float) {
+		return transformMatrix(1, 0, 0, 1, tx, ty);
+	}
+
+	/**
+	 * Translate current matrix on x axis accumulative.
+	 * @param tx - translation for x
+	 */
+	public function translateX(tx:Float) {
+		return transformMatrix(1, 0, 0, 1, tx, 0);
+	}
+
+	/**
+	 * Translate current matrix on y axis accumulative.
+	 * @param ty - translation for y
+	 */
+	public function translateY(ty:Float) {
+		return transformMatrix(1, 0, 0, 1, 0, ty);
+	}
+
+	/**
+	 * Flips the vertical values.
+	 */
+	public function flipY() {
+		return transformMatrix(1.0, 0.0, 0.0, -1.0, 0.0, 0.0);
+	}
+
+	/**
+	 * Flips the horizontal values.
+	 */
+	public function flipX() {
+		return transformMatrix(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
+	}
+/**
+	 * Scales current matrix accumulative.
+	 * @param sx - scale factor x (1 does nothing)
+	 * @param sy - scale factor y (1 does nothing)
+	 */
+	public function scale(sx:Float, sy:Float) {
+		transformMatrix(sx, 0, 0, sy, 0, 0);
+		return this;
+	}
+
+	/**
+	 * Scales current matrix on x axis accumulative.
+	 * @param sx - scale factor x (1 does nothing)
+	 */
+	public function scaleX(sx:Float) {
+		transformMatrix(sx, 0, 0, 1, 0, 0);
+		return this;
+	}
+
+	/**
+	 * Scales current matrix on y axis accumulative.
+	 * @param sy - scale factor y (1 does nothing)
+	 */
+	public function scaleY(sy:Float) {
+		return transformMatrix(1, 0, 0, sy, 0, 0);
+	}
+
+	/**
+	 * Apply skew to the current matrix accumulative.
+	 * @param sx - amount of skew for x
+	 * @param sy - amount of skew for y
+	 */
+	 public function skew(sx:Float, sy:Float) {
+		return transformMatrix(1, sy, sx, 1, 0, 0);
+	}
+
+	/**
+	 * Apply skew for x to the current matrix accumulative.
+	 * @param sx - amount of skew for x
+	 */
+	public function skewX(sx:Float) {
+		return transformMatrix(1, 0, sx, 1, 0, 0);
+	}
+
+	/**
+	 * Apply skew for y to the current matrix accumulative.
+	 * @param sy - amount of skew for y
+	 */
+	public function skewY(sy:Float) {
+		return transformMatrix(1, sy, 0, 1, 0, 0);
+	}
+
 }
 
 /**

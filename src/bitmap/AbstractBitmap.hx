@@ -24,6 +24,7 @@ import haxe.io.Bytes;
 	public var format:Types.PixelFormat;
 	public var draw:Draw;
 	public var transform:Transform;
+public var bg=Color.create(255, 255, 255, 255);
 
 	public function new(w:Int = 0, h:Int = 0, f:Types.PixelFormat = Types.PixelFormat.RGBA) {
 		draw = new Draw(this);
@@ -33,25 +34,24 @@ import haxe.io.Bytes;
 			height = h;
 			data = Bytes.alloc(w * h * 4);
 			format = f;
-			draw.rectangle({
-				width: w - 1,
-				height: h - 1,
-				x: 0,
-				y: 0,
-				fill: true,
-				blend: Types.Blend.none,
-				c: Color.create(255, 255, 255, 255)
-			});
+      fillBg();    
 		}
 	}
+  private function fillBg(){
+    for(x in 0...width) {
+        for(y in 0...height){
+          set(x,y,bg);
+        }
+      }  
+  }
 
 	public function get(x:Int, y:Int):Color {
 		var i = (y * width + x) * 4;
 		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck) {
-				Sure.sure('outOfBounds' == null);
+				Sure.sure('get outOfBounds' == null);
 			} else {
-				return 0;
+				return bg;
 			}
 		}
 		return int32Mode ? getInt32(i) : getInt8(i);
@@ -59,9 +59,9 @@ import haxe.io.Bytes;
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
 		var i = (y * width + x) * 4;
-		if (i < 0 || i >= data.length - 5) {
+		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck && noError != true) {
-				Sure.sure('outOfBounds' == null);
+				Sure.sure('set outOfBounds' == null);
 			} else {
 				return true;
 			}
@@ -82,12 +82,17 @@ import haxe.io.Bytes;
 		throw "Abstract method call";
 	}
 
-	public function clone() {
+	public function clone(?fillBg_=false) {
 		var bitmap = new PNGBitmap();
 		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
+    if(!fillBg_){
 		bitmap.data = data.sub(0, data.length);
+    }else {
+      bitmap.data = Bytes.alloc(data.length);
+      bitmap.fillBg();
+    }
 		return bitmap;
 	}
 
@@ -135,6 +140,7 @@ import haxe.io.Bytes;
 	}
 
 	private inline function getInt8(i:Int) {
-		return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
+		return Color.create(Bytes.fastGet(data.getData(), i), Bytes.fastGet(data.getData(), i+1), Bytes.fastGet(data.getData(), i+2), Bytes.fastGet(data.getData(), i+3));
+		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
 }

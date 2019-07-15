@@ -74,4 +74,11 @@ class BitmapUtilTest implements utest.ITest {
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestdrawLine.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 	}
+
+	public function testMultiply() {
+		var a = [[8.0, 3.0], [2.0, 4.0], [3.0, 6.0]],
+    b = [[1.0, 2.0, 3.0], [4.0, 6.0, 8.0]];
+    Assert.same(Util.multiply(a, b), [[20,34,48],[18,28,38],[27,42,57]]);
+	}
+
 }

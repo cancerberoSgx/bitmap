@@ -5,6 +5,8 @@
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
+- [ ] color transformations: bright, contrast, replace-color
+- [ ] affine issues : lots doesn't work like rotate, flipY. The ones using negative values...
 - [ ] bitmap.util.write(bitmap2, x, y, blend)
 - [ ] bitmap.util.compare():number - move equals to bitmap.util
 - [ ] code formatter

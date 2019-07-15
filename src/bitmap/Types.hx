@@ -23,3 +23,8 @@ enum PixelFormat {
 	RGBA;
 	ARGB;
 }
+
+enum Background {
+  bg;
+  none;
+}
