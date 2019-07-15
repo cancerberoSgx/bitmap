@@ -63,7 +63,7 @@ interface Bitmap extends OffsetRectangleArea {
 	/**
 	 * Returns true if this bitmap and given one are exactly equal (pixel by pixel).
 	**/
-	public function equals(b:Bitmap):Bool;
+	public function equals(b:Bitmap, ?region:Types.Rectangle):Bool;
 
 	/**
 	 * Returns a new bitmap that is a copy of this one with exactly the same pixels.
@@ -74,4 +74,10 @@ interface Bitmap extends OffsetRectangleArea {
 	 * Writes in this bitmap given region of given bitmap, or if no region is given, the bitmap entirely.
 	**/
 	public function copyFrom(b:Bitmap, ?region:Types.Rectangle):Void;
+
+  public function fill(?bg:Color):Void;
+
+  public function copy(?r:Types.Rectangle):Bitmap;
+  public function compare(b:Bitmap,?r:Types.Rectangle):Float;
+
 }

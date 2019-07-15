@@ -15,14 +15,14 @@ enum Shapes {
 class Geometrize {
   var shapes:Array<Shapes>;
   var shapeCount:Int;
-  var buffer:Bitmap;
+  // var buffer:Bitmap;
   var bitmap:Bitmap;
   var target:Bitmap;
   var region:Types.Rectangle;
   public function geometrize(o:GeometrizeOptions) {
     bitmap = o.bitmap;
     target=bitmap.clone();
-    buffer=bitmap.clone();
+    // buffer=bitmap.clone();
 		var output = o.output == null ? o.bitmap.clone() : o.output;
     region = o.region == null ? {
 			x: 0,
@@ -39,16 +39,17 @@ class Geometrize {
     }
   }
   function bestFragment(){
-    var best=10000;
+    var best=1.0;
     for(i in 0...shapeCount){
       var tx = Util.randomIntArray(3, region.x, region.x+region.width);
       var ty = Util.randomIntArray(3, region.y, region.y+region.height);
       var ex=Util.minMaxElements(tx);
       var ey=Util.minMaxElements(ty);
       var r =  {x: ex.min, y: ey.min, width: ex.max-ex.min, height: ey.max-ey.min};
-      buffer.copyFrom(bitmap,r);
+      var buffer = bitmap.copy(r);
       buffer.draw.triangle(tx[0], ty[0], tx[1], ty[1],tx[2], ty[2], ColorUtil.random(alpha));
-
+      var c = Math.abs(buffer.compare(bitmap,r);
+      best = best>c?c:best;
 
       // var dtbr:Int = t.r - b.r;
 			// 	var dtbg:Int = t.g - b.g;

@@ -41,4 +41,19 @@ class PNGBitmap extends AbstractBitmap {
 		bitmap.load(input, format);
 		return bitmap;
 	}
+
+override  public function copy(?r:Types.Rectangle):Bitmap{
+    if (r == null) {
+			r = {
+				x: 0,
+				y: 0,
+				width: width,
+				height: height
+			};
+		}
+    Sure.sure(width<r.width||height<r.height);
+		var b = new PNGBitmap(r.width, r.height);
+    b.copyFrom(this, r);
+    return b;
+}
 }

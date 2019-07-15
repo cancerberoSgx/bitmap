@@ -31,20 +31,21 @@ import haxe.io.Bytes;
 			height = h;
 			data = Bytes.alloc(w * h * 4);
 			format = f;
-			fillBg();
+			fill();
 		}
 	}
 
-	private function fillBg() {
+	public function fill(?bg_:Color) {
+    bg_=bg_==null?bg:bg_;
 		for (x in 0...width) {
 			for (y in 0...height) {
-				set(x, y, bg);
+				set(x, y, bg_);
 			}
 		}
 	}
 
 	public function get(x:Int, y:Int, ?noError:Bool):Color {
-		var i =  byteIndex(x,y);
+		var i = byteIndex(x, y);
 		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck && !noError) {
 				Sure.sure('get outOfBounds' == null);
@@ -55,12 +56,19 @@ import haxe.io.Bytes;
 		return int32Mode ? getInt32(i) : getInt8(i);
 	}
 
-inline function byteIndex(x:Int, y:Int){
-  return (y * width + x) * 4;
+	public inline function byteIndex(x:Int, y:Int) {
+		return (y * width + x) * 4;
+	}
+// public static inline function getByteIndex(x:Int, y:Int,width:Int){
+//   return (y * width + x) * 4;
+// }
+
+public function copy(?r:Types.Rectangle):Bitmap{
+		throw "Abstract method call";
 }
 
 	public function set(x:Int, y:Int, c:Color, ?noError:Bool):Bool {
-		var i = byteIndex(x,y);
+		var i = byteIndex(x, y);
 		if (i < 0 || i > data.length - 4) {
 			if (!noRangeCheck && noError != true) {
 				Sure.sure('set outOfBounds' == null);
@@ -84,44 +92,43 @@ inline function byteIndex(x:Int, y:Int){
 		throw "Abstract method call";
 	}
 
-	public function clone(?fillBg_ = false) {
+	public function clone(?fill_ = false) {
 		var bitmap = new PNGBitmap();
 		bitmap.width = width;
 		bitmap.height = height;
 		bitmap.format = format;
-		if (!fillBg_) {
+		if (!fill_) {
 			bitmap.data = data.sub(0, data.length);
 		} else {
 			bitmap.data = Bytes.alloc(data.length);
-			bitmap.fillBg();
+			bitmap.fill();
 		}
 		return bitmap;
 	}
 
-	public inline function equals(b:Bitmap):Bool {
-		return BitmapUtil.bitmapEquals(this, b);
+	public inline function equals(b:Bitmap, ?region:Types.Rectangle):Bool {
+		return BitmapUtil.bitmapEquals(this, b, region);
 	}
 
 	public function copyFrom(b:Bitmap, ?region:Types.Rectangle) {
 		if (region == null) {
 			region = {
 				x: 0,
-				y: 0	,
-        width: Util.min(width, b.width), 
-        height:Util.min(height,b.height)			
+				y: 0,
+				width: Util.min(width, b.width),
+				height: Util.min(height, b.height)
 			};
 		}
-    // region.width = Util.min(Util.min(region.width, b.width), width);
+		// region.width = Util.min(Util.min(region.width, b.width), width);
 		// region.height = Util.min(Util.min(region.height, b.height), height);
-    var i0 =  byteIndex(region.x,region.y);
-    var i1 =  byteIndex(region.x+region.width-1,region.y+region.height-1);
-    data.blit(i0, b.data, i0, i1-i0);
+		var i0 = byteIndex(region.x, region.y);
+		var i1 = byteIndex(region.x + region.width - 1, region.y + region.height - 1);
+		data.blit(i0, b.data, i0, i1 - i0);
 		// for (x in region.x...region.width) {
 		// 	for (y in region.y...region.height) {
 		// 		set(x, y, b.get(x, y));
 		// 	}
 		// }
-
 	}
 
 	/** 
@@ -152,4 +159,9 @@ inline function byteIndex(x:Int, y:Int){
 			Bytes.fastGet(data.getData(), i + 3));
 		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
+
+  public function compare(b:Bitmap,?r:Types.Rectangle):Float{
+    return BitmapUtil.compare(this, b, r);
+  }
+
 }
