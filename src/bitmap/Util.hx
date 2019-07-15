@@ -99,6 +99,11 @@ class Util {
   return m;
 }
 
+public static inline function dist(x:Int,y:Int) {
+		return x<y ? y-x : x-y;
+	}
+
+
 	// /**
 	//  * Returns a random item from an array.
 	//  * @param	a	The array to pick a random item from.
