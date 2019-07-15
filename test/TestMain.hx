@@ -7,7 +7,7 @@ import IOUtilTest;
 import BitmapUtilTest;
 import MiscTest;
 import TransformTest;
-
+import PerformanceGetSetTest;
 class TestMain {
 	static function main() {		
 		var runner = new Runner();
@@ -16,6 +16,7 @@ class TestMain {
 		runner.addCase(new BitmapUtilTest());
 		runner.addCase(new MiscTest());
 		runner.addCase(new TransformTest());
+		runner.addCase(new PerformanceGetSetTest());
     
 		Report.create(runner);
 		runner.run();

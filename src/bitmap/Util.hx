@@ -15,7 +15,7 @@ class Util {
 	 * @return	The clamped value.
 	 */
 	public static inline function clamp(value:Int, min:Int, max:Int):Int {
-		Sure.sure(min <= max);
+		// Sure.sure(min <= max);
 		return value < min ? min : value > max ? max : value;
 	}
 
@@ -75,10 +75,15 @@ class Util {
 	 * @param	upper	The upper bound.
 	 * @return	A random integer in the range [lower:upper] inclusive.
 	 */
-	public static inline function random(lower:Int, upper:Int):Int {
-		Sure.sure(lower <= upper);
-		return lower + Math.floor((upper - lower + 1) * Math.random());
+	public static inline function random(lower:Float, upper:Float):Int {
+		// Sure.sure(lower <= upper);
+		return Math.floor(lower + upper - lower + 1 * Math.random());
 	}
+
+  public static inline function  randomRectangle(r:Types.Rectangle) {
+    var w = r.width/2, h = r.height/2;
+    return {x: random(0, w), y: random(0, h), width:random(0, w), height: random(0, h) };
+  }
 	// /**
 	//  * Returns a random item from an array.
 	//  * @param	a	The array to pick a random item from.

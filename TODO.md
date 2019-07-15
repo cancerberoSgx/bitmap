@@ -6,6 +6,7 @@
 - [ ] check https://github.com/martamius/Exif.hx and see if with format.jpg read/write jpg could be supported
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] dox
+- [ ] ensure that Bitmaps never throw error when drawing outside their canvas if noRangeCheck=true
 - [ ] code formatter
 - [ ] easy API for common affine transforms like rotate, translate, skew
 - [ ] easy API for common convolutions like blur, sharpen, edges, etc
