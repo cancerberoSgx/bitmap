@@ -93,4 +93,4 @@ install:
   - haxelib list
 
 script:
-  - sh scripts/test.sh
+  - sh scripts/test-local.sh

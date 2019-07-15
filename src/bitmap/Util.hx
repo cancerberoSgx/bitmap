@@ -113,25 +113,25 @@ public static inline function dist(x:Int,y:Int) {
 	// 	Sure.sure(a != null && a.length > 0);
 	// 	return a[random(0, a.length - 1)];
 	// }
-	// /**
-	//  * Returns the smallest and largest items from an array of ints.
-	//  * @param	a	The array of ints.
-	//  * @return	The smallest and largest items from the array.
-	//  */
-	// public static inline function minMaxElements(a:Array<Int>):Point {
-	// 	if (a == null || a.length == 0) {
-	// 		return {x: 0, y: 0};
-	// 	}
-	// 	var min:Int = a[0];
-	// 	var max:Int = a[0];
-	// 	for (value in a) {
-	// 		if (min > value) {
-	// 			min = value;
-	// 		}
-	// 		if (max < value) {
-	// 			max = value;
-	// 		}
-	// 	}
-	// 	return {x: min, y: max};
-	// }
+	/**
+	 * Returns the smallest and largest items from an array of ints.
+	 * @param	a	The array of ints.
+	 * @return	The smallest and largest items from the array.
+	 */
+	public static inline function minMaxElements(a:Array<Int>)  {
+		if (a == null || a.length == 0) {
+			return {min: 0, max: 0};
+		}
+		var min:Int = a[0];
+		var max:Int = a[0];
+		for (value in a) {
+			if (min > value) {
+				min = value;
+			}
+			if (max < value) {
+				max = value;
+			}
+		}
+		return {min: min, max: max};
+	}
 }

@@ -20,10 +20,9 @@ class BitmapUtil {
 		return true;
 	}
 
-	public static function blendBitmaps(b1:Bitmap, b2:Bitmap, ?b3:Bitmap, ?mode:Types.Blend) {
+	public static function blendBitmaps(b1:Bitmap, b2:Bitmap, b3:Bitmap, ?mode:Types.Blend) {
 		var w = Util.min(b1.width, b2.width);
 		var h = Util.min(b1.height, b2.height);
-		b3 = b3 == null ? b1 : b3;
 		for (y in 0...h) {
 			for (x in 0...w) {
 				var c = ColorUtil.blendColors(b1.get(x, y), b2.get(x, y), mode);

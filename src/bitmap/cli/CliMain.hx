@@ -1,4 +1,5 @@
 package bitmap.cli;
+using bitmap.support.StructureTools;
 
 class CliMain {
 	public static function main() {

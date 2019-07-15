@@ -13,11 +13,19 @@ class Convolution {
 	public static function convolve(o:ConvolveOptions) {
 		Sure.sure(o.bitmap != o.output);
 		Sure.sure(o.output == null || o.bitmap.width == o.output.width && o.bitmap.height == o.output.height);
-		var output = o.output == null ? o.bitmap.clone() : o.output, data = o.bitmap, width = o.bitmap.width, height = o.bitmap.height, matrix = o
-			.kernel, w = matrix[0].length, h = matrix.length, half = Math.floor(h / 2), factor = o.factor == null ? 1.0 : o.factor, bias = o.bias == null ? 0.0 : o
-			.bias;
-		for (y in 0...height) {
-			for (x in 0...width) {
+		var output = o.output == null ? o.bitmap.clone() : o.output;
+		var data = o.bitmap, width = o.bitmap.width, height = o.bitmap.height, matrix = o.kernel;
+		var w = matrix[0].length, h = matrix.length, half = Math.floor(h / 2);
+		var factor = o.factor == null ? 1.0 : o.factor, bias = o.bias == null ? 0.0 : o.bias;
+		var region = o.region == null ? {
+			x: 0,
+			y: 0,
+			width: output.width,
+			height: output.height
+		}
+			: o.region;
+		for (y in region.y...region.height) {
+			for (x in region.x...region.width) {
 				var px = (y * width + x) * 4;
 				var r = 0.0, g = 0.0, b = 0.0;
 				for (cy in 0...h) {
@@ -56,7 +64,8 @@ class Convolution {
 			bias: bias,
 			factor: 1 / (size * size),
 			bitmap: null,
-			output: output
+			output: output,
+			region: null
 		};
 	}
 
@@ -80,7 +89,8 @@ class Convolution {
 			bias: bias,
 			factor: 1 / (size + 1),
 			bitmap: null,
-			output: output
+			output: output,
+			region: null
 		};
 	}
 
@@ -96,7 +106,8 @@ class Convolution {
 			bias: bias,
 			factor: 1.0,
 			bitmap: null,
-			output: output
+			output: output,
+			region: null
 		};
 	}
 }
