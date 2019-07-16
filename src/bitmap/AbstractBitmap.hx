@@ -20,6 +20,7 @@ import haxe.io.Bytes;
 	public var originalHeight:Int;
 	public var format:Types.PixelFormat;
 	public var draw:Draw;
+	public var io:BitmapIO;
 	public var color:Colors;
 	public var transform:Transform;
 	public var bg = Color.create(255, 255, 255, 255);
@@ -28,6 +29,7 @@ import haxe.io.Bytes;
 		draw = new Draw(this);
 		transform = new Transform(this);
 		color = new Colors(this);
+    io = new BitmapIO(this);
 		if (w > 0 && h > 0) {
 			width = w;
 			height = h;

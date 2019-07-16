@@ -119,6 +119,10 @@ public static function dist(x:Int,y:Int) {
 	}
 
 
+  public static function urlToBase64(s: String) {
+  return s.substring(s.indexOf(';base64,') + ';base64,'.length);
+}
+
 	/**
 	 * Returns a random item from an array.
 	 * @param	a	The array to pick a random item from.

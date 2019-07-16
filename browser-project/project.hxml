@@ -1,0 +1,5 @@
+-cp .
+-lib bitmap
+-main Test
+-debug
+-js bin/app.js

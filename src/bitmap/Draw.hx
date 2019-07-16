@@ -119,7 +119,7 @@ line(e.min,  y, e.max,  y,c,blend );
     }
   }
 
-	private inline function set(x:Int, y:Int, c:Color,?blend:Types.ColorBlend) {
+	public inline function set(x:Int, y:Int, c:Color,?blend:Types.ColorBlend) {
 		bitmap.set(x, y, (blend == null ||  blend.type == Types.Blend.none) ? c : ColorUtil.blendColors(bitmap.get(x, y), c, blend));
 	}
 }

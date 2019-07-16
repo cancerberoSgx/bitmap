@@ -50,6 +50,17 @@ class IOUtil {
 		throw "Unexpected end of method";
 	}
 
+	public static function writeTextFile(path:String, s:String) {
+		#if js
+		untyped return require("fs").writeFileSync(path, s);
+		#else
+		return sys.io.File.write(path).writeString(s);
+		#end
+		return '';
+	}
+
+
+
 	public static function writeBitmap(file:String, bitmap:Bitmap) {
 		var output = new haxe.io.BytesOutput();
 		bitmap.save(output);

@@ -12,7 +12,7 @@
   ],
   "description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
   "version": "0.1.1",
-  "releasenote": "convolutions",
+  "releasenote": "colors, affine transformations",
   "contributors": [
     "cancerberosgx"
   ],

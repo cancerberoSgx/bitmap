@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>bitmap sample</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Bitmap playground</h1>
+  <p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action:</p>
+  <button class="rectangleButton">draw rectangle</button>
+  <br/>
+  <img class="input"/>
+  <br/>
+  <img class="output"/>
+
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAKElEQVR42mO4d+9eCzr+DwQMYAYDwz2eCQwtIIwiAcKkS2DY8R8HAADQb2yOj6UYOAAAAABJRU5ErkJggg"/>
+  <!-- <input type="file" /> -->
+  <script>
+    window.applicationFetchImage = async function (url, cb) {
+      var response = await fetch(url);
+      var arrayBuffer = await response.arrayBuffer();
+      cb(arrayBuffer);
+    };
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>

@@ -15,4 +15,5 @@ class IOUtilTest implements utest.ITest {
 		IOUtil.writeFile('test/assets/tmptestwriteFile.png', input);
 		Assert.equals(IOUtil.readFile("test/assets/n.png").readAll().length,  IOUtil.readFile("test/assets/tmptestwriteFile.png").readAll().length);
 	}
+  
 }

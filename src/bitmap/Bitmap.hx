@@ -41,6 +41,11 @@ interface Bitmap extends OffsetRectangleArea {
 	@:readOnly public var transform:Transform;
 
 	/**
+	 * Utilities to load/save bitmaps from/to other formats or resources, such as base64 dataUrls, raw bytes formats, HTML canvas, HTML images, DOM Blobs, TypedArrays, buffers, urls, etc.
+	**/
+	@:readOnly public var io:BitmapIO;
+
+	/**
 	 * Default color for this bitmap background. It's used in some operations like copy/clone as default background color in some cases.
 	**/
 	public var bg:Color;
