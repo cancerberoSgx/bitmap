@@ -20,7 +20,8 @@ class Convolution {
 		var region = o.region == null ? output.bounds()			: o.region;
 		for (y in region.y...region.height) {
 			for (x in region.x...region.width) {
-				var px = (y * width + x) * 4;
+				// var px = (y * width + x) * 4;
+        var px = (width * y + x) << 2 ;
 				var r = 0.0, g = 0.0, b = 0.0;
 				for (cy in 0...h) {
 					for (cx in 0...w) {

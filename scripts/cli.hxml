@@ -1,7 +1,7 @@
--lib utest 
+# -lib utest 
 -lib format 
 -lib sure 
--lib tink_cli 
+-lib hxnodejs
 -cp src 
 -main bitmap.cli.CliMain
 -js bin/cli/main.js

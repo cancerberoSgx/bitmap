@@ -20,6 +20,7 @@
 - [ ] browser test (sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
 - [ ] cli should automatically execute like this https://github.com/HaxeCheckstyle/haxe-formatter/   - haxelib install bitmap && haxelib run bitmap --input... 
+- [ ] color libraries  supports spaces, format conversions and interpolations with no dependencies: https://lib.haxe.org/p/thx.color/, https://lib.haxe.org/p/hxColorToolkit/
 - [ ] test errors - opening invalid content, saving to invalid output, copy() out range.
 - [ ] load image from url should work in all targets
 - [ ] image metadata?

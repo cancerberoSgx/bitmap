@@ -68,6 +68,40 @@ Std.__name__ = true;
 Std.string = function(s) {
 	return js_Boot.__string_rec(s,"");
 };
+Std.parseInt = function(x) {
+	var v = parseInt(x, x && x[0]=="0" && (x[1]=="x" || x[1]=="X") ? 16 : 10);
+	if(isNaN(v)) {
+		return null;
+	}
+	return v;
+};
+var StringTools = function() { };
+StringTools.__name__ = true;
+StringTools.hex = function(n,digits) {
+	var s = "";
+	var hexChars = "0123456789ABCDEF";
+	while(true) {
+		s = hexChars.charAt(n & 15) + s;
+		n >>>= 4;
+		if(!(n > 0)) {
+			break;
+		}
+	}
+	if(digits != null) {
+		while(s.length < digits) s = "0" + s;
+	}
+	return s;
+};
+var _$UInt_UInt_$Impl_$ = {};
+_$UInt_UInt_$Impl_$.__name__ = true;
+_$UInt_UInt_$Impl_$.toFloat = function(this1) {
+	var int = this1;
+	if(int < 0) {
+		return 4294967296.0 + int;
+	} else {
+		return int + 0.0;
+	}
+};
 var app_App = function(b,s) {
 	this.bitmap = b;
 	this.state = s;
@@ -179,7 +213,7 @@ bitmap_AbstractBitmap.prototype = {
 		}
 	}
 	,get: function(x,y,noError) {
-		var i = (y * this.width + x) * 4;
+		var i = this.width * y + x << 2;
 		if(i < 0 || i > this.data.length - 4) {
 			if(!this.noRangeCheck && !noError) {
 				var actual = "get outOfBounds";
@@ -203,13 +237,13 @@ bitmap_AbstractBitmap.prototype = {
 		}
 	}
 	,byteIndex: function(x,y) {
-		return (y * this.width + x) * 4;
+		return this.width * y + x << 2;
 	}
 	,copy: function(r) {
 		throw new js__$Boot_HaxeError("Abstract method call");
 	}
 	,set: function(x,y,c,noError) {
-		var i = (y * this.width + x) * 4;
+		var i = this.width * y + x << 2;
 		if(i < 0 || i > this.data.length - 4) {
 			if(!this.noRangeCheck && noError != true) {
 				var actual = "set outOfBounds";
@@ -224,9 +258,9 @@ bitmap_AbstractBitmap.prototype = {
 		if(this.int32Mode) {
 			this.data.setInt32(i,(c >> 24 & 255) + (c >> 8 & 65280) + ((c & 65280) << 8) + ((c & 255) << 24));
 		} else {
-			this.data.b[i] = c >> 24 & 255;
-			this.data.b[i + 1] = c >> 16 & 255;
-			this.data.b[i + 2] = c >> 8 & 255;
+			this.data.b[i] = c >>> 24 & 255;
+			this.data.b[i + 1] = c >>> 16 & 255;
+			this.data.b[i + 2] = c >>> 8 & 255;
 			this.data.b[i + 3] = c & 255;
 		}
 		return false;
@@ -280,9 +314,9 @@ bitmap_AbstractBitmap.prototype = {
 		this.data.setInt32(i,(c >> 24 & 255) + (c >> 8 & 65280) + ((c & 65280) << 8) + ((c & 255) << 24));
 	}
 	,setInt8: function(i,c) {
-		this.data.b[i] = c >> 24 & 255;
-		this.data.b[i + 1] = c >> 16 & 255;
-		this.data.b[i + 2] = c >> 8 & 255;
+		this.data.b[i] = c >>> 24 & 255;
+		this.data.b[i + 1] = c >>> 16 & 255;
+		this.data.b[i + 2] = c >>> 8 & 255;
 		this.data.b[i + 3] = c & 255;
 	}
 	,getInt32: function(i) {
@@ -394,10 +428,22 @@ bitmap_BitmapUtil.blend = function(b1,b2,b3,blend) {
 			if(blend1.type == bitmap_Blend.alpha) {
 				tmp = c2;
 			} else if(blend1.type == bitmap_Blend.mean) {
-				var red = (c1 >> 24 & 255) * blend1.factor + (c2 >> 24 & 255) * (1 - blend1.factor) | 0;
-				var green = (c1 >> 16 & 255) * blend1.factor + (c2 >> 16 & 255) * (1 - blend1.factor) | 0;
-				var blue = (c1 >> 8 & 255) * blend1.factor + (c2 >> 8 & 255) * (1 - blend1.factor) | 0;
-				var alpha = (c1 & 255) * blend1.factor + (c2 & 255) * (1 - blend1.factor) | 0;
+				var b = blend1.factor;
+				var x1 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+				var b4 = 1 - blend1.factor;
+				var red = x1 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 24 & 255) * b4 | 0;
+				var b5 = blend1.factor;
+				var x2 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b5;
+				var b6 = 1 - blend1.factor;
+				var green = x2 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 16 & 255) * b6 | 0;
+				var b7 = blend1.factor;
+				var x3 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b7;
+				var b8 = 1 - blend1.factor;
+				var blue = x3 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 8 & 255) * b8 | 0;
+				var b9 = blend1.factor;
+				var x4 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b9;
+				var b10 = 1 - blend1.factor;
+				var alpha = x4 + _$UInt_UInt_$Impl_$.toFloat(c2 & 255) * b10 | 0;
 				tmp = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 			} else {
 				tmp = c2;
@@ -440,25 +486,55 @@ bitmap__$Color_Color_$Impl_$._new = function(rgba) {
 bitmap__$Color_Color_$Impl_$.create = function(red,green,blue,alpha) {
 	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 };
+bitmap__$Color_Color_$Impl_$.fromString = function(s) {
+	if(s.indexOf("#") == 0) {
+		var this1 = Std.parseInt("0x" + s.substring(1,s.length));
+		return this1;
+	} else if(s.indexOf("0x") == 0) {
+		var this2 = Std.parseInt(s);
+		return this2;
+	}
+	var this3 = 0;
+	return this3;
+};
 bitmap__$Color_Color_$Impl_$.fromInt = function(rgba) {
 	return rgba;
 };
+bitmap__$Color_Color_$Impl_$.toString = function(this1) {
+	return "0x" + StringTools.hex(this1,8);
+};
 bitmap__$Color_Color_$Impl_$.get_r = function(this1) {
-	return this1 >> 24 & 255;
+	return this1 >>> 24 & 255;
 };
 bitmap__$Color_Color_$Impl_$.get_g = function(this1) {
-	return this1 >> 16 & 255;
+	return this1 >>> 16 & 255;
 };
 bitmap__$Color_Color_$Impl_$.get_b = function(this1) {
-	return this1 >> 8 & 255;
+	return this1 >>> 8 & 255;
 };
 bitmap__$Color_Color_$Impl_$.get_a = function(this1) {
 	return this1 & 255;
 };
+bitmap__$Color_Color_$Impl_$.set_r = function(this1,value) {
+	this1 = value << 24 | (this1 >>> 16 & 255) << 16 | (this1 >>> 8 & 255) << 8 | this1 & 255;
+	return value;
+};
+bitmap__$Color_Color_$Impl_$.set_g = function(this1,value) {
+	this1 = (this1 >>> 24 & 255) << 24 | value << 16 | (this1 >>> 8 & 255) << 8 | this1 & 255;
+	return value;
+};
+bitmap__$Color_Color_$Impl_$.set_b = function(this1,value) {
+	this1 = (this1 >>> 24 & 255) << 24 | (this1 >>> 16 & 255) << 16 | value << 8 | this1 & 255;
+	return value;
+};
+bitmap__$Color_Color_$Impl_$.set_a = function(this1,value) {
+	this1 = (this1 >>> 24 & 255) << 24 | (this1 >>> 16 & 255) << 16 | (this1 >>> 8 & 255) << 8 | value;
+	return value;
+};
 var bitmap_ColorUtil = function() { };
 bitmap_ColorUtil.__name__ = true;
 bitmap_ColorUtil.colorEquals = function(a,b) {
-	if((a >> 24 & 255) == (b >> 24 & 255) && (a >> 16 & 255) == (b >> 16 & 255) && (a >> 8 & 255) == (b >> 8 & 255)) {
+	if((a >>> 24 & 255) == (b >>> 24 & 255) && (a >>> 16 & 255) == (b >>> 16 & 255) && (a >>> 8 & 255) == (b >>> 8 & 255)) {
 		return (a & 255) == (b & 255);
 	} else {
 		return false;
@@ -484,10 +560,10 @@ bitmap_ColorUtil.average = function(image,region,alpha) {
 		while(_g2 < _g11) {
 			var y = _g2++;
 			var pixel = image.get(x,y);
-			totalRed += pixel >> 24 & 255;
-			totalGreen += pixel >> 16 & 255;
-			totalBlue += pixel >> 8 & 255;
-			totalAlpha += pixel & 255;
+			totalRed = totalRed + (pixel >>> 24 & 255);
+			totalGreen = totalGreen + (pixel >>> 16 & 255);
+			totalBlue = totalBlue + (pixel >>> 8 & 255);
+			totalAlpha = totalAlpha + (pixel & 255);
 		}
 	}
 	var size = region.width * region.height;
@@ -515,25 +591,91 @@ bitmap_ColorUtil.blendColors = function(c1,c2,blend) {
 	if(blend.type == bitmap_Blend.alpha) {
 		return c2;
 	} else if(blend.type == bitmap_Blend.mean) {
-		var red = (c1 >> 24 & 255) * blend.factor + (c2 >> 24 & 255) * (1 - blend.factor) | 0;
-		var green = (c1 >> 16 & 255) * blend.factor + (c2 >> 16 & 255) * (1 - blend.factor) | 0;
-		var blue = (c1 >> 8 & 255) * blend.factor + (c2 >> 8 & 255) * (1 - blend.factor) | 0;
-		var alpha = (c1 & 255) * blend.factor + (c2 & 255) * (1 - blend.factor) | 0;
+		var b = blend.factor;
+		var x = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+		var b1 = 1 - blend.factor;
+		var red = x + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 24 & 255) * b1 | 0;
+		var b2 = blend.factor;
+		var x1 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b2;
+		var b3 = 1 - blend.factor;
+		var green = x1 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 16 & 255) * b3 | 0;
+		var b4 = blend.factor;
+		var x2 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b4;
+		var b5 = 1 - blend.factor;
+		var blue = x2 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 8 & 255) * b5 | 0;
+		var b6 = blend.factor;
+		var x3 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b6;
+		var b7 = 1 - blend.factor;
+		var alpha = x3 + _$UInt_UInt_$Impl_$.toFloat(c2 & 255) * b7 | 0;
 		return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 	} else {
 		return c2;
 	}
 };
 bitmap_ColorUtil.filter = function(c,o) {
-	o.red = o.red == null ? { a : 1.0, c : 0.0} : o.red;
-	o.green = o.green == null ? { a : 1.0, c : 0.0} : o.green;
-	o.blue = o.blue == null ? { a : 1.0, c : 0.0} : o.blue;
-	o.alpha = o.alpha == null ? { a : 1.0, c : 0.0} : o.alpha;
-	var red = Math.round((c >> 24 & 255) * o.red.a + o.red.c);
-	var green = Math.round((c >> 16 & 255) * o.green.a + o.green.c);
-	var blue = Math.round((c >> 8 & 255) * o.blue.a + o.blue.c);
-	var alpha = Math.round((c & 255) * o.alpha.a + o.alpha.c);
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+	var c2;
+	if(o.fn != null) {
+		c2 = o.fn(c);
+	} else {
+		o.red = o.red == null ? { a : 1.0, c : 0.0} : o.red;
+		o.green = o.green == null ? { a : 1.0, c : 0.0} : o.green;
+		o.blue = o.blue == null ? { a : 1.0, c : 0.0} : o.blue;
+		o.alpha = o.alpha == null ? { a : 1.0, c : 0.0} : o.alpha;
+		var b = o.red.a;
+		var red = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b + o.red.c);
+		var b1 = o.green.a;
+		var green = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b1 + o.green.c);
+		var b2 = o.blue.a;
+		var blue = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b2 + o.blue.c);
+		var b3 = o.alpha.a;
+		var alpha = Math.round(_$UInt_UInt_$Impl_$.toFloat(c & 255) * b3 + o.alpha.c);
+		c2 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+	}
+	if(o.blend == null) {
+		return c2;
+	} else {
+		var blend = o.blend;
+		blend = blend == null ? { type : bitmap_Blend.mean, factor : 0.5} : blend;
+		blend.factor = blend.factor == null ? 0.5 : blend.factor;
+		if(blend.type == bitmap_Blend.alpha) {
+			return c2;
+		} else if(blend.type == bitmap_Blend.mean) {
+			var b4 = blend.factor;
+			var x = _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b4;
+			var b5 = 1 - blend.factor;
+			var red1 = x + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 24 & 255) * b5 | 0;
+			var b6 = blend.factor;
+			var x1 = _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b6;
+			var b7 = 1 - blend.factor;
+			var green1 = x1 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 16 & 255) * b7 | 0;
+			var b8 = blend.factor;
+			var x2 = _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b8;
+			var b9 = 1 - blend.factor;
+			var blue1 = x2 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 8 & 255) * b9 | 0;
+			var b10 = blend.factor;
+			var x3 = _$UInt_UInt_$Impl_$.toFloat(c & 255) * b10;
+			var b11 = 1 - blend.factor;
+			var alpha1 = x3 + _$UInt_UInt_$Impl_$.toFloat(c2 & 255) * b11 | 0;
+			return ((red1 < 0 ? 0 : red1 > 255 ? 255 : red1) << 24) + ((green1 < 0 ? 0 : green1 > 255 ? 255 : green1) << 16) + ((blue1 < 0 ? 0 : blue1 > 255 ? 255 : blue1) << 8) + (alpha1 < 0 ? 0 : alpha1 > 255 ? 255 : alpha1);
+		} else {
+			return c2;
+		}
+	}
+};
+bitmap_ColorUtil.prototype = {
+	mix: function(c1,c2,strength) {
+		var this1 = 0;
+		var output = this1;
+		var value = Math.floor(_$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * (1 - strength) + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 24 & 255) * strength);
+		output = value << 24 | (output >>> 16 & 255) << 16 | (output >>> 8 & 255) << 8 | output & 255;
+		var value1 = Math.floor(_$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * (1 - strength) + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 16 & 255) * strength);
+		output = (output >>> 24 & 255) << 24 | value1 << 16 | (output >>> 8 & 255) << 8 | output & 255;
+		var value2 = Math.floor(_$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * (1 - strength) + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 8 & 255) * strength);
+		output = (output >>> 24 & 255) << 24 | (output >>> 16 & 255) << 16 | value2 << 8 | output & 255;
+		var value3 = Math.floor(_$UInt_UInt_$Impl_$.toFloat(c1 & 255) * (1 - strength) + _$UInt_UInt_$Impl_$.toFloat(c2 & 255) * strength);
+		output = (output >>> 24 & 255) << 24 | (output >>> 16 & 255) << 16 | (output >>> 8 & 255) << 8 | value3;
+		return output;
+	}
 };
 var bitmap_Draw = function(b) {
 	this.bitmap = b;
@@ -578,10 +720,22 @@ bitmap_Draw.prototype = {
 					if(blend1.type == bitmap_Blend.alpha) {
 						tmp1 = c;
 					} else if(blend1.type == bitmap_Blend.mean) {
-						var red = (c1 >> 24 & 255) * blend1.factor + (c >> 24 & 255) * (1 - blend1.factor) | 0;
-						var green = (c1 >> 16 & 255) * blend1.factor + (c >> 16 & 255) * (1 - blend1.factor) | 0;
-						var blue = (c1 >> 8 & 255) * blend1.factor + (c >> 8 & 255) * (1 - blend1.factor) | 0;
-						var alpha = (c1 & 255) * blend1.factor + (c & 255) * (1 - blend1.factor) | 0;
+						var b = blend1.factor;
+						var x3 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+						var b1 = 1 - blend1.factor;
+						var red = x3 + _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b1 | 0;
+						var b2 = blend1.factor;
+						var x4 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b2;
+						var b3 = 1 - blend1.factor;
+						var green = x4 + _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b3 | 0;
+						var b4 = blend1.factor;
+						var x5 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b4;
+						var b5 = 1 - blend1.factor;
+						var blue = x5 + _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b5 | 0;
+						var b6 = blend1.factor;
+						var x6 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b6;
+						var b7 = 1 - blend1.factor;
+						var alpha = x6 + _$UInt_UInt_$Impl_$.toFloat(c & 255) * b7 | 0;
 						tmp1 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 					} else {
 						tmp1 = c;
@@ -613,10 +767,22 @@ bitmap_Draw.prototype = {
 					if(blend2.type == bitmap_Blend.alpha) {
 						tmp3 = c;
 					} else if(blend2.type == bitmap_Blend.mean) {
-						var red1 = (c11 >> 24 & 255) * blend2.factor + (c >> 24 & 255) * (1 - blend2.factor) | 0;
-						var green1 = (c11 >> 16 & 255) * blend2.factor + (c >> 16 & 255) * (1 - blend2.factor) | 0;
-						var blue1 = (c11 >> 8 & 255) * blend2.factor + (c >> 8 & 255) * (1 - blend2.factor) | 0;
-						var alpha1 = (c11 & 255) * blend2.factor + (c & 255) * (1 - blend2.factor) | 0;
+						var b8 = blend2.factor;
+						var x7 = _$UInt_UInt_$Impl_$.toFloat(c11 >>> 24 & 255) * b8;
+						var b9 = 1 - blend2.factor;
+						var red1 = x7 + _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b9 | 0;
+						var b10 = blend2.factor;
+						var x8 = _$UInt_UInt_$Impl_$.toFloat(c11 >>> 16 & 255) * b10;
+						var b11 = 1 - blend2.factor;
+						var green1 = x8 + _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b11 | 0;
+						var b12 = blend2.factor;
+						var x9 = _$UInt_UInt_$Impl_$.toFloat(c11 >>> 8 & 255) * b12;
+						var b13 = 1 - blend2.factor;
+						var blue1 = x9 + _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b13 | 0;
+						var b14 = blend2.factor;
+						var x10 = _$UInt_UInt_$Impl_$.toFloat(c11 & 255) * b14;
+						var b15 = 1 - blend2.factor;
+						var alpha1 = x10 + _$UInt_UInt_$Impl_$.toFloat(c & 255) * b15 | 0;
 						tmp3 = ((red1 < 0 ? 0 : red1 > 255 ? 255 : red1) << 24) + ((green1 < 0 ? 0 : green1 > 255 ? 255 : green1) << 16) + ((blue1 < 0 ? 0 : blue1 > 255 ? 255 : blue1) << 8) + (alpha1 < 0 ? 0 : alpha1 > 255 ? 255 : alpha1);
 					} else {
 						tmp3 = c;
@@ -654,10 +820,22 @@ bitmap_Draw.prototype = {
 						if(blend1.type == bitmap_Blend.alpha) {
 							tmp1 = c;
 						} else if(blend1.type == bitmap_Blend.mean) {
-							var red = (c1 >> 24 & 255) * blend1.factor + (c >> 24 & 255) * (1 - blend1.factor) | 0;
-							var green = (c1 >> 16 & 255) * blend1.factor + (c >> 16 & 255) * (1 - blend1.factor) | 0;
-							var blue = (c1 >> 8 & 255) * blend1.factor + (c >> 8 & 255) * (1 - blend1.factor) | 0;
-							var alpha = (c1 & 255) * blend1.factor + (c & 255) * (1 - blend1.factor) | 0;
+							var b = blend1.factor;
+							var x1 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+							var b1 = 1 - blend1.factor;
+							var red = x1 + _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b1 | 0;
+							var b2 = blend1.factor;
+							var x3 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b2;
+							var b3 = 1 - blend1.factor;
+							var green = x3 + _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b3 | 0;
+							var b4 = blend1.factor;
+							var x4 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b4;
+							var b5 = 1 - blend1.factor;
+							var blue = x4 + _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b5 | 0;
+							var b6 = blend1.factor;
+							var x5 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b6;
+							var b7 = 1 - blend1.factor;
+							var alpha = x5 + _$UInt_UInt_$Impl_$.toFloat(c & 255) * b7 | 0;
 							tmp1 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 						} else {
 							tmp1 = c;
@@ -744,10 +922,22 @@ bitmap_Draw.prototype = {
 					if(blend1.type == bitmap_Blend.alpha) {
 						tmp1 = c;
 					} else if(blend1.type == bitmap_Blend.mean) {
-						var red = (c1 >> 24 & 255) * blend1.factor + (c >> 24 & 255) * (1 - blend1.factor) | 0;
-						var green = (c1 >> 16 & 255) * blend1.factor + (c >> 16 & 255) * (1 - blend1.factor) | 0;
-						var blue = (c1 >> 8 & 255) * blend1.factor + (c >> 8 & 255) * (1 - blend1.factor) | 0;
-						var alpha = (c1 & 255) * blend1.factor + (c & 255) * (1 - blend1.factor) | 0;
+						var b = blend1.factor;
+						var x4 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+						var b1 = 1 - blend1.factor;
+						var red = x4 + _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b1 | 0;
+						var b2 = blend1.factor;
+						var x5 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b2;
+						var b3 = 1 - blend1.factor;
+						var green = x5 + _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b3 | 0;
+						var b4 = blend1.factor;
+						var x6 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b4;
+						var b5 = 1 - blend1.factor;
+						var blue = x6 + _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b5 | 0;
+						var b6 = blend1.factor;
+						var x7 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b6;
+						var b7 = 1 - blend1.factor;
+						var alpha = x7 + _$UInt_UInt_$Impl_$.toFloat(c & 255) * b7 | 0;
 						tmp1 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 					} else {
 						tmp1 = c;
@@ -772,10 +962,22 @@ bitmap_Draw.prototype = {
 			if(blend1.type == bitmap_Blend.alpha) {
 				tmp1 = c;
 			} else if(blend1.type == bitmap_Blend.mean) {
-				var red = (c1 >> 24 & 255) * blend1.factor + (c >> 24 & 255) * (1 - blend1.factor) | 0;
-				var green = (c1 >> 16 & 255) * blend1.factor + (c >> 16 & 255) * (1 - blend1.factor) | 0;
-				var blue = (c1 >> 8 & 255) * blend1.factor + (c >> 8 & 255) * (1 - blend1.factor) | 0;
-				var alpha = (c1 & 255) * blend1.factor + (c & 255) * (1 - blend1.factor) | 0;
+				var b = blend1.factor;
+				var x1 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 24 & 255) * b;
+				var b1 = 1 - blend1.factor;
+				var red = x1 + _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b1 | 0;
+				var b2 = blend1.factor;
+				var x2 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 16 & 255) * b2;
+				var b3 = 1 - blend1.factor;
+				var green = x2 + _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b3 | 0;
+				var b4 = blend1.factor;
+				var x3 = _$UInt_UInt_$Impl_$.toFloat(c1 >>> 8 & 255) * b4;
+				var b5 = 1 - blend1.factor;
+				var blue = x3 + _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b5 | 0;
+				var b6 = blend1.factor;
+				var x4 = _$UInt_UInt_$Impl_$.toFloat(c1 & 255) * b6;
+				var b7 = 1 - blend1.factor;
+				var alpha = x4 + _$UInt_UInt_$Impl_$.toFloat(c & 255) * b7 | 0;
 				tmp1 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 			} else {
 				tmp1 = c;
@@ -1365,19 +1567,88 @@ bitmap_transformation_Colors.prototype = {
 			while(_g2 < _g11) {
 				var x = _g2++;
 				var c = o.bitmap.get(x,y);
-				o.red = o.red == null ? { a : 1.0, c : 0.0} : o.red;
-				o.green = o.green == null ? { a : 1.0, c : 0.0} : o.green;
-				o.blue = o.blue == null ? { a : 1.0, c : 0.0} : o.blue;
-				o.alpha = o.alpha == null ? { a : 1.0, c : 0.0} : o.alpha;
-				var red = Math.round((c >> 24 & 255) * o.red.a + o.red.c);
-				var green = Math.round((c >> 16 & 255) * o.green.a + o.green.c);
-				var blue = Math.round((c >> 8 & 255) * o.blue.a + o.blue.c);
-				var alpha = Math.round((c & 255) * o.alpha.a + o.alpha.c);
-				var c2 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-				output.set(x,y,c2);
+				var c2;
+				if(o.fn != null) {
+					c2 = o.fn(c);
+				} else {
+					o.red = o.red == null ? { a : 1.0, c : 0.0} : o.red;
+					o.green = o.green == null ? { a : 1.0, c : 0.0} : o.green;
+					o.blue = o.blue == null ? { a : 1.0, c : 0.0} : o.blue;
+					o.alpha = o.alpha == null ? { a : 1.0, c : 0.0} : o.alpha;
+					var b = o.red.a;
+					var red = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b + o.red.c);
+					var b1 = o.green.a;
+					var green = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b1 + o.green.c);
+					var b2 = o.blue.a;
+					var blue = Math.round(_$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b2 + o.blue.c);
+					var b3 = o.alpha.a;
+					var alpha = Math.round(_$UInt_UInt_$Impl_$.toFloat(c & 255) * b3 + o.alpha.c);
+					c2 = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+				}
+				var c21;
+				if(o.blend == null) {
+					c21 = c2;
+				} else {
+					var blend = o.blend;
+					blend = blend == null ? { type : bitmap_Blend.mean, factor : 0.5} : blend;
+					blend.factor = blend.factor == null ? 0.5 : blend.factor;
+					if(blend.type == bitmap_Blend.alpha) {
+						c21 = c2;
+					} else if(blend.type == bitmap_Blend.mean) {
+						var b4 = blend.factor;
+						var x1 = _$UInt_UInt_$Impl_$.toFloat(c >>> 24 & 255) * b4;
+						var b5 = 1 - blend.factor;
+						var red1 = x1 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 24 & 255) * b5 | 0;
+						var b6 = blend.factor;
+						var x2 = _$UInt_UInt_$Impl_$.toFloat(c >>> 16 & 255) * b6;
+						var b7 = 1 - blend.factor;
+						var green1 = x2 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 16 & 255) * b7 | 0;
+						var b8 = blend.factor;
+						var x3 = _$UInt_UInt_$Impl_$.toFloat(c >>> 8 & 255) * b8;
+						var b9 = 1 - blend.factor;
+						var blue1 = x3 + _$UInt_UInt_$Impl_$.toFloat(c2 >>> 8 & 255) * b9 | 0;
+						var b10 = blend.factor;
+						var x4 = _$UInt_UInt_$Impl_$.toFloat(c & 255) * b10;
+						var b11 = 1 - blend.factor;
+						var alpha1 = x4 + _$UInt_UInt_$Impl_$.toFloat(c2 & 255) * b11 | 0;
+						c21 = ((red1 < 0 ? 0 : red1 > 255 ? 255 : red1) << 24) + ((green1 < 0 ? 0 : green1 > 255 ? 255 : green1) << 16) + ((blue1 < 0 ? 0 : blue1 > 255 ? 255 : blue1) << 8) + (alpha1 < 0 ? 0 : alpha1 > 255 ? 255 : alpha1);
+					} else {
+						c21 = c2;
+					}
+				}
+				output.set(x,y,c21);
 			}
 		}
 		return output;
+	}
+	,grayScale: function(o) {
+		var fn = function(c) {
+			var a = [c >>> 24 & 255,c >>> 16 & 255,c >>> 8 & 255,c & 255];
+			var e;
+			if(a == null || a.length == 0) {
+				e = { min : 0, max : 0};
+			} else {
+				var min = a[0];
+				var max = a[0];
+				var _g = 0;
+				while(_g < a.length) {
+					var value = a[_g];
+					++_g;
+					if(min > value) {
+						min = value;
+					}
+					if(max < value) {
+						max = value;
+					}
+				}
+				e = { min : min, max : max};
+			}
+			var v = Math.round((e.max - e.min) / 2);
+			return ((v < 0 ? 0 : v > 255 ? 255 : v) << 24) + ((v < 0 ? 0 : v > 255 ? 255 : v) << 16) + ((v < 0 ? 0 : v > 255 ? 255 : v) << 8) + (v < 0 ? 0 : v > 255 ? 255 : v);
+		};
+		var tmp_1 = o;
+		var tmp_2_fn = fn;
+		return this.filter({ region : tmp_1.region, red : tmp_1.red, output : tmp_1.output, green : tmp_1.green, fn : tmp_2_fn, blue : tmp_1.blue, blend : tmp_1.blend, bitmap : tmp_1.bitmap, alpha : tmp_1.alpha});
 	}
 };
 var bitmap_transformation_Convolution = function() { };
@@ -1408,7 +1679,7 @@ bitmap_transformation_Convolution.convolve = function(o) {
 		var _g11 = region.width;
 		while(_g2 < _g11) {
 			var x = _g2++;
-			var px = (y * width + x) * 4;
+			var px = width * y + x << 2;
 			var r = 0.0;
 			var g = 0.0;
 			var b = 0.0;

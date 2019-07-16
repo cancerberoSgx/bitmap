@@ -1,4 +1,5 @@
 test/targets/test-each.hxml
+# -lib hxnodejs
 
 -js bin/test/MainPhantom.js
 -cmd haxe test/phantomjs/run.hxml bin/test/MainPhantom.js

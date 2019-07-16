@@ -61,7 +61,8 @@ import haxe.io.Bytes;
 	}
 
 	public inline function byteIndex(x:Int, y:Int) {
-		return (y * width + x) * 4;
+		// return (y * width + x) * 4;
+    return (width * y + x) << 2 ;
 	}
 
 	public function copy(r:Types.Rectangle):Bitmap {
