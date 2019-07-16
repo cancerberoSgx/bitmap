@@ -11,11 +11,12 @@
     "png"
   ],
   "description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
-  "version": "0.1.1",
-  "releasenote": "colors, affine transformations",
+  "version": "0.1.2",
+  "releasenote": "browser, gray sale",
   "contributors": [
     "cancerberosgx"
   ],
+  "main": "bitmap.cli.CliMain",
   "classPath": "src",
   "dependencies": {
     "sure": "0.1.1",

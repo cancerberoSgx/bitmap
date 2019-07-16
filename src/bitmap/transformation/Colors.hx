@@ -2,10 +2,14 @@ package bitmap.transformation;
 
 import bitmap.*;
 import bitmap.transformation.*;
+using bitmap.support.StructureTools;
 
 typedef ColorBlendOptions = {
-	> Transform.TransformationOptions,
-	@:optional var blend:Types.ColorBlend;
+	> ColorFilterOptions,
+};
+
+typedef GrayScaleFilterOptions = {
+	> ColorFilterOptions,
 };
 
 /** Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) . **/
@@ -13,6 +17,7 @@ typedef ColorFilterOptions = {
 	> Transform.TransformationOptions,
 	> ColorUtil.ColorFilter,
 };
+ 
 
 class Colors {
 	private var bitmap:Bitmap;
@@ -39,4 +44,15 @@ class Colors {
 		}
 		return output;
 	}
+
+	/** Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) . **/
+	public function grayScale(o:  GrayScaleFilterOptions) {
+   var fn = function(c:Color){
+      var e = Util.minMaxElements([c.r, c.g, c.b, c.a]); 
+      var v = Math.round((e.max-e.min)/2);
+      return Color.create(v,v,v,v);
+    }
+		return filter(o.combine({fn:fn}));
+	}
+
 }

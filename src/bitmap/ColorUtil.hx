@@ -8,6 +8,11 @@ typedef ColorFilter = {
 	@:optional var green:ColorFilterChannel;
 	@:optional var blue:ColorFilterChannel;
 	@:optional var alpha:ColorFilterChannel;
+  /**
+   * filter declarations by providing a function `fn` that transform colors to colors
+   **/
+	@:optional var fn:(c: Color) ->  Color;
+  @:optional var ?blend:Types.ColorBlend;
 };
 
 /** Linear transformation on channels (a * value + c). **/
@@ -80,12 +85,31 @@ class ColorUtil {
 		}
 	}
 
-	public inline static function filter(c:Color, o:ColorFilter) {
+  public function mix(c1: Color, c2:Color, strength:Float):Color
+	{
+		var output:Color = new Color(0);
+		output.r = Math.floor((c1.r * (1 - strength)) + (c2.r * strength));
+		output.g = Math.floor((c1.g * (1 - strength)) + (c2.g * strength));
+		output.b = Math.floor((c1.b * (1 - strength)) + (c2.b * strength));
+		output.a = Math.floor((c1.a * (1 - strength)) + (c2.a * strength));
+		return output;
+	}
+	/**
+	 * Supports filter declarations by providing a function `fn` that transform colors to colors, or if not given, alternatively it supports providing 1-grade equation coeficients to transform each channel linearly (red*a+c).
+	**/
+	public inline static function filter(c:Color, o:ColorFilter): Color {
+    var c2 : Color; 
+		if (o.fn != null) {
+			c2= o.fn(c);
+		}
+    else {
 		o.red = o.red == null ? {a: 1.0, c: 0.0} : o.red;
 		o.green = o.green == null ? {a: 1.0, c: 0.0} : o.green;
 		o.blue = o.blue == null ? {a: 1.0, c: 0.0} : o.blue;
 		o.alpha = o.alpha == null ? {a: 1.0, c: 0.0} : o.alpha;
-		return Color.create(Math.round(c.r * o.red.a + o.red.c), Math.round(c.g * o.green.a + o.green.c), Math.round(c.b * o.blue.a + o.blue.c),
+     c2 = Color.create(Math.round(c.r * o.red.a + o.red.c), Math.round(c.g * o.green.a + o.green.c), Math.round(c.b * o.blue.a + o.blue.c),
 			Math.round(c.a * o.alpha.a + o.alpha.c));
+    }
+		return o.blend==null?c2 : blendColors(c, c2, o.blend);
 	}
 }

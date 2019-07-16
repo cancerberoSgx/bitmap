@@ -11,15 +11,15 @@
   * [Transformations](#transformations)
 - [Browser example](#browser-example)
 - [Command Line interface](#command-line-interface)
+- [Native libraries for other targets (JavaScript)](#native-libraries-for-other-targets-javascript)
 - [Scripts](#scripts)
   * [Run tests locally](#run-tests-locally)
   * [Run tests with docker](#run-tests-with-docker)
   * [Other](#other)
-- [Status](#status)
 - [Tests](#tests)
   * [Run locally](#run-locally)
   * [Run with docker](#run-with-docker)
-- [TODO / Road map / Changelog](#todo--road-map--changelog)
+- [Status / TODO / Road map / Changelog](#status--todo--road-map--changelog)
 
 <!-- tocstop -->
 

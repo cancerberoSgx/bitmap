@@ -12,13 +12,27 @@
 - [ ] bitmap.util.write(src:Bitmap, region:Rectangle, blend:Blend, factor:float) 
   - [ ] bitmap.compose(otherBitmap, region, blend, factor): creates a new bitmap 
 - [ ] code formatter
+- [ ] color replace - threshold
 - [ ] write tutorial page showing the effect of API, get, draw, transformations, etc
 - [ ] remove the borders of convolution result by copying neighbor
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
   - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] browser test (sh test.sh should verify that at least the browser example renders whet it should,)
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
+- [ ] cli should automatically execute like this https://github.com/HaxeCheckstyle/haxe-formatter/   - haxelib install bitmap && haxelib run bitmap --input... 
+- [ ] test errors - opening invalid content, saving to invalid output, copy() out range.
+- [ ] load image from url should work in all targets
+- [ ] image metadata?
+- [ ] visual image diff 
+- [ ] dither: img.dither({colors:16}) will reduce image colors to only 16 different ones.
+- [ ] chained transformations. bitmap.resize(1,b).rotate(g).copyFrom(b2).convolve(j).save('foo.png')
 - [ ] better productize the CLI, perhaps in separate project.
+- [ ] check this fft impl: https://github.com/deltaluca/goodies#FFT
+- [ ] performance - libraries do const idx = (image.bitmap.width * _y + _x) << 2 instead *4
+- [ ] bitmap.scan({x: 0, y:0,w:11, h:111, f: (x,y,idx,bitmap)->{if bitmap.get(x.y)==ddd return true/*stops iteration*/})
+- [ ] img1.mask(img2) (Masks a source image on to this image using average pixel colour. A completely black pixel on the mask will turn a pixel in the image completely transparent.)
+- [ ] bitmaps as resources
+- [x] bitmap.color.grayScale()
 - [x] browser example. load png from url, draw/transform and render it back again as img.
 - [x] color transformations: bright, contrast, replace-color
 - [x] document CLI
@@ -46,9 +60,13 @@ Convert png to rgba
 
 convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
 
+- [] checkout these tests https://github.com/oliver-moran/jimp/blob/master/packages/plugin-mask/test/mask.test.js!
  * [ ] some math libraries: https://github.com/markknol/hx-vector2d/blob/master/src/geom/Vector2d.hx, https://github.com/tbrosman/hxmath/blob/master/test/Test2D.hx, https://github.com/ramchale/quick-haxe/blob/master/quick_haxe/path/Path.hx
 
  * this project http://kvazars.com/littera/ is able to generate a transparent png and font spec in xml form a ttf. We can implement a feature to render text in a bitmap with it.
+   * other apps : http://fontforge.github.io/en-US/, https://lib.haxe.org/p/gl3font
+   * https://github.com/oliver-moran/jimp/blob/master/packages/jimp/fonts/open-sans/open-sans-64-white/open-sans-64-white.fnt
+ * circle: https://github.com/oliver-moran/jimp/blob/master/packages/plugin-circle/src/index.js
 ### OT
 
 - [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
