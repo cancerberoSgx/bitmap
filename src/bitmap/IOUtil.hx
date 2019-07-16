@@ -30,7 +30,6 @@ class IOUtil {
 	public static function args() {
 		#if js
 		// return Sys.args();
-
 		untyped return process.argv;
 		#else
 		return Sys.args();
@@ -41,7 +40,6 @@ class IOUtil {
 	public static function exit(code:Int) {
 		#if js
 		// return Sys.exit(code);
-
 		untyped return process.exit(code);
 		#else
 		return Sys.exit(code);
@@ -51,7 +49,6 @@ class IOUtil {
 	public static function readTextFile(path:String):String {
 		#if js
 		// return sys.io.File.getContent(path);
-
 	untyped return require('fs').readFileSync(path).toString();
 		#else
 		return sys.io.File.getContent(path);
@@ -63,7 +60,6 @@ class IOUtil {
 		var bytes = input.readAll();
 		#if js
 		// sys.io.File.saveBytes(file, bytes);
-
 		untyped require('fs').writeFileSync(file, Buffer.from(cast bytes.b));
 		return;
 		#else
@@ -76,7 +72,6 @@ class IOUtil {
 	public static function writeTextFile(path:String, s:String) {
 		#if js
 		// sys.io.File.write(path).writeString(s);
-
 		 untyped require('fs').writeFileSync(path, s);
 		#else
 		sys.io.File.write(path).writeString(s);
@@ -89,7 +84,6 @@ class IOUtil {
 		var bytes = output.getBytes();
 		#if js
 		// sys.io.File.saveBytes(file, bytes);
-
 		untyped require('fs').writeFileSync(file, Buffer.from((cast bytes).b));
 		return;
 		#else

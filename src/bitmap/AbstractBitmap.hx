@@ -60,6 +60,9 @@ import haxe.io.Bytes;
 		return int32Mode ? getInt32(i) : getInt8(i);
 	}
 
+public function toString(){
+  return 'Bitmap('+Util.printRectangle(bounds())+')';
+  }
 	public inline function byteIndex(x:Int, y:Int) {
 		// return (y * width + x) * 4;
     return (width * y + x) << 2 ;

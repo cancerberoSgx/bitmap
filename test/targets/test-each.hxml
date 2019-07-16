@@ -2,8 +2,8 @@
 -lib format
 -lib sure
 
--cp test
 -cp src
+-cp test
 
 -debug
 -main TestMain

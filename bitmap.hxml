@@ -1,3 +1,3 @@
-test/targets/test-each.hxml
+test/targets/test-node.hxml
 
--main bitmap.cli.CliMain
+# -main bitmap.cli.CliMain

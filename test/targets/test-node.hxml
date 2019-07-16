@@ -1,5 +1,5 @@
 test/targets/test-each.hxml
-
 # -lib hxnodejs
+# --macro allowPackage('sys')
 -js bin/test/Main.js
 -cmd node bin/test/Main.js

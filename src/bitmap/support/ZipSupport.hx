@@ -7,11 +7,11 @@ class ZipSupport {
 	private static var haxeZipCompressJsSupportOnce = false;
 
 	public static function haxeZipCompressJsSupport() {
-		if (haxeZipCompressJsSupportOnce) {
+		#if js
+    	if (haxeZipCompressJsSupportOnce) {
 			return;
 		}
 		haxeZipCompressJsSupportOnce = true;
-		#if js
 		// pako.min.js is embedded as a string variable so we can eval() it:
 		var pakoJs = Pako.js;
 		untyped eval(pakoJs);

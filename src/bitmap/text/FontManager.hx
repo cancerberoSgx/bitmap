@@ -1,0 +1,106 @@
+package bitmap.text;
+
+import bitmap.text.Types.RenderTextOptions;
+import bitmap.text.Types.Glyph;
+import bitmap.text.Types.CharDef;
+
+using bitmap.support.StructureTools;
+
+class FontManager {
+	private var renderer:Renderer;
+
+	private function new() {
+		fonts = new Map<String, Font>();
+		renderer = new Renderer(this);
+	}
+
+	private static var instance:FontManager;
+
+	private var fonts:Map<String, Font>;
+
+	public static function getInstance() {
+		if (instance == null) {
+			instance = new FontManager();
+		}
+		return instance;
+	}
+
+	public function getFont(fontFamily:String) {
+		var font = fonts[fontFamily];
+		if (font == null) {
+			throw "Font not registered: ";
+		}
+		return font;
+	}
+
+	private function parseFont(def:Types.FontDef) {
+		var fmtString = def.fmt.readAll().toString();
+		var xml = haxe.xml.Parser.parse(fmtString).firstElement();
+		var chars:Array<CharDef> = [];
+		var chars:Map<Int, CharDef> = new Map();
+		for (char in xml.elementsNamed('chars').next().elementsNamed('char')) {
+			var id = Util.parseIntOrThrow(char.get('id'));
+			var text = String.fromCharCode(id);
+			var c = {
+				id: id,
+				text: text,
+				x: Util.parseIntOrThrow(char.get('x')),
+				y: Util.parseIntOrThrow(char.get('y')),
+				width: Util.parseIntOrThrow(char.get('width')),
+				height: Util.parseIntOrThrow(char.get('height')),
+				xoffset: Util.parseIntOrThrow(char.get('xoffset')),
+				yoffset: Util.parseIntOrThrow(char.get('yoffset')),
+				xadvance: Util.parseIntOrThrow(char.get('xadvance')),
+			};
+			chars[c.id] = c;
+		}
+		return chars;
+	}
+
+	private function buildGlyps(chars:Map<Int, CharDef>, b:Bitmap):Map<Int, Glyph> {
+		var glyps:Map<Int, Glyph> = new Map();
+		// var c = xml.elementsNamed('chars');
+		// trace(fmtString, xml);
+		// //  haxe.xml
+		// var font = haxe.Json.parse(bitmap.IOUtil.readTextFile('test/assets/openSans.json'));
+		// 	var b = PNGBitmap.create(IOUtil.readFile("test/assets/openSans.png"));
+		// 	var o = new PNGBitmap(221, 111);
+		// 	var chars = new Map<String, Bitmap>();
+		for (c in chars.iterator()) {
+			// var s = String.fromCharCode(c.id);
+			// var bounds = {
+			// 	x: Std.parseInt(c.x),
+			// 	y: Std.parseInt(c.y),
+			// 	width: Std.parseInt(c.width),
+			// 	height: Std.parseInt(c.height)
+			// };
+			glyps[c.id] = {bitmap: b.copy(c)}.combine(c);
+		}
+		// for (i in 0...font.chars.char.length) {
+		// var c = (cast font.chars.char)[i];
+		return glyps;
+	}
+
+	public function registerFont(def:Types.FontDef) {
+		if (fonts[def.fontFamily] != null) {
+			throw "Font already registered";
+		}
+		var chars = parseFont(def);
+		var bitmap = new PNGBitmap();
+		bitmap.load(def.img);
+		var glyps = buildGlyps(chars, bitmap);
+
+		var font = new Font(def.fontFamily, glyps, bitmap);
+
+		fonts[def.fontFamily] = font;
+		return font;
+	}
+
+	public function render(o:RenderTextOptions) {
+		var font = fonts[o.fontFamily];
+		var o2 = o.combine({
+			font: font
+		});
+		return renderer.render(o2);
+	}
+}

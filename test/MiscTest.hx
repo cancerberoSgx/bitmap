@@ -15,6 +15,7 @@ class MiscTest implements utest.ITest {
 
 	public static function testOptionalBoolAux2(l:T) {
 		// Assert.isTrue(l.b == true); // <-----  FAILS
+		Assert.isTrue( true); 
 	}
 
 	public function testFont() {

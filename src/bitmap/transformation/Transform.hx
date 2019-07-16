@@ -1,14 +1,16 @@
 package bitmap.transformation;
 
 import bitmap.*;
-import bitmap.transformation.*;
 
 typedef TransformationOptions = {
 	@:optional var region:Types.Rectangle;
 	@:optional public var bitmap:Bitmap;
 	@:optional public var output:Bitmap;
-}
-
+};
+// typedef StrictTransformationOptions = {
+// >TransformationOptions,
+// public var bitmap:Bitmap
+// }
 class Transform {
 	private var bitmap:Bitmap;
 

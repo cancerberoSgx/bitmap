@@ -53,13 +53,12 @@
 
 ### Notes
 
-Convert from rgba to png:
+- [ ] **magica and bitmap** bitmap and magica could complement magica very well. magica (ImageMagick) is a complete profesional suite, but slow for individual pixel manipulation since its based not in IM API but in IM CLI (which is not designed for individual pixel manipulation but file batch processing). If this project could provide a fast API to fast per-pixel API and use magica for professional/complex manipulations and format conversion - it would be ideal couple. 
 
-convert -size 109x145 -depth 8 test/assets/tmptestdrawRectangle.rgba tmp2.png
-
-Convert png to rgba
-
-convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
+**Using IM to Convert from rgba to png:**
+`convert -size 109x145 -depth 8 test/assets/tmptestdrawRectangle.rgba tmp2.png`
+**Convert png to rgba:**
+`convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba`
 
 - [] checkout these tests https://github.com/oliver-moran/jimp/blob/master/packages/plugin-mask/test/mask.test.js!
  * [ ] some math libraries: https://github.com/markknol/hx-vector2d/blob/master/src/geom/Vector2d.hx, https://github.com/tbrosman/hxmath/blob/master/test/Test2D.hx, https://github.com/ramchale/quick-haxe/blob/master/quick_haxe/path/Path.hx

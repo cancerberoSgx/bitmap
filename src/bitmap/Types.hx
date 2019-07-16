@@ -23,10 +23,19 @@ typedef FloatPoint = {
 	y:Float
 };
 
+typedef Area = {
+	var width:Int;
+	var height:Int;
+};
+
+typedef OptionalArea = {
+@:optional 	var width:Int;
+@:optional var height:Int;
+};
+
 typedef Rectangle = {
 	> Point,
-	width:Int,
-	height:Int
+  > Area,
 };
 
 enum PixelFormat {

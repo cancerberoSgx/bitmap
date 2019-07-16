@@ -18,7 +18,9 @@ class Util {
 		// Sure.sure(min <= max);
 		return value < min ? min : value > max ? max : value;
 	}
-
+public static function printRectangle(r:Types.Rectangle){
+  return 'Rectangle(${r.x}, ${r.y}, ${r.width}, ${r.height})';
+}
 	/**
 	 * Compares two values and returns the smaller one.
 	 * @param	first	The first value.
@@ -67,6 +69,18 @@ class Util {
 	 */
 	public static inline function toDegrees(radians:Float):Float {
 		return radians * 180 / Math.PI;
+	}
+	/**
+	 * Converts a value measured in radians to degrees.
+	 * @param	radians	Radians value to convert to degrees.
+	 * @return	The value converted to degrees.
+	 */
+	public static inline function parseIntOrThrow(s:String):Int {
+	  var i = Std.parseInt(s);
+    if(Math.isNaN(i)){
+      throw "Expected "+s+" to be parsable as integer";
+    }
+    return Math.round(i);
 	}
 
 	/**
@@ -118,10 +132,9 @@ public static function dist(x:Int,y:Int) {
 		return x<y ? y-x : x-y;
 	}
 
-
   public static function urlToBase64(s: String) {
-  return s.substring(s.indexOf(';base64,') + ';base64,'.length);
-}
+    return s.substring(s.indexOf(';base64,') + ';base64,'.length);
+  }
 
 	/**
 	 * Returns a random item from an array.
@@ -132,6 +145,7 @@ public static function dist(x:Int,y:Int) {
 		Sure.sure(a != null && a.length > 0);
 		return a[random(0, a.length - 1)];
 	}
+  
 	/**
 	 * Returns the smallest and largest items from an array of ints.
 	 * @param	a	The array of ints.

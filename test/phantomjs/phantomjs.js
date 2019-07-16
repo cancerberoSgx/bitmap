@@ -1,3 +1,4 @@
+console.log(typeof require)
 var page = require('webpage').create();
 var args = require('system').args;
 var hasError = false;

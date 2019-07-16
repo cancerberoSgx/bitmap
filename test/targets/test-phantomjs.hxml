@@ -1,5 +1,10 @@
 test/targets/test-each.hxml
 # -lib hxnodejs
 
+# --macro allowPackage('sys')
+# --macro define('nodejs')
+# -lib hxnodejs
+# --macro allowPackage('sys')
+# --macro define('nodejs')
 -js bin/test/MainPhantom.js
 -cmd haxe test/phantomjs/run.hxml bin/test/MainPhantom.js
