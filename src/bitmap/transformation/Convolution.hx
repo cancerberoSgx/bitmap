@@ -48,13 +48,9 @@ class Convolution {
 		return output;
 	}
 
-	public static function blur(size:Int = 3, bias:Float = 0.0, modify = false, ?output:Bitmap) {
-		var k = [for (i in 0...size) [for (i in 0...size) 0.0]];
-		for (i in 0...size)
-			for (j in 0...size)
-				k[i][j] = 1.0;
+	public static function blur(size:Int = 3, bias:Float = 0.0,  ?output:Bitmap) {
 		return {
-			kernel: k,
+			kernel: blurKernel(size, bias),
 			bias: bias,
 			factor: 1 / (size * size),
 			bitmap: null,
@@ -62,7 +58,13 @@ class Convolution {
 			region: null
 		};
 	}
-
+	public static function blurKernel(size:Int = 3, bias:Float = 0.0) {
+		var k = [for (i in 0...size) [for (i in 0...size) 0.0]];
+		for (i in 0...size)
+			for (j in 0...size)
+				k[i][j] = 1.0;
+        return k;
+  }
 	/**
 		1, 1, 1, 1, 1,
 			1, 0, 0, 0, 1,
@@ -70,7 +72,7 @@ class Convolution {
 			1, 0, 0, 0, 1,
 			1, 1, 1, 1, 1,
 	**/
-	public static function fBlur(size:Int = 4, bias:Float = 0.0, modify = false, ?output:Bitmap) {
+	public static function fBlur(size:Int = 4, bias:Float = 0.0,  ?output:Bitmap) {
 		var k = [for (i in 0...size) [for (i in 0...size) 0.0]];
 		for (i in 0...size)
 			for (j in 0...size)
@@ -88,7 +90,7 @@ class Convolution {
 		};
 	}
 
-	public static function sharp(factor = 1.0, bias:Float = 0.0, modify = false, ?output:Bitmap) {
+	public static function sharp(factor = 1.0, bias:Float = 0.0, ?output:Bitmap) {
 		var k = [
 			[-1 / 9.0, -1 / 9.0, -1 / 9.0, -1 / 9.0],
 			[-1 / 9.0, factor, factor, -1 / 9.0],
@@ -98,7 +100,7 @@ class Convolution {
 		return {
 			kernel: k,
 			bias: bias,
-			factor: 1.0,
+			factor: factor,
 			bitmap: null,
 			output: output,
 			region: null

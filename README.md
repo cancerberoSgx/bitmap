@@ -9,6 +9,8 @@
 - [API Reference](#api-reference)
 - [Usage](#usage)
   * [Transformations](#transformations)
+- [Browser example](#browser-example)
+- [Command Line interface](#command-line-interface)
 - [Scripts](#scripts)
   * [Run tests locally](#run-tests-locally)
   * [Run tests with docker](#run-tests-with-docker)

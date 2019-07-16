@@ -1,6 +1,4 @@
-rm -rf bin
-haxe  project.hxml
-cp static/* bin
-# npx watch "haxe project.hxml" . &
-npx watch "haxe project.hxml && echo compiled" src & 
+sh build.sh 
+npx watch "  echo "" && haxe project.hxml && echo "" && echo compiled" src &
+sh build.sh 
 npx http-server bin

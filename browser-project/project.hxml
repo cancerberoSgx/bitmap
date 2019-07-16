@@ -1,5 +1,6 @@
 -cp src
 -lib bitmap
--main Test
+-main Main
 -debug
--js bin/app.js
+--resource src/examples/Shapes.hx@shapes
+-js bin/main.js

@@ -10,14 +10,19 @@
 <body>
   <h1>Bitmap playground</h1>
   <p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action:</p>
-  <button class="rectangleButton">draw rectangle</button>
+  <br/>
+  <button class="shapes">draw shapes</button>
+  <button class="convolutions">Convolutions</button>
+  <button class="affine">Affine transformations</button>
+  <button class="pixelize">Pixelize</button>
   <br/>
   <img class="input"/>
-  <br/>
-  <img class="output"/>
+  <img class="output1"/>
+  <img class="output2"/>
+  <img class="output3"/>
+  <img class="output4"/>
+  <img class="output5"/>
 
-  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAKElEQVR42mO4d+9eCzr+DwQMYAYDwz2eCQwtIIwiAcKkS2DY8R8HAADQb2yOj6UYOAAAAABJRU5ErkJggg"/>
-  <!-- <input type="file" /> -->
   <script>
     window.applicationFetchImage = async function (url, cb) {
       var response = await fetch(url);
@@ -25,7 +30,7 @@
       cb(arrayBuffer);
     };
   </script>
-  <script src="app.js"></script>
+  <script src="main.js"></script>
 </body>
 
 </html>
