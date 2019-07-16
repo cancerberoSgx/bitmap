@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>bitmap sample</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Bitmap playground</h1>
+  <p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action:</p>
+  <br/>
+  <button class="shapes">draw shapes</button>
+  <button class="convolutions">Convolutions</button>
+  <button class="affine">Affine transformations</button>
+  <button class="pixelize">Pixelize</button>
+  <br/>
+  <img class="input"/>
+  <img class="output1"/>
+  <img class="output2"/>
+  <img class="output3"/>
+  <img class="output4"/>
+  <img class="output5"/>
+
+  <script>
+    window.applicationFetchImage = async function (url, cb) {
+      var response = await fetch(url);
+      var arrayBuffer = await response.arrayBuffer();
+      cb(arrayBuffer);
+    };
+  </script>
+  <script src="main.js"></script>
+</body>
+
+</html>
