@@ -14,11 +14,11 @@ class MiscTest implements utest.ITest {
 	}
 
 
-  public function testFont() {
-probes.text.TextProbe.main();
-		Assert.isTrue(true);
+//   public function testFont() {
+// probes.text.TextProbe.main();
+// 		Assert.isTrue(true);
 
-	}
+// 	}
 
 }
 

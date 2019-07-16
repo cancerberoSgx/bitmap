@@ -55,7 +55,7 @@ class PNGBitmap extends AbstractBitmap {
 		// var b = this.clone();
 		var b = new PNGBitmap(r.width, r.height);
     b.noRangeCheck=noRangeCheck;
-		b.copyFrom(this, r, b.bounds());
+		b.copyFrom(this, {x:r.x,y:r.y}, {x:0,y:0,width: r.width, height:r.height});
 		return b;
 	}
 }

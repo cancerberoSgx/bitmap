@@ -4,7 +4,7 @@ import bitmap.*;
 class TextProbe {
   public static function main(){
 		var font = haxe.Json.parse(bitmap.IOUtil.readTextFile('test/probes/text/openSans.json'));
-    var b = PNGBitmap.create(IOUtil.readFile("test/probes/text/openSans.png"));
+    var b = PNGBitmap.create(IOUtil.readFile("test/assets/fonts.png"));
 		// var b = haxe.Json.parse(bitmap.IOUtil.readTextFile('test/probes/text/openSans.png'));
     // trace(font.chars.char[0]);
     var o = new PNGBitmap(300,300);// .create();
@@ -25,5 +25,7 @@ trace(bounds, b.bounds());
     var v = b.copy(bounds) ;
     // varo.copyFrom(c);
 		IOUtil.writeBitmap('test/assets/tmpFonts.png', v);
+		Assert.isTrue(BitmapUtil.bitmapEquals(v, PNGBitmap.create(IOUtil.readFile("test/assets/fonts1.png"))));
+
   }
 }

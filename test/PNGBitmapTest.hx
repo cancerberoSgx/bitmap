@@ -18,4 +18,16 @@ class PNGBitmapTest  implements utest.ITest{
     input.close();
 	}
 
+public function  testCopy() {
+    	var font = haxe.Json.parse(bitmap.IOUtil.readTextFile('test/probes/text/openSans.json'));
+    var b = PNGBitmap.create(IOUtil.readFile("test/assets/fonts.png"));
+    var o = new PNGBitmap(300,300);// .create();
+var c = cast (cast font.chars.char)[0];
+var bounds = {x: Std.parseInt(c.x), y: Std.parseInt(c.y), width: Std.parseInt(c.width), height: Std.parseInt(c.height)};
+trace(bounds, b.bounds());
+    var v = b.copy(bounds) ;
+		IOUtil.writeBitmap('test/assets/tmpFonts.png', v);
+		Assert.isTrue(BitmapUtil.bitmapEquals(v, PNGBitmap.create(IOUtil.readFile("test/assets/fonts1.png"))));
+  }
+
 }

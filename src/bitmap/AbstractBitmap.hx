@@ -113,14 +113,14 @@ import haxe.io.Bytes;
 		return BitmapUtil.bitmapEquals(this, b, region);
 	}
 
-	public function copyFrom(b:Bitmap, regionB:Types.Rectangle, regionThis:Types.Rectangle) {
-		if (regionThis.width != regionB.width || regionThis.height != regionB.height) {
-      trace(regionB, regionThis);
-			throw "Regions have different sizes";
-		}
-    for(y in 0...regionB.height){
-      for(x in 0...regionB.width){
-        set(regionThis.x+x, regionThis.y+y, b.get(regionB.x+x, regionB.y+y));
+	public function copyFrom(b:Bitmap, bCoords:Types.Point, regionThis:Types.Rectangle):Void {
+		// if (regionThis.width != regionB.width || regionThis.height != regionB.height) {
+    //   trace(regionB, regionThis);
+		// 	throw "Regions have different sizes";
+		// }
+    for(y in 0...regionThis.height){
+      for(x in 0...regionThis.width){
+        set(regionThis.x+x, regionThis.y+y, b.get(bCoords.x+x, bCoords.y+y));
       }
     }
 		// regionB = regionB == null ? regionThis == null ? b.bounds() : regionThis : regionB;
