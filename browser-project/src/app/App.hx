@@ -25,6 +25,8 @@ class App {
 		document.querySelector('.affine').addEventListener('click', function() return exampleSelected('affine'));
 		document.querySelector('.pixelize').addEventListener('click', function() return exampleSelected('pixelize'));
 		document.querySelector('.colors').addEventListener('click', function() return exampleSelected('colors'));
+		document.querySelector('.getSource').addEventListener('click', function() getSource());
+
 		input = cast document.querySelector('.input');
 		outputs = [
 			cast document.querySelector('.output1'),
@@ -34,20 +36,31 @@ class App {
 			cast document.querySelector('.output5')
 		];
 		input.src = bitmap.io.toDataUrl();
-    untyped outputs.forEach((o, i)->o.addEventListener('click', e-> applicationDownload(e.currentTarget.src, 'output-'+i+'.png')));
+		untyped outputs.forEach((o, i) -> o.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i + '.png')));
+	}
+
+	function getSource() {
+		alert(state.example.getSource());
 	}
 
 	function exampleSelected(name) {
+		var ex:Example;
 		if (name == 'convolutions') {
-			new Convolutions().run(bitmap, outputs);
+			ex = new Convolutions();
 		} else if (name == 'shapes') {
-			new Shapes().run(bitmap, outputs);
+			ex = new Shapes();
 		} else if (name == 'pixelize') {
-			new Pixelize().run(bitmap, outputs);
+			ex = new Pixelize();
 		} else if (name == 'colors') {
-			new Colors().run(bitmap, outputs);
+			ex = new Colors();
 		} else if (name == 'affine') {
-			new AffineTransformation().run(bitmap, outputs);
-		} else {}
+			ex = new AffineTransformation();
+		} else {
+			throw "example not recognized";
+		}
+		if (ex != null) {
+			state.example = ex;
+			ex.run(bitmap, outputs);
+		}
 	}
 }

@@ -3,11 +3,9 @@ package app;
 import examples.*;
 
 class State {
+	public var example:Example;
 
-  // var state:State;
-  public function new(){
-    // state={
-    //   example:ExampleDef
-    // };
-  }
+	public function new() {
+		example = new Shapes();
+	}
 }

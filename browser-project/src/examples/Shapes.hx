@@ -14,4 +14,7 @@ class Shapes implements Example {
 		outputs[0].src = bitmap.io.toDataUrl();
 
    }
+   public function getSource() {
+     return  haxe.Resource.getString("Shapes");
+   }
 }

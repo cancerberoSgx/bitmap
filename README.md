@@ -33,6 +33,8 @@
  * Composition, convolution, color blending and more.
  * Stay tunned!
 
+**See the [Online Playground](https://cancerberosgx.github.io/bitmap/playground) to see what's this is all about!**
+
 ## Install
 
 ```sh
@@ -106,7 +108,7 @@ class Test {
 
 ## Browser example
 
-[Playground demo](TODO)
+[Playground demo](https://cancerberosgx.github.io/bitmap/playground)
 
 (needs node.js)
 
@@ -117,9 +119,8 @@ sh start.sh
 
 This is a very simplistic example, that loads images using http requests (fetch() and arrayBuffer()) and then serializes bitmap back to PNG encoded as data urls (base64) and render in a HTMLImageElement. So it's not optimized for speed, just a proof of concept.
 
-For a real playground, we should use web workers and canvas. (TODO).
+For a real playground, we should use web workers and canvas. Coming soon... However it's useful to test the API since it has several examples. 
 
-However it's useful to test the API since it has several examples. 
 
 ## Command Line interface
 
@@ -157,6 +158,9 @@ where cliConfig1.json is something like the following, and as you can see it all
 ]
 ```
 
+## Native libraries for other targets (JavaScript)
+
+Stay tunned for a native JavaScript library directly/ automatically ported from this project's source code. And maybe other languages too. I think that's the main advantage of haxe compared to other languages and I don't see this feature being much used. 
 
 ## Scripts
 
@@ -182,13 +186,6 @@ sh scripts/pack.sh
 sh scripts/publish.sh
 ```
 
-## Status
-
- * `Bitmap` types to create from haxe.io.Input and get/set pixel colors
- * `IOUtil`: basic utilities to read/write Input / Ouput and files supporting all haxe targets.
- * `PNGBitmap`: Supports read/write PNG images pixel formats: ARGB, RGBA
- * tests running in all targets.
-
 ## Tests
 
 ### Run locally
@@ -205,6 +202,6 @@ sh scripts/test.sh
 sh test-docker.sh
 ```
 
-## TODO / Road map / Changelog
+## Status / TODO / Road map / Changelog
 
 See [TODO.md](TODO.md)

@@ -114,37 +114,12 @@ import haxe.io.Bytes;
 	}
 
 	public function copyFrom(b:Bitmap, bCoords:Types.Point, regionThis:Types.Rectangle):Void {
-		// if (regionThis.width != regionB.width || regionThis.height != regionB.height) {
-    //   trace(regionB, regionThis);
-		// 	throw "Regions have different sizes";
-		// }
+    //TODO: check bounds
     for(y in 0...regionThis.height){
       for(x in 0...regionThis.width){
         set(regionThis.x+x, regionThis.y+y, b.get(bCoords.x+x, bCoords.y+y));
       }
     }
-		// regionB = regionB == null ? regionThis == null ? b.bounds() : regionThis : regionB;
-		// regionThis = regionThis == null ? regionB == null ? this.bounds() : regionB : regionThis;
-
-		// regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
-		// regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
-
-		// regionThis.width = regionThis.width + regionThis.x > this.width ? this.width - regionThis.x - 1 : regionThis.width;
-		// regionThis.height = regionThis.height + regionThis.y > this.height ? this.height - regionThis.y - 1 : regionThis.height;
-
-
-		// Sure.sure(b.width >= regionB.x + regionB.width && b.height >= regionB.y + regionB.height);
-		// Sure.sure(width >= regionThis.x + regionThis.width && height >= regionThis.y + regionThis.height);
-
-// 		var startB = (cast b).byteIndex(regionB.x, regionB.y);
-// 		var endB = (cast b).byteIndex(regionB.x + regionB.width - 1, regionB.y + regionB.height - 1);
-
-// 		var startThis = (cast b).byteIndex(regionThis.x, regionThis.y);
-// 		var endThis = (cast b).byteIndex(regionThis.x + regionThis.width - 1, regionThis.y + regionThis.height - 1);
-// trace(startB, endB, startThis, endThis);
-// // var len = b.length<endB
-// 		// data.blit(startThis, b.data, startB, Util.min(endThis - startThis, endB - startB)-1);
-// 		data.blit(startThis, b.data, startB, Util.min(Util.min(endB - startB, b.data.length-1),Util.min(data.length-startThis, endThis-startThis)));
 	}
 
 	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {

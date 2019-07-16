@@ -15,6 +15,8 @@ class Pixelize implements Example {
 		outputs[2].src = bitmap.transform.pixelize({width: 40, height: 34}).io.toDataUrl();
 		outputs[3].src = bitmap.transform.pixelize({width: 28, height: 25}).io.toDataUrl();
 		outputs[4].src = bitmap.transform.pixelize({width: 19, height: 15}).io.toDataUrl();
-
 	}
+   public function getSource() {
+     return  haxe.Resource.getString("Pixelize");
+   }
 }

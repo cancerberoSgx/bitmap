@@ -2,5 +2,9 @@
 -lib bitmap
 -main Main
 -debug
---resource src/examples/Shapes.hx@shapes
+--resource src/examples/Shapes.hx@Shapes
+--resource src/examples/AffineTransformation.hx@AffineTransformation
+--resource src/examples/Colors.hx@Colors
+--resource src/examples/Convolutions.hx@Convolutions
+--resource src/examples/Pixelize.hx@Pixelize
 -js bin/main.js

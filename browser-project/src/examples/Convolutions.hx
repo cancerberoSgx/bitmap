@@ -25,4 +25,7 @@ class Convolutions implements Example {
 		});
 		outputs[3].src = result3.io.toDataUrl();
 	}
+     public function getSource() {
+     return  haxe.Resource.getString("Convolutions");
+   }
 }
