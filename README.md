@@ -102,6 +102,60 @@ class Test {
 }
 ```
 
+## Browser example
+
+[Playground demo](TODO)
+
+(needs node.js)
+
+```sh
+cd browser-project
+sh start.sh
+```
+
+This is a very simplistic example, that loads images using http requests (fetch() and arrayBuffer()) and then serializes bitmap back to PNG encoded as data urls (base64) and render in a HTMLImageElement. So it's not optimized for speed, just a proof of concept.
+
+For a real playground, we should use web workers and canvas. (TODO).
+
+However it's useful to test the API since it has several examples. 
+
+## Command Line interface
+
+`bitmap.cli` package contains a very simplistic command line application. Since operations like affine or convolutions have complex settings, most of the arguments must be given through a json file, example:
+
+```sh
+haxe scripts/cli.hxml
+node bin/cli/main --input test/assets/bluebells.png --output tmp1.png --config test/assets/cliConfig1.json
+```
+
+where cliConfig1.json is something like the following, and as you can see it allows to declare series of transformations that will be applied to input images (arguments) in order:
+
+```json
+[
+  {
+    "transformation": "scale",
+    "x": 0.5,
+    "y": 0.5
+  },
+  {
+    "transformation": "translate",
+    "x": 122,
+    "y": 33
+  },
+  {
+    "transformation": "rotate",
+    "degrees": 33,
+    "precision": true
+  },
+  {
+    "transformation": "pixelize",
+    "width": 64,
+    "height": 64
+  }
+]
+```
+
+
 ## Scripts
 
 ### Run tests locally

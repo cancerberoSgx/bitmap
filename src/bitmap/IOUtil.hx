@@ -52,11 +52,10 @@ class IOUtil {
 
 	public static function writeTextFile(path:String, s:String) {
 		#if js
-		untyped return require("fs").writeFileSync(path, s);
+		untyped require("fs").writeFileSync(path, s);
 		#else
-		return sys.io.File.write(path).writeString(s);
+		sys.io.File.write(path).writeString(s);
 		#end
-		return '';
 	}
 
 

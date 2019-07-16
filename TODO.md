@@ -1,9 +1,9 @@
 ## TODO
 
-- [W] color transformations: bright, contrast, replace-color
+- [ ] verify that bitmap.compare is working correctly. also copyFrom, both  with different bounds and regions.
 - [W] easy API for common affine transforms like rotate, translate, skew
+- [] easy API for bitmap.colors like contrast, bright, sepia, etc
 - [W] easy API for common convolutions like blur, sharpen, edges, etc
-- [ ] browser example. load png from url, draw/transform and render it back again as img.
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] bitmap.util.clip() - creates a new bitmap from a region.
 - [ ] bitmap.util.scale(region, x, y) - both a bitmap resize and affine resize creating a larget bitmap if neccesary.
@@ -12,13 +12,15 @@
   - [ ] bitmap.compose(otherBitmap, region, blend, factor): creates a new bitmap 
 - [ ] code formatter
 - [ ] write tutorial page showing the effect of API, get, draw, transformations, etc
-- [ ] document CLI
 - [ ] remove the borders of convolution result by copying neighbor
 - [ ] bitmap.setOffset(bounds):Bitmap : offset support for bitmap: width, height, set, get methods in coordinates relative to `offset` property. Use case, work only on a region of the bitmap. Multiple bitmap referencing the same data
   - [ ] bitmap.view(bounds?:Rectangle):Bitmap // returns a new Bitmap but using the same data so modifications will affect both
 - [ ] browser test (sh test.sh should verify that at least the browser example renders whet it should,)
-- [ ] test bitmap  compare, copyFrom with different bounds and regions.
 - [ ] iterate faster with UInt32Array http://jsfiddle.net/cancerbero_sgx/h824Lq0n/4/
+- [ ] better productize the CLI, perhaps in separate project.
+- [x] browser example. load png from url, draw/transform and render it back again as img.
+- [x] color transformations: bright, contrast, replace-color
+- [x] document CLI
 - [x] dox
 - [x] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
 - [x] bitmap.copy(bounds?:Rectangle):Bitmap

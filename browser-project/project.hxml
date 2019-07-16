@@ -1,4 +1,4 @@
--cp .
+-cp src
 -lib bitmap
 -main Test
 -debug

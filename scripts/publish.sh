@@ -1,6 +1,4 @@
-sh scripts/test.sh && \
-sh scripts/doc.sh && \
-npx markdown-toc README.md -i && \
+sh scripts/prepare.sh && \
 node scripts/patch.js && \
 sh scripts/clean.sh && \
 sh scripts/pack.sh && \
