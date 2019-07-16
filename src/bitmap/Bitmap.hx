@@ -87,9 +87,11 @@ interface Bitmap extends OffsetRectangleArea {
 	/**
 	 * Writes in this bitmap given region of given bitmap, or if no region is given, the bitmap entirely.
 	**/
-	public function copyFrom(b:Bitmap, ?region:Types.Rectangle, ?thisRegion:Types.Rectangle):Void;
+  public function copyFrom(b:Bitmap, regionB:Types.Rectangle, regionThis:Types.Rectangle):Void;
+	// public function copyFrom(b:Bitmap, ?region:Types.Rectangle, ?thisRegion:Types.Rectangle):Void;
 	public function fill(?bg:Color):Void;
-	public function copy(?r:Types.Rectangle):Bitmap;
+	// public function copy(?r:Types.Rectangle):Bitmap;
+  public function copy(r:Types.Rectangle):Bitmap ;
 	public function compare(b:Bitmap, ?regionA:Types.Rectangle, ?thisRegion:Types.Rectangle):Float;
 	public function bounds():Types.Rectangle;
 }

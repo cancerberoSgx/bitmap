@@ -12,6 +12,6 @@ class Shapes implements Example {
 		bitmap.draw.triangle(220, 30, 300, 150, 90, 210, Color.create(21, 211, 111, 66), true, {type: Blend.mean});
 		bitmap.draw.line(12 , 211, 88, 1, Color.create(21, 21, 211, 166));
 		outputs[0].src = bitmap.io.toDataUrl();
-    // return bitmap;
+
    }
 }

@@ -1,5 +1,6 @@
 ## TODO
 
+- [ ] affine background not working.
 - [ ] verify that bitmap.compare is working correctly. also copyFrom, both  with different bounds and regions.
 - [W] easy API for common affine transforms like rotate, translate, skew
 - [] easy API for bitmap.colors like contrast, bright, sepia, etc
@@ -47,6 +48,7 @@ convert -depth 8 test/assets/n.png -depth 8 tmp2.rgba
 
  * [ ] some math libraries: https://github.com/markknol/hx-vector2d/blob/master/src/geom/Vector2d.hx, https://github.com/tbrosman/hxmath/blob/master/test/Test2D.hx, https://github.com/ramchale/quick-haxe/blob/master/quick_haxe/path/Path.hx
 
+ * this project http://kvazars.com/littera/ is able to generate a transparent png and font spec in xml form a ttf. We can implement a feature to render text in a bitmap with it.
 ### OT
 
 - [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)

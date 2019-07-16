@@ -1,7 +1,8 @@
 package examples;
 
 import examples.Example;
-import bitmap.Bitmap;
+import bitmap.*;
+import bitmap.Types.Background;
 import bitmap.transformation.Affine;
 import js.html.ImageElement;
 
@@ -9,6 +10,17 @@ class AffineTransformation implements Example {
 	public function new() {}
 
 	public function run(bitmap:Bitmap, outputs:Array<js.html.ImageElement>) {
+
+
+    // just scale, but we want to set the bg property on the bitmap first so padding is transparent
+bitmap.bg=Color.create(255,0,0,222);
+// var copy = bitmap.clone();
+    var result1 = bitmap.transform.affine({
+			affine: new Affine().scale(0.7, 0.6),
+      // output: bitmap,
+      bg: Background.bg
+		});
+		outputs[1].src = result1.bitmap.io.toDataUrl();
 
     // compose transformations using the matrix
     var result2 = bitmap.transform.affine({

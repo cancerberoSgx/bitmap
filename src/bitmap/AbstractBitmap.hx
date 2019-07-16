@@ -7,7 +7,7 @@ import haxe.io.Output;
 import haxe.io.Bytes;
 
 @:abstract class AbstractBitmap implements Bitmap {
-	public var noRangeCheck = false;
+	public var noRangeCheck = true;
 
 	/**
 	 * Switch between byte-by-byte and int32 modalities for reading and writing pixels with get/set.
@@ -64,7 +64,7 @@ import haxe.io.Bytes;
 		return (y * width + x) * 4;
 	}
 
-	public function copy(?r:Types.Rectangle):Bitmap {
+	public function copy(r:Types.Rectangle):Bitmap {
 		throw "Abstract method call";
 	}
 
@@ -113,30 +113,38 @@ import haxe.io.Bytes;
 		return BitmapUtil.bitmapEquals(this, b, region);
 	}
 
-	public function copyFrom(b:Bitmap, ?regionB:Types.Rectangle, ?regionThis:Types.Rectangle) {
-		regionB = regionB == null ? regionThis == null ? b.bounds() : regionThis : regionB;
-		regionThis = regionThis == null ? regionB == null ? this.bounds() : regionB : regionThis;
-
-		regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
-		regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
-
-		regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
-		regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
-
+	public function copyFrom(b:Bitmap, regionB:Types.Rectangle, regionThis:Types.Rectangle) {
 		if (regionThis.width != regionB.width || regionThis.height != regionB.height) {
-			throw "Regions given or inferred have different sizes";
+      trace(regionB, regionThis);
+			throw "Regions have different sizes";
 		}
+    for(y in 0...regionB.height){
+      for(x in 0...regionB.width){
+        set(regionThis.x+x, regionThis.y+y, b.get(regionB.x+x, regionB.y+y));
+      }
+    }
+		// regionB = regionB == null ? regionThis == null ? b.bounds() : regionThis : regionB;
+		// regionThis = regionThis == null ? regionB == null ? this.bounds() : regionB : regionThis;
 
-		Sure.sure(b.width >= regionB.x + regionB.width && b.height >= regionB.y + regionB.height);
-		Sure.sure(width >= regionThis.x + regionThis.width && height >= regionThis.y + regionThis.height);
+		// regionB.width = regionB.width + regionB.x > b.width ? b.width - regionB.x - 1 : regionB.width;
+		// regionB.height = regionB.height + regionB.y > b.height ? b.height - regionB.y - 1 : regionB.height;
 
-		var startB = (cast b).byteIndex(regionB.x, regionB.y);
-		var endB = (cast b).byteIndex(regionB.x + regionB.width - 1, regionB.y + regionB.height - 1);
+		// regionThis.width = regionThis.width + regionThis.x > this.width ? this.width - regionThis.x - 1 : regionThis.width;
+		// regionThis.height = regionThis.height + regionThis.y > this.height ? this.height - regionThis.y - 1 : regionThis.height;
 
-		var startThis = (cast b).byteIndex(regionThis.x, regionThis.y);
-		var endThis = (cast b).byteIndex(regionThis.x + regionThis.width - 1, regionThis.y + regionThis.height - 1);
 
-		data.blit(startThis, b.data, startB, Util.min(endThis - startThis, endB - startB));
+		// Sure.sure(b.width >= regionB.x + regionB.width && b.height >= regionB.y + regionB.height);
+		// Sure.sure(width >= regionThis.x + regionThis.width && height >= regionThis.y + regionThis.height);
+
+// 		var startB = (cast b).byteIndex(regionB.x, regionB.y);
+// 		var endB = (cast b).byteIndex(regionB.x + regionB.width - 1, regionB.y + regionB.height - 1);
+
+// 		var startThis = (cast b).byteIndex(regionThis.x, regionThis.y);
+// 		var endThis = (cast b).byteIndex(regionThis.x + regionThis.width - 1, regionThis.y + regionThis.height - 1);
+// trace(startB, endB, startThis, endThis);
+// // var len = b.length<endB
+// 		// data.blit(startThis, b.data, startB, Util.min(endThis - startThis, endB - startB)-1);
+// 		data.blit(startThis, b.data, startB, Util.min(Util.min(endB - startB, b.data.length-1),Util.min(data.length-startThis, endThis-startThis)));
 	}
 
 	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {

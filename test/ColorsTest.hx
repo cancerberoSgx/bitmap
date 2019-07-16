@@ -9,8 +9,8 @@ class ColorsTest implements utest.ITest {
 		var a = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
 		var r = a.color.filter({
 			bitmap: a,
-			red: {c: 2, a: 1.5},
-			green: {c: -15, a: 1.0},
+			red: {a: 1.5, c: 2},
+			green: {a: 1.0, c: -15},
 			alpha: {a: 0.6, c: 0}
 		});
 		IOUtil.writeBitmap('test/assets/tmpColors1.png', r);

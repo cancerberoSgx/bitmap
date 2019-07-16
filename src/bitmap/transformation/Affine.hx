@@ -100,7 +100,7 @@ class Affine {
 			}
 		}
     if(o.output==o.bitmap) {
-      o.output.copyFrom(output, region);
+      o.output.copyFrom(output, region, region);
     }
 		return {
 			bitmap: output,

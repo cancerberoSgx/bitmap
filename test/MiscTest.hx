@@ -1,5 +1,5 @@
 import utest.Assert;
-
+import bitmap.*;
 class MiscTest implements utest.ITest {
 	public function new() {}
 	public function testOptionalBool() {
@@ -12,6 +12,14 @@ class MiscTest implements utest.ITest {
 	public static function testOptionalBoolAux2(l:T) {
 		// Assert.isTrue(l.b == true); // <-----  FAILS
 	}
+
+
+  public function testFont() {
+probes.text.TextProbe.main();
+		Assert.isTrue(true);
+
+	}
+
 }
 
 typedef T = {

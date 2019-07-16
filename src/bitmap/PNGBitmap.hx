@@ -42,19 +42,20 @@ class PNGBitmap extends AbstractBitmap {
 		return bitmap;
 	}
 
-	override public function copy(?r:Types.Rectangle):Bitmap {
+	override public function copy(r:Types.Rectangle):Bitmap {
 		if (r == null) {
 			r = bounds();
 		}
 
-		r.width = r.width+r.x> width ? width - r.x -1 : r.width;// Util.min(r.width+r.x, width);
-		r.height =r.height+r.y> height ? height - r.y -1 : r.height;//Util.min(r.height+r.y, height);
+		// r.width = r.width+r.x> width ? width - r.x -1 : r.width;// Util.min(r.width+r.x, width);
+		// r.height =r.height+r.y> height ? height - r.y -1 : r.height;//Util.min(r.height+r.y, height);
 
     // trace(width, r.x + r.width, height,r.y+ r.height);
 		Sure.sure(width >= r.x + r.width && height >= r.y + r.height);
+		// var b = this.clone();
 		var b = new PNGBitmap(r.width, r.height);
     b.noRangeCheck=noRangeCheck;
-		b.copyFrom(this, r);
+		b.copyFrom(this, r, b.bounds());
 		return b;
 	}
 }
