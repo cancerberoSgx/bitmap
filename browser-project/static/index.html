@@ -9,32 +9,7 @@
 </head>
 
 <body>
-  <div id="main">
-
-  </div>
-  <script>
-    window.applicationDownload = async function (url, filename) {
-      var response = await fetch(url)
-      var blob = await response.blob()
-      var a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.setAttribute("download", filename);
-      a.click();
-    }
-  </script>
-  <style>
-    body {
-      background: linear-gradient(45deg, rgb(209, 192, 192) 25%, transparent 26%, transparent 75%, rgb(209, 192, 192) 76%),
-        linear-gradient(-45deg, rgb(209, 192, 192) 25%, transparent 26%, transparent 75%, rgb(209, 192, 192) 76%);
-      background-color: rgb(161, 179, 206);
-      background-size: 100px 100px;
-      font-weight: bold;
-    }
-
-    img {
-      cursor: pointer;
-    }
-  </style>
+  <div id="main"></div>
   <script src="main.js"></script>
 </body>
 

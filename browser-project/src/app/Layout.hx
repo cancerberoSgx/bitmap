@@ -9,22 +9,21 @@ class Layout extends Component<Component.Props> {
 	override public function render() {
 		return '
 <h1>Bitmap playground</h1>
-<p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action.</p>
-<p>Click on output images to download them.</p>
+<p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action. Click on output images to download them.</p>
 <br />
+<label>Load File <input type="file"  class="loadFile"></label> <br />
 <button class="getSource">See Example Sources</button>
-<button class="shapes ${this.props.state.example.name == 'shapes' ? 'selected' : ''}">draw shapes</button>
-<button class="convolutions ${this.props.state.example.name == 'convolutions' ? 'selected' : ''}">Convolutions</button>
-<button class="affine ${this.props.state.example.name == 'affine' ? 'selected' : ''}">Affine transformations</button>
-<button class="pixelize ${this.props.state.example.name == 'pixelize' ? 'selected' : ''}">Pixelize</button>
-<button class="colors ${this.props.state.example.name == 'colors' ? 'selected' : ''}">Colors</button>
-<button class="text ${this.props.state.example.name == 'text' ? 'selected' : ''}">Text</button>
-<br />
+<button class="shapes ${this.props.state.example.getName() == 'shapes' ? 'selected' : ''}">Shapes</button>
+<button class="convolutions ${this.props.state.example.getName() == 'convolutions' ? 'selected' : ''}">Convolutions</button>
+<button class="affine ${this.props.state.example.getName() == 'affine' ? 'selected' : ''}">Affine</button>
+<button class="pixelize ${this.props.state.example.getName() == 'pixelize' ? 'selected' : ''}">Pixelize</button>
+<button class="colors ${this.props.state.example.getName() == 'colors' ? 'selected' : ''}">Colors</button>
+<button class="text ${this.props.state.example.getName() == 'text' ? 'selected' : ''}">Text</button>
 <br />
 
 <img class="input" src="${this.props.state.bitmap.io.toDataUrl()}"/>
 
-${[for(output in this.props.state.output)'<img src="${output.io.toDataUrl()}" />'].join('\n')}
+${[for(output in this.props.state.output)'<img class="output" src="${output.io.toDataUrl()}" />'].join('\n')}
 
 <br />
 <h3>Example code</h3>
@@ -33,6 +32,17 @@ ${[for(output in this.props.state.output)'<img src="${output.io.toDataUrl()}" />
 <style>
 ${Styles.css}
 </style>
+
+<script>
+window.applicationDownload = async function (url, filename) {
+  var response = await fetch(url)
+  var blob = await response.blob()
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.setAttribute("download", filename);
+  a.click();
+}
+</script>
   ';
 	}
 
@@ -43,12 +53,11 @@ ${Styles.css}
 		queryOne('.pixelize').addEventListener('click', e -> exampleSelected('pixelize'));
 		queryOne('.colors').addEventListener('click', e -> exampleSelected('colors'));
 		queryOne('.text').addEventListener('click', e -> exampleSelected('text'));
-		queryOne('.getSource').addEventListener('click', getSource);
-		untyped outputs.forEach((o, i) -> o.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i + '.png')));
-	}
-
-	function getSource() {
-		(cast queryOne('.exampleCode')).scrollIntoViewIfNeeded();
+		queryOne('.getSource').addEventListener('click', e->(cast queryOne('.exampleCode')).scrollIntoViewIfNeeded());
+    var i = 0;
+		for(output in query('.output')){
+     untyped  output.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i++ + '.png'));
+    }    
 	}
 
 	function exampleSelected(name) {

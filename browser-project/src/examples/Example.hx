@@ -6,7 +6,7 @@ import bitmap.*;
 interface Example {
   public function run(options:ExampleOptions):Void;
   public function getSource():String;
-  public var name:String;
+ public function getName():String;
 }
 
 typedef ExampleOptions = {

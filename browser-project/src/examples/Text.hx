@@ -4,14 +4,13 @@ import examples.Example;
 import bitmap.*;
 import bitmap.text.*;
 
-class Text implements Example {
-	public function new() {}
-  public var name='text';
+class Text extends AbstractExample {
+	override public function getName() {
+		return 'Text';
+	}
 
-	public function run(o:ExampleOptions) {
+	override public function run(o:ExampleOptions) {
 		var manager = FontManager.getInstance();
-		trace('before');
-
 		IOUtil.fetch("openSans.png", (error, dataPng) -> {
 			IOUtil.fetch("openSans.xml", (error, dataXml) -> {
 				var font = manager.registerFont({
@@ -26,13 +25,8 @@ class Text implements Example {
 					y: 20,
 					bitmap: o.bitmap
 				});
-        o.done({output: [r.bitmap]});
-				// o.outputs[0].src = r.bitmap.io.toDataUrl();
+				o.done({output: [r.bitmap]});
 			});
 		});
-	}
-
-	public function getSource() {
-		return haxe.Resource.getString("Text");
 	}
 }
