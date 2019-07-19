@@ -1,18 +1,11 @@
 package app;
 
+import bitmap.Bitmap;
 import examples.*;
 
 typedef  State= {
 	public var example:Example;
+  public var bitmap:Bitmap;
+  public var output:Array<Bitmap>;
 };
 
-// typedef S = {
-// // >State,
-// };
-// class State {
-// 	public var example:Example;
-
-// 	public function new() {
-// 		example = new Shapes();
-// 	}
-// }

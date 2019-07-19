@@ -1,10 +1,8 @@
 package bitmap;
 
-import haxe.io.Input;
+import haxe.io.*;
 import bitmap.*;
 import bitmap.transformation.*;
-import haxe.io.Output;
-import haxe.io.Bytes;
 
 @:abstract class AbstractBitmap implements Bitmap {
 	public var noRangeCheck = true;
@@ -29,7 +27,7 @@ import haxe.io.Bytes;
 		draw = new Draw(this);
 		transform = new Transform(this);
 		color = new Colors(this);
-    io = new BitmapIO(this);
+		io = new BitmapIO(this);
 		if (w > 0 && h > 0) {
 			width = w;
 			height = h;
@@ -60,12 +58,12 @@ import haxe.io.Bytes;
 		return int32Mode ? getInt32(i) : getInt8(i);
 	}
 
-public function toString(){
-  return 'Bitmap('+Util.printRectangle(bounds())+')';
-  }
+	public function toString() {
+		return 'Bitmap(' + Util.printRectangle(bounds()) + ')';
+	}
+
 	public inline function byteIndex(x:Int, y:Int) {
-		// return (y * width + x) * 4;
-    return (width * y + x) << 2 ;
+		return (width * y + x) << 2;
 	}
 
 	public function copy(r:Types.Rectangle):Bitmap {
@@ -118,12 +116,12 @@ public function toString(){
 	}
 
 	public function copyFrom(b:Bitmap, bCoords:Types.Point, regionThis:Types.Rectangle):Void {
-    //TODO: check bounds
-    for(y in 0...regionThis.height){
-      for(x in 0...regionThis.width){
-        set(regionThis.x+x, regionThis.y+y, b.get(bCoords.x+x, bCoords.y+y));
-      }
-    }
+		// TODO: check bounds
+		for (y in 0...regionThis.height) {
+			for (x in 0...regionThis.width) {
+				set(regionThis.x + x, regionThis.y + y, b.get(bCoords.x + x, bCoords.y + y));
+			}
+		}
 	}
 
 	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {
@@ -165,6 +163,5 @@ public function toString(){
 	private inline function getInt8(i:Int) {
 		return Color.create(Bytes.fastGet(data.getData(), i), Bytes.fastGet(data.getData(), i + 1), Bytes.fastGet(data.getData(), i + 2),
 			Bytes.fastGet(data.getData(), i + 3));
-		// return Color.create(data.get(i), data.get(i + 1), data.get(i + 2), data.get(i + 3));
 	}
 }

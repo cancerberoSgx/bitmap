@@ -7,7 +7,7 @@
 - [W] easy API for common convolutions like blur, sharpen, edges, etc
 - [ ] export the library to other target's library by @:exposing public API( so non haxe users can also use it)
 - [ ] bitmap.util.clip() - creates a new bitmap from a region.
-- [ ] bitmap.util.scale(region, x, y) - both a bitmap resize and affine resize creating a larget bitmap if neccesary.
+- [ ] bitmap.util.scale(region, x, y) - both a bitmap resize and affine resize creating a larger bitmap if necessary.
 - [ ] performance tests and track performance.
 - [ ] bitmap.util.write(src:Bitmap, region:Rectangle, blend:Blend, factor:float) 
   - [ ] bitmap.compose(otherBitmap, region, blend, factor): creates a new bitmap 
@@ -22,7 +22,6 @@
 - [ ] cli should automatically execute like this https://github.com/HaxeCheckstyle/haxe-formatter/   - haxelib install bitmap && haxelib run bitmap --input... 
 - [ ] color libraries  supports spaces, format conversions and interpolations with no dependencies: https://lib.haxe.org/p/thx.color/, https://lib.haxe.org/p/hxColorToolkit/
 - [ ] test errors - opening invalid content, saving to invalid output, copy() out range.
-- [ ] load image from url should work in all targets
 - [ ] image metadata?
 - [ ] visual image diff 
 - [ ] dither: img.dither({colors:16}) will reduce image colors to only 16 different ones.
@@ -36,6 +35,7 @@
 - [x] bitmap.color.grayScale()
 - [x] browser example. load png from url, draw/transform and render it back again as img.
 - [x] color transformations: bright, contrast, replace-color
+- [x] load image from url should work in all targets
 - [x] document CLI
 - [x] dox
 - [x] refactor Affine: AffineTransform will have the transform() method for Transform, and Affine can be instantiated by user, transformed/multiplied/interpolate and passed as option. remove Matrix and define a,b,c,... as Affine props.
@@ -53,7 +53,7 @@
 
 ### Notes
 
-- [ ] **magica and bitmap** bitmap and magica could complement magica very well. magica (ImageMagick) is a complete profesional suite, but slow for individual pixel manipulation since its based not in IM API but in IM CLI (which is not designed for individual pixel manipulation but file batch processing). If this project could provide a fast API to fast per-pixel API and use magica for professional/complex manipulations and format conversion - it would be ideal couple. 
+- [ ] **magica and bitmap** bitmap and magica could complement magica very well. magica (ImageMagick) is a complete professional suite, but slow for individual pixel manipulation since its based not in IM API but in IM CLI (which is not designed for individual pixel manipulation but file batch processing). If this project could provide a fast API to fast per-pixel API and use magica for professional/complex manipulations and format conversion - it would be ideal couple. 
 
 **Using IM to Convert from rgba to png:**
 `convert -size 109x145 -depth 8 test/assets/tmptestdrawRectangle.rgba tmp2.png`
@@ -67,14 +67,10 @@
    * other apps : http://fontforge.github.io/en-US/, https://lib.haxe.org/p/gl3font
    * https://github.com/oliver-moran/jimp/blob/master/packages/jimp/fonts/open-sans/open-sans-64-white/open-sans-64-white.fnt
  * circle: https://github.com/oliver-moran/jimp/blob/master/packages/plugin-circle/src/index.js
+
 ### OT
 
 - [ ] fix haxe cookbook "macro combine structures" to support haxe 4 (Use ObjectField)
  * geomtrize-haxe : may be checking with Sure is expensive so: implement macro or conditionals to not compile those statement if an option or compile arg is given.
  * haxe library to call ImageMagick commands in ALL targets (and browser). In non js targets user needs to have installed ImageMatick and we spawn. In the browser , with the same API, use https://www.npmjs.com/package/magica emscripten port of IM. 
 
-
-### Performance notes
- * before: 
-  *  real    0m34.359s user    0m28.755s sys     0m2.693s
-  *  real 0m33.955s user    0m28.450s sys     0m2.654s

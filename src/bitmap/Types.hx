@@ -1,7 +1,5 @@
 package bitmap;
 
-import bitmap.*;
-
 enum Blend {
 	alpha;
 	mean;

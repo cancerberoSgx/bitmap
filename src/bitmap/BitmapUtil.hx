@@ -16,16 +16,6 @@ class BitmapUtil {
 			};
 		}
 		return a.data.compare(b.data) == 0;
-		// for (y in 0...a.height) {
-		// 	for (x in 0...a.width) {
-		// 		var c1 = a.get(x, y);
-		// 		var c2 = b.get(x, y);
-		// 		if (!ColorUtil.colorEquals(c1, c2)) {
-		// 			return false;
-		// 		}
-		// 	}
-		// }
-		// return true;
 	}
 
 	/**

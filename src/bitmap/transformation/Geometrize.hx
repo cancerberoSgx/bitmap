@@ -18,12 +18,6 @@ typedef Shape = {
 	var color:Color;
 };
 
-// enum Shapes {
-// 	triangle;
-// 	rectangle;
-// 	line;
-// }
-
 class Geometrize {
 	var shapes:Array<String>;
 	var shapeCount:Int;
@@ -138,17 +132,4 @@ class Geometrize {
 typedef Fragment = {
 	var bitmap:Bitmap;
 	var region:Types.Rectangle;
-}
-
-			// var dtbr:Int = t.r - b.r;
-			// 	var dtbg:Int = t.g - b.g;
-			// 	var dtbb:Int = t.b - b.b;
-			// 	var dtba:Int = t.a - b.a;
-
-			// 	var dtar:Int = t.r - a.r;
-			// 	var dtag:Int = t.g - a.g;
-			// 	var dtab:Int = t.b - a.b;
-			// 	var dtaa:Int = t.a - a.a;
-
-			// 	total -= (dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba);
-			// 	total += (dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa);
+};

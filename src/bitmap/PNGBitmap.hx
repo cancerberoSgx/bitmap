@@ -46,7 +46,6 @@ class PNGBitmap extends AbstractBitmap {
 		if (r == null) {
 			r = bounds();
 		}
-		// Sure.sure(width >= r.x + r.width && height >= r.y + r.height);
 		var b = new PNGBitmap(r.width, r.height);
     b.noRangeCheck=noRangeCheck;
 		b.copyFrom(this, {x:r.x,y:r.y}, {x:0,y:0,width: r.width, height:r.height});

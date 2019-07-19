@@ -25,8 +25,6 @@ class Pixelize {
 		var a = t.bitmap;
 
 		var region2 = t.region == null ? a.bounds() : t.region;
-		// for (y in region2.y...region2.height) {
-		// 	for (x in region2.x...region2.width) {
 		var xStep = Std.int(Math.round(region2.width / t.width));
 		var yStep = Std.int(Math.round(region2.height / t.height));
 		for (x in 0...t.width) {

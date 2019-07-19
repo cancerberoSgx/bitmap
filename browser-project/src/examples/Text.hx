@@ -6,6 +6,7 @@ import bitmap.text.*;
 
 class Text implements Example {
 	public function new() {}
+  public var name='text';
 
 	public function run(o:ExampleOptions) {
 		var manager = FontManager.getInstance();
@@ -25,7 +26,8 @@ class Text implements Example {
 					y: 20,
 					bitmap: o.bitmap
 				});
-				o.outputs[0].src = r.bitmap.io.toDataUrl();
+        o.done({output: [r.bitmap]});
+				// o.outputs[0].src = r.bitmap.io.toDataUrl();
 			});
 		});
 	}

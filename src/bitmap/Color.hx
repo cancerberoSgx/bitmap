@@ -70,34 +70,27 @@ abstract Color(UInt) from Int from UInt to UInt {
 
 	private inline function get_r():UInt {
 		return (this >> 24) & 0xFF;
-		// return (this & 0x00ff0000) >>> 16;
 	}
 
 	private inline function get_g():UInt {
 		return (this >> 16) & 0xFF;
-		// return (this & 0x0000ff00) >>> 8;
 	}
 
 	private inline function get_b():UInt {
 		return (this >> 8) & 0xFF;
-		// return this & 0x000000ff;
 	}
 
 	private inline function get_a():UInt {
 		return this & 0xFF;
-		// return this >>> 24;
 	}
 
 	inline function set_r(value:UInt):UInt {
-		// this = (a << 24) | (value << 16) | (g << 8) | b;
 		this = (value << 24) | (g << 16) | (b << 8) | a;
-		// return (this >> 24) & 0xFF;
 		return value;
 	}
 
 	inline function set_g(value:UInt):UInt {
 		this = (r << 24) | (value << 16) | (b << 8) | a;
-		// this = (a << 24) | (r << 16) | (value << 8) | b;
 		return value;
 	}
 

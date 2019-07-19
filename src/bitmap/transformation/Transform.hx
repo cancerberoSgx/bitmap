@@ -7,10 +7,7 @@ typedef TransformationOptions = {
 	@:optional public var bitmap:Bitmap;
 	@:optional public var output:Bitmap;
 };
-// typedef StrictTransformationOptions = {
-// >TransformationOptions,
-// public var bitmap:Bitmap
-// }
+
 class Transform {
 	private var bitmap:Bitmap;
 

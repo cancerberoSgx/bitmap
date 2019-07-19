@@ -3,8 +3,6 @@ package bitmap.text;
 import bitmap.text.Types.RenderOptions;
 import bitmap.text.*;
 
-using bitmap.support.StructureTools;
-
 class Renderer {
 	var glyphs:Map<String, Map<Int, Bitmap>>;
 	var manager:FontManager;
@@ -14,19 +12,6 @@ class Renderer {
 		glyphs = new Map();
 	}
 
-	// public function render(o:RenderOptions) {
-	// 		var x = 0, y = 0;
-	// 	// 	for (s in 'seba'.split('')) {
-	// 	// 		var cc = chars[s];
-	// 	// 		o.copyFrom(cc, {x: 0, y: 0}, {
-	// 	// 			x: x,
-	// 	// 			y: y,
-	// 	// 			width: cc.width,
-	// 	// 			height: cc.height
-	// 	// 		});
-	// 	// 		x += cc.width;
-	// 	// 	}
-	// }
 	public function render(o:RenderOptions) {
 		var font = manager.getFont(o.fontFamily);
 		var output = o.output == null ? o.bitmap.clone() : o.output;
@@ -48,19 +33,6 @@ class Renderer {
 				height: glyph.height
 			});
 			x += glyph.width;
-			// y += glyph.height;
-			// var s = String.fromCharCode(Std.parseInt(c.id));
-			// var charBitmap = fonnt.chars
-			// var charBitmap = fonnt.cj
-
-			// var charImg = new PNGBitmap();
-			// var cBitmap = font.copyFrom({x: 0, y: 0, width: }, {
-			// 	x: x,
-			// 	y: y,
-			// 	width: cc.width,
-			// 	height: cc.height
-			// });
-			// x += cc.width;
 		}
     return {bitmap: output};
 	}

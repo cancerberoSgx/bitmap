@@ -3,12 +3,11 @@ package bitmap.text;
 import haxe.io.Input;
 import bitmap.transformation.Transform.TransformationOptions;
 
-/** options provided by the suer**/
+/** options provided by the user **/
 typedef RenderTextOptions = {
 	> TransformationOptions,
 	> FontOptions,
 	> Types.Point,
-	// var coords:Types.Point;
 	var text:String;
   public var bitmap:Bitmap;
 	@:optional var area:Types.OptionalArea;

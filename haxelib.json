@@ -11,7 +11,7 @@
     "png"
   ],
   "description": "Image manipulation library, supporting all targets and common bitmap formats, with an easy to use API and no dependencies",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "releasenote": "browser, gray sale",
   "contributors": [
     "cancerberosgx"

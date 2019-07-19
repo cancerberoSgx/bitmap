@@ -59,25 +59,9 @@ class FontManager {
 
 	private function buildGlyps(chars:Map<Int, CharDef>, b:Bitmap):Map<Int, Glyph> {
 		var glyps:Map<Int, Glyph> = new Map();
-		// var c = xml.elementsNamed('chars');
-		// trace(fmtString, xml);
-		// //  haxe.xml
-		// var font = haxe.Json.parse(bitmap.IOUtil.readTextFile('test/assets/openSans.json'));
-		// 	var b = PNGBitmap.create(IOUtil.readFile("test/assets/openSans.png"));
-		// 	var o = new PNGBitmap(221, 111);
-		// 	var chars = new Map<String, Bitmap>();
 		for (c in chars.iterator()) {
-			// var s = String.fromCharCode(c.id);
-			// var bounds = {
-			// 	x: Std.parseInt(c.x),
-			// 	y: Std.parseInt(c.y),
-			// 	width: Std.parseInt(c.width),
-			// 	height: Std.parseInt(c.height)
-			// };
 			glyps[c.id] = {bitmap: b.copy(c)}.combine(c);
 		}
-		// for (i in 0...font.chars.char.length) {
-		// var c = (cast font.chars.char)[i];
 		return glyps;
 	}
 

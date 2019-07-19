@@ -1,15 +1,19 @@
 
 package examples;
 
-import examples.*;
 import bitmap.*;
-import js.html.*;
 
 interface Example {
   public function run(options:ExampleOptions):Void;
-    public function getSource():String;
+  public function getSource():String;
+  public var name:String;
 }
+
 typedef ExampleOptions = {
-  bitmap : Bitmap, 
-  outputs: Array<js.html.ImageElement>
-}
+  var bitmap : Bitmap;
+  function done(o:ExampleResult):Void;
+};
+
+typedef ExampleResult = {
+  var output: Array<Bitmap>;
+};

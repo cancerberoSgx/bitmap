@@ -46,16 +46,26 @@ HxOverrides.iter = function(a) {
 var Main = function() { };
 Main.__name__ = "Main";
 Main.main = function() {
-	Util.fetchResource("bluebells.png",function(data) {
+	bitmap_IOUtil.fetchResource("bluebells.png",function(error,data) {
 		var bytes = haxe_io_Bytes.ofData(data);
 		var input = new haxe_io_BytesInput(bytes);
 		var bitmap1 = new bitmap_PNGBitmap();
 		bitmap1.load(input);
-		return new app_App(bitmap1,Main.initialState());
+		var initialState = new examples_Shapes();
+		var _g = [];
+		_g.push(bitmap1.clone());
+		_g.push(bitmap1.clone());
+		_g.push(bitmap1.clone());
+		_g.push(bitmap1.clone());
+		_g.push(bitmap1.clone());
+		var initialState1 = { example : initialState, bitmap : bitmap1, output : _g};
+		app_Store.init(initialState1);
+		app_Store.getInstance().addStateChangeListener({ onStateChange : function(old,newState) {
+			app_Component.renderDom(window.document.querySelector("#main"),new app_Layout({ state : newState}));
+			return;
+		}});
+		return;
 	});
-};
-Main.initialState = function() {
-	return { example : new examples_Shapes()};
 };
 Math.__name__ = "Math";
 var Reflect = function() { };
@@ -202,11 +212,6 @@ _$UInt_UInt_$Impl_$.toFloat = function(this1) {
 	} else {
 		return int + 0.0;
 	}
-};
-var Util = function() { };
-Util.__name__ = "Util";
-Util.fetchResource = function(url,cb) {
-	bitmapFetchResource(url,cb);
 };
 var _$Xml_XmlType_$Impl_$ = {};
 _$Xml_XmlType_$Impl_$.__name__ = "_Xml.XmlType_Impl_";
@@ -391,55 +396,106 @@ Xml.prototype = {
 	}
 	,__class__: Xml
 };
-var app_App = function(b,s) {
-	this.bitmap = b;
-	this.state = s;
-	this.start();
+var app_Component = function(p) {
+	this.props = p;
 };
-app_App.__name__ = "app.App";
-app_App.prototype = {
-	start: function() {
+app_Component.__name__ = "app.Component";
+app_Component.renderDom = function(el,c) {
+	var s = c.render();
+	c.container = el;
+	el.innerHTML = s;
+	c._afterRender();
+};
+app_Component.prototype = {
+	render: function() {
+		throw new js__$Boot_HaxeError("Abstract method");
+	}
+	,afterRender: function() {
+	}
+	,_afterRender: function() {
+		this.afterRender();
+		if(this.props.children != null) {
+			var _g = 0;
+			var _g1 = this.props.children;
+			while(_g < _g1.length) {
+				var c = _g1[_g];
+				++_g;
+				c._afterRender();
+			}
+		}
+	}
+	,query: function(sel) {
+		var _g = [];
+		var _g1 = 0;
+		var _g2 = this.container.querySelectorAll(sel);
+		while(_g1 < _g2.length) {
+			var e = _g2[_g1];
+			++_g1;
+			_g.push(e);
+		}
+		return _g;
+	}
+	,queryOne: function(sel) {
+		return this.container.querySelector(sel);
+	}
+	,__class__: app_Component
+};
+var app_Layout = function(p) {
+	app_Component.call(this,p);
+};
+app_Layout.__name__ = "app.Layout";
+app_Layout.__super__ = app_Component;
+app_Layout.prototype = $extend(app_Component.prototype,{
+	render: function() {
+		var tmp = "\n<h1>Bitmap playground</h1>\n<p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to see it in action.</p>\n<p>Click on output images to download them.</p>\n<br />\n<button class=\"getSource\">See Example Sources</button>\n<button class=\"shapes\">draw shapes</button>\n<button class=\"convolutions " + (this.props.state.example.name == "convolutions" ? "selected" : "") + "\">Convolutions</button>\n<button class=\"affine " + (this.props.state.example.name == "affine" ? "selected" : "") + "\">Affine transformations</button>\n<button class=\"pixelize " + (this.props.state.example.name == "pixelize" ? "selected" : "") + "\">Pixelize</button>\n<button class=\"colors\">Colors</button>\n<button class=\"text\">Text</button>\n<br />\n<br />\n<img class=\"input\" src=\"" + this.props.state.bitmap.io.toDataUrl() + "\"/>\n";
+		var _g = [];
+		var _g1 = 0;
+		var _g2 = this.props.state.output;
+		while(_g1 < _g2.length) {
+			var output = _g2[_g1];
+			++_g1;
+			_g.push("<img src=\"" + output.io.toDataUrl() + "\" />");
+		}
+		return tmp + _g.join("\n") + "\n\n<br />\n<h3>Example code</h3>\n<textarea class=\"exampleCode\">" + this.props.state.example.getSource() + "</textarea>\n<style>\n  body {\n    background: linear-gradient(45deg, rgb(209, 192, 192) 25%, transparent 26%, transparent 75%, rgb(209, 192, 192) 76%),\n      linear-gradient(-45deg, rgb(209, 192, 192) 25%, transparent 26%, transparent 75%, rgb(209, 192, 192) 76%);\n    background-color: rgb(161, 179, 206);\n    background-size: 100px 100px;\n    font-weight: bold;\n  }\n  img {\n    cursor: pointer;\n  }\n  textarea {\n    width: 100%;\n    height: 250px;\n  }\n  .selected {\n    border: 2px solid pink;\n  }\n</style>\n  ";
+	}
+	,afterRender: function() {
 		var _gthis = this;
-		window.document.querySelector(".shapes").addEventListener("click",function() {
+		this.queryOne(".shapes").addEventListener("click",function(e) {
 			_gthis.exampleSelected("shapes");
 			return;
 		});
-		window.document.querySelector(".convolutions").addEventListener("click",function() {
+		this.queryOne(".convolutions").addEventListener("click",function(e1) {
 			_gthis.exampleSelected("convolutions");
 			return;
 		});
-		window.document.querySelector(".affine").addEventListener("click",function() {
+		this.queryOne(".affine").addEventListener("click",function(e2) {
 			_gthis.exampleSelected("affine");
 			return;
 		});
-		window.document.querySelector(".pixelize").addEventListener("click",function() {
+		this.queryOne(".pixelize").addEventListener("click",function(e3) {
 			_gthis.exampleSelected("pixelize");
 			return;
 		});
-		window.document.querySelector(".colors").addEventListener("click",function() {
+		this.queryOne(".colors").addEventListener("click",function(e4) {
 			_gthis.exampleSelected("colors");
 			return;
 		});
-		window.document.querySelector(".text").addEventListener("click",function() {
+		this.queryOne(".text").addEventListener("click",function(e5) {
 			_gthis.exampleSelected("text");
 			return;
 		});
-		window.document.querySelector(".getSource").addEventListener("click",function() {
-			_gthis.getSource();
-		});
-		this.input = window.document.querySelector(".input");
-		this.outputs = [window.document.querySelector(".output1"),window.document.querySelector(".output2"),window.document.querySelector(".output3"),window.document.querySelector(".output4"),window.document.querySelector(".output5")];
-		this.input.src = this.bitmap.io.toDataUrl();
-		this.outputs.forEach(function(o,i) {
-			return o.addEventListener("click",function(e) {
-				return applicationDownload(e.currentTarget.src,"output-" + i + ".png");
+		this.queryOne(".getSource").addEventListener("click",$bind(this,this.getSource));
+		outputs.forEach(function(o,i) {
+			return o.addEventListener("click",function(e6) {
+				return applicationDownload(e6.currentTarget.src,"output-" + i + ".png");
 			});
 		});
 	}
 	,getSource: function() {
-		window.alert(Std.string(this.state.example.getSource()));
+		this.queryOne(".exampleCode").scrollIntoViewIfNeeded();
 	}
 	,exampleSelected: function(name) {
+		var _gthis = this;
 		var ex;
 		if(name == "convolutions") {
 			ex = new examples_Convolutions();
@@ -457,11 +513,54 @@ app_App.prototype = {
 			throw new js__$Boot_HaxeError("example not recognized");
 		}
 		if(ex != null) {
-			this.state.example = ex;
-			ex.run({ bitmap : this.bitmap, outputs : this.outputs});
+			this.props.state.example = ex;
+			ex.run({ bitmap : this.props.state.bitmap, done : function(result) {
+				app_Store.getInstance().setState({ example : ex, output : result.output, bitmap : _gthis.props.state.bitmap});
+				return;
+			}});
 		}
 	}
-	,__class__: app_App
+	,__class__: app_Layout
+});
+var app_Store = function(s) {
+	this.stateChangeListeners = [];
+	this.state = s;
+};
+app_Store.__name__ = "app.Store";
+app_Store.getInstance = function() {
+	if(app_Store.instance == null) {
+		throw new js__$Boot_HaxeError("must call init() before getInstance()");
+	}
+	return app_Store.instance;
+};
+app_Store.init = function(state) {
+	if(app_Store.instance != null) {
+		throw new js__$Boot_HaxeError("instance already initialized");
+	}
+	app_Store.instance = new app_Store(state);
+};
+app_Store.prototype = {
+	getState: function() {
+		return this.state;
+	}
+	,setState: function(partialState) {
+		var old = this.state;
+		var tmp_1_example = this.state.example;
+		var tmp_2 = this.state;
+		var tmp_3 = partialState;
+		this.state = { output : tmp_3.output, example : tmp_3.example, bitmap : tmp_3.bitmap};
+		var _g = 0;
+		var _g1 = this.stateChangeListeners;
+		while(_g < _g1.length) {
+			var l = _g1[_g];
+			++_g;
+			l.onStateChange(old,this.state);
+		}
+	}
+	,addStateChangeListener: function(l) {
+		this.stateChangeListeners.push(l);
+	}
+	,__class__: app_Store
 };
 var bitmap_AbstractBitmap = function(w,h,f) {
 	if(f == null) {
@@ -1315,9 +1414,8 @@ bitmap_IOUtil.fetchResource = function(url,cb) {
 			return;
 		});
 	} else {
-		console.log("bitmap/IOUtil.hx:32:","FETCH browser");
-		window.fetch(url).then(function(repsonse) {
-			return repsonse.arrayBuffer().then(function(data1) {
+		window.fetch(url).then(function(response) {
+			return response.arrayBuffer().then(function(data1) {
 				cb(null,data1);
 				return;
 			});
@@ -2438,17 +2536,16 @@ bitmap_transformation_Transform.prototype = {
 	,__class__: bitmap_transformation_Transform
 };
 var examples_AffineTransformation = function() {
+	this.name = "affine";
 };
 examples_AffineTransformation.__name__ = "examples.AffineTransformation";
 examples_AffineTransformation.prototype = {
 	run: function(o) {
 		o.bitmap.bg = -16776994;
 		var result1 = o.bitmap.transform.affine({ affine : new bitmap_transformation_Affine().scale(0.7,0.6), bg : bitmap_Background.bg});
-		o.outputs[1].src = result1.bitmap.io.toDataUrl();
 		var result2 = o.bitmap.transform.affine({ affine : new bitmap_transformation_Affine().scale(0.5,0.3).translate(222,211).rotateDeg(35.6)});
-		o.outputs[2].src = result2.bitmap.io.toDataUrl();
 		var result3 = o.bitmap.transform.affine({ matrix : { a : 0.4, b : 0.5, c : 0.2, d : 1.5, e : 2.0, f : 3.0}});
-		o.outputs[3].src = result3.bitmap.io.toDataUrl();
+		o.done({ output : [result1.bitmap,result2.bitmap,result3.bitmap]});
 	}
 	,getSource: function() {
 		return haxe_Resource.getString("AffineTransformation");
@@ -2456,14 +2553,14 @@ examples_AffineTransformation.prototype = {
 	,__class__: examples_AffineTransformation
 };
 var examples_Colors = function() {
+	this.name = "colors";
 };
 examples_Colors.__name__ = "examples.Colors";
 examples_Colors.prototype = {
 	run: function(o) {
 		var result0 = o.bitmap.color.filter({ alpha : { a : 0.2, c : 0}});
-		o.outputs[0].src = result0.io.toDataUrl();
 		var result1 = o.bitmap.color.filter({ red : { a : 1.5, c : 2}, green : { a : 1.0, c : -15}, alpha : { a : 0.6, c : 0}});
-		o.outputs[1].src = result1.io.toDataUrl();
+		o.done({ output : [result0,result1]});
 	}
 	,getSource: function() {
 		return haxe_Resource.getString("Colors");
@@ -2471,17 +2568,16 @@ examples_Colors.prototype = {
 	,__class__: examples_Colors
 };
 var examples_Convolutions = function() {
+	this.name = "convolutions";
 };
 examples_Convolutions.__name__ = "examples.Convolutions";
 examples_Convolutions.prototype = {
 	run: function(o) {
 		var result0 = o.bitmap.transform.convolve(bitmap_transformation_Convolution.blur(7));
-		o.outputs[0].src = result0.io.toDataUrl();
 		var result1 = o.bitmap.transform.convolve(bitmap_transformation_Convolution.sharp(0.7,0.1));
-		o.outputs[1].src = result1.io.toDataUrl();
 		var edgy = [[0.0,-1.0,0.0],[-1.0,4.0,-1.0],[0.0,-1.0,0.0]];
 		var result3 = o.bitmap.transform.convolve({ kernel : edgy, bias : 0.2, factor : 1.1});
-		o.outputs[3].src = result3.io.toDataUrl();
+		o.done({ output : [result0,result1,result3]});
 	}
 	,getSource: function() {
 		return haxe_Resource.getString("Convolutions");
@@ -2489,16 +2585,12 @@ examples_Convolutions.prototype = {
 	,__class__: examples_Convolutions
 };
 var examples_Pixelize = function() {
+	this.name = "pixelize";
 };
 examples_Pixelize.__name__ = "examples.Pixelize";
 examples_Pixelize.prototype = {
 	run: function(o) {
-		var result0 = o.bitmap.transform.pixelize({ width : 100, height : 90});
-		o.outputs[0].src = result0.io.toDataUrl();
-		o.outputs[1].src = o.bitmap.transform.pixelize({ width : 70, height : 60}).io.toDataUrl();
-		o.outputs[2].src = o.bitmap.transform.pixelize({ width : 40, height : 34}).io.toDataUrl();
-		o.outputs[3].src = o.bitmap.transform.pixelize({ width : 28, height : 25}).io.toDataUrl();
-		o.outputs[4].src = o.bitmap.transform.pixelize({ width : 19, height : 15}).io.toDataUrl();
+		o.done({ output : [o.bitmap.transform.pixelize({ width : 100, height : 90}),o.bitmap.transform.pixelize({ width : 70, height : 60}),o.bitmap.transform.pixelize({ width : 40, height : 34}),o.bitmap.transform.pixelize({ width : 28, height : 25}),o.bitmap.transform.pixelize({ width : 19, height : 15})]});
 	}
 	,getSource: function() {
 		return haxe_Resource.getString("Pixelize");
@@ -2506,14 +2598,16 @@ examples_Pixelize.prototype = {
 	,__class__: examples_Pixelize
 };
 var examples_Shapes = function() {
+	this.name = "shapes";
 };
 examples_Shapes.__name__ = "examples.Shapes";
 examples_Shapes.prototype = {
 	run: function(o) {
-		o.bitmap.draw.rectangle2(20,40,100,50,-579899582,true,{ type : bitmap_Blend.mean});
-		o.bitmap.draw.triangle(220,30,300,150,90,210,366178114,true,{ type : bitmap_Blend.mean});
-		o.bitmap.draw.line(12,211,88,1,353751974);
-		o.outputs[0].src = o.bitmap.io.toDataUrl();
+		var output = o.bitmap.clone();
+		output.draw.rectangle2(20,40,100,50,-579899582,true,{ type : bitmap_Blend.mean});
+		output.draw.triangle(220,30,300,150,90,210,366178114,true,{ type : bitmap_Blend.mean});
+		output.draw.line(12,211,88,1,353751974);
+		o.done({ output : [output]});
 	}
 	,getSource: function() {
 		return haxe_Resource.getString("Shapes");
@@ -2521,17 +2615,19 @@ examples_Shapes.prototype = {
 	,__class__: examples_Shapes
 };
 var examples_Text = function() {
+	this.name = "text";
 };
 examples_Text.__name__ = "examples.Text";
 examples_Text.prototype = {
 	run: function(o) {
 		var manager = bitmap_text_FontManager.getInstance();
-		console.log("src/examples/Text.hx:12:","before");
+		console.log("src/examples/Text.hx:13:","before");
 		bitmap_IOUtil.fetch("openSans.png",function(error,dataPng) {
 			bitmap_IOUtil.fetch("openSans.xml",function(error1,dataXml) {
 				var font = manager.registerFont({ img : dataPng, fmt : dataXml, fontFamily : "openSans"});
 				var r = manager.render({ text : "hello world", fontFamily : "openSans", x : 10, y : 20, bitmap : o.bitmap});
-				return o.outputs[0].src = r.bitmap.io.toDataUrl();
+				o.done({ output : [r.bitmap]});
+				return;
 			});
 			return;
 		});
@@ -5893,11 +5989,13 @@ js_lib__$ArrayBuffer_ArrayBufferCompat.sliceImpl = function(begin,end) {
 	resultArray.set(u);
 	return resultArray.buffer;
 };
+function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
+if(typeof $global.$haxeUID == "undefined") $global.$haxeUID = 0;
 if( String.fromCodePoint == null ) String.fromCodePoint = function(c) { return c < 0x10000 ? String.fromCharCode(c) : String.fromCharCode((c>>10)+0xD7C0)+String.fromCharCode((c&0x3FF)+0xDC00); }
 String.prototype.__class__ = String;
 String.__name__ = "String";
 Array.__name__ = "Array";
-haxe_Resource.content = [{ name : "AffineTransformation", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAuVHlwZXMuQmFja2dyb3VuZDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5BZmZpbmU7CmltcG9ydCBqcy5odG1sLkltYWdlRWxlbWVudDsKCmNsYXNzIEFmZmluZVRyYW5zZm9ybWF0aW9uIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KCglwdWJsaWMgZnVuY3Rpb24gcnVuKG86RXhhbXBsZU9wdGlvbnMpIHsKCQkvLyBqdXN0IHNjYWxlLCBidXQgd2Ugd2FudCB0byBzZXQgdGhlIGJnIHByb3BlcnR5IG9uIHRoZSBiaXRtYXAgZmlyc3Qgc28gcGFkZGluZyBpcyB0cmFuc3BhcmVudAoJCW8uYml0bWFwLmJnID0gQ29sb3IuY3JlYXRlKDI1NSwgMCwgMCwgMjIyKTsKCQl2YXIgcmVzdWx0MSA9IG8uYml0bWFwLnRyYW5zZm9ybS5hZmZpbmUoewoJCQlhZmZpbmU6IG5ldyBBZmZpbmUoKS5zY2FsZSgwLjcsIDAuNiksCgkJCWJnOiBCYWNrZ3JvdW5kLmJnCgkJfSk7CgkJby5vdXRwdXRzWzFdLnNyYyA9IHJlc3VsdDEuYml0bWFwLmlvLnRvRGF0YVVybCgpOwoKCQkvLyBjb21wb3NlIHRyYW5zZm9ybWF0aW9ucyB1c2luZyB0aGUgbWF0cml4CgkJdmFyIHJlc3VsdDIgPSBvLmJpdG1hcC50cmFuc2Zvcm0uYWZmaW5lKHsKCQkJYWZmaW5lOiBuZXcgQWZmaW5lKCkuc2NhbGUoMC41LCAwLjMpLnRyYW5zbGF0ZSgyMjIsIDIxMSkucm90YXRlRGVnKDM1LjYpLAoJCX0pOwoJCW8ub3V0cHV0c1syXS5zcmMgPSByZXN1bHQyLmJpdG1hcC5pby50b0RhdGFVcmwoKTsKCgkJLy8gbWFudWFsbHkgZGVmaW5lIHRoZSBhZmZpbmUgdHJhbnNmb3JtYXRpb24gbWF0cml4CgkJdmFyIHJlc3VsdDMgPSBvLmJpdG1hcC50cmFuc2Zvcm0uYWZmaW5lKHsKCQkJbWF0cml4OiB7CgkJCQlhOiAwLjQsCgkJCQliOiAwLjUsCgkJCQljOiAwLjIsCgkJCQlkOiAxLjUsCgkJCQllOiAyLjAsCgkJCQlmOiAzLjAKCQkJfQoJCX0pOwoJCW8ub3V0cHV0c1szXS5zcmMgPSByZXN1bHQzLmJpdG1hcC5pby50b0RhdGFVcmwoKTsKCX0KCglwdWJsaWMgZnVuY3Rpb24gZ2V0U291cmNlKCkgewoJCXJldHVybiBoYXhlLlJlc291cmNlLmdldFN0cmluZygiQWZmaW5lVHJhbnNmb3JtYXRpb24iKTsKCX0KfQo"},{ name : "Colors", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgQ29sb3JzIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KCglwdWJsaWMgZnVuY3Rpb24gcnVuKG86RXhhbXBsZU9wdGlvbnMpIHsKCQl2YXIgcmVzdWx0MCA9IG8uYml0bWFwLmNvbG9yLmZpbHRlcih7CgkJCWFscGhhOiB7YTogMC4yLCBjOiAwfQoJCX0pOwoJCW8ub3V0cHV0c1swXS5zcmMgPSByZXN1bHQwLmlvLnRvRGF0YVVybCgpOwoKCQl2YXIgcmVzdWx0MSA9IG8uYml0bWFwLmNvbG9yLmZpbHRlcih7CgkJCXJlZDoge2E6IDEuNSwgYzogMn0sCgkJCWdyZWVuOiB7YTogMS4wLCBjOiAtMTV9LAoJCQlhbHBoYToge2E6IDAuNiwgYzogMH0KCQl9KTsKCQlvLm91dHB1dHNbMV0uc3JjID0gcmVzdWx0MS5pby50b0RhdGFVcmwoKTsKCX0KCglwdWJsaWMgZnVuY3Rpb24gZ2V0U291cmNlKCkgewoJCXJldHVybiBoYXhlLlJlc291cmNlLmdldFN0cmluZygiQ29sb3JzIik7Cgl9Cn0K"},{ name : "Convolutions", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgQ29udm9sdXRpb25zIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KCglwdWJsaWMgZnVuY3Rpb24gcnVuKG86IEV4YW1wbGVPcHRpb25zKSB7CiAgICAvLyBzaG9ydGN1dCB0byBibHVyIGNvbnZvbHV0aW9uCgkJdmFyIHJlc3VsdDAgPSBvLmJpdG1hcC50cmFuc2Zvcm0uY29udm9sdmUoQ29udm9sdXRpb24uYmx1cig3KSk7CgkJby5vdXRwdXRzWzBdLnNyYyA9IHJlc3VsdDAuaW8udG9EYXRhVXJsKCk7CgoJCXZhciByZXN1bHQxID0gby5iaXRtYXAudHJhbnNmb3JtLmNvbnZvbHZlKENvbnZvbHV0aW9uLnNoYXJwKDAuNywgMC4xKSk7CgkJby5vdXRwdXRzWzFdLnNyYyA9IHJlc3VsdDEuaW8udG9EYXRhVXJsKCk7CiAgICAKICAgIC8vIGRlZmluaW5nIHRoZSBrZXJuZWwgbWFudWFsbHkKCQl2YXIgZWRneSA9IFtbMC4wLCAtMS4wLCAwLjBdLCBbLTEuMCwgNC4wLCAtMS4wXSwgWzAuMCwgLTEuMCwgMC4wXV07CgkJdmFyIHJlc3VsdDMgPSBvLmJpdG1hcC50cmFuc2Zvcm0uY29udm9sdmUoewoJCQlrZXJuZWw6IGVkZ3ksCgkJCWJpYXM6IDAuMiwKCQkJZmFjdG9yOiAxLjEsCgkJfSk7CgkJby5vdXRwdXRzWzNdLnNyYyA9IHJlc3VsdDMuaW8udG9EYXRhVXJsKCk7Cgl9CiAgICAgcHVibGljIGZ1bmN0aW9uIGdldFNvdXJjZSgpIHsKICAgICByZXR1cm4gIGhheGUuUmVzb3VyY2UuZ2V0U3RyaW5nKCJDb252b2x1dGlvbnMiKTsKICAgfQp9Cg"},{ name : "Shapes", data : "cGFja2FnZSBleGFtcGxlczsKaW1wb3J0IGV4YW1wbGVzLkV4YW1wbGU7CgppbXBvcnQgYml0bWFwLlR5cGVzLkJsZW5kOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBqcy5odG1sLio7CgpjbGFzcyBTaGFwZXMgaW1wbGVtZW50cyBFeGFtcGxlIHsKICBwdWJsaWMgZnVuY3Rpb24gbmV3KCl7fQogIHB1YmxpYyBmdW5jdGlvbiBydW4obzogRXhhbXBsZU9wdGlvbnMpewogICAgby5iaXRtYXAuZHJhdy5yZWN0YW5nbGUyKDIwLCA0MCwgMTAwLCA1MCwgQ29sb3IuY3JlYXRlKDIyMSwgMTExLCAxMTEsIDY2KSwgdHJ1ZSwge3R5cGU6IEJsZW5kLm1lYW59KTsKCQlvLmJpdG1hcC5kcmF3LnRyaWFuZ2xlKDIyMCwgMzAsIDMwMCwgMTUwLCA5MCwgMjEwLCBDb2xvci5jcmVhdGUoMjEsIDIxMSwgMTExLCA2NiksIHRydWUsIHt0eXBlOiBCbGVuZC5tZWFufSk7CgkJby5iaXRtYXAuZHJhdy5saW5lKDEyICwgMjExLCA4OCwgMSwgQ29sb3IuY3JlYXRlKDIxLCAyMSwgMjExLCAxNjYpKTsKCQlvLm91dHB1dHNbMF0uc3JjID0gby5iaXRtYXAuaW8udG9EYXRhVXJsKCk7CgogICB9CiAgIHB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CiAgICAgcmV0dXJuICBoYXhlLlJlc291cmNlLmdldFN0cmluZygiU2hhcGVzIik7CiAgIH0KfQ"},{ name : "Pixelize", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgUGl4ZWxpemUgaW1wbGVtZW50cyBFeGFtcGxlIHsKCXB1YmxpYyBmdW5jdGlvbiBuZXcoKSB7fQoKCXB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucykgewoJCXZhciByZXN1bHQwID0gby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMTAwLCBoZWlnaHQ6IDkwfSk7CgkJby5vdXRwdXRzWzBdLnNyYyA9IHJlc3VsdDAuaW8udG9EYXRhVXJsKCk7CgkJby5vdXRwdXRzWzFdLnNyYyA9IG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDcwLCBoZWlnaHQ6IDYwfSkuaW8udG9EYXRhVXJsKCk7CgkJby5vdXRwdXRzWzJdLnNyYyA9IG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDQwLCBoZWlnaHQ6IDM0fSkuaW8udG9EYXRhVXJsKCk7CgkJby5vdXRwdXRzWzNdLnNyYyA9IG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDI4LCBoZWlnaHQ6IDI1fSkuaW8udG9EYXRhVXJsKCk7CgkJby5vdXRwdXRzWzRdLnNyYyA9IG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDE5LCBoZWlnaHQ6IDE1fSkuaW8udG9EYXRhVXJsKCk7Cgl9CiAgIHB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CiAgICAgcmV0dXJuICBoYXhlLlJlc291cmNlLmdldFN0cmluZygiUGl4ZWxpemUiKTsKICAgfQp9Cg"},{ name : "Text", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAudGV4dC4qOwoKY2xhc3MgVGV4dCBpbXBsZW1lbnRzIEV4YW1wbGUgewoJcHVibGljIGZ1bmN0aW9uIG5ldygpIHt9CgoJcHVibGljIGZ1bmN0aW9uIHJ1bihvOkV4YW1wbGVPcHRpb25zKSB7CgkJdmFyIG1hbmFnZXIgPSBGb250TWFuYWdlci5nZXRJbnN0YW5jZSgpOwoJCXRyYWNlKCdiZWZvcmUnKTsKCgkJSU9VdGlsLmZldGNoKCJvcGVuU2Fucy5wbmciLCAoZXJyb3IsIGRhdGFQbmcpIC0+IHsKCQkJSU9VdGlsLmZldGNoKCJvcGVuU2Fucy54bWwiLCAoZXJyb3IsIGRhdGFYbWwpIC0+IHsKCQkJCXZhciBmb250ID0gbWFuYWdlci5yZWdpc3RlckZvbnQoewoJCQkJCWltZzogZGF0YVBuZywKCQkJCQlmbXQ6IGRhdGFYbWwsCgkJCQkJZm9udEZhbWlseTogJ29wZW5TYW5zJwoJCQkJfSk7CgkJCQl2YXIgciA9IG1hbmFnZXIucmVuZGVyKHsKCQkJCQl0ZXh0OiAnaGVsbG8gd29ybGQnLAoJCQkJCWZvbnRGYW1pbHk6ICdvcGVuU2FucycsCgkJCQkJeDogMTAsCgkJCQkJeTogMjAsCgkJCQkJYml0bWFwOiBvLmJpdG1hcAoJCQkJfSk7CgkJCQlvLm91dHB1dHNbMF0uc3JjID0gci5iaXRtYXAuaW8udG9EYXRhVXJsKCk7CgkJCX0pOwoJCX0pOwoJfQoKCXB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CgkJcmV0dXJuIGhheGUuUmVzb3VyY2UuZ2V0U3RyaW5nKCJUZXh0Iik7Cgl9Cn0K"}];
+haxe_Resource.content = [{ name : "AffineTransformation", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAuVHlwZXMuQmFja2dyb3VuZDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5BZmZpbmU7CmltcG9ydCBqcy5odG1sLkltYWdlRWxlbWVudDsKCmNsYXNzIEFmZmluZVRyYW5zZm9ybWF0aW9uIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KICBwdWJsaWMgdmFyIG5hbWU9J2FmZmluZSc7CgoJcHVibGljIGZ1bmN0aW9uIHJ1bihvOkV4YW1wbGVPcHRpb25zKSB7CgkJLy8ganVzdCBzY2FsZSwgYnV0IHdlIHdhbnQgdG8gc2V0IHRoZSBiZyBwcm9wZXJ0eSBvbiB0aGUgYml0bWFwIGZpcnN0IHNvIHBhZGRpbmcgaXMgdHJhbnNwYXJlbnQKCQlvLmJpdG1hcC5iZyA9IENvbG9yLmNyZWF0ZSgyNTUsIDAsIDAsIDIyMik7CgkJdmFyIHJlc3VsdDEgPSBvLmJpdG1hcC50cmFuc2Zvcm0uYWZmaW5lKHsKCQkJYWZmaW5lOiBuZXcgQWZmaW5lKCkuc2NhbGUoMC43LCAwLjYpLAoJCQliZzogQmFja2dyb3VuZC5iZwoJCX0pOwoJCS8vIG8ub3V0cHV0c1sxXS5zcmMgPSByZXN1bHQxLmJpdG1hcC5pby50b0RhdGFVcmwoKTsKCgkJLy8gY29tcG9zZSB0cmFuc2Zvcm1hdGlvbnMgdXNpbmcgdGhlIG1hdHJpeAoJCXZhciByZXN1bHQyID0gby5iaXRtYXAudHJhbnNmb3JtLmFmZmluZSh7CgkJCWFmZmluZTogbmV3IEFmZmluZSgpLnNjYWxlKDAuNSwgMC4zKS50cmFuc2xhdGUoMjIyLCAyMTEpLnJvdGF0ZURlZygzNS42KSwKCQl9KTsKCQkvLyBvLm91dHB1dHNbMl0uc3JjID0gcmVzdWx0Mi5iaXRtYXAuaW8udG9EYXRhVXJsKCk7CgoJCS8vIG1hbnVhbGx5IGRlZmluZSB0aGUgYWZmaW5lIHRyYW5zZm9ybWF0aW9uIG1hdHJpeAoJCXZhciByZXN1bHQzID0gby5iaXRtYXAudHJhbnNmb3JtLmFmZmluZSh7CgkJCW1hdHJpeDogewoJCQkJYTogMC40LAoJCQkJYjogMC41LAoJCQkJYzogMC4yLAoJCQkJZDogMS41LAoJCQkJZTogMi4wLAoJCQkJZjogMy4wCgkJCX0KCQl9KTsKCQkvLyBvLm91dHB1dHNbM10uc3JjID0gcmVzdWx0My5iaXRtYXAuaW8udG9EYXRhVXJsKCk7CiAgICBvLmRvbmUoe291dHB1dDogW3Jlc3VsdDEuYml0bWFwLCByZXN1bHQyLmJpdG1hcCwgcmVzdWx0My5iaXRtYXBdfSk7Cgl9CgoJcHVibGljIGZ1bmN0aW9uIGdldFNvdXJjZSgpIHsKCQlyZXR1cm4gaGF4ZS5SZXNvdXJjZS5nZXRTdHJpbmcoIkFmZmluZVRyYW5zZm9ybWF0aW9uIik7Cgl9Cn0K"},{ name : "Colors", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgQ29sb3JzIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KICBwdWJsaWMgdmFyIG5hbWU9J2NvbG9ycyc7CgoJcHVibGljIGZ1bmN0aW9uIHJ1bihvOkV4YW1wbGVPcHRpb25zKSB7CgkJdmFyIHJlc3VsdDAgPSBvLmJpdG1hcC5jb2xvci5maWx0ZXIoewoJCQlhbHBoYToge2E6IDAuMiwgYzogMH0KCQl9KTsKCQkvLyBvLm91dHB1dHNbMF0uc3JjID0gcmVzdWx0MC5pby50b0RhdGFVcmwoKTsKCgkJdmFyIHJlc3VsdDEgPSBvLmJpdG1hcC5jb2xvci5maWx0ZXIoewoJCQlyZWQ6IHthOiAxLjUsIGM6IDJ9LAoJCQlncmVlbjoge2E6IDEuMCwgYzogLTE1fSwKCQkJYWxwaGE6IHthOiAwLjYsIGM6IDB9CgkJfSk7CgkJLy8gby5vdXRwdXRzWzFdLnNyYyA9IHJlc3VsdDEuaW8udG9EYXRhVXJsKCk7CiAgICBvLmRvbmUoe291dHB1dDpbcmVzdWx0MCwgcmVzdWx0MSBdfSk7CgoJfQoKCXB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CgkJcmV0dXJuIGhheGUuUmVzb3VyY2UuZ2V0U3RyaW5nKCJDb2xvcnMiKTsKCX0KfQo"},{ name : "Convolutions", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgQ29udm9sdXRpb25zIGltcGxlbWVudHMgRXhhbXBsZSB7CglwdWJsaWMgZnVuY3Rpb24gbmV3KCkge30KICBwdWJsaWMgdmFyIG5hbWU9J2NvbnZvbHV0aW9ucyc7CglwdWJsaWMgZnVuY3Rpb24gcnVuKG86IEV4YW1wbGVPcHRpb25zKTpWb2lkIHsKICAgIC8vIHNob3J0Y3V0IHRvIGJsdXIgY29udm9sdXRpb24KCQl2YXIgcmVzdWx0MCA9IG8uYml0bWFwLnRyYW5zZm9ybS5jb252b2x2ZShDb252b2x1dGlvbi5ibHVyKDcpKTsKCQkvLyBvLm91dHB1dHNbMF0uc3JjID0gcmVzdWx0MC5pby50b0RhdGFVcmwoKTsKCgkJdmFyIHJlc3VsdDEgPSBvLmJpdG1hcC50cmFuc2Zvcm0uY29udm9sdmUoQ29udm9sdXRpb24uc2hhcnAoMC43LCAwLjEpKTsKCQkvLyBvLm91dHB1dHNbMV0uc3JjID0gcmVzdWx0MS5pby50b0RhdGFVcmwoKTsKICAgIAogICAgLy8gZGVmaW5pbmcgdGhlIGtlcm5lbCBtYW51YWxseQoJCXZhciBlZGd5ID0gW1swLjAsIC0xLjAsIDAuMF0sIFstMS4wLCA0LjAsIC0xLjBdLCBbMC4wLCAtMS4wLCAwLjBdXTsKCQl2YXIgcmVzdWx0MyA9IG8uYml0bWFwLnRyYW5zZm9ybS5jb252b2x2ZSh7CgkJCWtlcm5lbDogZWRneSwKCQkJYmlhczogMC4yLAoJCQlmYWN0b3I6IDEuMSwKCQl9KTsKCQkvLyBvLm91dHB1dHNbM10uc3JjID0gcmVzdWx0My5pby50b0RhdGFVcmwoKTsKICAgIG8uZG9uZSh7b3V0cHV0OltyZXN1bHQwLCByZXN1bHQxLCByZXN1bHQzXX0pOwoJfQogICAgIHB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CiAgICAgcmV0dXJuICBoYXhlLlJlc291cmNlLmdldFN0cmluZygiQ29udm9sdXRpb25zIik7CiAgIH0KfQo"},{ name : "Shapes", data : "cGFja2FnZSBleGFtcGxlczsKaW1wb3J0IGV4YW1wbGVzLkV4YW1wbGU7CgppbXBvcnQgYml0bWFwLlR5cGVzLkJsZW5kOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBqcy5odG1sLio7CgpjbGFzcyBTaGFwZXMgaW1wbGVtZW50cyBFeGFtcGxlIHsKICBwdWJsaWMgdmFyIG5hbWU9J3NoYXBlcyc7CiAgcHVibGljIGZ1bmN0aW9uIG5ldygpe30KICBwdWJsaWMgZnVuY3Rpb24gcnVuKG86IEV4YW1wbGVPcHRpb25zKXsKICAgIHZhciBvdXRwdXQgPSBvLmJpdG1hcC5jbG9uZSgpOwogICAgb3V0cHV0LmRyYXcucmVjdGFuZ2xlMigyMCwgNDAsIDEwMCwgNTAsIENvbG9yLmNyZWF0ZSgyMjEsIDExMSwgMTExLCA2NiksIHRydWUsIHt0eXBlOiBCbGVuZC5tZWFufSk7CgkJb3V0cHV0LmRyYXcudHJpYW5nbGUoMjIwLCAzMCwgMzAwLCAxNTAsIDkwLCAyMTAsIENvbG9yLmNyZWF0ZSgyMSwgMjExLCAxMTEsIDY2KSwgdHJ1ZSwge3R5cGU6IEJsZW5kLm1lYW59KTsKCQlvdXRwdXQuZHJhdy5saW5lKDEyICwgMjExLCA4OCwgMSwgQ29sb3IuY3JlYXRlKDIxLCAyMSwgMjExLCAxNjYpKTsKCQkvLyBvLm91dHB1dHNbMF0uc3JjID0gby5iaXRtYXAuaW8udG9EYXRhVXJsKCk7CiAgICBvLmRvbmUoe291dHB1dDpbb3V0cHV0XX0pOwogICAgCgogICB9CiAgIHB1YmxpYyBmdW5jdGlvbiBnZXRTb3VyY2UoKSB7CiAgICAgcmV0dXJuICBoYXhlLlJlc291cmNlLmdldFN0cmluZygiU2hhcGVzIik7CiAgIH0KfQ"},{ name : "Pixelize", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLkJpdG1hcDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5Db252b2x1dGlvbjsKaW1wb3J0IGpzLmh0bWwuSW1hZ2VFbGVtZW50OwoKY2xhc3MgUGl4ZWxpemUgaW1wbGVtZW50cyBFeGFtcGxlIHsKCXB1YmxpYyBmdW5jdGlvbiBuZXcoKSB7fQogIHB1YmxpYyB2YXIgbmFtZT0ncGl4ZWxpemUnOwoJcHVibGljIGZ1bmN0aW9uIHJ1bihvOkV4YW1wbGVPcHRpb25zKSB7CgkJLy8gdmFyIHJlc3VsdDAgPSBvLmJpdG1hcC50cmFuc2Zvcm0ucGl4ZWxpemUoe3dpZHRoOiAxMDAsIGhlaWdodDogOTB9KTsKCQkvLyBvLm91dHB1dHNbMF0uc3JjID0gcmVzdWx0MC5pby50b0RhdGFVcmwoKTsKCQkvLyBvLm91dHB1dHNbMV0uc3JjID0gby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogNzAsIGhlaWdodDogNjB9KS5pby50b0RhdGFVcmwoKTsKCQkvLyBvLm91dHB1dHNbMl0uc3JjID0gby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogNDAsIGhlaWdodDogMzR9KS5pby50b0RhdGFVcmwoKTsKCQkvLyBvLm91dHB1dHNbM10uc3JjID0gby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMjgsIGhlaWdodDogMjV9KS5pby50b0RhdGFVcmwoKTsKCQkvLyBvLm91dHB1dHNbNF0uc3JjID0gby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMTksIGhlaWdodDogMTV9KS5pby50b0RhdGFVcmwoKTsKICAgIG8uZG9uZSh7b3V0cHV0Olsgby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMTAwLCBoZWlnaHQ6IDkwfSksIG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDcwLCBoZWlnaHQ6IDYwfSksby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogNDAsIGhlaWdodDogMzR9KSwgIG8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDI4LCBoZWlnaHQ6IDI1fSkgLCAgby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMTksIGhlaWdodDogMTV9KV19KTsKICAgIAoJfQogICBwdWJsaWMgZnVuY3Rpb24gZ2V0U291cmNlKCkgewogICAgIHJldHVybiAgaGF4ZS5SZXNvdXJjZS5nZXRTdHJpbmcoIlBpeGVsaXplIik7CiAgIH0KfQo"},{ name : "Text", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAudGV4dC4qOwoKY2xhc3MgVGV4dCBpbXBsZW1lbnRzIEV4YW1wbGUgewoJcHVibGljIGZ1bmN0aW9uIG5ldygpIHt9CiAgcHVibGljIHZhciBuYW1lPSd0ZXh0JzsKCglwdWJsaWMgZnVuY3Rpb24gcnVuKG86RXhhbXBsZU9wdGlvbnMpIHsKCQl2YXIgbWFuYWdlciA9IEZvbnRNYW5hZ2VyLmdldEluc3RhbmNlKCk7CgkJdHJhY2UoJ2JlZm9yZScpOwoKCQlJT1V0aWwuZmV0Y2goIm9wZW5TYW5zLnBuZyIsIChlcnJvciwgZGF0YVBuZykgLT4gewoJCQlJT1V0aWwuZmV0Y2goIm9wZW5TYW5zLnhtbCIsIChlcnJvciwgZGF0YVhtbCkgLT4gewoJCQkJdmFyIGZvbnQgPSBtYW5hZ2VyLnJlZ2lzdGVyRm9udCh7CgkJCQkJaW1nOiBkYXRhUG5nLAoJCQkJCWZtdDogZGF0YVhtbCwKCQkJCQlmb250RmFtaWx5OiAnb3BlblNhbnMnCgkJCQl9KTsKCQkJCXZhciByID0gbWFuYWdlci5yZW5kZXIoewoJCQkJCXRleHQ6ICdoZWxsbyB3b3JsZCcsCgkJCQkJZm9udEZhbWlseTogJ29wZW5TYW5zJywKCQkJCQl4OiAxMCwKCQkJCQl5OiAyMCwKCQkJCQliaXRtYXA6IG8uYml0bWFwCgkJCQl9KTsKICAgICAgICBvLmRvbmUoe291dHB1dDogW3IuYml0bWFwXX0pOwoJCQkJLy8gby5vdXRwdXRzWzBdLnNyYyA9IHIuYml0bWFwLmlvLnRvRGF0YVVybCgpOwoJCQl9KTsKCQl9KTsKCX0KCglwdWJsaWMgZnVuY3Rpb24gZ2V0U291cmNlKCkgewoJCXJldHVybiBoYXhlLlJlc291cmNlLmdldFN0cmluZygiVGV4dCIpOwoJfQp9Cg"}];
 var __map_reserved = {};
 Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function() {
 	return String(this.val);

@@ -9,33 +9,10 @@
 </head>
 
 <body>
-  <h1>Bitmap playground</h1>
-  <p>Welcome to Bitmap library playground! An image should be shown below (loaded as Bitmap). Play with the controls to
-    see it in action.</p>
-    <p>Click on output images to download them.</p>
-    <br />
-    <button class="getSource">See Example Sources</button>
-  <button class="shapes">draw shapes</button>
-  <button class="convolutions">Convolutions</button>
-  <button class="affine">Affine transformations</button>
-  <button class="pixelize">Pixelize</button>
-  <button class="colors">Colors</button>
-  <button class="text">Text</button>
-  <br />
-  <br />
-  <img class="input" />
-  <img class="output1" />
-  <img class="output2" />
-  <img class="output3" />
-  <img class="output4" />
-  <img class="output5" />
+  <div id="main">
 
+  </div>
   <script>
-    window.bitmapFetchResource = async function (url, cb) {
-      var response = await fetch(url);
-      var arrayBuffer = await response.arrayBuffer();
-      cb(arrayBuffer);
-    };
     window.applicationDownload = async function (url, filename) {
       var response = await fetch(url)
       var blob = await response.blob()
@@ -53,8 +30,9 @@
       background-size: 100px 100px;
       font-weight: bold;
     }
-    img{
-      cursor:pointer;
+
+    img {
+      cursor: pointer;
     }
   </style>
   <script src="main.js"></script>

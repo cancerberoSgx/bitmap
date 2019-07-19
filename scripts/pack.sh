@@ -1,2 +1,2 @@
 sh scripts/clean.sh
-zip -x "test/*" "bin/*" "tmp*" "*.zip" ".*" "sample-project/*" "scripts/*" "docs/*" -r bitmap *
+zip -x "test/*" ".vscode/*" "bin/*" "tmp*" "*.zip" ".*" "sample-project/*" "browser-project/*" "scripts/*" "docs/*" -r bitmap *
