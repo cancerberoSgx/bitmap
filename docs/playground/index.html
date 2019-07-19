@@ -20,6 +20,7 @@
   <button class="affine">Affine transformations</button>
   <button class="pixelize">Pixelize</button>
   <button class="colors">Colors</button>
+  <button class="text">Text</button>
   <br />
   <br />
   <img class="input" />
@@ -30,7 +31,7 @@
   <img class="output5" />
 
   <script>
-    window.applicationFetchImage = async function (url, cb) {
+    window.bitmapFetchResource = async function (url, cb) {
       var response = await fetch(url);
       var arrayBuffer = await response.arrayBuffer();
       cb(arrayBuffer);

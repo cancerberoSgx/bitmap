@@ -2,10 +2,7 @@ package app;
 
 import bitmap.*;
 import js.Browser.*;
-import js.*;
-import js.html.*;
 import examples.*;
-import state.*;
 
 class App {
 	var input:js.html.ImageElement;
@@ -25,6 +22,7 @@ class App {
 		document.querySelector('.affine').addEventListener('click', function() return exampleSelected('affine'));
 		document.querySelector('.pixelize').addEventListener('click', function() return exampleSelected('pixelize'));
 		document.querySelector('.colors').addEventListener('click', function() return exampleSelected('colors'));
+		document.querySelector('.text').addEventListener('click', function() return exampleSelected('text'));
 		document.querySelector('.getSource').addEventListener('click', function() getSource());
 
 		input = cast document.querySelector('.input');
@@ -55,12 +53,14 @@ class App {
 			ex = new Colors();
 		} else if (name == 'affine') {
 			ex = new AffineTransformation();
+		}else if (name == 'text') {
+			ex = new Text();
 		} else {
 			throw "example not recognized";
 		}
 		if (ex != null) {
 			state.example = ex;
-			ex.run(bitmap, outputs);
+			ex.run({bitmap:bitmap, outputs:outputs});
 		}
 	}
 }

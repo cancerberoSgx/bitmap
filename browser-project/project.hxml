@@ -7,4 +7,6 @@
 --resource src/examples/Colors.hx@Colors
 --resource src/examples/Convolutions.hx@Convolutions
 --resource src/examples/Pixelize.hx@Pixelize
+--resource src/examples/Text.hx@Text
+
 -js bin/main.js

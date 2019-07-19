@@ -6,6 +6,10 @@ import bitmap.*;
 import js.html.*;
 
 interface Example {
-  public function run(bitmap : Bitmap, outputs:Array<js.html.ImageElement>):Void;
+  public function run(options:ExampleOptions):Void;
     public function getSource():String;
+}
+typedef ExampleOptions = {
+  bitmap : Bitmap, 
+  outputs: Array<js.html.ImageElement>
 }
