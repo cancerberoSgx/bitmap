@@ -457,7 +457,18 @@ app_Layout.prototype = $extend(app_Component.prototype,{
 			++_g1;
 			_g.push("<img class=\"output\" src=\"" + output.io.toDataUrl() + "\" />");
 		}
-		return tmp + _g.join("\n") + "\n\n<br />\n<h3>Example code</h3>\n<textarea class=\"exampleCode\">" + this.props.state.example.getSource() + "</textarea>\n\n<style>\n" + app_Styles.css + "\n</style>\n\n<script>\nwindow.applicationDownload = async function (url, filename) {\n  var response = await fetch(url)\n  var blob = await response.blob()\n  var a = document.createElement(\"a\");\n  a.href = URL.createObjectURL(blob);\n  a.setAttribute(\"download\", filename);\n  a.click();\n}\n</script>\n  ";
+		return tmp + _g.join("\n") + "\n\n<br />\n<h3>Example code</h3>\n<textarea class=\"exampleCode\">" + this.props.state.example.getSource() + "</textarea>\n\n<style>\n" + app_Styles.css + "\n</style>\n\n  ";
+	}
+	,applicationDownload: function(url,filename) {
+		window.fetch(url).then(function(response) {
+			return response.blob();
+		}).then(function(blob) {
+			var a = js_Boot.__cast(window.document.createElement("a") , HTMLAnchorElement);
+			a.href = URL.createObjectURL(blob);
+			a.setAttribute("download",filename);
+			a.click();
+			return;
+		});
 	}
 	,afterRender: function() {
 		var _gthis = this;
@@ -488,19 +499,30 @@ app_Layout.prototype = $extend(app_Component.prototype,{
 		this.queryOne(".getSource").addEventListener("click",function(e6) {
 			return _gthis.queryOne(".exampleCode").scrollIntoViewIfNeeded();
 		});
+		this.queryOne(".loadFile").addEventListener("change",function(e7) {
+			return bitmap_IOUtil.readHtmlInputFile(e7.currentTarget).then(function(bitmaps) {
+				var tmp = app_Store.getInstance();
+				var _gthis1 = _gthis.props.state.example;
+				var _g = [];
+				_g.push(bitmaps[0].clone());
+				_g.push(bitmaps[0].clone());
+				_g.push(bitmaps[0].clone());
+				_g.push(bitmaps[0].clone());
+				_g.push(bitmaps[0].clone());
+				tmp.setState({ example : _gthis1, output : _g, bitmap : bitmaps[0]});
+				return;
+			});
+		});
 		var i = 0;
-		var _g = 0;
-		var _g1 = this.query(".output");
-		while(_g < _g1.length) {
-			var output = _g1[_g];
-			++_g;
-			output.addEventListener("click",function(e7) {
-				return applicationDownload(e7.currentTarget.src,"output-" + (function($this) {
-					var $r;
-					i = i + 1;
-					$r = i - 1;
-					return $r;
-				}(this)) + ".png");
+		var _g1 = 0;
+		var _g11 = this.query(".output");
+		while(_g1 < _g11.length) {
+			var output = _g11[_g1];
+			++_g1;
+			output.addEventListener("click",function(e8) {
+				i += 1;
+				_gthis.applicationDownload(e8.currentTarget.src,"output-" + (i - 1) + ".png");
+				return;
 			});
 		}
 	}
@@ -573,6 +595,26 @@ app_Store.prototype = {
 };
 var app_Styles = function() { };
 app_Styles.__name__ = "app.Styles";
+var bitmap_RectangleArea = function() { };
+bitmap_RectangleArea.__name__ = "bitmap.RectangleArea";
+bitmap_RectangleArea.__isInterface__ = true;
+bitmap_RectangleArea.prototype = {
+	__class__: bitmap_RectangleArea
+};
+var bitmap_OffsetRectangleArea = function() { };
+bitmap_OffsetRectangleArea.__name__ = "bitmap.OffsetRectangleArea";
+bitmap_OffsetRectangleArea.__isInterface__ = true;
+bitmap_OffsetRectangleArea.__interfaces__ = [bitmap_RectangleArea];
+bitmap_OffsetRectangleArea.prototype = {
+	__class__: bitmap_OffsetRectangleArea
+};
+var bitmap_Bitmap = function() { };
+bitmap_Bitmap.__name__ = "bitmap.Bitmap";
+bitmap_Bitmap.__isInterface__ = true;
+bitmap_Bitmap.__interfaces__ = [bitmap_OffsetRectangleArea];
+bitmap_Bitmap.prototype = {
+	__class__: bitmap_Bitmap
+};
 var bitmap_AbstractBitmap = function(w,h,f) {
 	if(f == null) {
 		f = bitmap_PixelFormat.RGBA;
@@ -599,6 +641,7 @@ var bitmap_AbstractBitmap = function(w,h,f) {
 	}
 };
 bitmap_AbstractBitmap.__name__ = "bitmap.AbstractBitmap";
+bitmap_AbstractBitmap.__interfaces__ = [bitmap_Bitmap];
 bitmap_AbstractBitmap.prototype = {
 	fill: function(bg_) {
 		bg_ = bg_ == null ? this.bg : bg_;
@@ -1432,6 +1475,35 @@ bitmap_IOUtil.fetchResource = function(url,cb) {
 			});
 		});
 	}
+};
+bitmap_IOUtil.readHtmlInputFile = function(el) {
+	var _g = [];
+	var _g1 = 0;
+	var _g2 = el.files;
+	while(_g1 < _g2.length) {
+		var file = _g2[_g1];
+		++_g1;
+		_g.push(file);
+	}
+	return Promise.all(_g.map(function(file1) {
+		return new Promise(function(resolve,reject) {
+			var reader = new FileReader();
+			reader.addEventListener("loadend",function(e) {
+				resolve(new Uint8Array(reader.result));
+				return;
+			});
+			reader.readAsArrayBuffer(file1);
+			return;
+		});
+	})).then(function(contents) {
+		return contents.map(function(content) {
+			var bytes = haxe_io_Bytes.ofData(content);
+			var input = new haxe_io_BytesInput(bytes);
+			var bitmap1 = new bitmap_PNGBitmap();
+			bitmap1.load(input);
+			return js_Boot.__cast(bitmap1 , bitmap_Bitmap);
+		});
+	});
 };
 bitmap_IOUtil.readFile = function(path) {
 	var s = require("fs").readFileSync(path);
@@ -2546,9 +2618,16 @@ bitmap_transformation_Transform.prototype = {
 	}
 	,__class__: bitmap_transformation_Transform
 };
+var examples_Example = function() { };
+examples_Example.__name__ = "examples.Example";
+examples_Example.__isInterface__ = true;
+examples_Example.prototype = {
+	__class__: examples_Example
+};
 var examples_AbstractExample = function() {
 };
 examples_AbstractExample.__name__ = "examples.AbstractExample";
+examples_AbstractExample.__interfaces__ = [examples_Example];
 examples_AbstractExample.prototype = {
 	run: function(o) {
 		throw new js__$Boot_HaxeError("Abstract method");
@@ -4103,6 +4182,9 @@ format_tools_Inflate.__name__ = "format.tools.Inflate";
 format_tools_Inflate.run = function(bytes) {
 	return haxe_zip_Uncompress.run(bytes);
 };
+var haxe_IMap = function() { };
+haxe_IMap.__name__ = "haxe.IMap";
+haxe_IMap.__isInterface__ = true;
 var haxe_Resource = function() { };
 haxe_Resource.__name__ = "haxe.Resource";
 haxe_Resource.getString = function(name) {
@@ -4432,6 +4514,7 @@ var haxe_ds_IntMap = function() {
 	this.h = { };
 };
 haxe_ds_IntMap.__name__ = "haxe.ds.IntMap";
+haxe_ds_IntMap.__interfaces__ = [haxe_IMap];
 haxe_ds_IntMap.prototype = {
 	keys: function() {
 		var a = [];
@@ -4477,6 +4560,7 @@ var haxe_ds_StringMap = function() {
 	this.h = { };
 };
 haxe_ds_StringMap.__name__ = "haxe.ds.StringMap";
+haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
 haxe_ds_StringMap.prototype = {
 	setReserved: function(key,value) {
 		if(this.rh == null) {
@@ -6002,12 +6086,103 @@ js_Boot.__string_rec = function(o,s) {
 		return String(o);
 	}
 };
+js_Boot.__interfLoop = function(cc,cl) {
+	if(cc == null) {
+		return false;
+	}
+	if(cc == cl) {
+		return true;
+	}
+	if(Object.prototype.hasOwnProperty.call(cc,"__interfaces__")) {
+		var intf = cc.__interfaces__;
+		var _g = 0;
+		var _g1 = intf.length;
+		while(_g < _g1) {
+			var i = _g++;
+			var i1 = intf[i];
+			if(i1 == cl || js_Boot.__interfLoop(i1,cl)) {
+				return true;
+			}
+		}
+	}
+	return js_Boot.__interfLoop(cc.__super__,cl);
+};
+js_Boot.__instanceof = function(o,cl) {
+	if(cl == null) {
+		return false;
+	}
+	switch(cl) {
+	case Array:
+		return ((o) instanceof Array);
+	case Bool:
+		return typeof(o) == "boolean";
+	case Dynamic:
+		return o != null;
+	case Float:
+		return typeof(o) == "number";
+	case Int:
+		if(typeof(o) == "number") {
+			return ((o | 0) === o);
+		} else {
+			return false;
+		}
+		break;
+	case String:
+		return typeof(o) == "string";
+	default:
+		if(o != null) {
+			if(typeof(cl) == "function") {
+				if(js_Boot.__downcastCheck(o,cl)) {
+					return true;
+				}
+			} else if(typeof(cl) == "object" && js_Boot.__isNativeObj(cl)) {
+				if(((o) instanceof cl)) {
+					return true;
+				}
+			}
+		} else {
+			return false;
+		}
+		if(cl == Class ? o.__name__ != null : false) {
+			return true;
+		}
+		if(cl == Enum ? o.__ename__ != null : false) {
+			return true;
+		}
+		if(o.__enum__ != null) {
+			return $hxEnums[o.__enum__] == cl;
+		} else {
+			return false;
+		}
+	}
+};
+js_Boot.__downcastCheck = function(o,cl) {
+	if(!((o) instanceof cl)) {
+		if(cl.__isInterface__) {
+			return js_Boot.__interfLoop(js_Boot.getClass(o),cl);
+		} else {
+			return false;
+		}
+	} else {
+		return true;
+	}
+};
+js_Boot.__cast = function(o,t) {
+	if(o == null || js_Boot.__instanceof(o,t)) {
+		return o;
+	} else {
+		throw new js__$Boot_HaxeError("Cannot cast " + Std.string(o) + " to " + Std.string(t));
+	}
+};
 js_Boot.__nativeClassName = function(o) {
 	var name = js_Boot.__toStr.call(o).slice(8,-1);
 	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") {
 		return null;
 	}
 	return name;
+};
+js_Boot.__isNativeObj = function(o) {
+	return js_Boot.__nativeClassName(o) != null;
 };
 js_Boot.__resolveNativeClass = function(name) {
 	return $global[name];
@@ -6024,6 +6199,12 @@ if( String.fromCodePoint == null ) String.fromCodePoint = function(c) { return c
 String.prototype.__class__ = String;
 String.__name__ = "String";
 Array.__name__ = "Array";
+var Int = { };
+var Dynamic = { };
+var Float = Number;
+var Bool = Boolean;
+var Class = { };
+var Enum = { };
 haxe_Resource.content = [{ name : "AffineTransformation", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlLkV4YW1wbGVPcHRpb25zOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAuVHlwZXMuQmFja2dyb3VuZDsKaW1wb3J0IGJpdG1hcC50cmFuc2Zvcm1hdGlvbi5BZmZpbmU7CgpjbGFzcyBBZmZpbmVUcmFuc2Zvcm1hdGlvbiBleHRlbmRzIEFic3RyYWN0RXhhbXBsZSB7CglvdmVycmlkZSBmdW5jdGlvbiBnZXROYW1lKCkgewoJCXJldHVybiAnQWZmaW5lVHJhbnNmb3JtYXRpb24nOwoJfQoKCW92ZXJyaWRlIHB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucykgewoJCS8vIGp1c3Qgc2NhbGUsIGJ1dCB3ZSB3YW50IHRvIHNldCB0aGUgYmcgcHJvcGVydHkgb24gdGhlIGJpdG1hcCBmaXJzdCBzbyBwYWRkaW5nIGlzIHRyYW5zcGFyZW50CgkJby5iaXRtYXAuYmcgPSBDb2xvci5jcmVhdGUoMjU1LCAwLCAwLCAyMjIpOwoJCXZhciByZXN1bHQxID0gby5iaXRtYXAudHJhbnNmb3JtLmFmZmluZSh7CgkJCWFmZmluZTogbmV3IEFmZmluZSgpLnNjYWxlKDAuNywgMC42KSwKCQkJYmc6IEJhY2tncm91bmQuYmcKCQl9KTsKCgkJLy8gY29tcG9zZSB0cmFuc2Zvcm1hdGlvbnMgdXNpbmcgdGhlIG1hdHJpeAoJCXZhciByZXN1bHQyID0gby5iaXRtYXAudHJhbnNmb3JtLmFmZmluZSh7CgkJCWFmZmluZTogbmV3IEFmZmluZSgpLnNjYWxlKDAuNSwgMC4zKS50cmFuc2xhdGUoMjIyLCAyMTEpLnJvdGF0ZURlZygzNS42KSwKCQl9KTsKCgkJLy8gbWFudWFsbHkgZGVmaW5lIHRoZSBhZmZpbmUgdHJhbnNmb3JtYXRpb24gbWF0cml4CgkJdmFyIHJlc3VsdDMgPSBvLmJpdG1hcC50cmFuc2Zvcm0uYWZmaW5lKHsKCQkJbWF0cml4OiB7CgkJCQlhOiAwLjQsCgkJCQliOiAwLjUsCgkJCQljOiAwLjIsCgkJCQlkOiAxLjUsCgkJCQllOiAyLjAsCgkJCQlmOiAzLjAKCQkJfQoJCX0pOwoKCQlvLmRvbmUoe291dHB1dDogW3Jlc3VsdDEuYml0bWFwLCByZXN1bHQyLmJpdG1hcCwgcmVzdWx0My5iaXRtYXBdfSk7Cgl9Cn0K"},{ name : "Colors", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlLkV4YW1wbGVPcHRpb25zOwppbXBvcnQgZXhhbXBsZXMuQWJzdHJhY3RFeGFtcGxlOwoKY2xhc3MgQ29sb3JzIGV4dGVuZHMgQWJzdHJhY3RFeGFtcGxlIHsKCW92ZXJyaWRlIGZ1bmN0aW9uIGdldE5hbWUoKSB7CgkJcmV0dXJuICdDb2xvcnMnOwoJfQoKCW92ZXJyaWRlIHB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucykgewoJCXZhciByZXN1bHQwID0gby5iaXRtYXAuY29sb3IuZmlsdGVyKHsKCQkJYWxwaGE6IHthOiAwLjIsIGM6IDB9CgkJfSk7CgoJCXZhciByZXN1bHQxID0gby5iaXRtYXAuY29sb3IuZmlsdGVyKHsKCQkJcmVkOiB7YTogMS41LCBjOiAyfSwKCQkJZ3JlZW46IHthOiAxLjAsIGM6IC0xNX0sCgkJCWFscGhhOiB7YTogMC42LCBjOiAwfQoJCX0pOwoKCQlvLmRvbmUoe291dHB1dDogW3Jlc3VsdDAsIHJlc3VsdDFdfSk7Cgl9Cn0K"},{ name : "Convolutions", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5BYnN0cmFjdEV4YW1wbGU7CmltcG9ydCBiaXRtYXAudHJhbnNmb3JtYXRpb24uQ29udm9sdXRpb247CmltcG9ydCBleGFtcGxlcy5FeGFtcGxlLkV4YW1wbGVPcHRpb25zOwoKY2xhc3MgQ29udm9sdXRpb25zIGV4dGVuZHMgQWJzdHJhY3RFeGFtcGxlIHsKCW92ZXJyaWRlIGZ1bmN0aW9uIGdldE5hbWUoKSB7CgkJcmV0dXJuICdDb252b2x1dGlvbnMnOwoJfQoKCW92ZXJyaWRlIHB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucyk6Vm9pZCB7CgkJLy8gc2hvcnRjdXQgdG8gYmx1ciBjb252b2x1dGlvbgoJCXZhciByZXN1bHQwID0gby5iaXRtYXAudHJhbnNmb3JtLmNvbnZvbHZlKENvbnZvbHV0aW9uLmJsdXIoNykpOwoKCQl2YXIgcmVzdWx0MSA9IG8uYml0bWFwLnRyYW5zZm9ybS5jb252b2x2ZShDb252b2x1dGlvbi5zaGFycCgwLjcsIDAuMSkpOwoKCQkvLyBkZWZpbmluZyB0aGUga2VybmVsIG1hbnVhbGx5CgkJdmFyIGVkZ3kgPSBbWzAuMCwgLTEuMCwgMC4wXSwgWy0xLjAsIDQuMCwgLTEuMF0sIFswLjAsIC0xLjAsIDAuMF1dOwoJCXZhciByZXN1bHQzID0gby5iaXRtYXAudHJhbnNmb3JtLmNvbnZvbHZlKHsKCQkJa2VybmVsOiBlZGd5LAoJCQliaWFzOiAwLjIsCgkJCWZhY3RvcjogMS4xLAoJCX0pOwoKCQlvLmRvbmUoe291dHB1dDogW3Jlc3VsdDAsIHJlc3VsdDEsIHJlc3VsdDNdfSk7Cgl9Cn0K"},{ name : "Shapes", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlLkV4YW1wbGVPcHRpb25zOwppbXBvcnQgYml0bWFwLlR5cGVzLkJsZW5kOwppbXBvcnQgYml0bWFwLio7CgpjbGFzcyBTaGFwZXMgZXh0ZW5kcyBBYnN0cmFjdEV4YW1wbGUgewoJb3ZlcnJpZGUgcHVibGljIGZ1bmN0aW9uIGdldE5hbWUoKSB7CgkJcmV0dXJuICdTaGFwZXMnOwoJfQoKCW92ZXJyaWRlIHB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucykgewoJCXZhciBvdXRwdXQgPSBvLmJpdG1hcC5jbG9uZSgpOwoJCW91dHB1dC5kcmF3LnJlY3RhbmdsZTIoMjAsIDQwLCAxMDAsIDUwLCBDb2xvci5jcmVhdGUoMjIxLCAxMTEsIDExMSwgNjYpLCB0cnVlLCB7dHlwZTogQmxlbmQubWVhbn0pOwoJCW91dHB1dC5kcmF3LnRyaWFuZ2xlKDIyMCwgMzAsIDMwMCwgMTUwLCA5MCwgMjEwLCBDb2xvci5jcmVhdGUoMjEsIDIxMSwgMTExLCA2NiksIHRydWUsIHt0eXBlOiBCbGVuZC5tZWFufSk7CgkJb3V0cHV0LmRyYXcubGluZSgxMiwgMjExLCA4OCwgMSwgQ29sb3IuY3JlYXRlKDIxLCAyMSwgMjExLCAxNjYpKTsKCQlvLmRvbmUoe291dHB1dDogW291dHB1dF19KTsKCX0KfQo"},{ name : "Pixelize", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwoKY2xhc3MgUGl4ZWxpemUgZXh0ZW5kcyBBYnN0cmFjdEV4YW1wbGUgewoJb3ZlcnJpZGUgcHVibGljIGZ1bmN0aW9uIGdldE5hbWUoKSB7CgkJcmV0dXJuICdQaXhlbGl6ZSc7Cgl9CgoJb3ZlcnJpZGUgcHVibGljIGZ1bmN0aW9uIHJ1bihvOkV4YW1wbGVPcHRpb25zKSB7CgkJby5kb25lKHsKCQkJb3V0cHV0OiBbCgkJCQlvLmJpdG1hcC50cmFuc2Zvcm0ucGl4ZWxpemUoe3dpZHRoOiAxMDAsIGhlaWdodDogOTB9KSwKCQkJCW8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDcwLCBoZWlnaHQ6IDYwfSksCgkJCQlvLmJpdG1hcC50cmFuc2Zvcm0ucGl4ZWxpemUoe3dpZHRoOiA0MCwgaGVpZ2h0OiAzNH0pLAoJCQkJby5iaXRtYXAudHJhbnNmb3JtLnBpeGVsaXplKHt3aWR0aDogMjgsIGhlaWdodDogMjV9KSwKCQkJCW8uYml0bWFwLnRyYW5zZm9ybS5waXhlbGl6ZSh7d2lkdGg6IDE5LCBoZWlnaHQ6IDE1fSkKCQkJXQoJCX0pOwoJfQp9Cg"},{ name : "Text", data : "cGFja2FnZSBleGFtcGxlczsKCmltcG9ydCBleGFtcGxlcy5FeGFtcGxlOwppbXBvcnQgYml0bWFwLio7CmltcG9ydCBiaXRtYXAudGV4dC4qOwoKY2xhc3MgVGV4dCBleHRlbmRzIEFic3RyYWN0RXhhbXBsZSB7CglvdmVycmlkZSBwdWJsaWMgZnVuY3Rpb24gZ2V0TmFtZSgpIHsKCQlyZXR1cm4gJ1RleHQnOwoJfQoKCW92ZXJyaWRlIHB1YmxpYyBmdW5jdGlvbiBydW4obzpFeGFtcGxlT3B0aW9ucykgewoJCXZhciBtYW5hZ2VyID0gRm9udE1hbmFnZXIuZ2V0SW5zdGFuY2UoKTsKCQlJT1V0aWwuZmV0Y2goIm9wZW5TYW5zLnBuZyIsIChlcnJvciwgZGF0YVBuZykgLT4gewoJCQlJT1V0aWwuZmV0Y2goIm9wZW5TYW5zLnhtbCIsIChlcnJvciwgZGF0YVhtbCkgLT4gewoJCQkJdmFyIGZvbnQgPSBtYW5hZ2VyLnJlZ2lzdGVyRm9udCh7CgkJCQkJaW1nOiBkYXRhUG5nLAoJCQkJCWZtdDogZGF0YVhtbCwKCQkJCQlmb250RmFtaWx5OiAnb3BlblNhbnMnCgkJCQl9KTsKCQkJCXZhciByID0gbWFuYWdlci5yZW5kZXIoewoJCQkJCXRleHQ6ICdoZWxsbyB3b3JsZCcsCgkJCQkJZm9udEZhbWlseTogJ29wZW5TYW5zJywKCQkJCQl4OiAxMCwKCQkJCQl5OiAyMCwKCQkJCQliaXRtYXA6IG8uYml0bWFwCgkJCQl9KTsKCQkJCW8uZG9uZSh7b3V0cHV0OiBbci5iaXRtYXBdfSk7CgkJCX0pOwoJCX0pOwoJfQp9Cg"}];
 var __map_reserved = {};
 Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function() {

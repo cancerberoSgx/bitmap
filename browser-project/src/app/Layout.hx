@@ -1,11 +1,17 @@
 package app;
 
-import js.html.ImageElement;
+import js.html.File;
+import bitmap.*;
+import js.html.FileReader;
+import js.lib.Uint8Array;
+import js.lib.Promise;
+import js.html.InputElement;
+import js.html.AnchorElement;
+import js.Browser;
 import examples.*;
 import app.*;
 
 class Layout extends Component<Component.Props> {
-
 	override public function render() {
 		return '
 <h1>Bitmap playground</h1>
@@ -33,19 +39,28 @@ ${[for(output in this.props.state.output)'<img class="output" src="${output.io.t
 ${Styles.css}
 </style>
 
-<script>
-window.applicationDownload = async function (url, filename) {
-  var response = await fetch(url)
-  var blob = await response.blob()
-  var a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.setAttribute("download", filename);
-  a.click();
-}
-</script>
   ';
+
 	}
 
+	function applicationDownload(url:String, filename:String) {
+		Browser.window.fetch(url).then(response -> response.blob()).then(blob -> {
+			var a = cast(Browser.document.createElement("a"), AnchorElement);
+			a.href = js.html.URL.createObjectURL(blob);
+			a.setAttribute("download", filename);
+			a.click();
+		});
+	}
+
+	// function inputFileToUint8Array(el:InputElement)
+	// :Promise<Array<{file:File, content:Uint8Array}>>
+	//  {
+	// 	return Promise.all([for (file in el.files) file].map(file -> (new Promise((resolve, reject) -> {
+	// 			var reader = new FileReader();
+	// 			reader.addEventListener('loadend', e -> resolve(new Uint8Array(reader.result)));
+	//       reader.readAsArrayBuffer(file);
+	// 		})).then(content -> (cast ({file: file, content: content}, file:File, content:Uint8Array})))));
+	// }
 	override function afterRender() {
 		queryOne('.shapes').addEventListener('click', e -> exampleSelected('shapes'));
 		queryOne('.convolutions').addEventListener('click', e -> exampleSelected('convolutions'));
@@ -53,11 +68,31 @@ window.applicationDownload = async function (url, filename) {
 		queryOne('.pixelize').addEventListener('click', e -> exampleSelected('pixelize'));
 		queryOne('.colors').addEventListener('click', e -> exampleSelected('colors'));
 		queryOne('.text').addEventListener('click', e -> exampleSelected('text'));
-		queryOne('.getSource').addEventListener('click', e->(cast queryOne('.exampleCode')).scrollIntoViewIfNeeded());
-    var i = 0;
-		for(output in query('.output')){
-     untyped  output.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i++ + '.png'));
-    }    
+		queryOne('.getSource').addEventListener('click', e -> (cast queryOne('.exampleCode')).scrollIntoViewIfNeeded());
+		queryOne('.loadFile').addEventListener('change', e -> {
+			IOUtil.readHtmlInputFile(e.currentTarget).then(bitmaps -> Store.getInstance().setState({
+					example: this.props.state.example,
+					output: [for (i in 0...5) bitmaps[0].clone()],
+					bitmap: bitmaps[0]
+				}));
+
+			// inputFileToUint8Array(e.currentTarget).then(files->{
+			//   	var bytes = haxe.io.Bytes.ofData(files[0].content);
+			// 		var input = new haxe.io.BytesInput(bytes);
+			//       var bitmap = new PNGBitmap();
+			//       bitmap.load(input);
+			//       Store.getInstance().setState({
+			// 			example: this.props.state.example,
+			// 			output: [for(i in 0...5)bitmap.clone()],
+			// 			bitmap: bitmap
+			// 		});
+		});
+		// });
+
+		var i = 0;
+		for (output in query('.output')) {
+			untyped output.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i++ + '.png'));
+		}
 	}
 
 	function exampleSelected(name) {
@@ -78,11 +113,16 @@ window.applicationDownload = async function (url, filename) {
 			throw "example not recognized";
 		}
 		if (ex != null) {
-			ex.run({bitmap: this.props.state.bitmap, done: result->{
-        Store.getInstance().setState({
-          example: ex, output: result.output, bitmap: this.props.state.bitmap
-        });
-      }});
+			ex.run({
+				bitmap: this.props.state.bitmap,
+				done: result -> {
+					Store.getInstance().setState({
+						example: ex,
+						output: result.output,
+						bitmap: this.props.state.bitmap
+					});
+				}
+			});
 		}
 	}
 }

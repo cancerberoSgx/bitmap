@@ -1,5 +1,10 @@
 package bitmap;
 
+import js.lib.Uint8Array;
+import js.html.FileReader;
+import js.html.InputElement;
+import js.lib.Promise;
+
 class IOUtil {
 	public static function fetch(url:String, cb:(error:Dynamic, data:haxe.io.BytesInput) -> Void) {
 		fetchResource(url, (error, data) -> {
@@ -42,6 +47,33 @@ class IOUtil {
 		#end
 	}
 
+
+public static function readHtmlInputFile(el:InputElement):Promise<Array<Bitmap>> {
+
+	// inline function htmlInputFileToUint8Array(el:InputElement)
+  // :Promise<Array<{file:File, content:Uint8Array}>>
+  //  {
+		return Promise.all([for (file in el.files) file].map(file -> (new Promise((resolve, reject) -> {
+				var reader = new FileReader();
+				reader.addEventListener('loadend', e -> resolve(new Uint8Array(reader.result)));
+        reader.readAsArrayBuffer(file);
+			})))).then(contents ->contents.map(content->{
+        var bytes = haxe.io.Bytes.ofData(content);
+				var input = new haxe.io.BytesInput(bytes);
+         var bitmap = new PNGBitmap();
+          bitmap.load(input);
+        return cast (bitmap, Bitmap);
+      }));
+  // }
+  // return htmlInputFileToUint8Array(el).then(files->{
+  //     	var bytes = haxe.io.Bytes.ofData(files[0].content);
+	// 			var input = new haxe.io.BytesInput(bytes);
+  //         var bitmap = new PNGBitmap();
+  //         bitmap.load(input);
+  //         return bitmap;
+  //   });
+
+}
 	public static function readFile(path:String):haxe.io.Input {
 		#if js
 		untyped var s = require('fs').readFileSync(path);
