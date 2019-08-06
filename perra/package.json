@@ -1,6 +1,6 @@
 {
   "name": "perra",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "haxelib bitmap target JavaScript as API",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
