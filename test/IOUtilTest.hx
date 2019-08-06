@@ -35,4 +35,51 @@ class IOUtilTest implements utest.ITest {
 			async.done();
 		});
 	}
+
+	@:timeout(6500)
+	public function testFetch(async:utest.Async) {
+		var url = 'https://cancerberosgx.github.io/demos/magica/images/parrots_orig.png';
+		IOUtil.fetch(url, (err, data) -> {
+			if (err != null) {
+				trace('ERROR', err);
+				Assert.fail('Expect no error');
+				async.done();
+				return;
+			}
+			var bitmap = PNGBitmap.create(data);
+			Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile('test/assets/parrots.png'))));
+			BitmapIO.writeBitmap('test/assets/tmpFetch.png', bitmap);
+			Assert.isTrue(BitmapUtil.bitmapEquals(PNGBitmap.create(IOUtil.readFile('test/assets/tmpFetch.png')), PNGBitmap.create(IOUtil
+						.readFile('test/assets/parrots.png'))));
+			async.done();
+		});
+	}
+
+	@:timeout(6500)
+	public function testFetchPromise(async:utest.Async) {
+		var url = 'https://cancerberosgx.github.io/demos/magica/images/parrots_orig.png';
+		IOUtil.fetch(url).then(result -> {
+			if (result.error != null) {
+				trace('ERROR', result.error);
+				Assert.fail('Expect no error');
+				async.done();
+				return;
+			}
+			var bitmap = PNGBitmap.create(result.data);
+			Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile('test/assets/parrots.png'))));
+			BitmapIO.writeBitmap('test/assets/tmpFetchPromise.png', bitmap);
+			Assert.isTrue(BitmapUtil.bitmapEquals(PNGBitmap.create(IOUtil.readFile('test/assets/tmpFetchPromise.png')),
+					PNGBitmap.create(IOUtil.readFile('test/assets/parrots.png'))));
+			async.done();
+		});
+	};
+
+	@:timeout(6500)
+	public function testFetchInvalid(async:utest.Async) {
+		var url = 'https://cancerberosgx.github.io/demos/magica/images/notexisisiss40404.png';
+		IOUtil.fetch(url).then(result -> {
+			Assert.notNull(result.error, 'Expects error');
+			async.done();
+		});
+	};
 }

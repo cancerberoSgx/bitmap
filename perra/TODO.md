@@ -9,6 +9,7 @@
 - [ ]  browser
   - [ ] test
   - [ ] example with web workers
+- [ ] check that in browser most APIs are async. Identify those who are not 
 
 ## WIP
 

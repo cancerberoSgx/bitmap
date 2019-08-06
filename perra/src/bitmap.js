@@ -986,13 +986,22 @@ bitmap_Draw.prototype = {
 var bitmap_IOUtil = $hx_exports["bitmap"]["IOUtil"] = function() { };
 bitmap_IOUtil.__name__ = true;
 bitmap_IOUtil.fetch = function(url,cb) {
-	bitmap_IOUtil.fetchResource(url,function(error,data) {
-		if(error != null) {
-			cb(error,null);
-		} else {
-			var bytes = haxe_io_Bytes.ofData(data);
-			cb(null,new haxe_io_BytesInput(bytes));
-		}
+	return new bitmap_support_Promise(function(resolve) {
+		bitmap_IOUtil.fetchResource(url,function(error,data) {
+			if(error != null) {
+				resolve({ error : error, data : null});
+				if(cb != null) {
+					cb(error,null);
+				}
+			} else {
+				var input = new haxe_io_BytesInput(haxe_io_Bytes.ofData(data));
+				resolve({ error : null, data : input});
+				if(cb != null) {
+					cb(null,input);
+				}
+			}
+			return;
+		});
 		return;
 	});
 };
@@ -1004,8 +1013,12 @@ bitmap_IOUtil.fetchResource = function(url,cb) {
 				return data.push(chunk);
 			});
 			return resp.on("end",function(chunk1) {
-				var body = Buffer.concat(data);
-				cb(null,body);
+				if(resp.statusCode >= 400) {
+					cb(1,null);
+				} else {
+					var tmp = Buffer.concat(data);
+					cb(null,tmp);
+				}
 				return null;
 			});
 		}).on("error",function(err) {
@@ -1521,6 +1534,58 @@ var bitmap_support_Doc = function() { };
 bitmap_support_Doc.__name__ = true;
 var bitmap_support_Pako = function() { };
 bitmap_support_Pako.__name__ = true;
+var bitmap_support_Promise = function(fn) {
+	var _gthis = this;
+	this.resolveListeners = [];
+	fn(function(t) {
+		_gthis.resolvedWith = t;
+		var _g = 0;
+		var _g1 = _gthis.resolveListeners;
+		while(_g < _g1.length) {
+			var l = _g1[_g];
+			++_g;
+			l(t);
+		}
+		return;
+	});
+};
+bitmap_support_Promise.__name__ = true;
+bitmap_support_Promise.all = function(promises) {
+	if(promises.length == 0) {
+		return bitmap_support_Promise.resolve([]);
+	}
+	return new bitmap_support_Promise(function(resolve) {
+		var resolved = [];
+		var f = function(t) {
+			resolved.push(t);
+			if(resolved.length == promises.length) {
+				resolve(resolved);
+			}
+		};
+		var _g = 0;
+		while(_g < promises.length) {
+			var p = promises[_g];
+			++_g;
+			p.then(f);
+		}
+		return;
+	});
+};
+bitmap_support_Promise.resolve = function(t) {
+	return new bitmap_support_Promise(function(resolve) {
+		resolve(t);
+		return;
+	});
+};
+bitmap_support_Promise.prototype = {
+	then: function(l) {
+		this.resolveListeners.push(l);
+		if(this.resolvedWith != null) {
+			l(this.resolvedWith);
+		}
+	}
+	,__class__: bitmap_support_Promise
+};
 var bitmap_support_StructureTools = function() { };
 bitmap_support_StructureTools.__name__ = true;
 bitmap_support_StructureTools.assign = function(o1,o2,o3) {

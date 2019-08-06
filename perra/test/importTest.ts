@@ -13,8 +13,7 @@ test('importing directly', async t => {
 })
 
 async function nDraw(inputFile: string, n: string) {
-  const input = IOUtil.readFile(inputFile)
-  var b = PNGBitmap.create(input)
+  var b = PNGBitmap.create(IOUtil.readFile(inputFile))
   b.draw.rectangle2(10, 10, 30, 30, Color.create(20, 200, 10, 128), true)
   BitmapIO.writeBitmap(n, b)
   return await File.fromFile(n)

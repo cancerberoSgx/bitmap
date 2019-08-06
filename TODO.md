@@ -1,5 +1,9 @@
 ## TODO
 
+- [ ] high level Bitmap-centric APIs for read/write/fetch - BitmapIO.fromFile('f.png'), BitmapIO.fromUrl('url.com/f.png')
+- [w] IO utilities should return thenanables
+  - [x] IOUtil.fetch support both callback and thenable
+- [ ] use magica for testing
 - [ ] verify that bitmap.compare is working correctly. also copyFrom, both  with different bounds and regions.
 - [W] easy API for common affine transforms like rotate, translate, skew
 - [] easy API for bitmap.colors like contrast, bright, sepia, etc

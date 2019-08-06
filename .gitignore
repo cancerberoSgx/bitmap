@@ -4,3 +4,5 @@ bkps
 tmp*
 dump
 *.zip
+perra/node_modules
+perra/dist
