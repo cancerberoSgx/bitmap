@@ -1,47 +1,47 @@
 package bitmap;
 
-enum Blend {
+@:expose enum Blend {
 	alpha;
 	mean;
 	none;
 }
 
-typedef ColorBlend = {
+@:expose typedef ColorBlend = {
   var type: Blend;
   @:optional var factor:Float;
 };
 
-typedef Point = {
+@:expose typedef Point = {
 	x:Int,
 	y:Int
 };
 
-typedef FloatPoint = {
+@:expose typedef FloatPoint = {
 	x:Float,
 	y:Float
 };
 
-typedef Area = {
+@:expose typedef Area = {
 	var width:Int;
 	var height:Int;
 };
 
-typedef OptionalArea = {
+@:expose typedef OptionalArea = {
 @:optional 	var width:Int;
 @:optional var height:Int;
 };
 
-typedef Rectangle = {
+@:expose typedef Rectangle = {
 	> Point,
   > Area,
 };
 
-enum PixelFormat {
+@:expose enum PixelFormat {
 	RGBA;
 	ARGB;
 }
 
-enum Background {
+@:expose enum Background {
   bg;
   none;
 }

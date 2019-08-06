@@ -2,7 +2,7 @@ package bitmap;
 
 import bitmap.*;
 
-class BitmapUtil {
+@:expose class BitmapUtil {
 	public static function bitmapEquals(a:Bitmap, b:Bitmap, ?region:Types.Rectangle) {
 		if (a.width != b.width || a.height != b.height) {
 			return false;

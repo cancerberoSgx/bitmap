@@ -17,7 +17,7 @@ class GeometrizeTest implements utest.ITest {
     //   iterations: 2,
     //   shapeCount:3
     // });
-		// IOUtil.writeBitmap('test/assets/tmpGeometrize1.png', r1.bitmap);
+		// BitmapIO.writeBitmap('test/assets/tmpGeometrize1.png', r1.bitmap);
     // var r2 = g.geometrize({
     //   bitmap: a,
     //   alpha: 233,
@@ -25,7 +25,7 @@ class GeometrizeTest implements utest.ITest {
     //   iterations: 2,
     //   shapeCount:122
     // });
-		// IOUtil.writeBitmap('test/assets/tmpGeometrize2.png', r2.bitmap);
+		// BitmapIO.writeBitmap('test/assets/tmpGeometrize2.png', r2.bitmap);
 		// Assert.isTrue(Math.abs(r1.bitmap.compare(a))>Math.abs(r2.bitmap.compare(a)));
 
 		// Assert.isTrue(a.compare(a)==0);

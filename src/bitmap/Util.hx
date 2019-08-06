@@ -6,7 +6,7 @@ import bitmap.*;
  * Utility functions.
  * Adapted from https://github.com/Tw1ddle/geometrize-haxe/
  */
-class Util {
+@:expose class Util {
 	/**
 	 * Clamps a value within a range.
 	 * @param	value	The value to clamp.

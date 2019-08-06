@@ -1,0 +1,18 @@
+-lib format
+-lib sure
+-lib hxtsdgen
+
+-cp src
+-debug
+bitmap.support.Doc
+-js perra/src/bitmap.js
+
+
+# -main bitmap.support.Doc
+# --no-output
+# -cmd perra/lib/*
+# -cmd  rm -rf perra/lib && mkdir -p perra/lib  && sleep 1s
+# -cmd    mkdir -p perra/lib  
+#  && echo "export namespace bitmap {	export var Color:any}" >> perra/lib/index.d.ts 
+# -cmd echo "export namespace bitmap {	export var Color:any}" >> perra/lib/index.d.ts 
+# rm -rf perra/lib ; mkdir -p perra/lib &&  echo "// @ts-nocheck" > perra/lib/index.js && echo "" >> perra/lib/index.js && cat bin/jslib/bitmap.js >> perra/lib/index.js && cp bin/jslib/bitmap.d.ts perra/lib/index.d.ts && cp bin/jslib/bitmap.js.map perra/lib/index.js.map

@@ -4,7 +4,7 @@ package bitmap;
  * Represents a color in RGBA8888 format with underlying type Int.
  * @author Sam Twidale (http://samcodes.co.uk/)
  */
-abstract Color(UInt) from Int from UInt to UInt {
+@:expose abstract Color(UInt) from Int from UInt to UInt {
 	/**
 	 * Red color component.
 	 */

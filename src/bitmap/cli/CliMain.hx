@@ -29,7 +29,7 @@ class CliMain {
 		for (i in 0...config.length) {
 			bitmap = handleTransformation(config[i], bitmap);
 		}
-		IOUtil.writeBitmap(args['output'], bitmap);
+		BitmapIO.writeBitmap(args['output'], bitmap);
 	}
 
 	static function handleTransformation(config:Dynamic, bitmap:Bitmap) {

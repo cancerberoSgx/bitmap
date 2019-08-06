@@ -21,6 +21,6 @@ class FontTest implements utest.ITest {
 			y: 20,
 			bitmap: PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"))
 		});
-		IOUtil.writeBitmap('test/assets/tmpFont1.png', r.bitmap);
+		BitmapIO.writeBitmap('test/assets/tmpFont1.png', r.bitmap);
 	}
 }

@@ -20,7 +20,7 @@ var bounds = {x: Std.parseInt(c.x), y: Std.parseInt(c.y), width: Std.parseInt(c.
       o.copyFrom(cc, {x: 0,y: 0}, {x:x, y: y, width: cc.width, height: cc.height });
       x+=cc.width;
     }
-		IOUtil.writeBitmap('test/assets/tmpFonts2.png', o);
+		BitmapIO.writeBitmap('test/assets/tmpFonts2.png', o);
 
   }
 }

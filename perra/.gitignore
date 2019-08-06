@@ -1,0 +1,13 @@
+node_modules
+dist
+.cache
+.DS_Store
+*.tgz
+.nyc_output
+coverage
+/package
+test-browser-outdir
+tmp*
+working_tmp
+bkps
+emscripten_prefix

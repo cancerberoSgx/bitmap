@@ -2,7 +2,7 @@ package bitmap;
 
 import bitmap.*;
 
-typedef DrawShape = {
+@:expose typedef DrawShape = {
 	@:optional var fill:Bool;
 	var c:bitmap.Color;
 	@:optional var blend:Types.ColorBlend;
@@ -10,19 +10,19 @@ typedef DrawShape = {
 	var y:Int;
 };
 
-typedef LineShape = {
+@:expose typedef LineShape = {
 	> DrawShape,
 	var x2:Int;
 	var y2:Int;
 };
 
-typedef RectangleShape = {
+@:expose typedef RectangleShape = {
 	> DrawShape,
 	var width:Int;
 	var height:Int;
 };
 
-class Draw {
+@:expose class Draw {
 	private var bitmap:Bitmap;
 
 	public function new(b:Bitmap) {

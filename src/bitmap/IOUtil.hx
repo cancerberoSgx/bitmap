@@ -1,11 +1,35 @@
 package bitmap;
 
-import js.lib.Uint8Array;
-import js.html.FileReader;
-import js.html.InputElement;
-import js.lib.Promise;
+@:expose typedef ExecResult = {
+	var stdout:String;
+	var stderr:String;
+	var code:Int;
+}
 
-class IOUtil {
+@:expose class IOUtil {
+
+	// public static function execSync(cmd:String, args:Array<String>):ExecResult {
+	// 	#if js
+	// 	untyped if (((typeof(window) == 'undefined' || typeof(window.fetch) == 'undefined') && typeof(process) != 'undefined')) {
+	// 		try {
+	// 			var stdout = untyped require('child_process').execSync(cmd + ' ' + args.map(a -> '"${a.replace(~/\"/g, '\\"')}"').join(" "));
+	// 			return {code: 0, stdout: stdout.toString(), stderr: ''};
+	// 		} catch (error:Any) {
+	// 			return {code: error.code, stdout: '', stderr: error.stderr}; // TODO: stderr, code verify
+	// 		}
+	// 	} else {
+	// 		throw "Exec not available in the browser";
+	// 	}
+	// 	#else
+	// 	var process = new sys.io.Process(cmd, args);
+	// 	return {
+	// 		code: process.exitCode(),
+	// 		stdout: process.stdout.readAll().toString(),
+	// 		stderr: process.stderr.readAll().toString()
+	// 	};
+	// 	#end
+	// }
+
 	public static function fetch(url:String, cb:(error:Dynamic, data:haxe.io.BytesInput) -> Void) {
 		fetchResource(url, (error, data) -> {
 			if (error != null) {
@@ -47,33 +71,6 @@ class IOUtil {
 		#end
 	}
 
-
-public static function readHtmlInputFile(el:InputElement):Promise<Array<Bitmap>> {
-
-	// inline function htmlInputFileToUint8Array(el:InputElement)
-  // :Promise<Array<{file:File, content:Uint8Array}>>
-  //  {
-		return Promise.all([for (file in el.files) file].map(file -> (new Promise((resolve, reject) -> {
-				var reader = new FileReader();
-				reader.addEventListener('loadend', e -> resolve(new Uint8Array(reader.result)));
-        reader.readAsArrayBuffer(file);
-			})))).then(contents ->contents.map(content->{
-        var bytes = haxe.io.Bytes.ofData(content);
-				var input = new haxe.io.BytesInput(bytes);
-         var bitmap = new PNGBitmap();
-          bitmap.load(input);
-        return cast (bitmap, Bitmap);
-      }));
-  // }
-  // return htmlInputFileToUint8Array(el).then(files->{
-  //     	var bytes = haxe.io.Bytes.ofData(files[0].content);
-	// 			var input = new haxe.io.BytesInput(bytes);
-  //         var bitmap = new PNGBitmap();
-  //         bitmap.load(input);
-  //         return bitmap;
-  //   });
-
-}
 	public static function readFile(path:String):haxe.io.Input {
 		#if js
 		untyped var s = require('fs').readFileSync(path);
@@ -131,17 +128,4 @@ public static function readHtmlInputFile(el:InputElement):Promise<Array<Bitmap>>
 		#end
 	}
 
-	public static function writeBitmap(file:String, bitmap:Bitmap) {
-		var output = new haxe.io.BytesOutput();
-		bitmap.save(output);
-		var bytes = output.getBytes();
-		#if js
-		untyped require('fs').writeFileSync(file, Buffer.from((cast bytes).b));
-		return;
-		#else
-		sys.io.File.saveBytes(file, bytes);
-		return;
-		#end
-		throw "Unexpected end of method";
-	}
 }

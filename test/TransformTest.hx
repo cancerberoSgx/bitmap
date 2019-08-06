@@ -26,7 +26,7 @@ class TransformTest implements utest.ITest {
 			output: bitmap,
 			alpha: 255
 		});
-		IOUtil.writeBitmap('test/assets/tmpPixelize.png', result);
+		BitmapIO.writeBitmap('test/assets/tmpPixelize.png', result);
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/pixelize.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
 	}
@@ -44,7 +44,7 @@ class TransformTest implements utest.ITest {
 			bias: 0.2,
 			factor: 1.1,
 		});
-		IOUtil.writeBitmap('test/assets/tmpConvolve1.png', result);
+		BitmapIO.writeBitmap('test/assets/tmpConvolve1.png', result);
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/convolve.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
 	}
@@ -53,7 +53,7 @@ class TransformTest implements utest.ITest {
 		var bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/n.png"));
 		bitmap.noRangeCheck = true;
 		var result = bitmap.transform.convolve(Convolution.blur(7, 0.7));
-		IOUtil.writeBitmap('test/assets/tmpConvolve2.png', result);
+		BitmapIO.writeBitmap('test/assets/tmpConvolve2.png', result);
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/convolve2.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result, b2));
 	}
@@ -71,7 +71,7 @@ class TransformTest implements utest.ITest {
 				f: 3.0
 			}
 		});
-		IOUtil.writeBitmap('test/assets/tmpAffine1.png', result.bitmap);
+		BitmapIO.writeBitmap('test/assets/tmpAffine1.png', result.bitmap);
 		var b2 = PNGBitmap.create(IOUtil.readFile("test/assets/affine1.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(result.bitmap, b2));
 	}
@@ -83,7 +83,7 @@ class TransformTest implements utest.ITest {
 			affine: new Affine().scale(0.5, 0.3).translate(222, 211).rotateDeg(35.6),
 			output: bitmap,
 		});
-		IOUtil.writeBitmap('test/assets/tmpAffine2.png',  bitmap);
+		BitmapIO.writeBitmap('test/assets/tmpAffine2.png',  bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine2.png"))));
 	}
 
@@ -95,7 +95,7 @@ class TransformTest implements utest.ITest {
 			precision: true,
 			output: bitmap
 		});
-		IOUtil.writeBitmap('test/assets/tmpAffine3.png', bitmap);
+		BitmapIO.writeBitmap('test/assets/tmpAffine3.png', bitmap);
 		Assert.isTrue(BitmapUtil.bitmapEquals(bitmap, PNGBitmap.create(IOUtil.readFile("test/assets/affine3.png"))));
 
 		// b2.noRangeCheck = true;
@@ -110,14 +110,14 @@ class TransformTest implements utest.ITest {
 		// // bitmap.draw.line( 2,3,13, 7, Color.create(222, 222, 9, 132));
 		// bitmap.set(10,6, Color.create(222, 222, 9, 132) );
 		// bitmap.set(9,6, Color.create(2, 222, 9, 132) );
-		// IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
+		// BitmapIO.writeBitmap('test/assets/tmpAffine4.png', bitmap);
 
 		// var bitmap = new PNGBitmap(16, 16);
 		// bitmap.noRangeCheck = true;
 		// // bitmap.draw.line( 2,3,13, 7, Color.create(222, 222, 9, 132));
 		// bitmap.set(10,6, Color.create(222, 222, 9, 132) );
 		// bitmap.set(9,6, Color.create(2, 222, 9, 132) );
-		// IOUtil.writeBitmap('test/assets/tmpAffine4.png', bitmap);
+		// BitmapIO.writeBitmap('test/assets/tmpAffine4.png', bitmap);
 
 		// bitmap = PNGBitmap.create(IOUtil.readFile("test/assets/bluebells.png"));
 		// 	bitmap.noRangeCheck = true;
@@ -125,7 +125,7 @@ class TransformTest implements utest.ITest {
 		// 	affine: new Affine().rotateDeg(24),
 		// 	modify: true
 		// });
-		// IOUtil.writeBitmap('test/assets/tmpAffine5.png', bitmap);
+		// BitmapIO.writeBitmap('test/assets/tmpAffine5.png', bitmap);
 
 		Assert.isTrue(true);
 	}

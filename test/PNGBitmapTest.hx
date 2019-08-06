@@ -30,7 +30,7 @@ class PNGBitmapTest implements utest.ITest {
 			height: Std.parseInt(c.height)
 		};
 		var v = b.copy(bounds);
-		IOUtil.writeBitmap('test/assets/tmpopenSans.png', v);
+		BitmapIO.writeBitmap('test/assets/tmpopenSans.png', v);
 		Assert.isTrue(BitmapUtil.bitmapEquals(v, PNGBitmap.create(IOUtil.readFile("test/assets/openSans1.png"))));
 	}
 
@@ -61,7 +61,7 @@ class PNGBitmapTest implements utest.ITest {
 			});
 			x += cc.width;
 		}
-		IOUtil.writeBitmap('test/assets/tmpopenSans.png', o);
+		BitmapIO.writeBitmap('test/assets/tmpopenSans.png', o);
 		Assert.isTrue(BitmapUtil.bitmapEquals(o, PNGBitmap.create(IOUtil.readFile("test/assets/openSans2.png"))));
 	}
 }

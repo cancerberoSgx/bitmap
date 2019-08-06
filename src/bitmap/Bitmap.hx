@@ -4,17 +4,17 @@ import haxe.io.*;
 import bitmap.*;
 import bitmap.transformation.*;
 
-interface RectangleArea {
+@:expose interface RectangleArea {
 	@:readOnly public var width:Int;
 	@:readOnly public var height:Int;
 }
 
-interface OffsetRectangleArea extends RectangleArea {
+@:expose interface OffsetRectangleArea extends RectangleArea {
 	@:readOnly public var originalWidth:Int;
 	@:readOnly public var originalHeight:Int;
 }
 
-interface Bitmap extends OffsetRectangleArea {
+@:expose interface Bitmap extends OffsetRectangleArea {
 	/**
 	 * image bitmap Raw bytes in RGBA int32 format.
 	**/

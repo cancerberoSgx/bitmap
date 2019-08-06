@@ -4,7 +4,7 @@ import haxe.io.*;
 import bitmap.*;
 import bitmap.transformation.*;
 
-@:abstract class AbstractBitmap implements Bitmap {
+@:expose @:abstract class AbstractBitmap implements Bitmap {
 	public var noRangeCheck = true;
 
 	/**

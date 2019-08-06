@@ -33,11 +33,11 @@ class BitmapUtilTest implements utest.ITest {
 		b.draw.rectangle2(2, 1, 2, 3, Color.create(12, 144, 0, 132), true);
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 
-		IOUtil.writeBitmap("test/assets/tmptestbitmapEquals2a.png", a);
+		BitmapIO.writeBitmap("test/assets/tmptestbitmapEquals2a.png", a);
 		a = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestbitmapEquals2a.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 
-		IOUtil.writeBitmap("test/assets/tmptestbitmapEquals2b.png", b);
+		BitmapIO.writeBitmap("test/assets/tmptestbitmapEquals2b.png", b);
 		b = PNGBitmap.create(IOUtil.readFile("test/assets/tmptestbitmapEquals2b.png"));
 		Assert.isTrue(BitmapUtil.bitmapEquals(a, b));
 

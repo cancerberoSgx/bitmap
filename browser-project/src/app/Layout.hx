@@ -38,9 +38,7 @@ ${[for(output in this.props.state.output)'<img class="output" src="${output.io.t
 <style>
 ${Styles.css}
 </style>
-
   ';
-
 	}
 
 	function applicationDownload(url:String, filename:String) {
@@ -52,15 +50,6 @@ ${Styles.css}
 		});
 	}
 
-	// function inputFileToUint8Array(el:InputElement)
-	// :Promise<Array<{file:File, content:Uint8Array}>>
-	//  {
-	// 	return Promise.all([for (file in el.files) file].map(file -> (new Promise((resolve, reject) -> {
-	// 			var reader = new FileReader();
-	// 			reader.addEventListener('loadend', e -> resolve(new Uint8Array(reader.result)));
-	//       reader.readAsArrayBuffer(file);
-	// 		})).then(content -> (cast ({file: file, content: content}, file:File, content:Uint8Array})))));
-	// }
 	override function afterRender() {
 		queryOne('.shapes').addEventListener('click', e -> exampleSelected('shapes'));
 		queryOne('.convolutions').addEventListener('click', e -> exampleSelected('convolutions'));
@@ -70,25 +59,12 @@ ${Styles.css}
 		queryOne('.text').addEventListener('click', e -> exampleSelected('text'));
 		queryOne('.getSource').addEventListener('click', e -> (cast queryOne('.exampleCode')).scrollIntoViewIfNeeded());
 		queryOne('.loadFile').addEventListener('change', e -> {
-			IOUtil.readHtmlInputFile(e.currentTarget).then(bitmaps -> Store.getInstance().setState({
+			BitmapIO.readHtmlInputFile(e.currentTarget).then(bitmaps -> Store.getInstance().setState({
 					example: this.props.state.example,
 					output: [for (i in 0...5) bitmaps[0].clone()],
 					bitmap: bitmaps[0]
 				}));
-
-			// inputFileToUint8Array(e.currentTarget).then(files->{
-			//   	var bytes = haxe.io.Bytes.ofData(files[0].content);
-			// 		var input = new haxe.io.BytesInput(bytes);
-			//       var bitmap = new PNGBitmap();
-			//       bitmap.load(input);
-			//       Store.getInstance().setState({
-			// 			example: this.props.state.example,
-			// 			output: [for(i in 0...5)bitmap.clone()],
-			// 			bitmap: bitmap
-			// 		});
 		});
-		// });
-
 		var i = 0;
 		for (output in query('.output')) {
 			untyped output.addEventListener('click', e -> applicationDownload(e.currentTarget.src, 'output-' + i++ + '.png'));
