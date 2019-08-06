@@ -1,8 +1,6 @@
 import test from 'ava'
-import { bitmap } from '../src'
-import { IOUtil, PNGBitmap, Color, BitmapIO } from '../src'
-import { File, imageCompare } from 'magica'
-import { imageCompareNumber } from 'magica/dist/src/image/imageCompare'
+import { File } from 'magica'
+import { BitmapIO, Color, IOUtil, PNGBitmap } from '../src'
 
 test('importing using namespace', async t => {
   var f = await nDraw('test/assets/n.png', 'tmp2.png')
