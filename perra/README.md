@@ -2,7 +2,6 @@
 
 [Bitmap](https://github.com/cancerberoSgx/bitmap) haxe library as a JavaScript API directly generated from haxe -js target. Zero implementation. TypeScript definitions automatically generated. Plus, some tests.
 
-
 ## Contents
 
 <!-- toc -->
