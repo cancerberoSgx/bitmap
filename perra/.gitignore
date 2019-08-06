@@ -11,3 +11,4 @@ tmp*
 working_tmp
 bkps
 emscripten_prefix
+tmp*

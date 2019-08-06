@@ -8,7 +8,7 @@ export namespace bitmap {
 }
 
 export namespace bitmap {
-	export interface OffsetRectangleArea {
+	export interface OffsetRectangleArea extends RectangleArea {
 		originalWidth: number;
 		originalHeight: number;
 	}
@@ -16,7 +16,7 @@ export namespace bitmap {
 
 export namespace haxe.io {
 	export class Bytes {
-		private constructor(data: ArrayBuffer);
+		protected constructor(data: ArrayBuffer);
 		readonly length: number;
 		blit(pos: number, src: haxe.io.Bytes, srcpos: number, len: number): void;
 		fill(pos: number, len: number, value: number): void;
@@ -303,7 +303,7 @@ export namespace haxe.io {
 	 * is reached.
 	 */
 	export class Input {
-		private constructor();
+		protected constructor();
 		/**
 		 * Endianness (word byte order) used when reading numbers.
 		 * If `true`, big-endian is used, otherwise `little-endian` is used.
@@ -360,7 +360,7 @@ export namespace haxe.io {
 	 * Output.
 	 */
 	export class Output {
-		private constructor();
+		protected constructor();
 		/**
 		 * Endianness (word byte order) used when writing numbers.
 		 * If `true`, big-endian is used, otherwise `little-endian` is used.
@@ -399,7 +399,7 @@ export namespace haxe.io {
 }
 
 export namespace bitmap {
-	export interface Bitmap {
+	export interface Bitmap extends OffsetRectangleArea {
 		/**
 		 * image bitmap Raw bytes in RGBA int32 format.
 		 */
@@ -468,7 +468,7 @@ export namespace bitmap {
 }
 
 export namespace bitmap {
-	export class AbstractBitmap {
+	export class AbstractBitmap implements Bitmap {
 		constructor(w: number, h?: number, f?: any);
 		noRangeCheck: boolean;
 		/**
@@ -534,7 +534,7 @@ export namespace bitmap {
 
 export namespace bitmap {
 	export class BitmapUtil {
-		private constructor();
+		protected constructor();
 		static bitmapEquals(a: bitmap.Bitmap, b: bitmap.Bitmap, region?: bitmap.Rectangle): boolean;
 		/**
 		 * Compares given region of given Bitmaps. Returns a number between -1 and 1, the biger its absolute value the bigger the difference. If negative it means the sum of a's bytes is bigger than b's, possitive otherwise.
@@ -563,7 +563,7 @@ export namespace bitmap {
 
 export namespace bitmap._Color {
 	export class Color_Impl_ {
-		private constructor();
+		protected constructor();
 		/**
 		 * Red color component.
 		 */
@@ -640,7 +640,7 @@ export namespace bitmap {
 
 export namespace bitmap {
 	export class ColorUtil {
-		private constructor();
+		protected constructor();
 		mix(c1: bitmap.Color, c2: bitmap.Color, strength: number): bitmap.Color;
 		static colorEquals(a: bitmap.Color, b: bitmap.Color): boolean;
 		/**
@@ -720,7 +720,7 @@ export namespace bitmap {
 }
 
 export namespace haxe.io {
-	export class BytesInput {
+	export class BytesInput extends Input {
 		constructor(b: haxe.io.Bytes, pos?: number, len?: number);
 		/**
 		 * The current position in the stream in bytes.
@@ -737,7 +737,7 @@ export namespace haxe.io {
 
 export namespace bitmap {
 	export class IOUtil {
-		private constructor();
+		protected constructor();
 		static fetch(url: string, cb: (error: any, data: haxe.io.BytesInput) => void): void;
 		static fetchResource(url: string, cb: (error: any, data: ArrayBuffer) => void): void;
 		static readFile(path: string): haxe.io.Input;
@@ -750,7 +750,7 @@ export namespace bitmap {
 }
 
 export namespace bitmap {
-	export class PNGBitmap extends AbstractBitmap{
+	export class PNGBitmap extends AbstractBitmap {
 		constructor(w: number, h?: number, f?: any);
 		load(input: haxe.io.Input, f?: any): void;
 		save(output: haxe.io.Output): void;
@@ -809,7 +809,7 @@ export namespace bitmap {
 	 * Adapted from https://github.com/Tw1ddle/geometrize-haxe/
 	 */
 	export class Util {
-		private constructor();
+		protected constructor();
 		/**
 		 * Clamps a value within a range.
 		 * @param	value	The value to clamp.

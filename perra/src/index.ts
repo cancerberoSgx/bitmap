@@ -10,6 +10,6 @@ export const Util = b. Util
 
 export const Color = b._Color.Color_Impl_ as typeof  b._Color.Color_Impl_
 
-export const bitmap = b
+export const bitmap = {...b, Color}
 
 // const { bitmap } = require('./index.js') as typeof Bitmap
