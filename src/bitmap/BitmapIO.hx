@@ -1,6 +1,7 @@
 package bitmap;
 
 import bitmap.*;
+import bitmap.support.Promise;
 
 /**
  * Utilities to load/save bitmaps from/to other formats or resources, such as base64 dataUrls, raw bytes formats, HTML canvas, HTML images, DOM Blobs, TypedArrays, buffers, urls, etc.
@@ -65,4 +66,18 @@ import bitmap.*;
 		throw "Unexpected end of method";
 	}
 
+	public static function fromUrl(url:String):Promise<Null<Bitmap>> {
+		return new Promise<Null<Bitmap>>(resolve -> {
+			IOUtil.fetch(url).then(result -> {
+				if (result.error != null) {
+					resolve(null);
+				}
+				resolve(PNGBitmap.create(result.data));
+			});
+		});
+	}
+
+	public static function fromFile(path:String):Bitmap {
+		return PNGBitmap.create(IOUtil.readFile(path));
+	}
 }

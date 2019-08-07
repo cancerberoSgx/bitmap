@@ -12,13 +12,11 @@ import GeometrizeTest;
 import DrawTest;
 import ColorsTest;
 import FontTest;
+import BitmapIOTest;
 
 class TestMain {
 	static function main() {
-    trace('Starting');
-	// try {
-
-  	var runner = new Runner();
+		var runner = new Runner();
 		runner.addCase(new PNGBitmapTest());
 		runner.addCase(new IOUtilTest());
 		runner.addCase(new BitmapUtilTest());
@@ -27,15 +25,8 @@ class TestMain {
 		runner.addCase(new DrawTest());
 		runner.addCase(new ColorsTest());
 		runner.addCase(new FontTest());
-
+		runner.addCase(new BitmapIOTest());
 		Report.create(runner);
 		runner.run();
-    trace('Finishing');
-
-		// runner.addCase(new PerformanceGetSetTest());
-		// runner.addCase(new GeometrizeTest());
-  // }catch(ex:Dynamic){
-  //   trace("error", ex);
-  // }
 	}
 }
