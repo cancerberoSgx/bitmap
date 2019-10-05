@@ -329,6 +329,22 @@ bitmap_BitmapIO.writeBitmap = function(file,bitmap1) {
 	tmp.writeFileSync(file,tmp1);
 	return;
 };
+bitmap_BitmapIO.fromUrl = function(url) {
+	return new bitmap_support_Promise(function(resolve) {
+		bitmap_IOUtil.fetch(url).then(function(result) {
+			if(result.error != null) {
+				resolve(null);
+			}
+			var tmp = bitmap_PNGBitmap.create(result.data);
+			resolve(tmp);
+			return;
+		});
+		return;
+	});
+};
+bitmap_BitmapIO.fromFile = function(path) {
+	return bitmap_PNGBitmap.create(bitmap_IOUtil.readFile(path));
+};
 bitmap_BitmapIO.prototype = {
 	toDataUrl: function(mime,name) {
 		if(mime == null) {

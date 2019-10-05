@@ -11,7 +11,7 @@
     "build": "npm run clean && mkdir -p dist/src && cd .. &&  haxe test/targets/test-js-expose.hxml  && mv  perra/src/bitmap.js  perra/src/bitmap.js2 && echo \"//@ts-nocheck\" > perra/src/bitmap.js && echo \"\" >> perra/src/bitmap.js && cat perra/src/bitmap.js2 >> perra/src/bitmap.js && rm perra/src/bitmap.js2 && echo \"export namespace bitmap {export var Color:any; export type Color=any}\" >> perra/src/bitmap.d.ts  && cd perra && npm run copy &&  npx tsc",
     "copy": "cp src/bitmap.* dist/src",
     "docs": "npm run docs-readme-toc && npm run docs-api",
-    "docs-api": "exit 0; rm -rf docs && typedoc  --ignoreCompilerErrors --theme markdown --out docs --readme none --excludeNotExported lib/index.d.ts ",
+    "docs-api": "rm -rf apidocs && typedoc --ignoreCompilerErrors --theme markdown --out apidocs --readme none  --excludeExternals --excludeNotExported --mode modules --name perra --includeDeclarations src/bitmap.d.ts ",
     "docs-readme-toc": "npx markdown-toc README.md -i",
     "format": "npx ts-refactor format \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk",
     "organizeImports": "npx ts-refactor organizeImports \"src/**/*.ts*\" \"test/**/*.ts*\" ./formatCodeSettings.json --tsConfigPath ./tsconfig.json --dontAsk ",
@@ -22,15 +22,15 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^12.6.9",
-    "ava": "^2.2.0",
-    "magica": "^0.2.10",
+    "@types/node": "^12.7.11",
+    "ava": "^2.4.0",
+    "magica": "^0.2.17",
     "markdown-toc": "^1.2.0",
-    "ts-node": "^8.3.0",
+    "ts-node": "^8.4.1",
     "ts-refactor": "0.0.9",
     "typedoc": "^0.15.0",
-    "typedoc-plugin-markdown": "^2.1.1",
-    "typescript": "^3.5.3"
+    "typedoc-plugin-markdown": "^2.2.7",
+    "typescript": "^3.6.3"
   },
   "keywords": [
     "cross",
@@ -38,6 +38,12 @@
     "bitmap",
     "format",
     "image",
+    "image processing",
+    "TypeScript",
+    "node",
+    "browser",
+    "library",
+    "API",
     "png"
   ],
   "author": {

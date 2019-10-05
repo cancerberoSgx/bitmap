@@ -502,6 +502,15 @@ export namespace bitmap {
 	}
 }
 
+export namespace bitmap.support {
+	export class Promise<T> {
+		constructor(fn: (resolve: (t: T) => void) => void);
+		then(l: (t: T) => void): void;
+		static all<T>(promises: bitmap.support.Promise<T>[]): bitmap.support.Promise<T[]>;
+		static resolve<T>(t: T): bitmap.support.Promise<T>;
+	}
+}
+
 export namespace bitmap {
 	/**
 	 * Utilities to load/save bitmaps from/to other formats or resources, such as base64 dataUrls, raw bytes formats, HTML canvas, HTML images, DOM Blobs, TypedArrays, buffers, urls, etc.
@@ -529,6 +538,8 @@ export namespace bitmap {
 		 */
 		static readHtmlInputFile(el: HTMLInputElement): Promise<bitmap.Bitmap[]>;
 		static writeBitmap(file: string, bitmap: bitmap.Bitmap): void;
+		static fromUrl(url: string): bitmap.support.Promise<bitmap.Bitmap>;
+		static fromFile(path: string): bitmap.Bitmap;
 	}
 }
 
@@ -732,15 +743,6 @@ export namespace haxe.io {
 		readonly length: number;
 		readByte(): number;
 		readBytes(buf: haxe.io.Bytes, pos: number, len: number): number;
-	}
-}
-
-export namespace bitmap.support {
-	export class Promise<T> {
-		constructor(fn: (resolve: (t: T) => void) => void);
-		then(l: (t: T) => void): void;
-		static all<T>(promises: bitmap.support.Promise<T>[]): bitmap.support.Promise<T[]>;
-		static resolve<T>(t: T): bitmap.support.Promise<T>;
 	}
 }
 
