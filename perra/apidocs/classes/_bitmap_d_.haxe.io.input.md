@@ -41,7 +41,7 @@ is reached.
 
 \+ **new Input**(): *[Input](_bitmap_d_.haxe.io.input.md)*
 
-*Defined in [bitmap.d.ts:305](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L305)*
+*Defined in [bitmap.d.ts:305](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L305)*
 
 **Returns:** *[Input](_bitmap_d_.haxe.io.input.md)*
 
@@ -51,7 +51,7 @@ is reached.
 
 • **bigEndian**: *boolean*
 
-*Defined in [bitmap.d.ts:311](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L311)*
+*Defined in [bitmap.d.ts:311](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L311)*
 
 Endianness (word byte order) used when reading numbers.
 If `true`, big-endian is used, otherwise `little-endian` is used.
@@ -62,7 +62,7 @@ If `true`, big-endian is used, otherwise `little-endian` is used.
 
 ▸ **read**(`nbytes`: number): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:337](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L337)*
+*Defined in [bitmap.d.ts:337](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L337)*
 
 Read and return `nbytes` bytes.
 
@@ -80,7 +80,7 @@ ___
 
 ▸ **readAll**(`bufsize`: number): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:328](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L328)*
+*Defined in [bitmap.d.ts:328](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L328)*
 
 Read and return all available data.
 The `bufsize` optional argument specifies the size of chunks by
@@ -100,7 +100,7 @@ ___
 
 ▸ **readByte**(): *number*
 
-*Defined in [bitmap.d.ts:315](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L315)*
+*Defined in [bitmap.d.ts:315](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L315)*
 
 Read and return one byte.
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **readBytes**(`s`: [Bytes](_bitmap_d_.haxe.io.bytes.md), `pos`: number, `len`: number): *number*
 
-*Defined in [bitmap.d.ts:321](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L321)*
+*Defined in [bitmap.d.ts:321](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L321)*
 
 Read `len` bytes and write them into `s` to the position specified by `pos`.
 Returns the actual length of read data that can be smaller than `len`.
@@ -134,7 +134,7 @@ ___
 
 ▸ **readFullBytes**(`s`: [Bytes](_bitmap_d_.haxe.io.bytes.md), `pos`: number, `len`: number): *void*
 
-*Defined in [bitmap.d.ts:333](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L333)*
+*Defined in [bitmap.d.ts:333](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L333)*
 
 Read `len` bytes and write them into `s` to the position specified by `pos`.
 Unlike `readBytes`, this method tries to read the exact `len` amount of bytes.
@@ -155,7 +155,7 @@ ___
 
 ▸ **readInt32**(): *number*
 
-*Defined in [bitmap.d.ts:347](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L347)*
+*Defined in [bitmap.d.ts:347](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L347)*
 
 Read a 32-bit signed integer.
 Endianness is specified by the `bigEndian` property.
@@ -168,7 +168,7 @@ ___
 
 ▸ **readString**(`len`: number, `encoding?`: any): *string*
 
-*Defined in [bitmap.d.ts:351](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L351)*
+*Defined in [bitmap.d.ts:351](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L351)*
 
 Read and `len` bytes as a string.
 
@@ -187,7 +187,7 @@ ___
 
 ▸ **readUInt16**(): *number*
 
-*Defined in [bitmap.d.ts:342](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L342)*
+*Defined in [bitmap.d.ts:342](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L342)*
 
 Read a 16-bit unsigned integer.
 Endianness is specified by the `bigEndian` property.
@@ -200,7 +200,7 @@ ___
 
 ▸ **set_bigEndian**(`b`: boolean): *boolean*
 
-*Defined in [bitmap.d.ts:322](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L322)*
+*Defined in [bitmap.d.ts:322](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L322)*
 
 **Parameters:**
 

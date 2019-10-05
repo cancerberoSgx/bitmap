@@ -28,7 +28,7 @@
 
 \+ **new ColorUtil**(): *[ColorUtil](_bitmap_d_.bitmap.colorutil.md)*
 
-*Defined in [bitmap.d.ts:653](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L653)*
+*Defined in [bitmap.d.ts:653](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L653)*
 
 **Returns:** *[ColorUtil](_bitmap_d_.bitmap.colorutil.md)*
 
@@ -38,7 +38,7 @@
 
 ▸ **mix**(`c1`: [Color](../modules/_bitmap_d_.bitmap.md#color), `c2`: [Color](../modules/_bitmap_d_.bitmap.md#color), `strength`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:655](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L655)*
+*Defined in [bitmap.d.ts:655](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L655)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **average**(`image`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `region?`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle), `alpha?`: undefined | number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:663](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L663)*
+*Defined in [bitmap.d.ts:663](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L663)*
 
 Computes the average RGB color of the pixels in the image.
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **blendColors**(`c1`: [Color](../modules/_bitmap_d_.bitmap.md#color), `c2`: [Color](../modules/_bitmap_d_.bitmap.md#color), `blend?`: [ColorBlend](../modules/_bitmap_d_.bitmap.md#colorblend)): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:669](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L669)*
+*Defined in [bitmap.d.ts:669](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L669)*
 
 Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) .
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **colorEquals**(`a`: [Color](../modules/_bitmap_d_.bitmap.md#color), `b`: [Color](../modules/_bitmap_d_.bitmap.md#color)): *boolean*
 
-*Defined in [bitmap.d.ts:656](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L656)*
+*Defined in [bitmap.d.ts:656](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L656)*
 
 **Parameters:**
 
@@ -115,7 +115,7 @@ ___
 
 ▸ **filter**(`c`: [Color](../modules/_bitmap_d_.bitmap.md#color), `o`: [ColorFilter](../modules/_bitmap_d_.bitmap.md#colorfilter)): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:673](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L673)*
+*Defined in [bitmap.d.ts:673](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L673)*
 
 Supports filter declarations by providing a function `fn` that transform colors to colors, or if not given, alternatively it supports providing 1-grade equation coeficients to transform each channel linearly (red*a+c).
 
@@ -134,7 +134,7 @@ ___
 
 ▸ **random**(`alpha`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:664](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L664)*
+*Defined in [bitmap.d.ts:664](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L664)*
 
 **Parameters:**
 
@@ -150,7 +150,7 @@ ___
 
 ▸ **randomGray**(`alpha`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:665](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L665)*
+*Defined in [bitmap.d.ts:665](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L665)*
 
 **Parameters:**
 

@@ -41,7 +41,7 @@ Adapted from https://github.com/Tw1ddle/geometrize-haxe/
 
 \+ **new Util**(): *[Util](_bitmap_d_.bitmap.util.md)*
 
-*Defined in [bitmap.d.ts:829](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L829)*
+*Defined in [bitmap.d.ts:829](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L829)*
 
 **Returns:** *[Util](_bitmap_d_.bitmap.util.md)*
 
@@ -51,7 +51,7 @@ Adapted from https://github.com/Tw1ddle/geometrize-haxe/
 
 ▸ **abs**(`value`: number): *number*
 
-*Defined in [bitmap.d.ts:859](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L859)*
+*Defined in [bitmap.d.ts:859](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L859)*
 
 Returns the absolute value of the given value.
 
@@ -71,7 +71,7 @@ ___
 
 ▸ **clamp**(`value`: number, `min`: number, `max`: number): *number*
 
-*Defined in [bitmap.d.ts:838](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L838)*
+*Defined in [bitmap.d.ts:838](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L838)*
 
 Clamps a value within a range.
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **dist**(`x`: number, `y`: number): *number*
 
-*Defined in [bitmap.d.ts:895](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L895)*
+*Defined in [bitmap.d.ts:895](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L895)*
 
 **Parameters:**
 
@@ -110,7 +110,7 @@ ___
 
 ▸ **max**(`first`: number, `second`: number): *number*
 
-*Defined in [bitmap.d.ts:853](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L853)*
+*Defined in [bitmap.d.ts:853](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L853)*
 
 Compare two values and returns the larger one.
 
@@ -131,7 +131,7 @@ ___
 
 ▸ **min**(`first`: number, `second`: number): *number*
 
-*Defined in [bitmap.d.ts:846](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L846)*
+*Defined in [bitmap.d.ts:846](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L846)*
 
 Compares two values and returns the smaller one.
 
@@ -152,7 +152,7 @@ ___
 
 ▸ **minMaxElements**(`a`: number[]): *object*
 
-*Defined in [bitmap.d.ts:908](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L908)*
+*Defined in [bitmap.d.ts:908](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L908)*
 
 Returns the smallest and largest items from an array of ints.
 
@@ -172,7 +172,7 @@ ___
 
 ▸ **multiply**(`a`: number[][], `b`: number[][]): *number[][]*
 
-*Defined in [bitmap.d.ts:894](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L894)*
+*Defined in [bitmap.d.ts:894](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L894)*
 
 **Parameters:**
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **parseIntOrThrow**(`s`: string): *number*
 
-*Defined in [bitmap.d.ts:878](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L878)*
+*Defined in [bitmap.d.ts:878](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L878)*
 
 Converts a value measured in radians to degrees.
 
@@ -209,7 +209,7 @@ ___
 
 ▸ **printRectangle**(`r`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle)): *string*
 
-*Defined in [bitmap.d.ts:839](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L839)*
+*Defined in [bitmap.d.ts:839](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L839)*
 
 **Parameters:**
 
@@ -225,7 +225,7 @@ ___
 
 ▸ **random**(`lower`: number, `upper`: number): *number*
 
-*Defined in [bitmap.d.ts:885](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L885)*
+*Defined in [bitmap.d.ts:885](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L885)*
 
 Returns a random integer in the range (inclusive).
 
@@ -246,7 +246,7 @@ ___
 
 ▸ **randomArrayItem**<**T**>(`a`: T[]): *T*
 
-*Defined in [bitmap.d.ts:902](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L902)*
+*Defined in [bitmap.d.ts:902](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L902)*
 
 Returns a random item from an array.
 
@@ -270,7 +270,7 @@ ___
 
 ▸ **randomIntArray**(`length`: number, `lower`: number, `upper`: number, `noRepeat?`: undefined | false | true): *number[]*
 
-*Defined in [bitmap.d.ts:892](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L892)*
+*Defined in [bitmap.d.ts:892](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L892)*
 
 Returns a random array of integers in the range (inclusive).
 
@@ -293,7 +293,7 @@ ___
 
 ▸ **randomRectangle**(`r`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle)): *object*
 
-*Defined in [bitmap.d.ts:893](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L893)*
+*Defined in [bitmap.d.ts:893](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L893)*
 
 **Parameters:**
 
@@ -309,7 +309,7 @@ ___
 
 ▸ **sgn**(`value`: number): *number*
 
-*Defined in [bitmap.d.ts:860](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L860)*
+*Defined in [bitmap.d.ts:860](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L860)*
 
 **Parameters:**
 
@@ -325,7 +325,7 @@ ___
 
 ▸ **toDegrees**(`radians`: number): *number*
 
-*Defined in [bitmap.d.ts:872](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L872)*
+*Defined in [bitmap.d.ts:872](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L872)*
 
 Converts a value measured in radians to degrees.
 
@@ -345,7 +345,7 @@ ___
 
 ▸ **toRadians**(`degrees`: number): *number*
 
-*Defined in [bitmap.d.ts:866](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L866)*
+*Defined in [bitmap.d.ts:866](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L866)*
 
 Converts a value measured in degrees to radians.
 
@@ -365,7 +365,7 @@ ___
 
 ▸ **urlToBase64**(`s`: string): *string*
 
-*Defined in [bitmap.d.ts:896](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L896)*
+*Defined in [bitmap.d.ts:896](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L896)*
 
 **Parameters:**
 

@@ -37,7 +37,7 @@ Output.
 
 \+ **new Output**(): *[Output](_bitmap_d_.haxe.io.output.md)*
 
-*Defined in [bitmap.d.ts:362](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L362)*
+*Defined in [bitmap.d.ts:362](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L362)*
 
 **Returns:** *[Output](_bitmap_d_.haxe.io.output.md)*
 
@@ -47,7 +47,7 @@ Output.
 
 • **bigEndian**: *boolean*
 
-*Defined in [bitmap.d.ts:368](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L368)*
+*Defined in [bitmap.d.ts:368](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L368)*
 
 Endianness (word byte order) used when writing numbers.
 If `true`, big-endian is used, otherwise `little-endian` is used.
@@ -58,7 +58,7 @@ If `true`, big-endian is used, otherwise `little-endian` is used.
 
 ▸ **set_bigEndian**(`b`: boolean): *boolean*
 
-*Defined in [bitmap.d.ts:379](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L379)*
+*Defined in [bitmap.d.ts:379](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L379)*
 
 **Parameters:**
 
@@ -74,7 +74,7 @@ ___
 
 ▸ **write**(`s`: [Bytes](_bitmap_d_.haxe.io.bytes.md)): *void*
 
-*Defined in [bitmap.d.ts:383](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L383)*
+*Defined in [bitmap.d.ts:383](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L383)*
 
 Write all bytes stored in `s`.
 
@@ -92,7 +92,7 @@ ___
 
 ▸ **writeByte**(`c`: number): *void*
 
-*Defined in [bitmap.d.ts:372](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L372)*
+*Defined in [bitmap.d.ts:372](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L372)*
 
 Write one byte.
 
@@ -110,7 +110,7 @@ ___
 
 ▸ **writeBytes**(`s`: [Bytes](_bitmap_d_.haxe.io.bytes.md), `pos`: number, `len`: number): *number*
 
-*Defined in [bitmap.d.ts:378](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L378)*
+*Defined in [bitmap.d.ts:378](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L378)*
 
 Write `len` bytes from `s` starting by position specified by `pos`.
 Returns the actual length of written data that can differ from `len`.
@@ -132,7 +132,7 @@ ___
 
 ▸ **writeFullBytes**(`s`: [Bytes](_bitmap_d_.haxe.io.bytes.md), `pos`: number, `len`: number): *void*
 
-*Defined in [bitmap.d.ts:388](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L388)*
+*Defined in [bitmap.d.ts:388](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L388)*
 
 Write `len` bytes from `s` starting by position specified by `pos`.
 Unlike `writeBytes`, this method tries to write the exact `len` amount of bytes.
@@ -153,7 +153,7 @@ ___
 
 ▸ **writeInt32**(`x`: number): *void*
 
-*Defined in [bitmap.d.ts:393](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L393)*
+*Defined in [bitmap.d.ts:393](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L393)*
 
 Write `x` as 32-bit signed integer.
 Endianness is specified by the `bigEndian` property.
@@ -172,7 +172,7 @@ ___
 
 ▸ **writeString**(`s`: string, `encoding?`: any): *void*
 
-*Defined in [bitmap.d.ts:397](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L397)*
+*Defined in [bitmap.d.ts:397](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L397)*
 
 Write `s` string.
 

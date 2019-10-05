@@ -56,7 +56,7 @@
 
 \+ **new AbstractBitmap**(`w`: number, `h?`: undefined | number, `f?`: any): *[AbstractBitmap](_bitmap_d_.bitmap.abstractbitmap.md)*
 
-*Defined in [bitmap.d.ts:471](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L471)*
+*Defined in [bitmap.d.ts:471](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L471)*
 
 **Parameters:**
 
@@ -76,7 +76,7 @@ Name | Type |
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[bg](../interfaces/_bitmap_d_.bitmap.bitmap.md#bg)*
 
-*Defined in [bitmap.d.ts:488](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L488)*
+*Defined in [bitmap.d.ts:488](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L488)*
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[color](../interfaces/_bitmap_d_.bitmap.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:486](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L486)*
+*Defined in [bitmap.d.ts:486](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L486)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[data](../interfaces/_bitmap_d_.bitmap.bitmap.md#data)*
 
-*Defined in [bitmap.d.ts:478](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L478)*
+*Defined in [bitmap.d.ts:478](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L478)*
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[draw](../interfaces/_bitmap_d_.bitmap.bitmap.md#draw)*
 
-*Defined in [bitmap.d.ts:484](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L484)*
+*Defined in [bitmap.d.ts:484](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L484)*
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 • **format**: *any*
 
-*Defined in [bitmap.d.ts:483](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L483)*
+*Defined in [bitmap.d.ts:483](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L483)*
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[height](../interfaces/_bitmap_d_.bitmap.bitmap.md#height)*
 
-*Defined in [bitmap.d.ts:480](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L480)*
+*Defined in [bitmap.d.ts:480](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L480)*
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **int32Mode**: *boolean*
 
-*Defined in [bitmap.d.ts:477](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L477)*
+*Defined in [bitmap.d.ts:477](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L477)*
 
 Switch between byte-by-byte and int32 modalities for reading and writing pixels with get/set.
 
@@ -144,7 +144,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[io](../interfaces/_bitmap_d_.bitmap.bitmap.md#io)*
 
-*Defined in [bitmap.d.ts:485](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L485)*
+*Defined in [bitmap.d.ts:485](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L485)*
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[noRangeCheck](../interfaces/_bitmap_d_.bitmap.bitmap.md#norangecheck)*
 
-*Defined in [bitmap.d.ts:473](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L473)*
+*Defined in [bitmap.d.ts:473](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L473)*
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[originalHeight](../interfaces/_bitmap_d_.bitmap.bitmap.md#originalheight)*
 
-*Defined in [bitmap.d.ts:482](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L482)*
+*Defined in [bitmap.d.ts:482](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L482)*
 
 ___
 
@@ -174,7 +174,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[originalWidth](../interfaces/_bitmap_d_.bitmap.bitmap.md#originalwidth)*
 
-*Defined in [bitmap.d.ts:481](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L481)*
+*Defined in [bitmap.d.ts:481](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L481)*
 
 ___
 
@@ -184,7 +184,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[transform](../interfaces/_bitmap_d_.bitmap.bitmap.md#transform)*
 
-*Defined in [bitmap.d.ts:487](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L487)*
+*Defined in [bitmap.d.ts:487](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L487)*
 
 ___
 
@@ -194,7 +194,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md).[width](../interfaces/_bitmap_d_.bitmap.bitmap.md#width)*
 
-*Defined in [bitmap.d.ts:479](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L479)*
+*Defined in [bitmap.d.ts:479](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L479)*
 
 ## Methods
 
@@ -204,7 +204,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:501](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L501)*
+*Defined in [bitmap.d.ts:501](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L501)*
 
 **Returns:** *[Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle)*
 
@@ -214,7 +214,7 @@ ___
 
 ▸ **byteIndex**(`x`: number, `y`: number): *number*
 
-*Defined in [bitmap.d.ts:492](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L492)*
+*Defined in [bitmap.d.ts:492](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L492)*
 
 **Parameters:**
 
@@ -233,7 +233,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:497](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L497)*
+*Defined in [bitmap.d.ts:497](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L497)*
 
 **Parameters:**
 
@@ -251,7 +251,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:500](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L500)*
+*Defined in [bitmap.d.ts:500](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L500)*
 
 **Parameters:**
 
@@ -271,7 +271,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:493](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L493)*
+*Defined in [bitmap.d.ts:493](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L493)*
 
 **Parameters:**
 
@@ -289,7 +289,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:499](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L499)*
+*Defined in [bitmap.d.ts:499](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L499)*
 
 **Parameters:**
 
@@ -309,7 +309,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:498](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L498)*
+*Defined in [bitmap.d.ts:498](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L498)*
 
 **Parameters:**
 
@@ -328,7 +328,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:489](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L489)*
+*Defined in [bitmap.d.ts:489](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L489)*
 
 **Parameters:**
 
@@ -346,7 +346,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:490](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L490)*
+*Defined in [bitmap.d.ts:490](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L490)*
 
 **Parameters:**
 
@@ -366,7 +366,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:495](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L495)*
+*Defined in [bitmap.d.ts:495](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L495)*
 
 **Parameters:**
 
@@ -385,7 +385,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:496](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L496)*
+*Defined in [bitmap.d.ts:496](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L496)*
 
 **Parameters:**
 
@@ -403,7 +403,7 @@ ___
 
 *Implementation of [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:494](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L494)*
+*Defined in [bitmap.d.ts:494](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L494)*
 
 **Parameters:**
 
@@ -422,6 +422,6 @@ ___
 
 ▸ **toString**(): *string*
 
-*Defined in [bitmap.d.ts:491](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L491)*
+*Defined in [bitmap.d.ts:491](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L491)*
 
 **Returns:** *string*

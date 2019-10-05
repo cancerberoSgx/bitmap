@@ -59,7 +59,7 @@ existing context.
 
 \+ **new Affine**(): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:116](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L116)*
+*Defined in [bitmap.d.ts:116](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L116)*
 
 **Returns:** *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
@@ -69,7 +69,7 @@ existing context.
 
 • **a**: *number*
 
-*Defined in [bitmap.d.ts:121](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L121)*
+*Defined in [bitmap.d.ts:121](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L121)*
 
 scale x
 
@@ -79,7 +79,7 @@ ___
 
 • **b**: *number*
 
-*Defined in [bitmap.d.ts:125](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L125)*
+*Defined in [bitmap.d.ts:125](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L125)*
 
 skew y
 
@@ -89,7 +89,7 @@ ___
 
 • **c**: *number*
 
-*Defined in [bitmap.d.ts:129](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L129)*
+*Defined in [bitmap.d.ts:129](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L129)*
 
 skew x
 
@@ -99,7 +99,7 @@ ___
 
 • **d**: *number*
 
-*Defined in [bitmap.d.ts:133](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L133)*
+*Defined in [bitmap.d.ts:133](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L133)*
 
 scale y
 
@@ -109,7 +109,7 @@ ___
 
 • **e**: *number*
 
-*Defined in [bitmap.d.ts:137](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L137)*
+*Defined in [bitmap.d.ts:137](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L137)*
 
 translate x
 
@@ -119,7 +119,7 @@ ___
 
 • **f**: *number*
 
-*Defined in [bitmap.d.ts:141](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L141)*
+*Defined in [bitmap.d.ts:141](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L141)*
 
 translate y
 
@@ -129,7 +129,7 @@ translate y
 
 ▸ **applyToArray**(`points`: Int32Array): *Int32Array*
 
-*Defined in [bitmap.d.ts:272](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L272)*
+*Defined in [bitmap.d.ts:272](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L272)*
 
 Apply current matrix to a typed array with point pairs. Although
 the input array may be an ordinary array, this method is intended
@@ -152,7 +152,7 @@ ___
 
 ▸ **applyToPoint**(`x`: number, `y`: number): *object*
 
-*Defined in [bitmap.d.ts:150](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L150)*
+*Defined in [bitmap.d.ts:150](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L150)*
 
 Apply current matrix to x and y point.
 Returns a point object.
@@ -174,7 +174,7 @@ ___
 
 ▸ **applyToPoints**(`points`: [FloatPoint](../modules/_bitmap_d_.bitmap.md#floatpoint)[]): *[FloatPoint](../modules/_bitmap_d_.bitmap.md#floatpoint)[]*
 
-*Defined in [bitmap.d.ts:262](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L262)*
+*Defined in [bitmap.d.ts:262](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L262)*
 
 Apply current matrix to array with point objects or point pairs.
 Returns a new array with points in the same format as the input array.
@@ -206,7 +206,7 @@ ___
 
 ▸ **assign**(`m`: [AffineMatrix](../modules/_bitmap_d_.bitmap.transformation.md#affinematrix)): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:159](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L159)*
+*Defined in [bitmap.d.ts:159](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L159)*
 
 Assign this affine to given matrix.
 
@@ -224,7 +224,7 @@ ___
 
 ▸ **flipX**(): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:211](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L211)*
+*Defined in [bitmap.d.ts:211](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L211)*
 
 Flips the horizontal values.
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **flipY**(): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:207](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L207)*
+*Defined in [bitmap.d.ts:207](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L207)*
 
 Flips the vertical values.
 
@@ -248,7 +248,7 @@ ___
 
 ▸ **getMatrix**(): *object*
 
-*Defined in [bitmap.d.ts:160](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L160)*
+*Defined in [bitmap.d.ts:160](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L160)*
 
 **Returns:** *object*
 
@@ -258,7 +258,7 @@ ___
 
 ▸ **interpolate**(`m2`: [AffineMatrix](../modules/_bitmap_d_.bitmap.transformation.md#affinematrix), `t`: number): *[AffineMatrix](../modules/_bitmap_d_.bitmap.transformation.md#affinematrix)*
 
-*Defined in [bitmap.d.ts:177](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L177)*
+*Defined in [bitmap.d.ts:177](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L177)*
 
 Interpolate this matrix with another and produce a new matrix.
 t is a value in the range [0.0, 1.0] where 0 is this instance and
@@ -283,7 +283,7 @@ ___
 
 ▸ **isIdentity**(): *boolean*
 
-*Defined in [bitmap.d.ts:165](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L165)*
+*Defined in [bitmap.d.ts:165](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L165)*
 
 Returns true if matrix is an identity matrix (no transforms applied).
 
@@ -297,7 +297,7 @@ ___
 
 ▸ **rotate**(`angle`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:182](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L182)*
+*Defined in [bitmap.d.ts:182](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L182)*
 
 Rotates current matrix accumulative by angle.
 
@@ -315,7 +315,7 @@ ___
 
 ▸ **rotateDeg**(`angle`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:187](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L187)*
+*Defined in [bitmap.d.ts:187](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L187)*
 
 Helper method to make a rotation based on an angle in degrees.
 
@@ -333,7 +333,7 @@ ___
 
 ▸ **scale**(`sx`: number, `sy`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:217](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L217)*
+*Defined in [bitmap.d.ts:217](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L217)*
 
 Scales current matrix accumulative.
 
@@ -352,7 +352,7 @@ ___
 
 ▸ **scaleX**(`sx`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:222](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L222)*
+*Defined in [bitmap.d.ts:222](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L222)*
 
 Scales current matrix on x axis accumulative.
 
@@ -370,7 +370,7 @@ ___
 
 ▸ **scaleY**(`sy`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:227](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L227)*
+*Defined in [bitmap.d.ts:227](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L227)*
 
 Scales current matrix on y axis accumulative.
 
@@ -388,7 +388,7 @@ ___
 
 ▸ **skew**(`sx`: number, `sy`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:233](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L233)*
+*Defined in [bitmap.d.ts:233](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L233)*
 
 Apply skew to the current matrix accumulative.
 
@@ -407,7 +407,7 @@ ___
 
 ▸ **skewX**(`sx`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:238](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L238)*
+*Defined in [bitmap.d.ts:238](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L238)*
 
 Apply skew for x to the current matrix accumulative.
 
@@ -425,7 +425,7 @@ ___
 
 ▸ **skewY**(`sy`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:243](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L243)*
+*Defined in [bitmap.d.ts:243](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L243)*
 
 Apply skew for y to the current matrix accumulative.
 
@@ -443,7 +443,7 @@ ___
 
 ▸ **transform**(`o`: [AffineOptions](../modules/_bitmap_d_.bitmap.transformation.md#affineoptions)): *object*
 
-*Defined in [bitmap.d.ts:151](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L151)*
+*Defined in [bitmap.d.ts:151](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L151)*
 
 **Parameters:**
 
@@ -459,7 +459,7 @@ ___
 
 ▸ **transformMatrix**(`a2`: number, `b2`: number, `c2`: number, `d2`: number, `e2`: number, `f2`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:155](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L155)*
+*Defined in [bitmap.d.ts:155](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L155)*
 
 Multiplies current matrix with new matrix values.
 
@@ -482,7 +482,7 @@ ___
 
 ▸ **translate**(`tx`: number, `ty`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:193](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L193)*
+*Defined in [bitmap.d.ts:193](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L193)*
 
 Translate current matrix accumulative.
 
@@ -501,7 +501,7 @@ ___
 
 ▸ **translateX**(`tx`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:198](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L198)*
+*Defined in [bitmap.d.ts:198](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L198)*
 
 Translate current matrix on x axis accumulative.
 
@@ -519,7 +519,7 @@ ___
 
 ▸ **translateY**(`ty`: number): *[Affine](_bitmap_d_.bitmap.transformation.affine.md)*
 
-*Defined in [bitmap.d.ts:203](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L203)*
+*Defined in [bitmap.d.ts:203](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L203)*
 
 Translate current matrix on y axis accumulative.
 
@@ -537,6 +537,6 @@ ___
 
 ▸ **identity**(): *object*
 
-*Defined in [bitmap.d.ts:273](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L273)*
+*Defined in [bitmap.d.ts:273](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L273)*
 
 **Returns:** *object*

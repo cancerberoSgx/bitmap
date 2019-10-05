@@ -28,7 +28,7 @@
 
 \+ **new BitmapUtil**(): *[BitmapUtil](_bitmap_d_.bitmap.bitmaputil.md)*
 
-*Defined in [bitmap.d.ts:547](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L547)*
+*Defined in [bitmap.d.ts:547](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L547)*
 
 **Returns:** *[BitmapUtil](_bitmap_d_.bitmap.bitmaputil.md)*
 
@@ -38,7 +38,7 @@
 
 ▸ **bitmapEquals**(`a`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `b`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `region?`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle)): *boolean*
 
-*Defined in [bitmap.d.ts:549](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L549)*
+*Defined in [bitmap.d.ts:549](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L549)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **blend**(`b1`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `b2`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `b3`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `blend?`: [ColorBlend](../modules/_bitmap_d_.bitmap.md#colorblend)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:555](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L555)*
+*Defined in [bitmap.d.ts:555](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L555)*
 
 **Parameters:**
 
@@ -75,7 +75,7 @@ ___
 
 ▸ **compare**(`a`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `b`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `regionA?`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle), `regionB?`: [Rectangle](../modules/_bitmap_d_.bitmap.md#rectangle)): *number*
 
-*Defined in [bitmap.d.ts:554](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L554)*
+*Defined in [bitmap.d.ts:554](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L554)*
 
 Compares given region of given Bitmaps. Returns a number between -1 and 1, the biger its absolute value the bigger the difference. If negative it means the sum of a's bytes is bigger than b's, possitive otherwise.
 TODO : fix this is not working fine
@@ -97,7 +97,7 @@ ___
 
 ▸ **fromBase64**(`base64`: string, `bitmap?`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:567](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L567)*
+*Defined in [bitmap.d.ts:567](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L567)*
 
 Loads bitmap from given base64 string.
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **fromDataUrl**(`dataurl`: string, `bitmap?`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:571](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L571)*
+*Defined in [bitmap.d.ts:571](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L571)*
 
 Loads bitmap from given data url string.
 
@@ -135,7 +135,7 @@ ___
 
 ▸ **toBase64**(`bitmap`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *string*
 
-*Defined in [bitmap.d.ts:563](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L563)*
+*Defined in [bitmap.d.ts:563](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L563)*
 
 Returns base64 representation of this image in an ecoded format like PNG
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **toDataUrl**(`bitmap`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md), `mime?`: undefined | string, `name?`: undefined | string): *string*
 
-*Defined in [bitmap.d.ts:559](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L559)*
+*Defined in [bitmap.d.ts:559](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L559)*
 
 Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.
 

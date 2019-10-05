@@ -54,7 +54,7 @@
 
 Ƭ **Area**: *object*
 
-*Defined in [bitmap.d.ts:802](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L802)*
+*Defined in [bitmap.d.ts:802](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L802)*
 
 #### Type declaration:
 
@@ -64,7 +64,7 @@ ___
 
 Ƭ **Color**: *any*
 
-*Defined in [bitmap.d.ts:988](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L988)*
+*Defined in [bitmap.d.ts:988](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L988)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 Ƭ **ColorBlend**: *object*
 
-*Defined in [bitmap.d.ts:781](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L781)*
+*Defined in [bitmap.d.ts:781](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L781)*
 
 #### Type declaration:
 
@@ -82,7 +82,7 @@ ___
 
 Ƭ **ColorFilter**: *object*
 
-*Defined in [bitmap.d.ts:627](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L627)*
+*Defined in [bitmap.d.ts:627](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L627)*
 
 Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) .
 
@@ -94,7 +94,7 @@ ___
 
 Ƭ **ColorFilterChannel**: *object*
 
-*Defined in [bitmap.d.ts:646](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L646)*
+*Defined in [bitmap.d.ts:646](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L646)*
 
 Linear transformation on channels (a * value + c).
 
@@ -106,7 +106,7 @@ ___
 
 Ƭ **DrawShape**: *object*
 
-*Defined in [bitmap.d.ts:678](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L678)*
+*Defined in [bitmap.d.ts:678](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L678)*
 
 #### Type declaration:
 
@@ -116,7 +116,7 @@ ___
 
 Ƭ **ExecResult**: *object*
 
-*Defined in [bitmap.d.ts:726](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L726)*
+*Defined in [bitmap.d.ts:726](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L726)*
 
 #### Type declaration:
 
@@ -126,7 +126,7 @@ ___
 
 Ƭ **FetchResult**: *object*
 
-*Defined in [bitmap.d.ts:750](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L750)*
+*Defined in [bitmap.d.ts:750](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L750)*
 
 #### Type declaration:
 
@@ -136,7 +136,7 @@ ___
 
 Ƭ **FloatPoint**: *object*
 
-*Defined in [bitmap.d.ts:795](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L795)*
+*Defined in [bitmap.d.ts:795](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L795)*
 
 #### Type declaration:
 
@@ -146,7 +146,7 @@ ___
 
 Ƭ **LineShape**: *object*
 
-*Defined in [bitmap.d.ts:688](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L688)*
+*Defined in [bitmap.d.ts:688](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L688)*
 
 #### Type declaration:
 
@@ -156,7 +156,7 @@ ___
 
 Ƭ **OptionalArea**: *object*
 
-*Defined in [bitmap.d.ts:809](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L809)*
+*Defined in [bitmap.d.ts:809](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L809)*
 
 #### Type declaration:
 
@@ -166,7 +166,7 @@ ___
 
 Ƭ **Point**: *object*
 
-*Defined in [bitmap.d.ts:788](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L788)*
+*Defined in [bitmap.d.ts:788](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L788)*
 
 #### Type declaration:
 
@@ -176,7 +176,7 @@ ___
 
 Ƭ **Rectangle**: *object*
 
-*Defined in [bitmap.d.ts:816](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L816)*
+*Defined in [bitmap.d.ts:816](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L816)*
 
 #### Type declaration:
 
@@ -186,7 +186,7 @@ ___
 
 Ƭ **RectangleShape**: *object*
 
-*Defined in [bitmap.d.ts:700](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L700)*
+*Defined in [bitmap.d.ts:700](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L700)*
 
 #### Type declaration:
 
@@ -196,4 +196,4 @@ ___
 
 • **Color**: *any*
 
-*Defined in [bitmap.d.ts:988](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L988)*
+*Defined in [bitmap.d.ts:988](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L988)*

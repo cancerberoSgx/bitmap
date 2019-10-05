@@ -27,7 +27,7 @@
 
 *Inherited from [RectangleArea](_bitmap_d_.bitmap.rectanglearea.md).[height](_bitmap_d_.bitmap.rectanglearea.md#height)*
 
-*Defined in [bitmap.d.ts:6](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L6)*
+*Defined in [bitmap.d.ts:6](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L6)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **originalHeight**: *number*
 
-*Defined in [bitmap.d.ts:13](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L13)*
+*Defined in [bitmap.d.ts:13](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L13)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • **originalWidth**: *number*
 
-*Defined in [bitmap.d.ts:12](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L12)*
+*Defined in [bitmap.d.ts:12](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L12)*
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 *Inherited from [RectangleArea](_bitmap_d_.bitmap.rectanglearea.md).[width](_bitmap_d_.bitmap.rectanglearea.md#width)*
 
-*Defined in [bitmap.d.ts:5](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L5)*
+*Defined in [bitmap.d.ts:5](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L5)*

@@ -31,7 +31,7 @@ Utilities to load/save bitmaps from/to other formats or resources, such as base6
 
 \+ **new BitmapIO**(`b`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *[BitmapIO](_bitmap_d_.bitmap.bitmapio.md)*
 
-*Defined in [bitmap.d.ts:518](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L518)*
+*Defined in [bitmap.d.ts:518](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L518)*
 
 **Parameters:**
 
@@ -47,7 +47,7 @@ Name | Type |
 
 ▸ **fromBase64**(`base64`: string): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:531](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L531)*
+*Defined in [bitmap.d.ts:531](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L531)*
 
 Loads bitmap from given base64 string.
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **fromDataUrl**(`dataurl`: string): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:535](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L535)*
+*Defined in [bitmap.d.ts:535](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L535)*
 
 Loads bitmap from given data url string.
 
@@ -83,7 +83,7 @@ ___
 
 ▸ **toBase64**(): *string*
 
-*Defined in [bitmap.d.ts:527](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L527)*
+*Defined in [bitmap.d.ts:527](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L527)*
 
 Returns base64 representation of this image in an ecoded format like PNG
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **toDataUrl**(`mime`: string, `name?`: undefined | string): *string*
 
-*Defined in [bitmap.d.ts:523](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L523)*
+*Defined in [bitmap.d.ts:523](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L523)*
 
 Creates a DataUrl like `data:image/png;name=f.png;base64,` using given base64 content, mimeType and fileName.
 
@@ -114,7 +114,7 @@ ___
 
 ▸ **fromFile**(`path`: string): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:542](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L542)*
+*Defined in [bitmap.d.ts:542](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L542)*
 
 **Parameters:**
 
@@ -130,7 +130,7 @@ ___
 
 ▸ **fromUrl**(`url`: string): *[Promise](_bitmap_d_.bitmap.support.promise.md)‹[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)›*
 
-*Defined in [bitmap.d.ts:541](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L541)*
+*Defined in [bitmap.d.ts:541](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L541)*
 
 **Parameters:**
 
@@ -146,7 +146,7 @@ ___
 
 ▸ **readHtmlInputFile**(`el`: HTMLInputElement): *Promise‹[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)[]›*
 
-*Defined in [bitmap.d.ts:539](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L539)*
+*Defined in [bitmap.d.ts:539](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L539)*
 
 Loads bitmaps from files in html input element of type "file"
 
@@ -164,7 +164,7 @@ ___
 
 ▸ **writeBitmap**(`file`: string, `bitmap`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *void*
 
-*Defined in [bitmap.d.ts:540](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L540)*
+*Defined in [bitmap.d.ts:540](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L540)*
 
 **Parameters:**
 

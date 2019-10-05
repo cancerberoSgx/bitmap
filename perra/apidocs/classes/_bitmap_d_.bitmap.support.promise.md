@@ -28,7 +28,7 @@
 
 \+ **new Promise**(`fn`: function): *[Promise](_bitmap_d_.bitmap.support.promise.md)*
 
-*Defined in [bitmap.d.ts:506](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L506)*
+*Defined in [bitmap.d.ts:506](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L506)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ Name | Type |
 
 ▸ **then**(`l`: function): *void*
 
-*Defined in [bitmap.d.ts:508](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L508)*
+*Defined in [bitmap.d.ts:508](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L508)*
 
 **Parameters:**
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **all**<**T**>(`promises`: [Promise](_bitmap_d_.bitmap.support.promise.md)‹T›[]): *[Promise](_bitmap_d_.bitmap.support.promise.md)‹T[]›*
 
-*Defined in [bitmap.d.ts:509](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L509)*
+*Defined in [bitmap.d.ts:509](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L509)*
 
 **Type parameters:**
 
@@ -98,7 +98,7 @@ ___
 
 ▸ **resolve**<**T**>(`t`: T): *[Promise](_bitmap_d_.bitmap.support.promise.md)‹T›*
 
-*Defined in [bitmap.d.ts:510](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L510)*
+*Defined in [bitmap.d.ts:510](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L510)*
 
 **Type parameters:**
 

@@ -34,7 +34,7 @@
 
 \+ **new Color_Impl_**(): *[Color_Impl_](_bitmap_d_.bitmap._color.color_impl_.md)*
 
-*Defined in [bitmap.d.ts:576](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L576)*
+*Defined in [bitmap.d.ts:576](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L576)*
 
 **Returns:** *[Color_Impl_](_bitmap_d_.bitmap._color.color_impl_.md)*
 
@@ -44,7 +44,7 @@
 
 ▸ **_new**(`rgba`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:594](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L594)*
+*Defined in [bitmap.d.ts:594](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L594)*
 
 Creates a new color.
 
@@ -62,7 +62,7 @@ ___
 
 ▸ **create**(`red`: number, `green`: number, `blue`: number, `alpha`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:603](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L603)*
+*Defined in [bitmap.d.ts:603](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L603)*
 
 Creates a new color.
 
@@ -85,7 +85,7 @@ ___
 
 ▸ **fromInt**(`rgba`: number): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:610](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L610)*
+*Defined in [bitmap.d.ts:610](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L610)*
 
 Converts an integer to a RGBA8888 color.
 
@@ -105,7 +105,7 @@ ___
 
 ▸ **fromString**(`s`: string): *[Color](../modules/_bitmap_d_.bitmap.md#color)*
 
-*Defined in [bitmap.d.ts:604](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L604)*
+*Defined in [bitmap.d.ts:604](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L604)*
 
 **Parameters:**
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **get_a**(`this`: number): *number*
 
-*Defined in [bitmap.d.ts:615](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L615)*
+*Defined in [bitmap.d.ts:615](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L615)*
 
 **Parameters:**
 
@@ -137,7 +137,7 @@ ___
 
 ▸ **get_b**(`this`: number): *number*
 
-*Defined in [bitmap.d.ts:614](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L614)*
+*Defined in [bitmap.d.ts:614](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L614)*
 
 **Parameters:**
 
@@ -153,7 +153,7 @@ ___
 
 ▸ **get_g**(`this`: number): *number*
 
-*Defined in [bitmap.d.ts:613](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L613)*
+*Defined in [bitmap.d.ts:613](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L613)*
 
 **Parameters:**
 
@@ -169,7 +169,7 @@ ___
 
 ▸ **get_r**(`this`: number): *number*
 
-*Defined in [bitmap.d.ts:612](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L612)*
+*Defined in [bitmap.d.ts:612](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L612)*
 
 **Parameters:**
 
@@ -185,7 +185,7 @@ ___
 
 ▸ **set_a**(`this`: number, `value`: number): *number*
 
-*Defined in [bitmap.d.ts:619](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L619)*
+*Defined in [bitmap.d.ts:619](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L619)*
 
 **Parameters:**
 
@@ -202,7 +202,7 @@ ___
 
 ▸ **set_b**(`this`: number, `value`: number): *number*
 
-*Defined in [bitmap.d.ts:618](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L618)*
+*Defined in [bitmap.d.ts:618](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L618)*
 
 **Parameters:**
 
@@ -219,7 +219,7 @@ ___
 
 ▸ **set_g**(`this`: number, `value`: number): *number*
 
-*Defined in [bitmap.d.ts:617](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L617)*
+*Defined in [bitmap.d.ts:617](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L617)*
 
 **Parameters:**
 
@@ -236,7 +236,7 @@ ___
 
 ▸ **set_r**(`this`: number, `value`: number): *number*
 
-*Defined in [bitmap.d.ts:616](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L616)*
+*Defined in [bitmap.d.ts:616](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L616)*
 
 **Parameters:**
 
@@ -253,7 +253,7 @@ ___
 
 ▸ **toString**(`this`: number): *string*
 
-*Defined in [bitmap.d.ts:611](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L611)*
+*Defined in [bitmap.d.ts:611](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L611)*
 
 **Parameters:**
 

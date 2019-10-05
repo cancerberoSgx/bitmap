@@ -24,7 +24,7 @@
 
 \+ **new Transform**(`b`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *[Transform](_bitmap_d_.bitmap.transformation.transform.md)*
 
-*Defined in [bitmap.d.ts:290](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L290)*
+*Defined in [bitmap.d.ts:290](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L290)*
 
 **Parameters:**
 
@@ -40,7 +40,7 @@ Name | Type |
 
 ▸ **affine**(`t`: [AffineOptions](../modules/_bitmap_d_.bitmap.transformation.md#affineoptions)): *object*
 
-*Defined in [bitmap.d.ts:294](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L294)*
+*Defined in [bitmap.d.ts:294](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L294)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ▸ **convolve**(`t`: [ConvolveOptions](../modules/_bitmap_d_.bitmap.transformation.md#convolveoptions)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:293](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L293)*
+*Defined in [bitmap.d.ts:293](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L293)*
 
 **Parameters:**
 
@@ -72,7 +72,7 @@ ___
 
 ▸ **pixelize**(`t`: [PixelizeOptions](../modules/_bitmap_d_.bitmap.transformation.md#pixelizeoptions)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:292](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L292)*
+*Defined in [bitmap.d.ts:292](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L292)*
 
 **Parameters:**
 

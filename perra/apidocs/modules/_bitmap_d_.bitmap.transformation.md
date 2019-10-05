@@ -26,7 +26,7 @@
 
 Ƭ **AffineMatrix**: *object*
 
-*Defined in [bitmap.d.ts:80](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L80)*
+*Defined in [bitmap.d.ts:80](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L80)*
 
 2D transformation matrix object initialized with identity matrix.
 
@@ -42,7 +42,7 @@ ___
 
 Ƭ **AffineOptions**: *object*
 
-*Defined in [bitmap.d.ts:278](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L278)*
+*Defined in [bitmap.d.ts:278](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L278)*
 
 #### Type declaration:
 
@@ -52,7 +52,7 @@ ___
 
 Ƭ **ColorBlendOptions**: *object*
 
-*Defined in [bitmap.d.ts:913](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L913)*
+*Defined in [bitmap.d.ts:913](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L913)*
 
 #### Type declaration:
 
@@ -62,7 +62,7 @@ ___
 
 Ƭ **ColorFilterOptions**: *object*
 
-*Defined in [bitmap.d.ts:956](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L956)*
+*Defined in [bitmap.d.ts:956](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L956)*
 
 Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) .
 
@@ -74,7 +74,7 @@ ___
 
 Ƭ **ConvolveOptions**: *object*
 
-*Defined in [bitmap.d.ts:62](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L62)*
+*Defined in [bitmap.d.ts:62](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L62)*
 
 #### Type declaration:
 
@@ -84,7 +84,7 @@ ___
 
 Ƭ **PixelizeOptions**: *object*
 
-*Defined in [bitmap.d.ts:47](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L47)*
+*Defined in [bitmap.d.ts:47](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L47)*
 
 #### Type declaration:
 
@@ -94,6 +94,6 @@ ___
 
 Ƭ **SepiaFilterOptions**: *object*
 
-*Defined in [bitmap.d.ts:933](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L933)*
+*Defined in [bitmap.d.ts:933](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L933)*
 
 #### Type declaration:

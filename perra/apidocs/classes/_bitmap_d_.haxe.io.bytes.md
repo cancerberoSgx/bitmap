@@ -35,7 +35,7 @@
 
 \+ **new Bytes**(`data`: ArrayBuffer): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:18](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L18)*
+*Defined in [bitmap.d.ts:18](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L18)*
 
 **Parameters:**
 
@@ -51,7 +51,7 @@ Name | Type |
 
 • **length**: *number*
 
-*Defined in [bitmap.d.ts:20](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L20)*
+*Defined in [bitmap.d.ts:20](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L20)*
 
 ## Methods
 
@@ -59,7 +59,7 @@ Name | Type |
 
 ▸ **blit**(`pos`: number, `src`: [Bytes](_bitmap_d_.haxe.io.bytes.md), `srcpos`: number, `len`: number): *void*
 
-*Defined in [bitmap.d.ts:21](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L21)*
+*Defined in [bitmap.d.ts:21](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L21)*
 
 **Parameters:**
 
@@ -78,7 +78,7 @@ ___
 
 ▸ **compare**(`other`: [Bytes](_bitmap_d_.haxe.io.bytes.md)): *number*
 
-*Defined in [bitmap.d.ts:24](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L24)*
+*Defined in [bitmap.d.ts:24](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L24)*
 
 **Parameters:**
 
@@ -94,7 +94,7 @@ ___
 
 ▸ **fill**(`pos`: number, `len`: number, `value`: number): *void*
 
-*Defined in [bitmap.d.ts:22](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L22)*
+*Defined in [bitmap.d.ts:22](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L22)*
 
 **Parameters:**
 
@@ -112,7 +112,7 @@ ___
 
 ▸ **getInt32**(`pos`: number): *number*
 
-*Defined in [bitmap.d.ts:28](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L28)*
+*Defined in [bitmap.d.ts:28](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L28)*
 
 Returns the 32 bit integer at given position (in low endian encoding).
 
@@ -130,7 +130,7 @@ ___
 
 ▸ **getString**(`pos`: number, `len`: number, `encoding?`: any): *string*
 
-*Defined in [bitmap.d.ts:33](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L33)*
+*Defined in [bitmap.d.ts:33](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L33)*
 
 **Parameters:**
 
@@ -148,7 +148,7 @@ ___
 
 ▸ **setInt32**(`pos`: number, `v`: number): *void*
 
-*Defined in [bitmap.d.ts:32](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L32)*
+*Defined in [bitmap.d.ts:32](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L32)*
 
 Store the 32 bit integer at given position (in low endian encoding).
 
@@ -167,7 +167,7 @@ ___
 
 ▸ **sub**(`pos`: number, `len`: number): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:23](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L23)*
+*Defined in [bitmap.d.ts:23](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L23)*
 
 **Parameters:**
 
@@ -184,7 +184,7 @@ ___
 
 ▸ **toString**(): *string*
 
-*Defined in [bitmap.d.ts:37](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L37)*
+*Defined in [bitmap.d.ts:37](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L37)*
 
 Returns string representation of the bytes as UTF8
 
@@ -196,7 +196,7 @@ ___
 
 ▸ **ofData**(`b`: ArrayBuffer): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:42](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L42)*
+*Defined in [bitmap.d.ts:42](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L42)*
 
 **Parameters:**
 
@@ -212,7 +212,7 @@ ___
 
 ▸ **ofString**(`s`: string, `encoding?`: any): *[Bytes](_bitmap_d_.haxe.io.bytes.md)*
 
-*Defined in [bitmap.d.ts:41](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L41)*
+*Defined in [bitmap.d.ts:41](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L41)*
 
 Returns bytes representation of the given String, using specific encoding (UTF-8 by default)
 

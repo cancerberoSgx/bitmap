@@ -25,7 +25,7 @@
 
 \+ **new Colors**(`b`: [Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)): *[Colors](_bitmap_d_.bitmap.transformation.colors.md)*
 
-*Defined in [bitmap.d.ts:975](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L975)*
+*Defined in [bitmap.d.ts:975](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L975)*
 
 **Parameters:**
 
@@ -41,7 +41,7 @@ Name | Type |
 
 ▸ **blend**(`o`: [ColorBlendOptions](../modules/_bitmap_d_.bitmap.transformation.md#colorblendoptions)): *void*
 
-*Defined in [bitmap.d.ts:977](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L977)*
+*Defined in [bitmap.d.ts:977](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L977)*
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ ___
 
 ▸ **filter**(`o`: [ColorFilterOptions](../modules/_bitmap_d_.bitmap.transformation.md#colorfilteroptions)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:981](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L981)*
+*Defined in [bitmap.d.ts:981](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L981)*
 
 Applies a linear transformation (a * value + c) on each channel (red, green, blue, alpha) .
 
@@ -75,7 +75,7 @@ ___
 
 ▸ **grayScale**(`o`: [ColorFilterOptions](../modules/_bitmap_d_.bitmap.transformation.md#colorfilteroptions)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:985](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L985)*
+*Defined in [bitmap.d.ts:985](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L985)*
 
 transform each channel to the closer gray to each of them.
 
@@ -93,7 +93,7 @@ ___
 
 ▸ **sepia**(`o`: [SepiaFilterOptions](../modules/_bitmap_d_.bitmap.transformation.md#sepiafilteroptions)): *[Bitmap](../interfaces/_bitmap_d_.bitmap.bitmap.md)*
 
-*Defined in [bitmap.d.ts:986](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L986)*
+*Defined in [bitmap.d.ts:986](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L986)*
 
 **Parameters:**
 

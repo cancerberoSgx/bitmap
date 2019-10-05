@@ -29,7 +29,7 @@
 
 \+ **new IOUtil**(): *[IOUtil](_bitmap_d_.bitmap.ioutil.md)*
 
-*Defined in [bitmap.d.ts:757](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L757)*
+*Defined in [bitmap.d.ts:757](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L757)*
 
 **Returns:** *[IOUtil](_bitmap_d_.bitmap.ioutil.md)*
 
@@ -39,7 +39,7 @@
 
 ▸ **args**(): *string[]*
 
-*Defined in [bitmap.d.ts:762](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L762)*
+*Defined in [bitmap.d.ts:762](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L762)*
 
 **Returns:** *string[]*
 
@@ -49,7 +49,7 @@ ___
 
 ▸ **exit**(`code`: number): *any*
 
-*Defined in [bitmap.d.ts:763](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L763)*
+*Defined in [bitmap.d.ts:763](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L763)*
 
 **Parameters:**
 
@@ -65,7 +65,7 @@ ___
 
 ▸ **fetch**(`url`: string, `cb?`: undefined | function): *[Promise](_bitmap_d_.bitmap.support.promise.md)‹[FetchResult](../modules/_bitmap_d_.bitmap.md#fetchresult)›*
 
-*Defined in [bitmap.d.ts:759](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L759)*
+*Defined in [bitmap.d.ts:759](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L759)*
 
 **Parameters:**
 
@@ -82,7 +82,7 @@ ___
 
 ▸ **fetchResource**(`url`: string, `cb`: function): *void*
 
-*Defined in [bitmap.d.ts:760](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L760)*
+*Defined in [bitmap.d.ts:760](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L760)*
 
 **Parameters:**
 
@@ -107,7 +107,7 @@ ___
 
 ▸ **readFile**(`path`: string): *[Input](_bitmap_d_.haxe.io.input.md)*
 
-*Defined in [bitmap.d.ts:761](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L761)*
+*Defined in [bitmap.d.ts:761](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L761)*
 
 **Parameters:**
 
@@ -123,7 +123,7 @@ ___
 
 ▸ **readTextFile**(`path`: string): *string*
 
-*Defined in [bitmap.d.ts:764](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L764)*
+*Defined in [bitmap.d.ts:764](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L764)*
 
 **Parameters:**
 
@@ -139,7 +139,7 @@ ___
 
 ▸ **writeFile**(`file`: string, `input`: [Input](_bitmap_d_.haxe.io.input.md)): *void*
 
-*Defined in [bitmap.d.ts:765](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L765)*
+*Defined in [bitmap.d.ts:765](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L765)*
 
 **Parameters:**
 
@@ -156,7 +156,7 @@ ___
 
 ▸ **writeTextFile**(`path`: string, `s`: string): *void*
 
-*Defined in [bitmap.d.ts:766](https://github.com/cancerberoSgx/bitmap/blob/a4d7607/perra/src/bitmap.d.ts#L766)*
+*Defined in [bitmap.d.ts:766](https://github.com/cancerberoSgx/bitmap/blob/201d0f4/perra/src/bitmap.d.ts#L766)*
 
 **Parameters:**
 
