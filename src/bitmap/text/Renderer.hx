@@ -27,12 +27,12 @@ class Renderer {
 			}
 			// TODO: check region, add new lines verify end of bitmap horizotal and certical, Impement align, justify and word wrap.
 			output.insertWithTransparency(glyph.bitmap, {x: 0, y: 0}, {
-				x: x,
-				y: y,
+				x: x + glyph.xoffset,
+				y: y + glyph.yoffset,
 				width: glyph.width,
-				height: glyph.height
+				height: glyph.height,
 			});
-			x += glyph.width;
+			x += glyph.xadvance;
 		}
     return {bitmap: output};
 	}
