@@ -26,7 +26,7 @@ class Renderer {
 				throw 'Glyph not found for font ${o.fontFamily} and character ${a[i]}';
 			}
 			// TODO: check region, add new lines verify end of bitmap horizotal and certical, Impement align, justify and word wrap.
-			output.copyFrom(glyph.bitmap, {x: 0, y: 0}, {
+			output.insertWithTransparency(glyph.bitmap, {x: 0, y: 0}, {
 				x: x,
 				y: y,
 				width: glyph.width,
