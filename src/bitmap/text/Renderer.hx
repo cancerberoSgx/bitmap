@@ -3,6 +3,8 @@ package bitmap.text;
 import bitmap.text.Types.RenderOptions;
 import bitmap.text.*;
 
+using Lambda;
+
 class Renderer {
 	var glyphs:Map<String, Map<Int, Bitmap>>;
 	var manager:FontManager;
@@ -13,7 +15,6 @@ class Renderer {
 	}
 
 	public function render(o:RenderOptions) {
-		var font = manager.getFont(o.fontFamily);
 		var output = o.output == null ? o.bitmap.clone() : o.output;
 
 		// TODO dictionary for glyphs - extract only  one time
@@ -34,6 +35,25 @@ class Renderer {
 			});
 			x += glyph.xadvance;
 		}
-    return {bitmap: output};
+		return {bitmap: output};
+	}
+
+	/**
+		Returns the width the text will take up when rendered
+	**/
+	public function getWidth(o: RenderOptions) {
+		return o.text.split('').fold(
+			(item, carry) -> {
+				var glyph = o.font.getGlyphByString(item);
+				return if (glyph == null)
+					if (o.throwOnGlyphNotFound)
+						throw 'Glyph not found for font ${o.fontFamily} and character ${item}'
+					else
+						carry
+				else
+					carry + glyph.xadvance;
+			},
+			0
+		);
 	}
 }
