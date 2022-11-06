@@ -23,9 +23,13 @@ class Renderer {
 		var a = o.text.split('');
 		for (i in 0...a.length) {
 			var glyph = o.font.getGlyphByString(a[i]);
-			if (glyph != null && o.throwOnGlyphNotFound) {
-				throw 'Glyph not found for font ${o.fontFamily} and character ${a[i]}';
+			if (glyph == null) {
+				if (o.throwOnGlyphNotFound)
+					throw 'Glyph not found for font ${o.fontFamily} and character ${a[i]}'
+				else
+					continue;
 			}
+
 			// TODO: check region, add new lines verify end of bitmap horizotal and certical, Impement align, justify and word wrap.
 			output.insertWithTransparency(glyph.bitmap, {x: 0, y: 0}, {
 				x: x + glyph.xoffset,
