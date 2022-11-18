@@ -45,13 +45,13 @@ class Renderer {
 	/**
 		Returns the width the text will take up when rendered
 	**/
-	public function getWidth(o: RenderOptions) {
-		return o.text.split('').fold(
+	public function getWidth(font: Font, text: String, throwOnGlyphNotFound: Bool) {
+		return text.split('').fold(
 			(item, carry) -> {
-				var glyph = o.font.getGlyphByString(item);
+				var glyph = font.getGlyphByString(item);
 				return if (glyph == null)
-					if (o.throwOnGlyphNotFound)
-						throw 'Glyph not found for font ${o.fontFamily} and character ${item}'
+					if (throwOnGlyphNotFound)
+						throw 'Glyph not found for font ${font.fontFamiliy} and character ${item}'
 					else
 						carry
 				else

@@ -6,7 +6,7 @@ import bitmap.text.FontManager.*;
 class Font {
 	private var glyps:Map<Int, Glyph>;
 	private var bitmap:Bitmap;
- var fontFamiliy:String;
+	public var fontFamiliy:String;
 	public function new(fontFamiliy_:String, glyps_:Map<Int, Glyph> , img:Bitmap) {
 		glyps = glyps_;
 		bitmap = img;

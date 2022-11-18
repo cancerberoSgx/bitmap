@@ -91,9 +91,8 @@ class FontManager {
 	/**
 		Returns the width the text will take up when rendered
 	**/
-	public function getWidth(o: RenderTextOptions): Int {
-		return renderer.getWidth(o.combine({
-			font: getFont(o.fontFamily),
-		}));
+	public function getWidth(fontFamily: String, text: String, throwOnGlyphNotFound: Bool = false): Int {
+		return renderer.getWidth(getFont(fontFamily), text, throwOnGlyphNotFound);
 	}
 }
+
