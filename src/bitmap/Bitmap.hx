@@ -94,4 +94,11 @@ import bitmap.transformation.*;
   public function copy(r:Types.Rectangle):Bitmap ;
 	public function compare(b:Bitmap, ?regionA:Types.Rectangle, ?thisRegion:Types.Rectangle):Float;
 	public function bounds():Types.Rectangle;
+
+	/**
+		Enlarges the bounds of this bitmap by the specified amounts.
+		The newly created are is filled with white. The dimensions must
+		be positive.
+	**/
+	public function increaseBounds(incrWidth: Int, incrHeight: Int): Void;
 }

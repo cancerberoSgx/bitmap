@@ -137,6 +137,36 @@ import bitmap.transformation.*;
 		};
 	}
 
+	/**
+		Enlarges the bounds of this bitmap by the specified amounts.
+		The newly created are is filled with white. The dimensions must
+		be larger than the current ones.
+	**/
+	public function increaseBounds(incrWidth: Int, incrHeight: Int) {
+		var newWidth = width + incrWidth;
+		var newHeight = height + incrHeight;
+		if (incrWidth < 0 || incrHeight < 0)
+			throw "Tried to increaseBounds() with dimensions smaller than the bitmap's";
+
+		var newData = Bytes.alloc(newWidth * newHeight * 4);
+		// fill with white
+		newData.fill(0, newData.length, 255);
+
+		if (newWidth == width) {
+			// if we only increase height, this is much faster
+			newData.blit(0, data, 0, data.length);
+		} else {
+			// if we increase width, we have to copy the data row by row
+			for (y in 0...height) {
+				newData.blit(newWidth * y * 4, data, width * y * 4, width * 4);
+			}
+		}
+
+		width = newWidth;
+		height = newHeight;
+		data = newData;
+	}
+
 	/** 
 		* This invert the four bytes order in the Int32. For some reason this is needed in order to write a whole Int32 ,instead separated bytes, which is faster.
 
@@ -144,24 +174,28 @@ import bitmap.transformation.*;
 
 		TODO: Si the previous is correct, this method should not be needed. Change the order in create() and r, b, g, a props.
 	**/
-	private inline function setInt32(i:Int, c:Color) {
-		data.setInt32(i, (c >> 24 & 0x000000FF) + (c >> 8 & 0x0000ff00) + ((c & 0x0000ff00) << 8) + ((c & 0x000000FF) << 24));
+	private inline function setInt32(i:Int, c:Color, ?data_: Bytes) {
+		if (data_ == null) data_ = data;
+		data_.setInt32(i, (c >> 24 & 0x000000FF) + (c >> 8 & 0x0000ff00) + ((c & 0x0000ff00) << 8) + ((c & 0x000000FF) << 24));
 	}
 
-	private inline function setInt8(i:Int, c:Color) {
-		data.set(i, c.r);
-		data.set(i + 1, c.g);
-		data.set(i + 2, c.b);
-		data.set(i + 3, c.a);
+	private inline function setInt8(i:Int, c:Color, ?data_: Bytes) {
+		if (data_ == null) data_ = data;
+		data_.set(i, c.r);
+		data_.set(i + 1, c.g);
+		data_.set(i + 2, c.b);
+		data_.set(i + 3, c.a);
 	}
 
-	private inline function getInt32(i:Int) {
-		var c = data.getInt32(i);
+	private inline function getInt32(i:Int, ?data_: Bytes) {
+		if (data_ == null) data_ = data;
+		var c = data_.getInt32(i);
 		return ((c >> 24) & 0xFF) + (((c >> 16) & 0xFF) << 8) + (((c >> 8) & 0xFF) << 16) + ((c & 0xff) << 24);
 	}
 
-	private inline function getInt8(i:Int) {
-		return Color.create(Bytes.fastGet(data.getData(), i), Bytes.fastGet(data.getData(), i + 1), Bytes.fastGet(data.getData(), i + 2),
-			Bytes.fastGet(data.getData(), i + 3));
+	private inline function getInt8(i:Int, ?data_: Bytes) {
+		if (data_ == null) data_ = data;
+		return Color.create(Bytes.fastGet(data_.getData(), i), Bytes.fastGet(data_.getData(), i + 1), Bytes.fastGet(data_.getData(), i + 2),
+			Bytes.fastGet(data_.getData(), i + 3));
 	}
 }
