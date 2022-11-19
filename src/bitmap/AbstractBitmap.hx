@@ -142,8 +142,10 @@ import bitmap.transformation.*;
 		The newly created are is filled with white. The dimensions must
 		be larger than the current ones.
 	**/
-	public function increaseBounds(newWidth: Int, newHeight: Int) {
-		if (newWidth < width || newHeight < height)
+	public function increaseBounds(incrWidth: Int, incrHeight: Int) {
+		var newWidth = width + incrWidth;
+		var newHeight = height + incrHeight;
+		if (incrWidth < 0 || incrHeight < 0)
 			throw "Tried to increaseBounds() with dimensions smaller than the bitmap's";
 
 		var newData = Bytes.alloc(newWidth * newHeight * 4);
