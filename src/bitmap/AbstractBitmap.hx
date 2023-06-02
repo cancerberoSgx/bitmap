@@ -124,6 +124,23 @@ import bitmap.transformation.*;
 		}
 	}
 
+	/**
+		Copies a region of the bitmap `b`, respecting transparency information in `b`
+		@see copyFrom() - plain copy
+	**/
+	public function insertWithTransparency(b:Bitmap, bCoords:Types.Point, regionThis:Types.Rectangle):Void {
+		// TODO: check bounds
+		for (y in 0...regionThis.height) {
+			for (x in 0...regionThis.width) {
+				var thisColor = get(regionThis.x + x, regionThis.y + y);
+				set(
+					regionThis.x + x, regionThis.y + y,
+					thisColor.blendWithAlpha(b.get(bCoords.x + x, bCoords.y + y))
+				);
+			}
+		}
+	}
+
 	public function compare(b:Bitmap, ?regionB:Types.Rectangle, ?thisRegion:Types.Rectangle):Float {
 		return BitmapUtil.compare(this, b, regionB, thisRegion);
 	}

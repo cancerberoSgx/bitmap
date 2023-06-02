@@ -87,4 +87,12 @@ class FontManager {
 		});
 		return renderer.render(o2);
 	}
+
+	/**
+		Returns the width the text will take up when rendered
+	**/
+	public function getWidth(fontFamily: String, text: String, throwOnGlyphNotFound: Bool = false): Int {
+		return renderer.getWidth(getFont(fontFamily), text, throwOnGlyphNotFound);
+	}
 }
+

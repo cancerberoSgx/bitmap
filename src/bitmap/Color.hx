@@ -103,4 +103,19 @@ package bitmap;
 		this = (r << 24) | (g << 16) | (b << 8) | value;
 		return value;
 	}
+
+	// won't be needed when Haxe 4.3.0 makes it into widespread usage
+	private var self(get, never): Color;
+	private function get_self(): Color return this;
+
+	// see https://en.wikipedia.org/wiki/Alpha_compositing
+	public function blendWithAlpha(other: Color): Color {
+		var alphaCorrected = (self.a/255) * (1 - other.a/255);
+		var resultAlpha = other.a/255 + alphaCorrected;
+		var resultR = (other.r * other.a/255 + self.r * alphaCorrected) / resultAlpha;
+		var resultG = (other.g * other.a/255 + self.g * alphaCorrected) / resultAlpha;
+		var resultB = (other.b * other.a/255 + self.b * alphaCorrected) / resultAlpha;
+
+		return Color.create(Std.int(resultR), Std.int(resultG), Std.int(resultB), Std.int(resultAlpha*255));
+	}
 }
